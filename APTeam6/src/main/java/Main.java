@@ -6,5 +6,6 @@ public class Main {
         ProgramManager.getProgramManagerInstance();
         MainScreen mainScreen = MainScreen.getMainScreenInstance();
         mainScreen.start();
+        //--------------------
     }
 }
