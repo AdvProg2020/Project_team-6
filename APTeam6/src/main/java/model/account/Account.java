@@ -1,20 +1,24 @@
 package model.account;
 
 public abstract class Account {
-    private String username;
-    private String password;
-    private String firstName = null;
-    private String lastName = null;
-    private String emailAddress = null;
-    private String phoneNumber = null;
-    private byte role;
-    private long credit;
+    protected String username;
+    protected String password;
+    protected String firstName = null;
+    protected String lastName = null;
+    protected String emailAddress = null;
+    protected String phoneNumber = null;
+    protected byte role;
 
-    public Account(String username) {
+    public Account(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean checkPassword(String password){
-        return password == this.password;
+        return password.equals(this.password);
     }
 }

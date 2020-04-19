@@ -12,21 +12,42 @@ public class LoginMenu {
         return loginMenuInstance;
     }
 
-    /**
-     * This menu works differently from other menus. this menu doesn't get anything back from view.
-     */
+    ///////////////////////////////////////////////////
+    LoginMenuView view;
+
     public void start(){
-        LoginMenuView view = new LoginMenuView();
+        view = new LoginMenuView();
+        String command = null;
+        while (true) {
+            command = view.getInputCommand();
+            if (command.matches("login \\S+ \\S+")) {
+                String[] splitCommand = command.split("\\s");
+                login(splitCommand[0], splitCommand[1]);
+            }
+            else if (command.matches("register \\S+ (buyer|seller)")) {
+                String[] splitCommand = command.split("\\s");
+                register(splitCommand[0], splitCommand[1]);
+            }
+            else if (command.equals("logout")){
+                logout();
+            }
+            else if (command.equals("back")){
+                return;
+            }
+            else {
+                throw new RuntimeException("Unknown command was passed to LoginMenu by view");
+            }
+        }
     }
 
     public void login(String username, String password){
         if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)){
-            System.out.println("This username does not exist");
+            view.giveOutput("This username does not exist");
             return;
         }
         Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
         if (!tempAccount.checkPassword(password)){
-            System.out.println("Wrong password");
+            view.giveOutput("Wrong password");
             return;
         }
         ProgramManager.getProgramManagerInstance().loginSuccessful(tempAccount);
@@ -34,9 +55,16 @@ public class LoginMenu {
 
     public void register(String username, String role){
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)){
-            System.out.println("This username is already occupied");
+            view.giveOutput("This username is already occupied");
         }
+        String[] userData = null;
+        userData = view.getUserUsualData();
 
+
+        /*if (role.equals("seller"))
+            userData = view.getSellerCompany();*/
+
+        // TODO: write something here
     }
 
     public void logout(){
