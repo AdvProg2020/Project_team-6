@@ -1,8 +1,7 @@
 package controller;
 
-import model.Account;
+import model.account.Account;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProgramManager {
@@ -29,6 +28,10 @@ public class ProgramManager {
         // TODO: We really should do something about this...
     }
 
+    public void saveToFiles(){
+        // TODO: We really should do something about this...
+    }
+
     //////////////////////////////////////////////
 
     public boolean isThereAccountWithUsername(String name){
@@ -39,7 +42,15 @@ public class ProgramManager {
         return allAccounts.get(username);
     }
 
-    public boolean loginSuccessful(Account account){
+    public void loginSuccessful(Account account){
         currentlyLoggedInUser = account;
+    }
+
+    public boolean isAnyoneLoggedIn(){
+        return currentlyLoggedInUser != null;
+    }
+
+    public void logoutSuccessful(){
+        currentlyLoggedInUser = null;
     }
 }

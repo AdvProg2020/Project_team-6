@@ -1,4 +1,4 @@
-package model;
+package model.account;
 
 public class Seller extends Account {
     public Seller(String username) {

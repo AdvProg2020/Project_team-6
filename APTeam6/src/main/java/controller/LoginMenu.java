@@ -1,6 +1,7 @@
 package controller;
 
-import model.Account;
+import model.account.Account;
+import view.LoginMenuView;
 
 public class LoginMenu {
     private static LoginMenu loginMenuInstance = null;
@@ -9,6 +10,13 @@ public class LoginMenu {
         if (loginMenuInstance == null)
             loginMenuInstance = new LoginMenu();
         return loginMenuInstance;
+    }
+
+    /**
+     * This menu works differently from other menus. this menu doesn't get anything back from view.
+     */
+    public void start(){
+        LoginMenuView view = new LoginMenuView();
     }
 
     public void login(String username, String password){
@@ -21,14 +29,17 @@ public class LoginMenu {
             System.out.println("Wrong password");
             return;
         }
-        ProgramManager.getProgramManagerInstance().
-        // TODO: fill here
+        ProgramManager.getProgramManagerInstance().loginSuccessful(tempAccount);
     }
 
     public void register(String username, String role){
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)){
             System.out.println("This username is already occupied");
         }
-        // TODO: fill here
+
+    }
+
+    public void logout(){
+        ProgramManager.getProgramManagerInstance().logoutSuccessful();
     }
 }
