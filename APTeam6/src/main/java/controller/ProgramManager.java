@@ -13,6 +13,9 @@ public class ProgramManager {
         return programManagerInstance;
     }
 
+
+
+
     //////////////////////////////////////////////
     private HashMap<String, Account> allAccounts;
     Account currentlyLoggedInUser;
@@ -21,10 +24,9 @@ public class ProgramManager {
         allAccounts = new HashMap<String, Account>();
         currentlyLoggedInUser = null;
         // TODO: Add arrayLists here
-        loadFromFiles();
     }
 
-    private void loadFromFiles(){
+    public void loadFromFiles(){
         // TODO: We really should do something about this...
     }
 
@@ -52,5 +54,9 @@ public class ProgramManager {
 
     public void logoutSuccessful(){
         currentlyLoggedInUser = null;
+    }
+
+    public void addAccountToList(String username, Account account){
+        allAccounts.put(username, account);
     }
 }

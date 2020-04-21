@@ -1,6 +1,8 @@
 package controller;
 
 import model.account.Account;
+import model.account.Buyer;
+import model.account.Seller;
 import view.LoginMenuView;
 
 public class LoginMenu {
@@ -51,6 +53,7 @@ public class LoginMenu {
             return;
         }
         ProgramManager.getProgramManagerInstance().loginSuccessful(tempAccount);
+        view.giveOutput("Welcome " + username + ".");
     }
 
     public void register(String username, String role){
@@ -60,11 +63,16 @@ public class LoginMenu {
         String[] userData = null;
         userData = view.getUserUsualData();
 
-
-        /*if (role.equals("seller"))
-            userData = view.getSellerCompany();*/
-
-        // TODO: write something here
+        if (role.equals("buyer")) {
+            Buyer buyer = new Buyer(username, userData[4], userData[0], userData[1], userData[3], userData[2]);
+            ProgramManager.getProgramManagerInstance().addAccountToList(username, buyer);
+        }
+        else if (role.equals("seller")) {
+            String company = view.getSellerCompany();
+            Seller seller = new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
+            ProgramManager.getProgramManagerInstance().addAccountToList(username, seller);
+        }
+        view.giveOutput("Registered successfully.");
     }
 
     public void logout(){

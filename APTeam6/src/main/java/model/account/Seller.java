@@ -6,10 +6,12 @@ import java.util.ArrayList;
 
 public class Seller extends Account {
     private long credit;
-    private ArrayList<SellLog> sellLogs = new ArrayList<SellLog>();
+    private ArrayList<Integer> sellLogIds = new ArrayList<Integer>();
+    private String companyName;
 
-    public Seller(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
+    public Seller(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber, String company) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
+        this.companyName = company;
         this.role = 2;
         credit = 0;
     }

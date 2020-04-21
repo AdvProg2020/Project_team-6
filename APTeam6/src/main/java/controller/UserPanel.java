@@ -1,4 +1,4 @@
-package controller.userpanel;
+package controller;
 
 public abstract class UserPanel {
 }

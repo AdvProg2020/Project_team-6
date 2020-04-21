@@ -25,7 +25,7 @@ public class LoginMenuView {
                 }
             }
             else {
-                if (command.matches("login \\S+ \\S+") || command.matches("register \\S+ (buyer|seller)")) {
+                if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller) \\S+")) {
                     return command;
                 }
             }
@@ -34,7 +34,7 @@ public class LoginMenuView {
     }
 
     private void showHelp(){
-        System.out.println("List of commands:\n\tlogin [username] [password]\n\tregister [username] [role]");
+        System.out.println("List of commands:\n\tlogin [username] [password]\n\tcreate account [role] [username]");
     }
 
     public void giveOutput(String message){
