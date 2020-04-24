@@ -1,8 +1,10 @@
 package model.account;
 
 import model.logs.BuyLog;
+import model.logs.LogsInGeneral;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Buyer extends Account {
     private long credit;

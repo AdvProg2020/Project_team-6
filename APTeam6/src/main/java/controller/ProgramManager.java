@@ -1,6 +1,7 @@
 package controller;
 
 import model.account.Account;
+import model.logs.LogsInGeneral;
 
 import java.util.HashMap;
 
@@ -17,7 +18,9 @@ public class ProgramManager {
 
 
     //////////////////////////////////////////////
-    private HashMap<String, Account> allAccounts;
+    public static HashMap<String, Account> allAccounts;
+    public static HashMap<Integer,LogsInGeneral> keepingLogs = new HashMap<Integer, LogsInGeneral>();
+
     Account currentlyLoggedInUser;
 
     private ProgramManager(){
