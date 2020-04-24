@@ -1,4 +1,8 @@
 package model.logs;
 
-public class SellLog {
+import java.util.ArrayList;
+
+public class SellLog extends LogsInGeneral{
+    private ArrayList<Integer> logId;
+
 }
