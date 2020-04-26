@@ -1,5 +1,7 @@
 package model.account;
 
+import controller.ProgramManager;
+
 public abstract class Account {
     protected String username;
     protected String password;
@@ -16,6 +18,7 @@ public abstract class Account {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        ProgramManager.allAccounts.put(username,this);
     }
 
     public boolean checkPassword(String password){

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class LogsInGeneral {
-    protected static int logId;
+    protected static int logId = 0;
     protected Date date;
     protected int executedDiscount;
-    private static ArrayList<LogsInGeneral> allLogs = new ArrayList<LogsInGeneral>();
+    public static ArrayList<LogsInGeneral> allLogs = new ArrayList<LogsInGeneral>();
 
     public LogsInGeneral(Date date, int executedDiscount,int logId) {
         this.date = date;
