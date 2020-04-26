@@ -1,5 +1,5 @@
 package model.logs;
 
 public enum DeliveryStatus {
-    //TODO
+    Carrying,Verifying,Paid;
 }
