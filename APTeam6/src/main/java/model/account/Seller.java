@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Seller extends Account {
     private long credit;
-    private ArrayList<Integer> sellLogIds = new ArrayList<Integer>();
+    public static ArrayList<Integer> sellLogIds = new ArrayList<Integer>();
     private String companyName;
 
     public Seller(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber, String company) {

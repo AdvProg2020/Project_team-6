@@ -1,5 +1,6 @@
 package model.logs;
 
+import model.account.Seller;
 import model.product.Products;
 
 import java.util.ArrayList;
@@ -15,5 +16,6 @@ public class SellLog extends LogsInGeneral{
         this.receivedAmount = receivedAmount;
         soldProducts = new ArrayList<Products>();
         this.sellerName = sellerName;
+        Seller.sellLogIds.add(logId);
     }
 }

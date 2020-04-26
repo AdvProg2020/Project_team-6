@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Buyer extends Account {
     private long credit;
-    private ArrayList<Integer> buyLogIds = new ArrayList<Integer>();
+    public static ArrayList<Integer> buyLogIds = new ArrayList<Integer>();
 
     public Buyer(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
