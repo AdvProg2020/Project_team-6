@@ -18,8 +18,8 @@ public class ProgramManager {
 
 
     //////////////////////////////////////////////
-    public static HashMap<String, Account> allAccounts;
-    public static HashMap<Integer,LogsInGeneral> keepingLogs = new HashMap<Integer, LogsInGeneral>();
+    private static HashMap<String, Account> allAccounts;
+    private static HashMap<Integer,LogsInGeneral> allLogs = new HashMap<Integer, LogsInGeneral>();
 
     Account currentlyLoggedInUser;
 
@@ -62,4 +62,13 @@ public class ProgramManager {
     public void addAccountToList(String username, Account account){
         allAccounts.put(username, account);
     }
+
+    public void addLogToList(LogsInGeneral log){
+        allLogs.put(log.getLogId(), log);
+    }
+    public LogsInGeneral getLogByLogId(int id){
+       return allLogs.get(id);
+    }
 }
+
+// Important note: this programManager doesn't and shouldn't have static methods. But it is singleton

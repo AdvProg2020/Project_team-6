@@ -64,13 +64,11 @@ public class LoginMenu {
         userData = view.getUserUsualData();
 
         if (role.equals("buyer")) {
-            Buyer buyer = new Buyer(username, userData[4], userData[0], userData[1], userData[3], userData[2]);
-            ProgramManager.getProgramManagerInstance().addAccountToList(username, buyer);
+            new Buyer(username, userData[4], userData[0], userData[1], userData[3], userData[2]);
         }
         else if (role.equals("seller")) {
             String company = view.getSellerCompany();
-            Seller seller = new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
-            ProgramManager.getProgramManagerInstance().addAccountToList(username, seller);
+            new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
         }
         view.giveOutput("Registered successfully.");
     }

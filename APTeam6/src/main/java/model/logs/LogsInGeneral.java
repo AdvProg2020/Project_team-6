@@ -5,25 +5,25 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class LogsInGeneral {
-    protected static int logId = 0;
+    protected static int nextLogId = 0;
+    protected int logId;
     protected Date date;
     protected int executedDiscount;
     public static ArrayList<LogsInGeneral> allLogs = new ArrayList<LogsInGeneral>();
 
+    /**
+     * Attention: this method automatically adds the log to the log list.
+     */
     public LogsInGeneral(Date date, int executedDiscount,int logId) {
         this.date = date;
         this.executedDiscount = executedDiscount;
-        logId++;
-        this.logId = logId;
+        nextLogId++;
+        this.logId = nextLogId;
         allLogs.add(this);
-        ProgramManager.keepingLogs.put(logId,this);
+        ProgramManager.getProgramManagerInstance().addLogToList(this);
     }
-    private static LogsInGeneral getLogByLogId(int id){
-        for (Integer integer : ProgramManager.keepingLogs.keySet()) {
-            if(integer == id){
-                return ProgramManager.keepingLogs.get(integer);
-            }
-        }
-        return null;
+
+    public int getLogId() {
+        return logId;
     }
 }
