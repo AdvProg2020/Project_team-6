@@ -2,7 +2,9 @@ package controller;
 
 import model.account.Account;
 import model.logs.LogsInGeneral;
+import model.product.Product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProgramManager {
@@ -15,60 +17,63 @@ public class ProgramManager {
     }
 
 
-
-
     //////////////////////////////////////////////
-    private static HashMap<String, Account> allAccounts;
-    private static HashMap<Integer,LogsInGeneral> allLogs = new HashMap<Integer, LogsInGeneral>();
+    private HashMap<String, Account> allAccounts;
+    private HashMap<Integer, LogsInGeneral> allLogs;
+    private HashMap<Integer, Product> allProducts;
+    private
 
     Account currentlyLoggedInUser;
 
-    private ProgramManager(){
+    private ProgramManager() {
         allAccounts = new HashMap<String, Account>();
+        allLogs = new HashMap<Integer, LogsInGeneral>();
+        allProducts = new HashMap<Integer, Product>();
         currentlyLoggedInUser = null;
         // TODO: Add arrayLists here
     }
 
-    public void loadFromFiles(){
+    public void loadFromFiles() {
         // TODO: We really should do something about this...
     }
 
-    public void saveToFiles(){
+    public void saveToFiles() {
         // TODO: We really should do something about this...
     }
 
     //////////////////////////////////////////////
 
-    public boolean isThereAccountWithUsername(String name){
+    public boolean isThereAccountWithUsername(String name) {
         return allAccounts.get(name) != null;
     }
 
-    public Account getAccountByUsername(String username){
+    public Account getAccountByUsername(String username) {
         return allAccounts.get(username);
     }
 
-    public void loginSuccessful(Account account){
+    public void loginSuccessful(Account account) {
         currentlyLoggedInUser = account;
     }
 
-    public boolean isAnyoneLoggedIn(){
+    public boolean isAnyoneLoggedIn() {
         return currentlyLoggedInUser != null;
     }
 
-    public void logoutSuccessful(){
+    public void logoutSuccessful() {
         currentlyLoggedInUser = null;
     }
 
-    public void addAccountToList(String username, Account account){
+    public void addAccountToList(String username, Account account) {
         allAccounts.put(username, account);
     }
 
-    public void addLogToList(LogsInGeneral log){
+    public void addLogToList(LogsInGeneral log) {
         allLogs.put(log.getLogId(), log);
     }
-    public LogsInGeneral getLogByLogId(int id){
-       return allLogs.get(id);
+
+    public LogsInGeneral getLogByLogId(int id) {
+        return allLogs.get(id);
     }
 }
 
-// Important note: this programManager doesn't and shouldn't have static methods. But it is singleton
+// Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.
