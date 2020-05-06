@@ -24,14 +24,25 @@ public class LoginMenuView {
                     return command;
                 }
             }
-            else {
-                if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller) \\S+")) {
-                    return command;
+            else if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller|manager) \\S+")) {
+                return command;
                 }
+            else if(command.equals("view personal info")){
+                return command;
             }
-            System.out.println("Invalid command");
+            else if(command.matches("edit \\.*")){
+                return command;
+            }
+            else if(command.equals("manage users")){
+                return command;
+            }
+            else {
+                System.out.println("Invalid command");
+            }
+
+            }
+
         }
-    }
 
     private void showHelp(){
         System.out.println("List of commands:\n\tlogin [username] [password]\n\tcreate account [role] [username]");
