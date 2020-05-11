@@ -56,6 +56,10 @@ public class ProgramManager {
         // TODO: Add arrayLists here
     }
 
+    public HashMap<String, Account> getAllAccounts() {
+        return allAccounts;
+    }
+
     public void loadFromFiles() {
         if (!folder.exists()){
             folder.mkdir();
