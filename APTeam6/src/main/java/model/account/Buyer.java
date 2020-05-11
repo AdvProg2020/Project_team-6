@@ -5,6 +5,7 @@ import model.logs.BuyLog;
 import model.logs.LogsInGeneral;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -46,10 +47,20 @@ public class Buyer extends Account implements Comparable<Buyer> {
     private static ArrayList<Buyer> buyerArrayList = new ArrayList<>();
 
     public ArrayList<Buyer> sortBuyers(int fieldSort) {
+        /*
+        How to use this method :
+        fieldSort = 1 for firstName sort
+        fieldSort = 2 for lastName sort
+        fieldSort = 3 for phoneNumber sort
+        fieldSort = 4 for emailAddress sort
+        fieldSort = 5 for username sort
+         */
         field = fieldSort;
-        for (int i = 0; i < ProgramManager.getProgramManagerInstance().getAllAccounts().size(); i++) {
-            if (ProgramManager.getProgramManagerInstance().getAllAccounts().get(i).role==1) {
-                buyerArrayList.add((Buyer) ProgramManager.getProgramManagerInstance().getAllAccounts().get(i));
+        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts().values();
+        ArrayList<Account> listOfValues = new ArrayList<>(values);
+        for (int i = 0; i < listOfValues.size(); i++) {
+            if (listOfValues.get(i).role==1) {
+                buyerArrayList.add((Buyer) listOfValues.get(i));
             }
         }
         Collections.sort(buyerArrayList);
