@@ -21,6 +21,8 @@ public abstract class Account {
         ProgramManager.getProgramManagerInstance().addAccountToList(username, this);
     }
 
+    public Account(){}
+
     public boolean checkPassword(String password){
         return password.equals(this.password);
     }
