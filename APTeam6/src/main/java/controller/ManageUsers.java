@@ -21,10 +21,10 @@ public class ManageUsers {
         while (true) {
             command = view.getInputCommand();
             if(command.matches("view \\S+")) {
-                viewUser(command.split("\\s")[1]);
+                ViewUser(command.split("\\s")[1]);
             }
             else if (command.matches("change type \\S+, \\S+")) {
-                // TODO: 5/6/2020  
+                ChangeType(command.split("\\s")[2],command.split("\\s")[3]);
             }
             else if(command.matches("delete user \\S+")){
                 // TODO: 5/6/2020  
@@ -34,8 +34,10 @@ public class ManageUsers {
             }
         }
     }
-    public Account viewUser(String username){
+    public Account ViewUser(String username){
         return ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
-
+    }
+    public void ChangeType(String username,String role){
+        ProgramManager.getProgramManagerInstance().getAccountByUsername(username).setRole(role);
     }
 }

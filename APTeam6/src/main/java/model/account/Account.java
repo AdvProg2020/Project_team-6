@@ -9,7 +9,7 @@ public abstract class Account {
     protected String lastName = null;
     protected String emailAddress = null;
     protected String phoneNumber = null;
-    protected byte role;
+    protected String role;
 
     public Account(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         this.username = username;
@@ -19,6 +19,14 @@ public abstract class Account {
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         ProgramManager.getProgramManagerInstance().addAccountToList(username, this);
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public boolean checkPassword(String password){
