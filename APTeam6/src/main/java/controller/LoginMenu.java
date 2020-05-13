@@ -7,7 +7,6 @@ import view.LoginMenuView;
 
 public class LoginMenu {
     private static LoginMenu loginMenuInstance = null;
-
     public static LoginMenu getLoginMenuInstance() {
         if (loginMenuInstance == null)
             loginMenuInstance = new LoginMenu();
