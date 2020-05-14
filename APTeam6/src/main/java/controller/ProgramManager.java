@@ -5,12 +5,14 @@ import com.google.gson.reflect.TypeToken;
 import model.account.Account;
 import model.logs.LogsInGeneral;
 import model.product.Category;
+import model.product.DiscountCode;
 import model.product.Product;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProgramManager {
@@ -36,7 +38,7 @@ public class ProgramManager {
     private HashMap<Integer, LogsInGeneral> allLogs;
     private HashMap<Integer, Product> allProducts;
     private HashMap<Integer, Category> allCategories;
-
+    private HashMap<Account, DiscountCode> discountCodeIncludedUsers;
     private Account currentlyLoggedInUser;
 
     private ProgramManager() {
@@ -49,6 +51,7 @@ public class ProgramManager {
         allAccounts = new HashMap<String, Account>();
         allLogs = new HashMap<Integer, LogsInGeneral>();
         allProducts = new HashMap<Integer, Product>();
+        discountCodeIncludedUsers = new HashMap<>();
         currentlyLoggedInUser = null;
         // TODO: Add arrayLists here
     }
@@ -151,6 +154,9 @@ public class ProgramManager {
 
     public void removeProductById(int productId) {
         allProducts.remove(productId);
+    }
+    public void createDiscountCode(){
+
     }
 }
 
