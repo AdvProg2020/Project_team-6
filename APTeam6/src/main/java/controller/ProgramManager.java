@@ -61,19 +61,17 @@ public class ProgramManager {
     }
 
     public void loadFromFiles() {
-        if (!folder.exists()){
+        if (!folder.exists()) {
             folder.mkdir();
             try {
                 accountsFile.createNewFile();
                 logsFile.createNewFile();
                 productsFile.createNewFile();
                 categoriesFile.createNewFile();
-            }
-            catch (Exception ignored){
+            } catch (Exception ignored) {
                 System.out.println("Failed to make files...");
             }
-        }
-        else {
+        } else {
             /*Gson gsonParser = new Gson();
             try {
                 allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
@@ -95,8 +93,7 @@ public class ProgramManager {
             FileWriter accountsFileWriter = new FileWriter(accountsFile, false);
             accountsFileWriter.write(gsonCreator.toJson(allAccounts));
             accountsFileWriter.close();
-        }
-        catch (Exception ignored){
+        } catch (Exception ignored) {
             System.out.println("Failed to save files...");
         }
         // TODO: We really should do something about this...
@@ -135,8 +132,12 @@ public class ProgramManager {
     public LogsInGeneral getLogByLogId(int id) {
         return allLogs.get(id);
     }
-    public void deleteAccount(Account account){
+
+    public void deleteAccount(Account account) {
         allAccounts.remove(account);
+    }
+    public void removeProductById(int productId){
+        allProducts.remove(productId);
     }
 }
 
