@@ -145,6 +145,10 @@ public class ProgramManager {
     public LogsInGeneral getLogByLogId(int id) {
         return allLogs.get(id);
     }
+
+    public void removeProductById(int productId) {
+        allProducts.remove(productId);
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.
