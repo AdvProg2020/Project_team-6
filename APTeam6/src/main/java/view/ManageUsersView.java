@@ -27,4 +27,7 @@ public class ManageUsersView {
         }
 
     }
+    public void giveOutput(String message){
+        System.out.println(message);
+    }
 }

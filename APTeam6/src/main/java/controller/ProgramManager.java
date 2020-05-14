@@ -135,6 +135,9 @@ public class ProgramManager {
     public LogsInGeneral getLogByLogId(int id) {
         return allLogs.get(id);
     }
+    public void deleteAccount(Account account){
+        allAccounts.remove(account);
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.
