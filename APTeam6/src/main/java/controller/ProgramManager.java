@@ -145,6 +145,9 @@ public class ProgramManager {
     public LogsInGeneral getLogByLogId(int id) {
         return allLogs.get(id);
     }
+    public void deleteAccount(Account account){
+        allAccounts.remove(account);
+    }
 
     public void removeProductById(int productId) {
         allProducts.remove(productId);

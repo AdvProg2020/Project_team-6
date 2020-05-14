@@ -1,5 +1,7 @@
-package controller;
+package controller.managerPanels;
 
+import controller.LoginMenu;
+import controller.ProgramManager;
 import model.account.Account;
 import view.LoginMenuView;
 import view.ManageUsersView;
@@ -13,7 +15,7 @@ public class ManageUsers {
             manageUsersInstance = new ManageUsers();
         return manageUsersInstance;
     }
-    
+
     ManageUsersView view;
     public void start(){
         view = new ManageUsersView();
@@ -48,3 +50,4 @@ public class ManageUsers {
         view.giveOutput("the user was successfully removed!");
     }
 }
+
