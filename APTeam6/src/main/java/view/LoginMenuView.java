@@ -27,15 +27,6 @@ public class LoginMenuView {
             else if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller|manager) \\S+")) {
                 return command;
                 }
-            else if(command.equals("view personal info")){
-                return command;
-            }
-            else if(command.matches("edit \\.+")){
-                return command;
-            }
-            else if(command.equals("manage users")){
-                return command;
-            }
             else {
                 System.out.println("Invalid command");
             }

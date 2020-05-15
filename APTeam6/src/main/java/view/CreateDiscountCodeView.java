@@ -7,8 +7,10 @@ public class CreateDiscountCodeView {
 
     public String getInputCommand(){
         String command;
+        String secondCommand;
         while (true) {
             command = Input.getInput();
+            giveOutput("Enter all discountCode properties except the userIncluded:");
             if(command.matches("create discount code \\.+")){
             return command;
             }
