@@ -1,5 +1,6 @@
 package controller;
 
+import com.gilecode.yagson.YaGson;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.account.Account;
@@ -70,27 +71,45 @@ public class ProgramManager {
             }
         }
         else {
-            /*Gson gsonParser = new Gson();
+            YaGson gsonParser = new YaGson();
             try {
+                //System.out.println(Files.readString(Paths.get(ADDRESS + "accounts.json")));
                 allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
                 allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<String, LogsInGeneral>>(){}.getType());
                 allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
                 allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
+                if (allAccounts == null)
+                    allAccounts = new HashMap<>();
+                if (allLogs == null)
+                    allLogs = new HashMap<>();
+                if (allProducts == null)
+                    allProducts = new HashMap<>();
+                if (allCategories == null)
+                    allCategories = new HashMap<>();
             }
             catch (Exception ignored){
                 ignored.printStackTrace();
                 System.out.println("Couldn't read from files...");
-            }*/
+            }
         }
         // TODO: We really should do something about this...
     }
 
     public void saveToFiles() {
-        Gson gsonCreator = new Gson();
+        YaGson gsonCreator = new YaGson();
         try {
             FileWriter accountsFileWriter = new FileWriter(accountsFile, false);
             accountsFileWriter.write(gsonCreator.toJson(allAccounts));
             accountsFileWriter.close();
+            FileWriter logsFileWriter = new FileWriter(logsFile, false);
+            logsFileWriter.write(gsonCreator.toJson(allLogs));
+            logsFileWriter.close();
+            FileWriter productsFileWriter = new FileWriter(productsFile, false);
+            productsFileWriter.write(gsonCreator.toJson(allProducts));
+            productsFileWriter.close();
+            FileWriter categoriesFileWriter = new FileWriter(categoriesFile, false);
+            categoriesFileWriter.write(gsonCreator.toJson(allCategories));
+            categoriesFileWriter.close();
         }
         catch (Exception ignored){
             System.out.println("Failed to save files...");
