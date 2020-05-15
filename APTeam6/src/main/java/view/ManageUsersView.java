@@ -11,9 +11,6 @@ public class ManageUsersView {
             if(command.matches("view \\S+")){
                 return command;
             }
-            /*else if(command.matches("change type \\S+, \\S+")){
-                return command;
-            }*/
             else if(command.matches("delete user \\S+")){
                 return command;
             }

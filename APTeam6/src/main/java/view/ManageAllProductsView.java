@@ -11,6 +11,9 @@ public class ManageAllProductsView {
             if(command.matches("remove \\.+")){
                 return command;
             }
+            else if(command.equals("back")){
+                return command;
+            }
             else {
                 giveOutput("Invalid Command!");
             }
