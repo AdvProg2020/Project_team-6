@@ -21,29 +21,33 @@ public class ManageUsers {
             command = view.getInputCommand();
             if(command.matches("view \\S+")) {
                 ViewUser(command.split("\\s")[1]);
+                //TODO: What is this? It doesn't do anything
             }
-            else if (command.matches("change type \\S+, \\S+")) {
+            /*else if (command.matches("change type \\S+, \\S+")) {
                 ChangeType(command.split("\\s")[2],command.split("\\s")[3]);
-            }
+            }*/
             else if(command.matches("delete user \\S+")){
                 deleteUser(command.split("\\s")[3]);
+            }
+            else if (command.equals("back")){
+                return;
             }
             else {
                 throw new RuntimeException("Unknown command was passed to LoginMenu by view");
             }
         }
     }
-    public Account ViewUser(String username){
+    private Account ViewUser(String username){
         return ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
     }
-    public void ChangeType(String username,String role){
+    /*private void ChangeType(String username, String role){
         ProgramManager.getProgramManagerInstance().deleteAccount(ProgramManager.getProgramManagerInstance().getAccountByUsername(username));
         LoginMenu loginMenu;
         LoginMenu.getLoginMenuInstance().register(username,role);
         view.giveOutput("the user's role was successfully changed!");
-    }
-    public void deleteUser(String username){
-        ProgramManager.getProgramManagerInstance().deleteAccount(ProgramManager.getProgramManagerInstance().getAccountByUsername(username));
+    }*/
+    private void deleteUser(String username){
+        ProgramManager.getProgramManagerInstance().deleteAccount(username);
         view.giveOutput("the user was successfully removed!");
     }
 }

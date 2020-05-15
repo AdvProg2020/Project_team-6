@@ -149,6 +149,10 @@ public class ProgramManager {
     public void removeProductById(int productId) {
         allProducts.remove(productId);
     }
+
+    public void deleteAccount(String username){
+        allAccounts.remove(username);
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.
