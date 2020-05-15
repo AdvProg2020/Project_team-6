@@ -1,6 +1,8 @@
 package controller.managerPanels;
 
 import controller.ProgramManager;
+
+import controller.ProgramManager;
 import view.ManageAllProductsView;
 
 public class ManageAllProducts {

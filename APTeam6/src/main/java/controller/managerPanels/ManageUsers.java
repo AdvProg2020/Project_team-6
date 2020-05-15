@@ -12,7 +12,7 @@ public class ManageUsers {
             manageUsersInstance = new ManageUsers();
         return manageUsersInstance;
     }
-    
+
     ManageUsersView view;
     public void start(){
         view = new ManageUsersView();
@@ -51,3 +51,4 @@ public class ManageUsers {
         view.giveOutput("the user was successfully removed!");
     }
 }
+
