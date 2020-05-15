@@ -1,20 +1,16 @@
 package controller;
 
 import com.gilecode.yagson.YaGson;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.account.Account;
-import model.account.Buyer;
 import model.logs.LogsInGeneral;
 import model.product.Category;
 import model.product.Product;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProgramManager {
@@ -73,7 +69,6 @@ public class ProgramManager {
         else {
             YaGson gsonParser = new YaGson();
             try {
-                //System.out.println(Files.readString(Paths.get(ADDRESS + "accounts.json")));
                 allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
                 allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<String, LogsInGeneral>>(){}.getType());
                 allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
