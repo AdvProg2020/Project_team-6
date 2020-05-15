@@ -14,7 +14,7 @@ public class BuyLog extends LogsInGeneral{
     public BuyLog(Date date, int executedDiscount, int logId, int paidAmount, String buyerName) {
         super(date, executedDiscount, logId);
         this.paidAmount = paidAmount;
-        boughtProducts = new ArrayList<Product>();
+        this.boughtProducts = new ArrayList<Product>();
         this.buyerName = buyerName;
         Buyer.buyLogIds.add(logId);
     }

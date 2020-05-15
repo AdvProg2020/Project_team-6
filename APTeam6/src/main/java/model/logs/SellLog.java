@@ -14,7 +14,7 @@ public class SellLog extends LogsInGeneral{
     public SellLog(Date date, int executedDiscount, int logId, int receivedAmount, String sellerName) {
         super(date, executedDiscount, logId);
         this.receivedAmount = receivedAmount;
-        soldProducts = new ArrayList<Product>();
+        this.soldProducts = new ArrayList<Product>();
         this.sellerName = sellerName;
         Seller.sellLogIds.add(logId);
     }

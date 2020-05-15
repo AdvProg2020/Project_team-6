@@ -30,7 +30,7 @@ public class LoginMenuView {
             else if(command.equals("view personal info")){
                 return command;
             }
-            else if(command.matches("edit \\.*")){
+            else if(command.matches("edit \\.+")){
                 return command;
             }
             else if(command.equals("manage users")){
