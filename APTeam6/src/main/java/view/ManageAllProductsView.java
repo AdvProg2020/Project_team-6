@@ -1,7 +1,5 @@
 package view;
 
-import controller.ManageAllProducts;
-
 public class ManageAllProductsView {
     public ManageAllProductsView(){
         System.out.println("=== ManageAllProducts menu");

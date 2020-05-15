@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class SubCategory {
     private String name;
-    private ArrayList<Product> products;
+    private ArrayList<Integer> productIds;
     private ArrayList<String> additionalAttributes;
 
     public SubCategory(String name){
         this.name = name;
-        products = new ArrayList<>();
+        productIds = new ArrayList<>();
         additionalAttributes = new ArrayList<>();
     }
 
@@ -21,11 +21,11 @@ public class SubCategory {
         additionalAttributes.remove(field);
     }
 
-    public void addSubcategory(Product product){
-        products.add(product);
+    public void addProduct(int productId){
+        productIds.add(productId);
     }
 
-    public void removeSubcategory(Product product){
-        products.remove(product);
+    public void removeProduct(int productId){
+        productIds.remove(productId);
     }
 }

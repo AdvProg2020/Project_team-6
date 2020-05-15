@@ -1,10 +1,9 @@
-package controller;
+package controller.managerPanels;
 
+import controller.LoginMenu;
+import controller.ProgramManager;
 import model.account.Account;
-import view.LoginMenuView;
 import view.ManageUsersView;
-
-import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 public class ManageUsers {
     private static ManageUsers manageUsersInstance = null;
