@@ -4,46 +4,44 @@ import controller.LoginMenu;
 import controller.ProgramManager;
 
 public class LoginMenuView {
-    public LoginMenuView(){
+    public LoginMenuView() {
         System.out.println("=== Login/register menu");
     }
 
-    public String getInputCommand(){
+    public String getInputCommand() {
         String command;
-        while (true){
+        while (true) {
             command = Input.getInput();
-            if (command.equals("help")){
+            if (command.equals("help")) {
                 showHelp();
                 continue;
             }
-            if (command.equals("back")){
+            if (command.equals("back")) {
                 return command;
             }
-            if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()){
+            if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
                 if (command.equals("logout")) {
                     return command;
                 }
             }
             else if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller|manager) \\S+")) {
                 return command;
-                }
+            }
             else {
                 System.out.println("Invalid command");
             }
-
-            }
-
         }
+    }
 
-    private void showHelp(){
+    private void showHelp() {
         System.out.println("List of commands:\n\tlogin [username] [password]\n\tcreate account [role] [username]");
     }
 
-    public void giveOutput(String message){
+    public void giveOutput(String message) {
         System.out.println(message);
     }
 
-    public String[] getUserUsualData(){
+    public String[] getUserUsualData() {
         String[] data = new String[5];
         System.out.println("Enter your first name:");
         data[0] = Input.getInput();
@@ -64,7 +62,7 @@ public class LoginMenuView {
         return data;
     }
 
-    public String getSellerCompany(){
+    public String getSellerCompany() {
         System.out.println("Enter your company name:");
         return Input.getInput();
     }

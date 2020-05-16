@@ -33,12 +33,13 @@ public class ProgramManager {
     private File logsFile;
     private File productsFile;
     private File categoriesFile;
+    private File discountCodesFile;
 
     private HashMap<String, Account> allAccounts;
     private HashMap<Integer, LogsInGeneral> allLogs;
     private HashMap<Integer, Product> allProducts;
     private HashMap<Integer, Category> allCategories;
-    private HashMap<Account, DiscountCode> discountCodeIncludedUsers;
+    private HashMap<Integer, DiscountCode> allDiscountCodes;
     private Account currentlyLoggedInUser;
 
     private ProgramManager() {
@@ -47,12 +48,9 @@ public class ProgramManager {
         logsFile = new File(ADDRESS + "logs.json");
         productsFile = new File(ADDRESS + "products.json");
         categoriesFile = new File(ADDRESS + "categories.json");
+        discountCodesFile = new File(ADDRESS + "discountCodes.json");
 
-        allAccounts = new HashMap<String, Account>();
-        allLogs = new HashMap<Integer, LogsInGeneral>();
-        allProducts = new HashMap<Integer, Product>();
         currentlyLoggedInUser = null;
-        // TODO: Add arrayLists here
     }
 
     public void loadFromFiles() {
@@ -63,18 +61,36 @@ public class ProgramManager {
                 logsFile.createNewFile();
                 productsFile.createNewFile();
                 categoriesFile.createNewFile();
+                discountCodesFile.createNewFile();
             }
             catch (Exception ignored){
                 System.out.println("Failed to make files...");
             }
         }
         else {
+            try {
+                if (!accountsFile.exists())
+                    accountsFile.createNewFile();
+                if (!logsFile.exists())
+                    logsFile.createNewFile();
+                if (!productsFile.exists())
+                    productsFile.createNewFile();
+                if (!categoriesFile.exists())
+                    categoriesFile.createNewFile();
+                if (!discountCodesFile.exists())
+                    discountCodesFile.createNewFile();
+            }
+            catch (Exception ignored){
+                System.out.println("Failed to make files...");
+            }
+
             YaGson gsonParser = new YaGson();
             try {
                 allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
                 allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<String, LogsInGeneral>>(){}.getType());
                 allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
                 allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
+                allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>(){}.getType());
                 if (allAccounts == null)
                     allAccounts = new HashMap<>();
                 if (allLogs == null)
@@ -83,35 +99,38 @@ public class ProgramManager {
                     allProducts = new HashMap<>();
                 if (allCategories == null)
                     allCategories = new HashMap<>();
+                if (allDiscountCodes == null)
+                    allDiscountCodes = new HashMap<>();
             }
             catch (Exception ignored){
                 ignored.printStackTrace();
                 System.out.println("Couldn't read from files...");
             }
         }
-        // TODO: We really should do something about this...
     }
 
     public void saveToFiles() {
         YaGson gsonCreator = new YaGson();
         try {
-            FileWriter accountsFileWriter = new FileWriter(accountsFile, false);
-            accountsFileWriter.write(gsonCreator.toJson(allAccounts));
-            accountsFileWriter.close();
-            FileWriter logsFileWriter = new FileWriter(logsFile, false);
-            logsFileWriter.write(gsonCreator.toJson(allLogs));
-            logsFileWriter.close();
-            FileWriter productsFileWriter = new FileWriter(productsFile, false);
-            productsFileWriter.write(gsonCreator.toJson(allProducts));
-            productsFileWriter.close();
-            FileWriter categoriesFileWriter = new FileWriter(categoriesFile, false);
-            categoriesFileWriter.write(gsonCreator.toJson(allCategories));
-            categoriesFileWriter.close();
+            FileWriter fileWriter = new FileWriter(accountsFile, false);
+            fileWriter.write(gsonCreator.toJson(allAccounts));
+            fileWriter.close();
+            fileWriter = new FileWriter(logsFile, false);
+            fileWriter.write(gsonCreator.toJson(allLogs));
+            fileWriter.close();
+            fileWriter = new FileWriter(productsFile, false);
+            fileWriter.write(gsonCreator.toJson(allProducts));
+            fileWriter.close();
+            fileWriter = new FileWriter(categoriesFile, false);
+            fileWriter.write(gsonCreator.toJson(allCategories));
+            fileWriter.close();
+            fileWriter = new FileWriter(discountCodesFile, false);
+            fileWriter.write(gsonCreator.toJson(allDiscountCodes));
+            fileWriter.close();
         }
         catch (Exception ignored){
             System.out.println("Failed to save files...");
         }
-        // TODO: We really should do something about this...
     }
 
     //////////////////////////////////////////////
@@ -151,6 +170,8 @@ public class ProgramManager {
     public void removeProductById(int productId) {
         allProducts.remove(productId);
     }
+
+    //TODO: I think it would be better if you create the code elsewhere then pass it to ProgramManager
     public void createDiscountCode(){
 
     }

@@ -33,7 +33,7 @@ public class ManageUsers {
                 return;
             }
             else {
-                throw new RuntimeException("Unknown command was passed to LoginMenu by view");
+                throw new RuntimeException("Unknown command was passed to ManageUsersMenu by view");
             }
         }
     }
