@@ -1,5 +1,8 @@
 package view;
 
+import controller.ProgramManager;
+import model.product.DiscountCode;
+
 public class CreateDiscountCodeView {
     public CreateDiscountCodeView(){
         System.out.println("=== Create DiscountCode menu");
@@ -34,13 +37,10 @@ public class CreateDiscountCodeView {
         discountCodeInfo[3] = Input.getInput();
         System.out.println("Enter the repetition time:");
         discountCodeInfo[4] = Input.getInput();
-        while (true) {
-            System.out.println("");
-            discountCodeInfo[2] = Input.getInput();
-            if (discountCodeInfo[2].matches("[0-9]+")) {
-                break;
-            }
-            System.out.println("Wrong phone number");
+        System.out.println("Enter the username of Users included in discount code: (when finished enter 'end')");
+        while (!Input.getInput().equalsIgnoreCase("end")){
+            String user = Input.getInput();
+            DiscountCode.usersIncludedInDiscountCode.add(ProgramManager.getProgramManagerInstance().getAccountByUsername(user));
         }
         return discountCodeInfo;
     }

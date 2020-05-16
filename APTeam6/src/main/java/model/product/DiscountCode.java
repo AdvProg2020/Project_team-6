@@ -1,6 +1,9 @@
 package model.product;
 
+import model.account.Account;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class DiscountCode {
     private static int nextId = 0;
@@ -10,6 +13,7 @@ public class DiscountCode {
     private LocalDateTime end;
     private int percentage;
     private int repetitionTime;
+    public static ArrayList <Account> usersIncludedInDiscountCode = new ArrayList<>();
 
     public DiscountCode(String code, LocalDateTime start, LocalDateTime end, int percentage, int repetitionTime) {
         id = nextId;
