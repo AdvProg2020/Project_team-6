@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -157,6 +159,11 @@ public class ProgramManager {
 
     public void deleteAccount(String username){
         allAccounts.remove(username);
+    }
+    public LocalDateTime parsingStringToData(String input){
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+        return dateTime;
     }
 }
 
