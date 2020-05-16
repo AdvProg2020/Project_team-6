@@ -24,4 +24,8 @@ public class DiscountCode {
         this.percentage = percentage;
         this.repetitionTime = repetitionTime;
     }
+
+    public String getCode() {
+        return code;
+    }
 }
