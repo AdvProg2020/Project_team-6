@@ -8,7 +8,6 @@ import java.util.Date;
 public class CreateDiscountCode {
     CreateDiscountCodeView view;
 
-
     public void start() {
         view = new CreateDiscountCodeView();
         String command = null;
@@ -17,7 +16,8 @@ public class CreateDiscountCode {
             if(command.startsWith("create discount code")){
                 String[] input = command.split("\\s");
                 ProgramManager instance = ProgramManager.getProgramManagerInstance();
-                DiscountCode discountCode = new DiscountCode(input[3], instance.parsingStringToData(input[4]),instance.parsingStringToData(input[5]),Integer.parseInt(input[6]),Integer.parseInt(input[7]));
+                String[] discountCommand = view.getUserUsualData();
+                DiscountCode discountCode = new DiscountCode(discountCommand[0], instance.parsingStringToData(discountCommand[1]),instance.parsingStringToData(discountCommand[2]),Integer.parseInt(discountCommand[3]),Integer.parseInt(discountCommand[4]));
             }
         }
     }

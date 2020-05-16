@@ -10,13 +10,13 @@ public class CreateDiscountCodeView {
 
     public String getInputCommand(){
         String command;
-        String secondCommand;
         while (true) {
             command = Input.getInput();
-            /*giveOutput("Enter all discountCode properties except the userIncluded:");
-            if(command.matches("create discount code \\.+")){
-            return command;
-            }*/
+            if(command.startsWith("create discount code"))
+            {
+                return command;
+            }
+
             if(command.equals("back")){
                 return command;
             }
@@ -26,7 +26,7 @@ public class CreateDiscountCodeView {
         }
         }
     public String[] getUserUsualData() {
-        String[] discountCodeInfo = new String[5];
+        String[] discountCodeInfo = new String[4];
         System.out.println("Enter the discountCode:");
         discountCodeInfo[0] = Input.getInput();
         System.out.println("Enter the startDate:");
