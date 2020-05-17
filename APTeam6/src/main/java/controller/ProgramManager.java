@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class ProgramManager {
@@ -178,6 +178,14 @@ public class ProgramManager {
 
     public void deleteAccount(String username){
         allAccounts.remove(username);
+    }
+
+    public Account getCurrentlyLoggedInUser(){
+        return currentlyLoggedInUser;
+    }
+
+    public Collection<Account> getAllAccounts(){
+        return allAccounts.values();
     }
 }
 

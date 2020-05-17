@@ -56,7 +56,7 @@ public class Buyer extends Account implements Comparable<Buyer> {
         fieldSort = 5 for username sort
          */
         field = fieldSort;
-        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts().values();
+        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts();
         ArrayList<Account> listOfValues = new ArrayList<>(values);
         for (int i = 0; i < listOfValues.size(); i++) {
             if (listOfValues.get(i).role==1) {
@@ -65,5 +65,9 @@ public class Buyer extends Account implements Comparable<Buyer> {
         }
         Collections.sort(buyerArrayList);
         return buyerArrayList;
+    }
+
+    public long getCredit() {
+        return credit;
     }
 }
