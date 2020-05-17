@@ -1,7 +1,7 @@
 package controller.managerPanels;
 
-import controller.LoginMenu;
-import view.LoginMenuView;
+import controller.ProgramManager;
+import model.product.DiscountCode;
 import view.ShowDiscountCodeView;
 
 public class ShowDiscountCode {
@@ -18,15 +18,13 @@ public class ShowDiscountCode {
         while (true) {
             command = view.getInputCommand();
             if (command.matches("view discount code \\.+")) {
-                String[] splitCommand = command.split("\\s");
-
+                viewDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
             }
             else if (command.matches("edit discount code \\.+")) {
-                String[] splitCommand = command.split("\\s");
-
+                editDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
             }
             else if (command.equals("remove discount code \\.+")){
-
+                removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
             }
             else if (command.equals("back")){
                 return;
@@ -36,14 +34,15 @@ public class ShowDiscountCode {
             }
         }
     }
-    public void viewDiscountCodeCode(){
 
+    public void viewDiscountCode(DiscountCode discountCode){
+        view.viewDiscountCode(discountCode);
     }
-    public void editDiscountCode(){
-
+    public void editDiscountCode(DiscountCode discountCode){
+        view.editDiscountCode(discountCode);
     }
-    public void removeDiscountCode(){
-
+    public void removeDiscountCode(DiscountCode discountCode){
+        view.removeDiscountCode(discountCode);
     }
 
 }

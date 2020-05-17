@@ -217,6 +217,9 @@ public class ProgramManager {
     public void addDiscountCodeToArrayList(DiscountCode discountCode){
         allDiscountCodes.put(discountCode.getCode(),discountCode);
     }
+    public DiscountCode getDiscountCodeByCode(String code){
+        return allDiscountCodes.get(code);
+    }
 
     /**
      * If a buyer is logged in, this method will add the product to their buyBasket, otherwise it will be added to ProgramManager buyBasket.
