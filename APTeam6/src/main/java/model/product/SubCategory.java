@@ -7,7 +7,7 @@ public class SubCategory {
     private ArrayList<Integer> productIds;
     private ArrayList<String> additionalAttributes;
 
-    public SubCategory(String name){
+    public SubCategory(String name) {
         this.name = name;
         productIds = new ArrayList<>();
         additionalAttributes = new ArrayList<>();
@@ -26,28 +26,28 @@ public class SubCategory {
         return false;
     }
 
-    public void addField(String field){
-        if(!isExistThisAttribute(field)) {
+    public void addField(String field) {
+        if (!isExistThisAttribute(field)) {
             additionalAttributes.add(field);
-        }else{
+        } else {
             //System.out.println("this attribute already exist");
             // TODO
         }
     }
 
-    public void removeField(String field){
-        if(isExistThisAttribute(field)) {
+    public void removeField(String field) {
+        if (isExistThisAttribute(field)) {
             additionalAttributes.remove(field);
-        }else{
+        } else {
             //System.out.println("this attribute not exist");
             // TODO
         }
     }
 
-    public void addProduct(int productId){
-        if(!isExistThisProduct(productId)) {
+    public void addProduct(int productId) {
+        if (!isExistThisProduct(productId)) {
             productIds.add(productId);
-        }else{
+        } else {
             //System.out.println("this product already exist in this sub category");
             // TODO
         }
@@ -55,17 +55,17 @@ public class SubCategory {
 
     private boolean isExistThisProduct(int productId) {
         for (Integer id : productIds) {
-            if(id==productId){
+            if (id == productId) {
                 return true;
             }
         }
         return false;
     }
 
-    public void removeProduct(int productId){
-        if(isExistThisProduct(productId)) {
+    public void removeProduct(int productId) {
+        if (isExistThisProduct(productId)) {
             productIds.remove(productId);
-        }else{
+        } else {
             //System.out.println("this product not exist in this sub category");
             // TODO
         }

@@ -1,15 +1,19 @@
 package model.product;
 
-import java.util.ArrayList;
+import controller.ProgramManager;
 
-public class Category {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+public class Category implements Comparable<Category> {
     private static int nextId = 0;
     private int id;
     private String name;
     private ArrayList<SubCategory> subCategories;
     private ArrayList<String> additionalAttributes;
 
-    public Category(String name){
+    public Category(String name) {
         this.name = name;
         this.id = nextId;
         nextId++;
@@ -17,10 +21,32 @@ public class Category {
         additionalAttributes = new ArrayList<>();
     }
 
-    public void addField(String field){
-        if(!isExistThisAttribute(field)) {
+    private static int field = 1;
+    private static ArrayList<Category> categoryArrayList = new ArrayList<>();
+
+    public int compareTo(Category category) {
+        return -(category.name.compareTo(this.name));
+    }
+
+    public ArrayList<Category> sortCategory(int fieldSort) {
+        /*
+        How to use this method :
+        fieldSort = 1 for name sort
+         */
+        field = fieldSort;
+        Collection<Category> values = ProgramManager.getProgramManagerInstance().getAllCategories();
+        ArrayList<Category> listOfValues = new ArrayList<>(values);
+        for (int i = 0; i < listOfValues.size(); i++) {
+            categoryArrayList.add(listOfValues.get(i));
+        }
+        Collections.sort(categoryArrayList);
+        return categoryArrayList;
+    }
+
+    public void addField(String field) {
+        if (!isExistThisAttribute(field)) {
             additionalAttributes.add(field);
-        }else{
+        } else {
             //System.out.println("this attribute already exist");
             // TODO
         }
@@ -45,30 +71,32 @@ public class Category {
     }
 
 
-    public void removeField(String field){
-        if(isExistThisAttribute(field)) {
+    public void removeField(String field) {
+        if (isExistThisAttribute(field)) {
             additionalAttributes.remove(field);
-        }else{
+        } else {
             //System.out.println("this attribute not exist");
             // TODO
         }
     }
 
-    public void addSubcategory(SubCategory subCategory){
-        if(!isExistThisSubCategories(subCategory)) {
+    public void addSubcategory(SubCategory subCategory) {
+        if (!isExistThisSubCategories(subCategory)) {
             subCategories.add(subCategory);
-        }else{
+        } else {
             //System.out.println("this subCategory already exist");
             // TODO
         }
     }
 
-    public void removeSubcategory(SubCategory subCategory){
-        if(isExistThisSubCategories(subCategory)) {
+    public void removeSubcategory(SubCategory subCategory) {
+        if (isExistThisSubCategories(subCategory)) {
             subCategories.remove(subCategory);
-        }else{
+        } else {
             //System.out.println("this subCategory not exist");
             // TODO
         }
     }
+
+
 }

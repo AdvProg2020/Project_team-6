@@ -204,6 +204,11 @@ public class ProgramManager {
         return allAccounts.values();
     }
 
+    public Collection<Category> getAllCategories(){
+        return allCategories.values();
+    }
+
+
     public LocalDateTime parsingStringToData(String input){
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
