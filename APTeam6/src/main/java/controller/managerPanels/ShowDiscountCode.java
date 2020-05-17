@@ -21,7 +21,7 @@ public class ShowDiscountCode {
                 viewDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
             }
             else if (command.matches("edit discount code \\.+")) {
-                editDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
+                editDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[4]);
             }
             else if (command.equals("remove discount code \\.+")){
                 removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
@@ -38,8 +38,8 @@ public class ShowDiscountCode {
     public void viewDiscountCode(DiscountCode discountCode){
         view.viewDiscountCode(discountCode);
     }
-    public void editDiscountCode(DiscountCode discountCode){
-        view.editDiscountCode(discountCode);
+    public void editDiscountCode(DiscountCode discountCode,String code){
+        view.editDiscountCode(discountCode,code);
     }
     public void removeDiscountCode(DiscountCode discountCode){
         view.removeDiscountCode(discountCode);

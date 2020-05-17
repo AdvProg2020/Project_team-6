@@ -41,10 +41,10 @@ public class ShowDiscountCodeView {
         System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
         System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
     }
-    public void editDiscountCode(DiscountCode discountCode){
-
+    public void editDiscountCode(DiscountCode discountCode,String code){
+        discountCode.setCode(code);
     }
     public void removeDiscountCode(DiscountCode discountCode){
-
+        ProgramManager.getProgramManagerInstance().deleteDiscountCode(discountCode);
     }
 }
