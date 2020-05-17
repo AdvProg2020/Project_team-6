@@ -1,4 +1,5 @@
 package controller.managerPanels;
+import controller.ProgramManager;
 import model.product.DiscountCode;
 import view.CreateDiscountCodeView;
 
@@ -15,7 +16,8 @@ public class CreateDiscountCode {
             command = view.getInputCommand();
             if(command.startsWith("create discount code")){
                 String[] input = command.split("\\s");
-                DiscountCode discountCode = new DiscountCode(input[3],input[4],input[5],Integer.parseInt(input[6]),Integer.parseInt(input[7]));
+                ProgramManager instance = ProgramManager.getProgramManagerInstance();
+                DiscountCode discountCode = new DiscountCode(input[3], instance.parsingStringToData(input[4]),instance.parsingStringToData(input[5]),Integer.parseInt(input[6]),Integer.parseInt(input[7]));
             }
         }
     }
