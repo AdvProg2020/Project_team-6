@@ -2,6 +2,8 @@ package model.account;
 
 import controller.ProgramManager;
 import model.logs.BuyLog;
+import model.logs.LogsInGeneral;
+import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +11,8 @@ import java.util.Collections;
 
 public class Buyer extends Account implements Comparable<Buyer> {
     private long credit;
-    public static ArrayList<Integer> buyLogIds = new ArrayList<>();
+    public static ArrayList<Integer> buyLogIds = new ArrayList<Integer>();
+    private ArrayList<Product> buyBasket = new ArrayList<>();
 
     public Buyer(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
@@ -62,11 +65,19 @@ public class Buyer extends Account implements Comparable<Buyer> {
         Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts();
         ArrayList<Account> listOfValues = new ArrayList<>(values);
         for (int i = 0; i < listOfValues.size(); i++) {
-            if (listOfValues.get(i).role==1) {
+            if (listOfValues.get(i).role == 1) {
                 buyerArrayList.add((Buyer) listOfValues.get(i));
             }
         }
         Collections.sort(buyerArrayList);
         return buyerArrayList;
+    }
+
+    public void addProductToBuyBasket(Product product) {
+        buyBasket.add(product);
+    }
+
+    public void addProductToBuyBasket(ArrayList<Product> products) {
+        buyBasket.addAll(products);
     }
 }
