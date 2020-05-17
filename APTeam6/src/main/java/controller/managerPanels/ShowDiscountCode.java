@@ -21,7 +21,21 @@ public class ShowDiscountCode {
                 viewDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
             }
             else if (command.matches("edit discount code \\.+")) {
-                editDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[4]);
+                if(command.split("\\s")[4].equalsIgnoreCase("code")) {
+                    editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[5]);
+                }
+                else if(command.split("\\s")[4].equalsIgnoreCase("startDate")){
+                    editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[5]);
+                }
+                else if(command.split("\\s")[4].equalsIgnoreCase("endDate")){
+                    editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[5]);
+                }
+                else if(command.split("\\s")[4].equalsIgnoreCase("percentage")){
+                    editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),Integer.parseInt(command.split("\\s")[5]));
+                }
+                else{
+                    editDiscountCodeCRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),Integer.parseInt(command.split("\\s")[5]));
+                }
             }
             else if (command.equals("remove discount code \\.+")){
                 removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
@@ -38,11 +52,24 @@ public class ShowDiscountCode {
     public void viewDiscountCode(DiscountCode discountCode){
         view.viewDiscountCode(discountCode);
     }
-    public void editDiscountCode(DiscountCode discountCode,String code){
-        view.editDiscountCode(discountCode,code);
+    public void editDiscountCodeCode(DiscountCode discountCode, String code){
+        view.editDiscountCodeCode(discountCode,code);
     }
     public void removeDiscountCode(DiscountCode discountCode){
         view.removeDiscountCode(discountCode);
     }
+    public void editDiscountCodeStartDate(DiscountCode discountCode,String startDate){
+        view.editDiscountCodeStartDate(discountCode,startDate);
+    }
+    public void editDiscountCodeEndDate(DiscountCode discountCode,String endDate){
+        view.editDiscountCodeEndDate(discountCode,endDate);
+    }
+    public void editDiscountCodePercentage(DiscountCode discountCode,int percentage){
+        view.editDiscountCodePercentage(discountCode,percentage);
+    }
+    public void editDiscountCodeCRepetitionTime(DiscountCode discountCode,int repetitionTime){
+        view.editDiscountCodeRepetitionTime(discountCode,repetitionTime);
+    }
+
 
 }

@@ -11,7 +11,6 @@ public class ShowDiscountCodeView {
     public ShowDiscountCodeView() {
         System.out.println("=== Login/register menu");
     }
-
     public String getInputCommand() {
         String command;
         while (true) {
@@ -41,8 +40,20 @@ public class ShowDiscountCodeView {
         System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
         System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
     }
-    public void editDiscountCode(DiscountCode discountCode,String code){
+    public void editDiscountCodeCode(DiscountCode discountCode, String code){
         discountCode.setCode(code);
+    }
+    public void editDiscountCodeStartDate(DiscountCode discountCode,String startDate){
+        discountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToData(startDate));
+    }
+    public void editDiscountCodeEndDate(DiscountCode discountCode,String endDate){
+        discountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToData(endDate));
+    }
+    public void editDiscountCodePercentage(DiscountCode discountCode,int percentage){
+        discountCode.setPercentage(percentage);
+    }
+    public void editDiscountCodeRepetitionTime(DiscountCode discountCode,int repetitionTime){
+        discountCode.setRepetitionTime(repetitionTime);
     }
     public void removeDiscountCode(DiscountCode discountCode){
         ProgramManager.getProgramManagerInstance().deleteDiscountCode(discountCode);
