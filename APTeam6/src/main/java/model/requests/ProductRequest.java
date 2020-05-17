@@ -21,7 +21,6 @@ public class ProductRequest implements Request{
         this.product = product;
         this.action = action;
         this.newValue = newValue;
-        requestId++;
     }
 
     @Override
@@ -43,8 +42,4 @@ public class ProductRequest implements Request{
         ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 
-    @Override
-    public void addToRequestId() {
-        requestId++;
-    }
 }
