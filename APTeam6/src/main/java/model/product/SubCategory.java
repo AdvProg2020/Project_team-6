@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SubCategory {
     private String name;
     private ArrayList<Integer> productIds;
-    private ArrayList<String> additionalAttributes;
+    private ArrayList<String> additionalAttributes; //--
 
     public SubCategory(String name){
         this.name = name;
