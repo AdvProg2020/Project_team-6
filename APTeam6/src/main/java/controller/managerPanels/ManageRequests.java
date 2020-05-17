@@ -1,6 +1,7 @@
 package controller.managerPanels;
 
 import controller.LoginMenu;
+import controller.ProgramManager;
 import view.LoginMenuView;
 import view.ManageRequestsView;
 
@@ -17,10 +18,14 @@ public class ManageRequests {
         String command = null;
         while (true) {
             command = view.getInputCommand();
+            ProgramManager.getProgramManagerInstance().showRequests();
             if(command.matches("details \\.+")){
 
             }
-            else if(command.matches("(accept|decline) \\.+")){
+            else if(command.matches("accept \\.+")){
+
+            }
+            else if(command.matches("decline \\.+")){
 
             }
             else if (command.equals("back")){
