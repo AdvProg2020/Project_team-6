@@ -41,7 +41,7 @@ public class BuyLog extends LogsInGeneral implements Comparable<BuyLog> {
         }
     }
 
-    public ArrayList<BuyLog> sortBuyLog(int fieldSort) {
+    public static ArrayList<BuyLog> sortBuyLog(int fieldSort) {
         /*
         How to use this method :
         fieldSort = 1 for date sort

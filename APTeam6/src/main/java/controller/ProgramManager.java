@@ -39,7 +39,7 @@ public class ProgramManager {
     private File categoriesFile;
     private File discountCodesFile;
 
-    private HashMap<String, Account> allAccounts;
+    private HashMap<String, Account> allAccounts = new HashMap<>();
     private HashMap<Integer, LogsInGeneral> allLogs;
     private HashMap<Integer, Product> allProducts;
     private HashMap<Integer, Category> allCategories;

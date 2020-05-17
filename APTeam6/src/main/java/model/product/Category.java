@@ -28,7 +28,7 @@ public class Category implements Comparable<Category> {
         return -(category.name.compareTo(this.name));
     }
 
-    public ArrayList<Category> sortCategory(int fieldSort) {
+    public static ArrayList<Category> sortCategory(int fieldSort) {
         /*
         How to use this method :
         fieldSort = 1 for name sort
