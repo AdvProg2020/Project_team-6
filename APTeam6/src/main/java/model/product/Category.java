@@ -18,18 +18,57 @@ public class Category {
     }
 
     public void addField(String field){
-        additionalAttributes.add(field);
+        if(!isExistThisAttribute(field)) {
+            additionalAttributes.add(field);
+        }else{
+            //System.out.println("this attribute already exist");
+            // TODO
+        }
     }
 
+    private boolean isExistThisAttribute(String field) {
+        for (String additionalAttribute : additionalAttributes) {
+            if (additionalAttribute.equalsIgnoreCase(field)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isExistThisSubCategories(SubCategory subCategory) {
+        for (SubCategory category : subCategories) {
+            if (category.getName().equalsIgnoreCase(subCategory.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public void removeField(String field){
-        additionalAttributes.remove(field);
+        if(isExistThisAttribute(field)) {
+            additionalAttributes.remove(field);
+        }else{
+            //System.out.println("this attribute not exist");
+            // TODO
+        }
     }
 
     public void addSubcategory(SubCategory subCategory){
-        subCategories.add(subCategory);
+        if(!isExistThisSubCategories(subCategory)) {
+            subCategories.add(subCategory);
+        }else{
+            //System.out.println("this subCategory already exist");
+            // TODO
+        }
     }
 
     public void removeSubcategory(SubCategory subCategory){
-        subCategories.remove(subCategory);
+        if(isExistThisSubCategories(subCategory)) {
+            subCategories.remove(subCategory);
+        }else{
+            //System.out.println("this subCategory not exist");
+            // TODO
+        }
     }
 }
