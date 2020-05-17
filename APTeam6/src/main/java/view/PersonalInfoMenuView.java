@@ -6,10 +6,9 @@ import model.account.Buyer;
 import model.account.Seller;
 
 public class PersonalInfoMenuView {
-    private ProgramManager programManager = ProgramManager.getProgramManagerInstance();
-    private Account currentUser = programManager.getCurrentlyLoggedInUser();
 
     public PersonalInfoMenuView(){
+        Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
         System.out.println("Your personal info is as follows:" +
                 "\n\tUsername: " + currentUser.getUsername() +
                 "\n\tFirst name: " + currentUser.getFirstName() +
