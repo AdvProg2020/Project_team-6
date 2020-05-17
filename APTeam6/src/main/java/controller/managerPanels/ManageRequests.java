@@ -17,6 +17,12 @@ public class ManageRequests {
         String command = null;
         while (true) {
             command = view.getInputCommand();
+            if(command.matches("details \\.+")){
+
+            }
+            else if(command.matches("(accept|decline) \\.+")){
+
+            }
             else if (command.equals("back")){
                 return;
             }
