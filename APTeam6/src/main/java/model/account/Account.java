@@ -49,6 +49,12 @@ public abstract class Account {
         return phoneNumber;
     }
 
+    /**
+     * returns account's role as a number
+     * @return 1 - if Buyer <br/>
+     *         2 - if Seller <br/>
+     *         3 - if Manager
+     */
     public byte getRole() {
         return role;
     }

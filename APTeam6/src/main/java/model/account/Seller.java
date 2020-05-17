@@ -23,6 +23,10 @@ public class Seller extends Account implements Comparable<Seller> {
         credit += amount;
     }
 
+    public long getCredit() {
+        return credit;
+    }
+
     private static int field = 1;
     private static ArrayList<Seller> sellerArrayList = new ArrayList<>();
 
@@ -52,7 +56,7 @@ public class Seller extends Account implements Comparable<Seller> {
         fieldSort = 5 for username sort
          */
         field = fieldSort;
-        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts().values();
+        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts();
         ArrayList<Account> listOfValues = new ArrayList<>(values);
         for (int i = 0; i < listOfValues.size(); i++) {
             if (listOfValues.get(i).role==2) {

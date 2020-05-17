@@ -27,6 +27,10 @@ public class Buyer extends Account implements Comparable<Buyer> {
         credit += amount;
     }
 
+    public long getCredit() {
+        return credit;
+    }
+
     public int compareTo(Buyer buyer) {
         if (field == 1) {
             return -(buyer.firstName.compareTo(this.firstName));
@@ -65,9 +69,5 @@ public class Buyer extends Account implements Comparable<Buyer> {
         }
         Collections.sort(buyerArrayList);
         return buyerArrayList;
-    }
-
-    public long getCredit() {
-        return credit;
     }
 }

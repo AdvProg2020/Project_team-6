@@ -41,7 +41,7 @@ public class Manager extends Account implements Comparable<Manager>{
         fieldSort = 5 for username sort
          */
         field = fieldSort;
-        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts().values();
+        Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts();
         ArrayList<Account> listOfValues = new ArrayList<>(values);
         for (int i = 0; i < listOfValues.size(); i++) {
             if (listOfValues.get(i).role==3) {

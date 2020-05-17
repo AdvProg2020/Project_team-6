@@ -2,6 +2,8 @@ package view;
 
 import controller.ProgramManager;
 import model.account.Account;
+import model.account.Buyer;
+import model.account.Seller;
 
 public class PersonalInfoMenuView {
     private ProgramManager programManager = ProgramManager.getProgramManagerInstance();
@@ -15,6 +17,12 @@ public class PersonalInfoMenuView {
                 "\n\tEmail address: " + currentUser.getEmailAddress() +
                 "\n\tTelephone num: " + currentUser.getPhoneNumber() +
                 "\n\tRole: " + currentUser.getRole());
+        if (currentUser.getRole() == 2){
+            System.out.println("\tCredit: " + ((Seller) currentUser).getCredit());
+        }
+        else if (currentUser.getRole() == 1){
+            System.out.println("\tCredit: " + ((Buyer) currentUser).getCredit());
+        }
     }
 
     public String getInputCommand() {

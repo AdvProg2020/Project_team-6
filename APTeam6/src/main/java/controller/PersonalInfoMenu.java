@@ -1,7 +1,6 @@
 package controller;
 
 import model.account.Account;
-import view.LoginMenuView;
 import view.PersonalInfoMenuView;
 
 public class PersonalInfoMenu {
@@ -41,5 +40,4 @@ public class PersonalInfoMenu {
             }
         }
     }
-    //TODO: write here
 }
