@@ -1,11 +1,17 @@
 package view;
 
+import controller.LoginMenu;
 import controller.ProgramManager;
+import controller.buyerPanels.BuyerUserPanel;
 
 public class MainScreenView {
 
     private void showHelp(){
-        System.out.println("List of commands:\n\tlogin menu\n\to");
+        System.out.println("List of commands:" +
+                "\n\tlogin menu" +
+                "\n\tproducts" +
+                "\n\texit" +
+                "\n\tkill kamali");
     }
 
     public String getInputCommand() {
@@ -15,11 +21,23 @@ public class MainScreenView {
             if (command.equalsIgnoreCase("exit")){
                 return command;
             }
-            if (command.equalsIgnoreCase("")){
-
+            else if (command.equalsIgnoreCase("help")){
+                showHelp();
+            }
+            else if (command.equalsIgnoreCase("login menu")){
+                return command;
+            }
+            else if (command.equalsIgnoreCase("kill kamali")){
+                System.out.println("Ahsant");
             }
             else {
                 System.out.println("Invalid command");
+            }
+
+            if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()){
+                byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getRole();
+                if (role == 1)
+                    BuyerUserPanel.getBuyerUserPanelInstance().start();
             }
         }
     }
