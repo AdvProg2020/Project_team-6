@@ -55,6 +55,10 @@ public class ProgramManager {
         currentlyLoggedInUser = null;
     }
 
+    public Collection<LogsInGeneral> getAllLogs() {
+        return allLogs.values();
+    }
+
     public void loadFromFiles() {
         if (!folder.exists()){
             folder.mkdir();

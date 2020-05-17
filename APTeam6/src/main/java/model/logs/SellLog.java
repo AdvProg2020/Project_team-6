@@ -12,7 +12,7 @@ public class SellLog extends LogsInGeneral{
     protected String sellerName;
 
     public SellLog(Date date, int executedDiscount, int logId, int receivedAmount, String sellerName) {
-        super(date, executedDiscount, logId);
+        super(date, executedDiscount, logId , 2);
         this.receivedAmount = receivedAmount;
         this.soldProducts = new ArrayList<Product>();
         this.sellerName = sellerName;

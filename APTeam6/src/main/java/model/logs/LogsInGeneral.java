@@ -9,18 +9,18 @@ public class LogsInGeneral {
     protected int logId;
     protected Date date;
     protected int executedDiscount;
-    public static ArrayList<LogsInGeneral> allLogs = new ArrayList<LogsInGeneral>();
+    protected int type;      // 1 : buyLog  -  2 : sellLog
 
     /**
      * Attention: this method automatically adds the log to the log list.
      */
-    public LogsInGeneral(Date date, int executedDiscount,int logId) {
+    public LogsInGeneral(Date date, int executedDiscount,int logId,int type) {
         this.date = date;
         this.executedDiscount = executedDiscount;
         nextLogId++;
         this.logId = nextLogId;
-        allLogs.add(this);
         ProgramManager.getProgramManagerInstance().addLogToList(this);
+        this.type = type;
     }
 
     public int getLogId() {
