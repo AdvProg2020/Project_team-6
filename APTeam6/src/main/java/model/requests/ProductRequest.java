@@ -38,7 +38,7 @@ public class ProductRequest implements Request{
     }
 
     @Override
-    public void reject() {
+    public void decline() {
         ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 }

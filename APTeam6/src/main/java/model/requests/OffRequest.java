@@ -12,7 +12,7 @@ public class OffRequest implements Request {
     }
 
     @Override
-    public void reject() {
+    public void decline() {
 
     }
 }
