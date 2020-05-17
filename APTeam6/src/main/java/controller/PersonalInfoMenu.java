@@ -1,6 +1,8 @@
 package controller;
 
 import model.account.Account;
+import model.account.Buyer;
+import model.account.Seller;
 import view.PersonalInfoMenuView;
 
 public class PersonalInfoMenu {
@@ -34,6 +36,12 @@ public class PersonalInfoMenu {
                     currentUser.setPhoneNumber(view.getNewValueForField("phoneNumber"));
                 if (command.equalsIgnoreCase("edit email"))
                     currentUser.setEmailAddress(view.getNewValueForField("email"));
+            }
+            else if (command.matches("edit credit") && (currentUser.getRole() == 1 || currentUser.getRole() == 2)){
+                if (currentUser.getRole() == 1)
+                    ((Buyer)currentUser).modifyCreditBy(Long.parseLong(view.getNewValueForField("credit modifier")));
+                if (currentUser.getRole() == 2)
+                    ((Seller)currentUser).modifyCreditBy(Long.parseLong(view.getNewValueForField("credit modifier")));
             }
             else {
                 throw new RuntimeException("Unknown command was passed to LoginMenu by view");
