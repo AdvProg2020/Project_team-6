@@ -40,6 +40,9 @@ public class ManagerUserPanel {
             else if (command.equalsIgnoreCase("view discount codes")){
                 ShowDiscountCode.getShowDiscountCodeInstance().start();
             }
+            else if (command.equalsIgnoreCase("manage requests")){
+                ManageRequests.getManageRequestsInstance().start();
+            }
             else {
                 throw new RuntimeException("Unknown command was passed to ManagerUserPanel by view");
             }
