@@ -2,6 +2,9 @@ package view;
 
 import controller.ProgramManager;
 import model.product.DiscountCode;
+import model.requests.Request;
+
+import java.util.ArrayList;
 
 public class ShowDiscountCodeView {
 
@@ -9,7 +12,11 @@ public class ShowDiscountCodeView {
         System.out.println(message);
     }
     public ShowDiscountCodeView() {
-        System.out.println("=== Login/register menu");
+        System.out.println("=== Discount codes view menu\n\tCurrent codes:");
+        ArrayList<Request> requests = ProgramManager.getProgramManagerInstance().getAllRequests();
+        for (Request request : requests) {
+            System.out.println("\t\t" + request);
+        }
     }
     public String getInputCommand() {
         String command;
