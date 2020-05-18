@@ -188,6 +188,9 @@ public class ProgramManager {
     public void addAccountToList(String username, Account account) {
         allAccounts.put(username, account);
     }
+    public void addAccountToList(Account account) {
+        allAccounts.put(account.getUsername(), account);
+    }
 
     public void addLogToList(LogsInGeneral log) {
         allLogs.put(log.getLogId(), log);

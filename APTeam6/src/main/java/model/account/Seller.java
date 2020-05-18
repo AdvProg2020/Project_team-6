@@ -71,11 +71,12 @@ public class Seller extends Account implements Comparable<Seller>, Request {
 
     @Override
     public void accept() {
-
+        ProgramManager.getProgramManagerInstance().addAccountToList(this);
+        ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 
     @Override
     public void reject() {
-
+        ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 }
