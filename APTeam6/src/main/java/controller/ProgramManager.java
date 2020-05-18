@@ -301,11 +301,6 @@ public class ProgramManager {
     public void addCategory(Category category){
         allCategories.put(category.getName(), category);
     }
-    public void showRequests(){
-        for (Request request : allRequests) {
-            System.out.println(request);
-        }
-    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.
