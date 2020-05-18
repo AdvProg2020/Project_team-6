@@ -52,6 +52,16 @@ public class ProgramManager {
 
     private ArrayList<Product> buyBasket;
 
+
+    //------------------------ Test----------
+    public void createAllAccountHashMapForTest(){
+        allAccounts = new HashMap<>();
+    }
+    public void createAllRequestHashMapForTest(){
+        allRequests = new ArrayList<>();
+    }
+    //------------------------ Test----------
+
     private ProgramManager() {
         folder = new File(ADDRESS);
         accountsFile = new File(ADDRESS + "accounts.json");
@@ -246,6 +256,10 @@ public class ProgramManager {
 
     public Collection<Account> getAllAccounts(){
         return allAccounts.values();
+    }
+
+    public ArrayList<Request> getAllRequests(){
+        return allRequests;
     }
 
     public Collection<Category> getAllCategories(){
