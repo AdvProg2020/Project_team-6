@@ -2,7 +2,6 @@ package controller.managerPanels;
 
 import controller.ProgramManager;
 
-import controller.ProgramManager;
 import view.ManageAllProductsView;
 
 public class ManageAllProducts {
@@ -24,6 +23,6 @@ public class ManageAllProducts {
         }
     }
     public void remove(int productId) {
-        ProgramManager.getProgramManagerInstance().removeProductById(productId);
+        ProgramManager.getProgramManagerInstance().removeProduct(productId);
     }
 }

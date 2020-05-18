@@ -4,8 +4,7 @@ import controller.ProgramManager;
 import model.product.Product;
 
 public class ProductRequest implements Request{
-    private Product newProduct;
-    private Product oldProduct;
+    private Product product;
     private byte action;
     private String newValue;
     // 0 - create
@@ -14,14 +13,12 @@ public class ProductRequest implements Request{
     // 3 - delete
 
     /**
-     * @param newProduct the new product. null in case of delete
-     * @param oldProduct the old product. null in case of create
+     * @param product the product
      * @param action the action to do.<br/>0 - create<br/>1 - change name<br/>2 - change description<br/>3 - delete<br/>
      * @param newValue new text for change. null otherwise
      */
-    public ProductRequest(Product newProduct, Product oldProduct, byte action, String newValue) {
-        this.newProduct = newProduct;
-        this.oldProduct = oldProduct;
+    public ProductRequest(Product product, byte action, String newValue) {
+        this.product = product;
         this.action = action;
         this.newValue = newValue;
     }
@@ -29,13 +26,19 @@ public class ProductRequest implements Request{
     @Override
     public void accept() {
         if (action == 0){
-            ProgramManager.getProgramManagerInstance().addProductToList(newProduct);
-
+            ProgramManager.getProgramManagerInstance().addProductToList(product);
         }
+        else if (action == 1 || action == 2){
+            product.changeField(action, newValue);
+        }
+        else if (action == 3){
+            ProgramManager.getProgramManagerInstance().removeProduct(product);
+        }
+        ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 
     @Override
     public void reject() {
-
+        ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 }

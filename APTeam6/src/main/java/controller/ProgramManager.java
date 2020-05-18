@@ -39,12 +39,15 @@ public class ProgramManager {
     private File productsFile;
     private File categoriesFile;
     private File discountCodesFile;
+    private File requestsFile;
 
     private HashMap<String, Account> allAccounts;
     private HashMap<Integer, LogsInGeneral> allLogs;
     private HashMap<Integer, Product> allProducts;
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
+    private ArrayList<Request> allRequests;
+
     private Account currentlyLoggedInUser;
 
     private ArrayList<Product> buyBasket;
@@ -56,6 +59,7 @@ public class ProgramManager {
         productsFile = new File(ADDRESS + "products.json");
         categoriesFile = new File(ADDRESS + "categories.json");
         discountCodesFile = new File(ADDRESS + "discountCodes.json");
+        requestsFile = new File(ADDRESS + "requests.json");
 
         currentlyLoggedInUser = null;
 
@@ -71,6 +75,7 @@ public class ProgramManager {
                 productsFile.createNewFile();
                 categoriesFile.createNewFile();
                 discountCodesFile.createNewFile();
+                requestsFile.createNewFile();
             }
             catch (Exception ignored){
                 System.out.println("Failed to make files...");
@@ -88,6 +93,8 @@ public class ProgramManager {
                     categoriesFile.createNewFile();
                 if (!discountCodesFile.exists())
                     discountCodesFile.createNewFile();
+                if (!requestsFile.exists())
+                    requestsFile.createNewFile();
             }
             catch (Exception ignored){
                 System.out.println("Failed to make files...");
@@ -100,6 +107,7 @@ public class ProgramManager {
                 allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
                 allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
                 allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>(){}.getType());
+                allRequests = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "requests.json")), new TypeToken<ArrayList<Request>>(){}.getType());
             }
             catch (Exception ignored){
                 ignored.printStackTrace();
@@ -116,6 +124,8 @@ public class ProgramManager {
             allCategories = new HashMap<>();
         if (allDiscountCodes == null)
             allDiscountCodes = new HashMap<>();
+        if (allRequests == null)
+            allRequests = new ArrayList<>();
     }
 
     public void saveToFiles() {
@@ -135,6 +145,9 @@ public class ProgramManager {
             fileWriter.close();
             fileWriter = new FileWriter(discountCodesFile, false);
             fileWriter.write(gsonCreator.toJson(allDiscountCodes));
+            fileWriter.close();
+            fileWriter = new FileWriter(requestsFile, false);
+            fileWriter.write(gsonCreator.toJson(allRequests));
             fileWriter.close();
         }
         catch (Exception ignored){
@@ -184,8 +197,14 @@ public class ProgramManager {
         return allLogs.get(id);
     }
 
-    public void removeProductById(int productId) {
+    public void removeProduct(int productId) {
         allProducts.remove(productId);
+        Product product = allProducts.get(productId);
+        allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(productId);
+    }
+    public void removeProduct(Product product){
+        allProducts.remove(product.getId());
+        allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(product.getId());
     }
 
     /**
@@ -239,7 +258,11 @@ public class ProgramManager {
     }
 
     public void addRequestToList(Request request){
-        //TODO: write this and make requests file
+        allRequests.add(request);
+    }
+
+    public void removeRequest(Request request){
+        allRequests.remove(request);
     }
 
     public void addCategory(Category category){
