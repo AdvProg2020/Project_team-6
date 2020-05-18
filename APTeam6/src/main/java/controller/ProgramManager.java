@@ -322,11 +322,6 @@ public class ProgramManager {
             }
         }
     }
-    public void showDetailsOfRequests(int id){
-        if(allRequests.get(id) instanceof ProductRequest){
-            System.out.println(allRequests.get(id).);
-        }
-    }
     public void acceptRequests(int id){
         if(allRequests.get(id) instanceof ProductRequest){
             allRequests.get(id).accept();
@@ -337,11 +332,13 @@ public class ProgramManager {
             allRequests.get(id).decline();
         }
     }
-    public ProductRequest getRequestByIdForProductsRequests(int id){
-        return (ProductRequest) allRequests.get(id);
-    }
-    public OffRequest getRequestByIdForOffRequests(int id){
-        return (OffRequest) allRequests.get(id);
+    public void detailsOfRequest(int id){
+        if(allRequests.get(id) instanceof ProductRequest){
+            ((ProductRequest) allRequests.get(id)).showDetails();
+        }
+        else if(allRequests.get(id) instanceof OffRequest){
+            ((OffRequest) allRequests.get(id)).showDetails();
+        }
     }
 }
 

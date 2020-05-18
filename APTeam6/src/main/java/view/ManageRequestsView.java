@@ -2,6 +2,7 @@ package view;
 
 import controller.ProgramManager;
 import controller.managerPanels.ManageRequests;
+import model.product.Product;
 
 public class ManageRequestsView {
     public ManageRequestsView() {
@@ -29,5 +30,11 @@ public class ManageRequestsView {
     }
     public void accept(int id){
         ProgramManager.getProgramManagerInstance().acceptRequests(id);
+    }
+    public void decline(int id){
+        ProgramManager.getProgramManagerInstance().declineRequests(id);
+    }
+    public void details(int id){
+        ProgramManager.getProgramManagerInstance().detailsOfRequest(id);
     }
 }

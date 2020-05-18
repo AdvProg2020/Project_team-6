@@ -24,13 +24,14 @@ public class ManageRequests {
         while (true) {
             command = view.getInputCommand();
             if (command.matches("details \\.+")) {
-
-
+                view.details(Integer.parseInt(command.split("\\s")[1]));
             }
             else if (command.matches("accept \\.+")) {
+                view.accept(Integer.parseInt(command.split("\\s")[1]));
 
             }
             else if (command.matches("decline \\.+")) {
+                view.decline(Integer.parseInt(command.split("\\s")[1]));
 
             }
             else if (command.equals("back")) {
@@ -40,19 +41,6 @@ public class ManageRequests {
                 throw new RuntimeException("Unknown command was passed to ManageRequests by view");
             }
         }
-    }
-
-    public void accept() {
-        view.accept();
-
-    }
-
-    public void decline() {
-
-    }
-
-    public void showDetails() {
-
     }
 }
 

@@ -42,4 +42,12 @@ public class ProductRequest implements Request{
         ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 
+    @Override
+    public void showDetails() {
+        System.out.println("the product's name :" + product.getName());
+        System.out.println("the product's Id :" + product.getId());
+        System.out.println("the product's description :" + product.getDescription());
+        System.out.println("the product's categoryName :" + product.getCategoryName());
+    }
+
 }
