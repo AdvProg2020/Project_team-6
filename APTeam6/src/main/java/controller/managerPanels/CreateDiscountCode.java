@@ -21,10 +21,11 @@ public class CreateDiscountCode {
         while (true) {
             command = view.getInputCommand();
             if(command.startsWith("create discount code")){
+                DiscountCode discountCode = new DiscountCode(null,null,null,0,0);
                 String[] input = command.split("\\s");
                 ProgramManager instance = ProgramManager.getProgramManagerInstance();
-                String[] discountDetails = view.getUserUsualData();
-                DiscountCode discountCode = new DiscountCode(discountDetails[0], instance.parsingStringToData(discountDetails[1]),instance.parsingStringToData(discountDetails[2]),Integer.parseInt(discountDetails[3]),Integer.parseInt(discountDetails[4]));
+                String[] discountDetails = view.getUserUsualData(discountCode);
+                discountCode = new DiscountCode(discountDetails[0], instance.parsingStringToData(discountDetails[1]),instance.parsingStringToData(discountDetails[2]),Integer.parseInt(discountDetails[3]),Integer.parseInt(discountDetails[4]));
                 ProgramManager.getProgramManagerInstance().addDiscountCodeToArrayList(discountCode);
             }
         }

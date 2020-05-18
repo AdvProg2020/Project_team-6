@@ -25,7 +25,7 @@ public class CreateDiscountCodeView {
             }
         }
         }
-    public String[] getUserUsualData() {
+    public String[] getUserUsualData(DiscountCode discountCode) {
         String[] discountCodeInfo = new String[4];
         System.out.println("Enter the discountCode:");
         discountCodeInfo[0] = Input.getInput();
@@ -40,7 +40,7 @@ public class CreateDiscountCodeView {
         System.out.println("Enter the username of Users included in discount code: (when finished enter 'end')");
         while (!Input.getInput().equalsIgnoreCase("end")){
             String user = Input.getInput();
-            DiscountCode.usersIncludedInDiscountCode.add(ProgramManager.getProgramManagerInstance().getAccountByUsername(user));
+            discountCode.addToArrayList(ProgramManager.getProgramManagerInstance().getAccountByUsername(user));
         }
         return discountCodeInfo;
     }

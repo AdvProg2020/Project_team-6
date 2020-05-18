@@ -72,4 +72,7 @@ public class DiscountCode {
     public int getRepetitionTime() {
         return repetitionTime;
     }
+    public void addToArrayList(Account account){
+        usersIncludedInDiscountCode.add(account);
+    }
 }
