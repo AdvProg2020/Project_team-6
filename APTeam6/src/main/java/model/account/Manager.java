@@ -30,9 +30,10 @@ public class Manager extends Account implements Comparable<Manager>{
     }
 
     private static int field = 1;
-    private static ArrayList<Manager> managerArrayList = new ArrayList<>();
+    private static ArrayList<Manager> managerArrayList;
 
     public static ArrayList<Manager> sortManagers(int fieldSort) {
+        managerArrayList = new ArrayList<>();
         /*
         How to use this method :
         fieldSort = 1 for firstName sort

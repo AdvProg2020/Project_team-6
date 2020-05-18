@@ -19,13 +19,14 @@ public class Category implements Comparable<Category> {
     }
 
     private static int field = 1;
-    private static ArrayList<Category> categoryArrayList = new ArrayList<>();
+    private static ArrayList<Category> categoryArrayList;
 
     public int compareTo(Category category) {
         return -(category.name.compareTo(this.name));
     }
 
     public static ArrayList<Category> sortCategory(int fieldSort) {
+        categoryArrayList = new ArrayList<>();
         /*
         How to use this method :
         fieldSort = 1 for name sort

@@ -51,9 +51,10 @@ public class Buyer extends Account implements Comparable<Buyer> {
     }
 
     private static int field = 1;
-    private static ArrayList<Buyer> buyerArrayList = new ArrayList<>();
+    private static ArrayList<Buyer> buyerArrayList;
 
     public static ArrayList<Buyer> sortBuyers(int fieldSort) {
+        buyerArrayList = new ArrayList<>();
         /*
         How to use this method :
         fieldSort = 1 for firstName sort
