@@ -13,7 +13,7 @@ public class DiscountCode {
     private LocalDateTime end;
     private int percentage;
     private int repetitionTime;
-    public static ArrayList <Account> usersIncludedInDiscountCode = new ArrayList<>();
+    private ArrayList <Account> usersIncludedInDiscountCode = new ArrayList<>();
 
     public DiscountCode(String code, LocalDateTime start, LocalDateTime end, int percentage, int repetitionTime) {
         id = nextId;
