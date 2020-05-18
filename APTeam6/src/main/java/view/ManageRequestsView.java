@@ -7,7 +7,7 @@ public class ManageRequestsView {
     public ManageRequestsView() {
         System.out.println("=== Manage Requests menu");
         System.out.println("The requests are (respectively):");
-        for (int i = 0;i < )
+        ProgramManager.getProgramManagerInstance().showAllRequests();
     }
     public String getInputCommand() {
         String command;
@@ -26,5 +26,8 @@ public class ManageRequestsView {
                 System.out.println("Invalid command");
             }
         }
+    }
+    public void accept(int id){
+        ProgramManager.getProgramManagerInstance().acceptRequests(id);
     }
 }

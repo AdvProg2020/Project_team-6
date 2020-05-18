@@ -24,10 +24,7 @@ public class ManageRequests {
         while (true) {
             command = view.getInputCommand();
             if (command.matches("details \\.+")) {
-                if((((Request)command.split("\\s"))instanceof ProductRequest)){
 
-
-                }
 
             }
             else if (command.matches("accept \\.+")) {
@@ -46,6 +43,7 @@ public class ManageRequests {
     }
 
     public void accept() {
+        view.accept();
 
     }
 
