@@ -51,4 +51,40 @@ public class Product {
                 break;
         }
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public HashMap<String, String> getCategoryAdditionalInfo() {
+        return CategoryAdditionalInfo;
+    }
+
+    public HashMap<String, String> getSubCategoryAdditionalInfo() {
+        return SubCategoryAdditionalInfo;
+    }
+
+    public int getVisitCount() {
+        return visitCount;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public ArrayList<Score> getScores() {
+        return scores;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
 }

@@ -188,6 +188,10 @@ public class ProgramManager {
         allProducts.remove(productId);
     }
 
+    public void addProductToList(Product product){
+        allProducts.put(product.getId(), product);
+    }
+
     //TODO: MKH please delete this
     public void createDiscountCode(){
 
