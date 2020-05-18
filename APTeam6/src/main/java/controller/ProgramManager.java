@@ -2,6 +2,9 @@ package controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
+import model.account.Seller;
+import model.requests.OffRequest;
+import model.requests.ProductRequest;
 import model.requests.Request;
 import model.account.Account;
 import model.account.Buyer;
@@ -307,6 +310,37 @@ public class ProgramManager {
 
     public void addCategory(Category category){
         allCategories.put(category.getName(), category);
+    }
+    public void showSellerCompanyInfo(){
+        ((Seller)currentlyLoggedInUser).getClass();
+    }
+    public void showAllRequests(){
+        for(int i = 0;i < allRequests.size();i++){
+            if(allRequests.get(i) instanceof ProductRequest){
+                System.out.println(i + ". " + allRequests.get(i) + "is a ProductRequest");
+            }
+            else if(allRequests.get(i) instanceof OffRequest){
+                System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
+            }
+        }
+    }
+    public void acceptRequests(int id){
+        if(allRequests.get(id) instanceof ProductRequest){
+            allRequests.get(id).accept();
+        }
+    }
+    public void declineRequests(int id){
+        if(allRequests.get(id) instanceof ProductRequest){
+            allRequests.get(id).decline();
+        }
+    }
+    public void detailsOfRequest(int id){
+        if(allRequests.get(id) instanceof ProductRequest){
+            ((ProductRequest) allRequests.get(id)).showDetails();
+        }
+        else if(allRequests.get(id) instanceof OffRequest){
+            ((OffRequest) allRequests.get(id)).showDetails();
+        }
     }
 }
 

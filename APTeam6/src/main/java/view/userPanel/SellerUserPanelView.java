@@ -6,11 +6,15 @@ import model.logs.SellLog;
 import view.Input;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class SellerUserPanelView {
     public SellerUserPanelView() {
         System.out.println("=== Seller main screen");
     }
+
+    private final HashSet<String> returningCommand = new HashSet<>(Arrays.asList("view personal info", "login menu", "view company information", "view sales history", "manage products", "view offs"));
 
     public String getInputCommand() {
         String command;
@@ -19,6 +23,9 @@ public class SellerUserPanelView {
             if (command.equals("help")) {
                 showHelp();
             }
+            else if (returningCommand.contains(command)){
+                return command;
+            }
             else {
                 System.out.println("Invalid command");
             }
@@ -26,7 +33,10 @@ public class SellerUserPanelView {
     }
 
     private void showHelp() {
-        System.out.println("List of commands:\n\t");
+        System.out.println("List of commands:");
+        for (String comm : returningCommand) {
+
+        }
     }
 
     public void giveOutput(String message) {
@@ -55,5 +65,17 @@ public class SellerUserPanelView {
             }
             System.out.println();
         }
+    }
+
+    public void viewBalance(){
+        int totalMoney = 0;
+        ProgramManager programManager = ProgramManager.getProgramManagerInstance();
+        ArrayList<Integer> logIds = ((Seller)programManager.getCurrentlyLoggedInUser()).getSellLogIds();
+        for (Integer logId : logIds) {
+            int price = ((SellLog)programManager.getLogByLogId(logId)).getReceivedAmount();
+            totalMoney += price;
+            System.out.print("\tlog" + logId + ": " + price);
+        }
+        System.out.print("Total money: " + totalMoney);
     }
 }
