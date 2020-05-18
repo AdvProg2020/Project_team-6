@@ -188,8 +188,17 @@ public class ProgramManager {
         allProducts.remove(productId);
     }
 
+    /**
+     * this method adds the product to productsList and adds it to its subCategory as well
+     */
     public void addProductToList(Product product){
-        allProducts.put(product.getId(), product);
+        try {
+            allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).addProduct(product.getId());
+            allProducts.put(product.getId(), product);
+        }
+        catch (Exception e){
+            System.out.println("Fake address");
+        }
     }
 
     //TODO: MKH please delete this

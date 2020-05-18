@@ -80,6 +80,14 @@ public class Product {
         return creationDate;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getSubCategoryName() {
+        return subCategoryName;
+    }
+
     public ArrayList<Score> getScores() {
         return scores;
     }

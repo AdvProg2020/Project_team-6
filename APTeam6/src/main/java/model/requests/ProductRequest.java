@@ -29,7 +29,8 @@ public class ProductRequest implements Request{
     @Override
     public void accept() {
         if (action == 0){
-            //ProgramManager.getProgramManagerInstance().add
+            ProgramManager.getProgramManagerInstance().addProductToList(newProduct);
+
         }
     }
 
