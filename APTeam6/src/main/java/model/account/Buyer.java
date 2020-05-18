@@ -12,7 +12,7 @@ import java.util.Collections;
 public class Buyer extends Account implements Comparable<Buyer> {
     private long credit;
     public static ArrayList<Integer> buyLogIds = new ArrayList<Integer>();
-    private ArrayList<Product> buyBasket = new ArrayList<>();
+    private ArrayList<Integer> buyBasket = new ArrayList<>();
 
     public Buyer(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
@@ -76,10 +76,10 @@ public class Buyer extends Account implements Comparable<Buyer> {
     }
 
     public void addProductToBuyBasket(Product product) {
-        buyBasket.add(product);
+        buyBasket.add(product.getId());
     }
 
     public void addProductToBuyBasket(ArrayList<Product> products) {
-        buyBasket.addAll(products);
+        for (Product product : products) buyBasket.add(product.getId());
     }
 }
