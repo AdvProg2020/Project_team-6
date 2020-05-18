@@ -234,6 +234,11 @@ public class ProgramManager {
             System.out.println("Fake address");
         }
     }
+
+    public Product getProductById(int id){
+        return allProducts.get(id);
+    }
+
     public void deleteDiscountCode(DiscountCode discountCode){
         allDiscountCodes.remove(discountCode);
     }

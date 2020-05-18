@@ -11,13 +11,13 @@ import java.util.Date;
 
 public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
     private int receivedAmount;
-    private ArrayList<Product> soldProducts;
+    private ArrayList<Integer> soldProducts;
     protected String sellerName;
 
     public SellLog(Date date, int executedDiscount, int logId, int receivedAmount, String sellerName) {
         super(date, executedDiscount, logId , 2);
         this.receivedAmount = receivedAmount;
-        this.soldProducts = new ArrayList<Product>();
+        this.soldProducts = new ArrayList<Integer>();
         this.sellerName = sellerName;
         Seller.sellLogIds.add(logId);
     }
@@ -61,5 +61,9 @@ public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
         }
         Collections.sort(sellLogArrayList);
         return sellLogArrayList;
+    }
+
+    public ArrayList<Integer> getSoldProductIds(){
+        return soldProducts;
     }
 }

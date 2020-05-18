@@ -1,5 +1,6 @@
 package controller.managerPanels;
 
+import controller.CategoriesAndSubCategoriesMenu;
 import controller.LoginMenu;
 import controller.PersonalInfoMenu;
 import controller.ProgramManager;
@@ -42,6 +43,9 @@ public class ManagerUserPanel {
             }
             else if (command.equalsIgnoreCase("manage requests")){
                 ManageRequests.getManageRequestsInstance().start();
+            }
+            else if (command.equalsIgnoreCase("manage categories")){
+                CategoriesAndSubCategoriesMenu.getInstance().startAsManager();
             }
             else {
                 throw new RuntimeException("Unknown command was passed to ManagerUserPanel by view");
