@@ -2,6 +2,7 @@ package controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
+import model.account.Seller;
 import model.requests.Request;
 import model.account.Account;
 import model.account.Buyer;
@@ -305,6 +306,9 @@ public class ProgramManager {
 
     public void addCategory(Category category){
         allCategories.put(category.getName(), category);
+    }
+    public void showSellerCompanyInfo(){
+        ((Seller)currentlyLoggedInUser).getClass();
     }
 }
 
