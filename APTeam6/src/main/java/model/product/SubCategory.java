@@ -70,8 +70,4 @@ public class SubCategory {
             // TODO
         }
     }
-
-    public String getName() {
-        return name;
-    }
 }
