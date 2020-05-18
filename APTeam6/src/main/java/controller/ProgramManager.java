@@ -43,7 +43,7 @@ public class ProgramManager {
     private HashMap<String, Account> allAccounts;
     private HashMap<Integer, LogsInGeneral> allLogs;
     private HashMap<Integer, Product> allProducts;
-    private HashMap<Integer, Category> allCategories;
+    private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private Account currentlyLoggedInUser;
 
@@ -227,6 +227,10 @@ public class ProgramManager {
 
     public void addRequestToList(Request request){
         //TODO: write this and make requests file
+    }
+
+    public void addCategory(Category category){
+        allCategories.put(category.getName(), category);
     }
 }
 

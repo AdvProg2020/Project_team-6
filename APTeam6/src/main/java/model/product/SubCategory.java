@@ -28,4 +28,8 @@ public class SubCategory {
     public void removeProduct(int productId){
         productIds.remove(productId);
     }
+
+    public String getName() {
+        return name;
+    }
 }
