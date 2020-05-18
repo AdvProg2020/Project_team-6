@@ -222,10 +222,8 @@ public class ProgramManager {
             System.out.println("Fake address");
         }
     }
-
-    //TODO: MKH please delete this
-    public void createDiscountCode(){
-
+    public void deleteDiscountCode(DiscountCode discountCode){
+        allDiscountCodes.remove(discountCode);
     }
 
     public void deleteAccount(String username){
