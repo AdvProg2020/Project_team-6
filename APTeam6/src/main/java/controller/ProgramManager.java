@@ -3,6 +3,8 @@ package controller;
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
 import model.account.Seller;
+import model.requests.OffRequest;
+import model.requests.ProductRequest;
 import model.requests.Request;
 import model.account.Account;
 import model.account.Buyer;
@@ -309,6 +311,16 @@ public class ProgramManager {
     }
     public void showSellerCompanyInfo(){
         ((Seller)currentlyLoggedInUser).getClass();
+    }
+    public void showAllRequests(){
+        for(int i = 0;i < allRequests.size();i++){
+            if(allRequests.get(i) instanceof ProductRequest){
+
+            }
+            else if(allRequests.get(i) instanceof OffRequest){
+
+            }
+        }
     }
 }
 

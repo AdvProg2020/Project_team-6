@@ -2,6 +2,8 @@ package controller.managerPanels;
 
 import controller.LoginMenu;
 import controller.ProgramManager;
+import model.requests.ProductRequest;
+import model.requests.Request;
 import view.LoginMenuView;
 import view.ManageRequestsView;
 
@@ -22,6 +24,10 @@ public class ManageRequests {
         while (true) {
             command = view.getInputCommand();
             if (command.matches("details \\.+")) {
+                if((((Request)command.split("\\s"))instanceof ProductRequest)){
+
+
+                }
 
             }
             else if (command.matches("accept \\.+")) {

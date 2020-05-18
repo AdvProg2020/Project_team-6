@@ -6,6 +6,8 @@ import controller.managerPanels.ManageRequests;
 public class ManageRequestsView {
     public ManageRequestsView() {
         System.out.println("=== Manage Requests menu");
+        System.out.println("The requests are (respectively):");
+        for (int i = 0;i < )
     }
     public String getInputCommand() {
         String command;
