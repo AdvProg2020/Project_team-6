@@ -20,20 +20,26 @@ public class SellerUserPanel {
         String command = null;
         while (true) {
             command = view.getInputCommand();
-            if (command.equalsIgnoreCase("view personal info")) {
+            if (command.equals("view personal info")) {
                 PersonalInfoMenu.getPersonalInfoMenuInstance().start();
             }
-            else if (command.equalsIgnoreCase("login menu")){
+            else if (command.equals("login menu")){
                 LoginMenu.getLoginMenuInstance().start();
             }
-            else if (command.equalsIgnoreCase("view company information")){
+            else if (command.equals("view company information")){
                 view.viewCompany();
             }
-            else if (command.equalsIgnoreCase("view sales history")){
+            else if (command.equals("view sales history")){
                 view.viewSellLogs();
             }
-            else if (command.equalsIgnoreCase("manage products")){
+            else if (command.equals("manage products")){
                 SellerProductsMenu.getInstance().start();
+            }
+            else if (command.equals("view offs")){
+                OffManagementSeller.getInstance().start();
+            }
+            else if (command.equals("view balance")){
+                view.viewBalance();
             }
             else {
                 throw new RuntimeException("Unknown command was passed to SellerUserPanel by view");
