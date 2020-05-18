@@ -6,7 +6,14 @@ import view.CreateDiscountCodeView;
 import java.util.Date;
 
 public class CreateDiscountCode {
-    CreateDiscountCodeView view;
+    private static CreateDiscountCode instance;
+    public static CreateDiscountCode getInstance(){
+        if (instance == null)
+            instance = new CreateDiscountCode();
+        return instance;
+    }
+    /////////////////////
+    private CreateDiscountCodeView view;
 
     public void start() {
         view = new CreateDiscountCodeView();

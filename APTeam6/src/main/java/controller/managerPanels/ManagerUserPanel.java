@@ -34,6 +34,12 @@ public class ManagerUserPanel {
             else if (command.equalsIgnoreCase("manage all products")){
                 ManageAllProducts.getLoginMenuInstance().start();
             }
+            else if (command.equalsIgnoreCase("create discount code")){
+                CreateDiscountCode.getInstance().start();
+            }
+            else if (command.equalsIgnoreCase("view discount codes")){
+                ShowDiscountCode.getShowDiscountCodeInstance().start();
+            }
             else {
                 throw new RuntimeException("Unknown command was passed to ManagerUserPanel by view");
             }

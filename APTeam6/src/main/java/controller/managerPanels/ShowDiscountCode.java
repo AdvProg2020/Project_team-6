@@ -5,13 +5,15 @@ import model.product.DiscountCode;
 import view.ShowDiscountCodeView;
 
 public class ShowDiscountCode {
-    ShowDiscountCodeView view;
     private static ShowDiscountCode showDiscountCode = null;
     public static ShowDiscountCode getShowDiscountCodeInstance() {
         if (showDiscountCode == null)
             showDiscountCode= new ShowDiscountCode();
         return showDiscountCode;
     }
+    //////////////////////////
+    private ShowDiscountCodeView view;
+
     public void start(){
         view = new ShowDiscountCodeView();
         String command = null;
