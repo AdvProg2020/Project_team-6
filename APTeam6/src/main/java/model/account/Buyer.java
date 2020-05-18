@@ -3,6 +3,7 @@ package model.account;
 import controller.ProgramManager;
 import model.logs.BuyLog;
 import model.logs.LogsInGeneral;
+import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 public class Buyer extends Account implements Comparable<Buyer> {
     private long credit;
     public static ArrayList<Integer> buyLogIds = new ArrayList<Integer>();
+    private ArrayList<Product> buyBasket = new ArrayList<>();
 
     public Buyer(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
@@ -34,15 +36,20 @@ public class Buyer extends Account implements Comparable<Buyer> {
     public int compareTo(Buyer buyer) {
         if (field == 1) {
             return -(buyer.firstName.compareTo(this.firstName));
-        } else if (field == 2) {
+        }
+        else if (field == 2) {
             return -(buyer.lastName.compareTo(this.lastName));
-        } else if (field == 3) {
+        }
+        else if (field == 3) {
             return -(buyer.phoneNumber.compareTo(this.phoneNumber));
-        } else if (field == 4) {
+        }
+        else if (field == 4) {
             return -(buyer.emailAddress.compareTo(this.emailAddress));
-        } else if (field == 5) {
+        }
+        else if (field == 5) {
             return -(buyer.username.compareTo(this.username));
-        } else {
+        }
+        else {
             return 0;
         }
     }
@@ -63,11 +70,19 @@ public class Buyer extends Account implements Comparable<Buyer> {
         Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts();
         ArrayList<Account> listOfValues = new ArrayList<>(values);
         for (int i = 0; i < listOfValues.size(); i++) {
-            if (listOfValues.get(i).role==1) {
+            if (listOfValues.get(i).role == 1) {
                 buyerArrayList.add((Buyer) listOfValues.get(i));
             }
         }
         Collections.sort(buyerArrayList);
         return buyerArrayList;
+    }
+
+    public void addProductToBuyBasket(Product product) {
+        buyBasket.add(product);
+    }
+
+    public void addProductToBuyBasket(ArrayList<Product> products) {
+        buyBasket.addAll(products);
     }
 }

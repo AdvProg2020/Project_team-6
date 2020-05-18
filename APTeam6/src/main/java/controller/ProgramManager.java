@@ -3,6 +3,7 @@ package controller;
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
 import model.account.Account;
+import model.account.Buyer;
 import model.logs.LogsInGeneral;
 import model.product.Category;
 import model.product.DiscountCode;
@@ -13,6 +14,7 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -42,7 +44,10 @@ public class ProgramManager {
     private HashMap<Integer, Product> allProducts;
     private HashMap<Integer, Category> allCategories;
     private HashMap<Integer, DiscountCode> allDiscountCodes;
+
     private Account currentlyLoggedInUser;
+
+    private ArrayList<Product> buyBasket;
 
     private ProgramManager() {
         folder = new File(ADDRESS);
@@ -53,6 +58,8 @@ public class ProgramManager {
         discountCodesFile = new File(ADDRESS + "discountCodes.json");
 
         currentlyLoggedInUser = null;
+
+        buyBasket = new ArrayList<>();
     }
 
     public void loadFromFiles() {
@@ -147,6 +154,10 @@ public class ProgramManager {
 
     public void loginSuccessful(Account account) {
         currentlyLoggedInUser = account;
+        if (account.getRole() == 1){
+            ((Buyer)account).addProductToBuyBasket(buyBasket);
+            buyBasket.clear();
+        }
     }
 
     public boolean isAnyoneLoggedIn() {
@@ -194,6 +205,17 @@ public class ProgramManager {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
         return dateTime;
+    }
+
+    /**
+     * If a buyer is logged in, this method will add the product to their buyBasket, otherwise it will be added to ProgramManager buyBasket.
+     * @param product the product to be added
+     */
+    public void addToCurrentBuyBasket(Product product){
+        if (currentlyLoggedInUser == null)
+            buyBasket.add(product);
+        else if (currentlyLoggedInUser.getRole() == 1)
+            ((Buyer)currentlyLoggedInUser).addProductToBuyBasket(product);
     }
 }
 
