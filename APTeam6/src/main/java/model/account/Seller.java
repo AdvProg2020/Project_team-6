@@ -68,4 +68,14 @@ public class Seller extends Account implements Comparable<Seller>, Request {
         Collections.sort(sellerArrayList);
         return sellerArrayList;
     }
+
+    @Override
+    public void accept() {
+
+    }
+
+    @Override
+    public void reject() {
+
+    }
 }
