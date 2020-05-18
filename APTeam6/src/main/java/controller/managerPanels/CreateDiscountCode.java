@@ -16,8 +16,9 @@ public class CreateDiscountCode {
             if(command.startsWith("create discount code")){
                 String[] input = command.split("\\s");
                 ProgramManager instance = ProgramManager.getProgramManagerInstance();
-                String[] discountCommand = view.getUserUsualData();
-                DiscountCode discountCode = new DiscountCode(discountCommand[0], instance.parsingStringToData(discountCommand[1]),instance.parsingStringToData(discountCommand[2]),Integer.parseInt(discountCommand[3]),Integer.parseInt(discountCommand[4]));
+                String[] discountDetails = view.getUserUsualData();
+                DiscountCode discountCode = new DiscountCode(discountDetails[0], instance.parsingStringToData(discountDetails[1]),instance.parsingStringToData(discountDetails[2]),Integer.parseInt(discountDetails[3]),Integer.parseInt(discountDetails[4]));
+                ProgramManager.getProgramManagerInstance().addDiscountCodeToArrayList(discountCode);
             }
         }
     }

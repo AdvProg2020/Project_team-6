@@ -43,8 +43,7 @@ public class ProgramManager {
     private HashMap<Integer, LogsInGeneral> allLogs;
     private HashMap<Integer, Product> allProducts;
     private HashMap<Integer, Category> allCategories;
-    private HashMap<Integer, DiscountCode> allDiscountCodes;
-
+    private HashMap<String, DiscountCode> allDiscountCodes;
     private Account currentlyLoggedInUser;
 
     private ArrayList<Product> buyBasket;
@@ -144,6 +143,10 @@ public class ProgramManager {
 
     //////////////////////////////////////////////
 
+    public Collection<LogsInGeneral> getAllLogs() {
+        return allLogs.values();
+    }
+
     public boolean isThereAccountWithUsername(String name) {
         return allAccounts.get(name) != null;
     }
@@ -205,6 +208,9 @@ public class ProgramManager {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
         return dateTime;
+    }
+    public void addDiscountCodeToArrayList(DiscountCode discountCode){
+        allDiscountCodes.put(discountCode.getCode(),discountCode);
     }
 
     /**

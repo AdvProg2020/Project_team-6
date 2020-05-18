@@ -8,7 +8,6 @@ import model.product.Product;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class Buyer extends Account implements Comparable<Buyer> {
     private long credit;
@@ -34,23 +33,19 @@ public class Buyer extends Account implements Comparable<Buyer> {
     }
 
     public int compareTo(Buyer buyer) {
-        if (field == 1) {
-            return -(buyer.firstName.compareTo(this.firstName));
-        }
-        else if (field == 2) {
-            return -(buyer.lastName.compareTo(this.lastName));
-        }
-        else if (field == 3) {
-            return -(buyer.phoneNumber.compareTo(this.phoneNumber));
-        }
-        else if (field == 4) {
-            return -(buyer.emailAddress.compareTo(this.emailAddress));
-        }
-        else if (field == 5) {
-            return -(buyer.username.compareTo(this.username));
-        }
-        else {
-            return 0;
+        switch (field) {
+            case 1:
+                return -(buyer.firstName.compareTo(this.firstName));
+            case 2:
+                return -(buyer.lastName.compareTo(this.lastName));
+            case 3:
+                return -(buyer.phoneNumber.compareTo(this.phoneNumber));
+            case 4:
+                return -(buyer.emailAddress.compareTo(this.emailAddress));
+            case 5:
+                return -(buyer.username.compareTo(this.username));
+            default:
+                return 0;
         }
     }
 

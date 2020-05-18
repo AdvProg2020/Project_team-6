@@ -31,18 +31,19 @@ public class Seller extends Account implements Comparable<Seller> {
     private static ArrayList<Seller> sellerArrayList = new ArrayList<>();
 
     public int compareTo(Seller seller) {
-        if (field == 1) {
-            return -(seller.firstName.compareTo(this.firstName));
-        } else if (field == 2) {
-            return -(seller.lastName.compareTo(this.lastName));
-        } else if (field == 3) {
-            return -(seller.phoneNumber.compareTo(this.phoneNumber));
-        } else if (field == 4) {
-            return -(seller.emailAddress.compareTo(this.emailAddress));
-        } else if (field == 5) {
-            return -(seller.username.compareTo(this.username));
-        } else {
-            return 0;
+        switch (field) {
+            case 1:
+                return -(seller.firstName.compareTo(this.firstName));
+            case 2:
+                return -(seller.lastName.compareTo(this.lastName));
+            case 3:
+                return -(seller.phoneNumber.compareTo(this.phoneNumber));
+            case 4:
+                return -(seller.emailAddress.compareTo(this.emailAddress));
+            case 5:
+                return -(seller.username.compareTo(this.username));
+            default:
+                return 0;
         }
     }
 
