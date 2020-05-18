@@ -60,6 +60,8 @@ public class ProgramManager {
     public void createAllRequestHashMapForTest(){
         allRequests = new ArrayList<>();
     }
+    public void createAllCategoriesHashMapForTest(){allCategories = new HashMap<>();}
+    public void createAllProductHashMap(){allProducts = new HashMap<>();}
     //------------------------ Test----------
 
     private ProgramManager() {
