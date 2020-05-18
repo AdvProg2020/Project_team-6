@@ -2,6 +2,7 @@ package controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
+import model.requests.Request;
 import model.account.Account;
 import model.account.Buyer;
 import model.logs.LogsInGeneral;
@@ -99,22 +100,22 @@ public class ProgramManager {
                 allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
                 allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
                 allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>(){}.getType());
-                if (allAccounts == null)
-                    allAccounts = new HashMap<>();
-                if (allLogs == null)
-                    allLogs = new HashMap<>();
-                if (allProducts == null)
-                    allProducts = new HashMap<>();
-                if (allCategories == null)
-                    allCategories = new HashMap<>();
-                if (allDiscountCodes == null)
-                    allDiscountCodes = new HashMap<>();
             }
             catch (Exception ignored){
                 ignored.printStackTrace();
                 System.out.println("Couldn't read from files...");
             }
         }
+        if (allAccounts == null)
+            allAccounts = new HashMap<>();
+        if (allLogs == null)
+            allLogs = new HashMap<>();
+        if (allProducts == null)
+            allProducts = new HashMap<>();
+        if (allCategories == null)
+            allCategories = new HashMap<>();
+        if (allDiscountCodes == null)
+            allDiscountCodes = new HashMap<>();
     }
 
     public void saveToFiles() {
@@ -187,7 +188,7 @@ public class ProgramManager {
         allProducts.remove(productId);
     }
 
-    //TODO: I think it would be better if you create the code elsewhere then pass it to ProgramManager
+    //TODO: MKH please delete this
     public void createDiscountCode(){
 
     }
@@ -222,6 +223,10 @@ public class ProgramManager {
             buyBasket.add(product);
         else if (currentlyLoggedInUser.getRole() == 1)
             ((Buyer)currentlyLoggedInUser).addProductToBuyBasket(product);
+    }
+
+    public void addRequestToList(Request request){
+        //TODO: write this and make requests file
     }
 }
 

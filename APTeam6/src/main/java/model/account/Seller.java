@@ -1,13 +1,13 @@
 package model.account;
 
 import controller.ProgramManager;
-import model.logs.SellLog;
+import model.requests.Request;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class Seller extends Account implements Comparable<Seller> {
+public class Seller extends Account implements Comparable<Seller>, Request {
     private long credit;
     public static ArrayList<Integer> sellLogIds = new ArrayList<Integer>();
     private String companyName;
@@ -17,6 +17,7 @@ public class Seller extends Account implements Comparable<Seller> {
         this.companyName = company;
         this.role = 2;
         credit = 0;
+        ProgramManager.getProgramManagerInstance().addRequestToList(this);
     }
 
     public void modifyCreditBy(long amount){

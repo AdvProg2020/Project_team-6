@@ -18,6 +18,7 @@ public class Buyer extends Account implements Comparable<Buyer> {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
         this.role = 1;
         credit = 0;
+        ProgramManager.getProgramManagerInstance().addAccountToList(username, this);
     }
 
     public boolean doesHaveEnoughMoney(long price) {

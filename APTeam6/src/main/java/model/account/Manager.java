@@ -10,6 +10,7 @@ public class Manager extends Account implements Comparable<Manager>{
     public Manager(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
         this.role = 3;
+        ProgramManager.getProgramManagerInstance().addAccountToList(username, this);
     }
 
     public int compareTo(Manager manager) {

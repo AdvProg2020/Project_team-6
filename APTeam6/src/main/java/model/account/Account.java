@@ -18,7 +18,6 @@ public abstract class Account {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
-        ProgramManager.getProgramManagerInstance().addAccountToList(username, this);
     }
 
     public boolean checkPassword(String password){
