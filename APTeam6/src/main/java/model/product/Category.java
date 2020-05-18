@@ -16,6 +16,7 @@ public class Category implements Comparable<Category> {
         this.name = name;
         subCategories = new HashMap<>();
         additionalAttributes = new ArrayList<>();
+        ProgramManager.getProgramManagerInstance().addCategory(this);
     }
 
     private static int field = 1;
@@ -34,11 +35,15 @@ public class Category implements Comparable<Category> {
         field = fieldSort;
         Collection<Category> values = ProgramManager.getProgramManagerInstance().getAllCategories();
         ArrayList<Category> listOfValues = new ArrayList<>(values);
-        for (int i = 0; i < listOfValues.size(); i++) {
-            categoryArrayList.add(listOfValues.get(i));
-        }
+        categoryArrayList.addAll(listOfValues);
         Collections.sort(categoryArrayList);
         return categoryArrayList;
+    }
+
+    public ArrayList<SubCategory> getAllSubCategories(){
+        Collection<SubCategory> values = subCategories.values();
+        ArrayList<SubCategory> subCategoryArrayList = new ArrayList<>(values);
+        return subCategoryArrayList;
     }
 
     public void addField(String field) {
@@ -84,7 +89,7 @@ public class Category implements Comparable<Category> {
 
     public void removeSubcategory(SubCategory subCategory) {
         if (isExistThisSubCategories(subCategory)) {
-            subCategories.remove(subCategory);
+            subCategories.remove(subCategory.getName());
         } else {
             //System.out.println("this subCategory not exist");
             // TODO
