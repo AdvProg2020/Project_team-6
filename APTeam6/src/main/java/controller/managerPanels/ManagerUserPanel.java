@@ -1,6 +1,8 @@
 package controller.managerPanels;
 
+import controller.LoginMenu;
 import controller.PersonalInfoMenu;
+import controller.ProgramManager;
 import view.userPanel.ManagerUserPanelView;
 
 public class ManagerUserPanel {
@@ -13,7 +15,7 @@ public class ManagerUserPanel {
     }
 
     //////////////////////////////////////
-    ManagerUserPanelView view;
+    private ManagerUserPanelView view;
 
     public void start() {
         view = new ManagerUserPanelView();
@@ -23,8 +25,21 @@ public class ManagerUserPanel {
             if (command.equalsIgnoreCase("view personal info")) {
                 PersonalInfoMenu.getPersonalInfoMenuInstance().start();
             }
+            else if (command.equalsIgnoreCase("login menu")){
+                LoginMenu.getLoginMenuInstance().start();
+            }
+            else if (command.equalsIgnoreCase("manage users")){
+                ManageUsers.getManageUsersInstance().start();
+            }
+            else if (command.equalsIgnoreCase("manage all products")){
+                ManageAllProducts.getLoginMenuInstance().start();
+            }
             else {
                 throw new RuntimeException("Unknown command was passed to ManagerUserPanel by view");
+            }
+            /////////////
+            if (ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() != 3){
+                return;
             }
         }
     }

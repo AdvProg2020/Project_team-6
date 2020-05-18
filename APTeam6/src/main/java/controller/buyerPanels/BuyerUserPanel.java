@@ -1,6 +1,8 @@
 package controller.buyerPanels;
 
+import controller.LoginMenu;
 import controller.PersonalInfoMenu;
+import controller.ProgramManager;
 import view.userPanel.BuyerUserPanelView;
 
 public class BuyerUserPanel {
@@ -13,7 +15,7 @@ public class BuyerUserPanel {
     }
 
     ////////////////////////////////////////
-    BuyerUserPanelView view;
+    private BuyerUserPanelView view;
 
     public void start() {
         view = new BuyerUserPanelView();
@@ -23,8 +25,15 @@ public class BuyerUserPanel {
             if (command.equalsIgnoreCase("view personal info")) {
                 PersonalInfoMenu.getPersonalInfoMenuInstance().start();
             }
+            else if (command.equalsIgnoreCase("login menu")){
+                LoginMenu.getLoginMenuInstance().start();
+            }
             else {
                 throw new RuntimeException("Unknown command was passed to BuyerUserPanel by view");
+            }
+            /////////////
+            if (ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() != 1){
+                return;
             }
         }
     }

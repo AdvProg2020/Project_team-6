@@ -13,7 +13,7 @@ public class ManageUsers {
         return manageUsersInstance;
     }
 
-    ManageUsersView view;
+    private ManageUsersView view;
     public void start(){
         view = new ManageUsersView();
         String command = null;

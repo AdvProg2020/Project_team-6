@@ -234,6 +234,16 @@ public class ProgramManager {
         return currentlyLoggedInUser;
     }
 
+    /**
+     * this function gets current user's role
+     * @return 0 if no one is logged in
+     */
+    public byte getCurrentlyLoggedInUserRole(){
+        if (currentlyLoggedInUser != null)
+            return currentlyLoggedInUser.getRole();
+        return 0;
+    }
+
     public Collection<Account> getAllAccounts(){
         return allAccounts.values();
     }
