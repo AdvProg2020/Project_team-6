@@ -28,4 +28,48 @@ public class DiscountCode {
     public String getCode() {
         return code;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
+
+    public void setRepetitionTime(int repetitionTime) {
+        this.repetitionTime = repetitionTime;
+    }
+
+    public int getRepetitionTime() {
+        return repetitionTime;
+    }
 }

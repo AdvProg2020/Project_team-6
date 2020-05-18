@@ -48,7 +48,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
         }
     }
 
-    public ArrayList<Seller> sortSellers(int fieldSort) {
+    public static ArrayList<Seller> sortSellers(int fieldSort) {
         /*
         How to use this method :
         fieldSort = 1 for firstName sort
