@@ -6,12 +6,12 @@ import model.account.Seller;
 import view.LoginMenuView;
 
 public class LoginMenu {
-    private static LoginMenu loginMenuInstance = null;
-    public static LoginMenu getLoginMenuInstance() {
-        if (loginMenuInstance == null)
-            loginMenuInstance = new LoginMenu();
-        return loginMenuInstance;
-    }
+        private static LoginMenu loginMenuInstance = null;
+        public static LoginMenu getLoginMenuInstance() {
+            if (loginMenuInstance == null)
+                loginMenuInstance = new LoginMenu();
+            return loginMenuInstance;
+        }
 
     ///////////////////////////////////////////////////
     LoginMenuView view;
