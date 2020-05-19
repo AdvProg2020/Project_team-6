@@ -80,6 +80,11 @@ public class Seller extends Account implements Comparable<Seller>, Request {
         ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
 
+    @Override
+    public void showDetails() {
+
+    }
+
     public String getCompanyName() {
         return companyName;
     }

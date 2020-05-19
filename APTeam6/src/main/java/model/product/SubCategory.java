@@ -64,7 +64,7 @@ public class SubCategory {
 
     public void removeProduct(int productId) {
         if (isExistThisProduct(productId)) {
-            productIds.remove(productId);
+            productIds.remove((Integer) productId);
         } else {
             //System.out.println("this product not exist in this sub category");
             // TODO
