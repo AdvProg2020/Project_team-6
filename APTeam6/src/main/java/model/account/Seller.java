@@ -29,7 +29,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
     }
 
     private static int field = 1;
-    private static ArrayList<Seller> sellerArrayList = new ArrayList<>();
+    private static ArrayList<Seller> sellerArrayList;
 
     public int compareTo(Seller seller) {
         switch (field) {
@@ -49,6 +49,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
     }
 
     public static ArrayList<Seller> sortSellers(int fieldSort) {
+        sellerArrayList = new ArrayList<>();
         /*
         How to use this method :
         fieldSort = 1 for firstName sort

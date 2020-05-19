@@ -23,7 +23,7 @@ public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
     }
 
     private static int field = 1;
-    private static ArrayList<SellLog> sellLogArrayList = new ArrayList<>();
+    private static ArrayList<SellLog> sellLogArrayList;
     public int compareTo(SellLog sellLog) {
         switch (field) {
             case 1:
@@ -42,6 +42,7 @@ public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
     }
 
     public static ArrayList<SellLog> sortBuyLog(int fieldSort) {
+        sellLogArrayList = new ArrayList<>();
         /*
         How to use this method :
         fieldSort = 1 for date sort
