@@ -1,5 +1,7 @@
 package model.product;
 
+import controller.ProgramManager;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,5 +19,7 @@ public class Off {
         this.endDate = endDate;
         this.offAmount = offAmount;
         offId++;
+        offStatus = OffStatus.WaitingForBuild;
+        ProgramManager.getProgramManagerInstance().addOffToArrayList(this);
     }
 }

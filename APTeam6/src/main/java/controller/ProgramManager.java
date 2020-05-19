@@ -51,6 +51,7 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
+    //NOTE for Tabaeian:please add this arraylist to YAGSON;
     private ArrayList<Off> allOffs;
 
     private Account currentlyLoggedInUser;
@@ -344,6 +345,9 @@ public class ProgramManager {
         else if(allRequests.get(id) instanceof OffRequest){
             ((OffRequest) allRequests.get(id)).showDetails();
         }
+    }
+    public void addOffToArrayList(Off off){
+        allOffs.add(off);
     }
 }
 
