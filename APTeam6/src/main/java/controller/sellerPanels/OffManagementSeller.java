@@ -14,6 +14,24 @@ public class OffManagementSeller {
 
     public void start(){
         view = new OffManagementSellerView();
-        //TODO: Write here
+        String command = null;
+        while (true) {
+            command = view.getInputCommand();
+            if (command.matches("view \\.+")) {
+                //TODO
+            }
+            else if (command.matches("edit \\.+")) {
+                //TODO
+            }
+            else if(command.equalsIgnoreCase("add off")){
+                //TODO
+            }
+            else if (command.equals("back")) {
+                return;
+            }
+            else {
+                throw new RuntimeException("Unknown command was passed to OffManagementSeller by view");
+            }
+        }
     }
 }
