@@ -6,17 +6,18 @@ import model.account.Seller;
 import view.LoginMenuView;
 
 public class LoginMenu {
-        private static LoginMenu loginMenuInstance = null;
-        public static LoginMenu getLoginMenuInstance() {
-            if (loginMenuInstance == null)
-                loginMenuInstance = new LoginMenu();
-            return loginMenuInstance;
-        }
+    private static LoginMenu loginMenuInstance = null;
+
+    public static LoginMenu getLoginMenuInstance() {
+        if (loginMenuInstance == null)
+            loginMenuInstance = new LoginMenu();
+        return loginMenuInstance;
+    }
 
     ///////////////////////////////////////////////////
     LoginMenuView view;
 
-    public void start(){
+    public void start() {
         view = new LoginMenuView();
         String command = null;
         while (true) {
@@ -25,14 +26,17 @@ public class LoginMenu {
                 String[] splitCommand = command.split("\\s");
                 login(splitCommand[0], splitCommand[1]);
             }
-            else if (command.matches("register \\S+ (buyer|seller)")) {
+            else if (command.matches("register (buyer|seller|manager) \\S+")) {
                 String[] splitCommand = command.split("\\s");
-                register(splitCommand[0], splitCommand[1]);
+                if (splitCommand[1].equals("manager"))
+                    System.out.println("You can't make managers here. get away");
+                else
+                    register(splitCommand[0], splitCommand[1]);
             }
-            else if (command.equals("logout")){
+            else if (command.equals("logout")) {
                 logout();
             }
-            else if (command.equals("back")){
+            else if (command.equals("back")) {
                 return;
             }
             else {
@@ -41,13 +45,13 @@ public class LoginMenu {
         }
     }
 
-    public void login(String username, String password){
-        if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)){
+    public void login(String username, String password) {
+        if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
             view.giveOutput("This username does not exist");
             return;
         }
         Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
-        if (!tempAccount.checkPassword(password)){
+        if (!tempAccount.checkPassword(password)) {
             view.giveOutput("Wrong password");
             return;
         }
@@ -55,8 +59,8 @@ public class LoginMenu {
         view.giveOutput("Welcome " + username + ".");
     }
 
-    public void register(String username, String role){
-        if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)){
+    public void register(String username, String role) {
+        if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
             view.giveOutput("This username is already occupied");
         }
         String[] userData = null;
@@ -72,7 +76,7 @@ public class LoginMenu {
         view.giveOutput("Registered successfully.");
     }
 
-    public void logout(){
+    public void logout() {
         ProgramManager.getProgramManagerInstance().logoutSuccessful();
     }
 }

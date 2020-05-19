@@ -12,8 +12,9 @@ public class ManageUsers {
             manageUsersInstance = new ManageUsers();
         return manageUsersInstance;
     }
-
+    ////////////////////////////////////
     private ManageUsersView view;
+
     public void start(){
         view = new ManageUsersView();
         String command = null;
