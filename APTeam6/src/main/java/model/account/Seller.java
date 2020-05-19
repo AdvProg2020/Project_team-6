@@ -20,7 +20,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
         ProgramManager.getProgramManagerInstance().addRequestToList(this);
     }
 
-    public void modifyCreditBy(long amount){
+    public void modifyCreditBy(long amount) {
         credit += amount;
     }
 
@@ -30,7 +30,6 @@ public class Seller extends Account implements Comparable<Seller>, Request {
 
     private static int field = 1;
     private static ArrayList<Seller> sellerArrayList;
-
     public int compareTo(Seller seller) {
         switch (field) {
             case 1:
@@ -62,7 +61,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
         Collection<Account> values = ProgramManager.getProgramManagerInstance().getAllAccounts();
         ArrayList<Account> listOfValues = new ArrayList<>(values);
         for (int i = 0; i < listOfValues.size(); i++) {
-            if (listOfValues.get(i).role==2) {
+            if (listOfValues.get(i).role == 2) {
                 sellerArrayList.add((Seller) listOfValues.get(i));
             }
         }

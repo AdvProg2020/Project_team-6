@@ -15,4 +15,9 @@ public class OffRequest implements Request {
     public void decline() {
 
     }
+
+    @Override
+    public void showDetails() {
+        //TODO
+    }
 }
