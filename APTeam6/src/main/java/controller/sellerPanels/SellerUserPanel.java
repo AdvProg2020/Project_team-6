@@ -38,6 +38,9 @@ public class SellerUserPanel {
             else if (command.equals("view offs")){
                 OffManagementSeller.getInstance().start();
             }
+            else if (command.equals("view balance")){
+                view.viewBalance();
+            }
             else {
                 throw new RuntimeException("Unknown command was passed to SellerUserPanel by view");
             }

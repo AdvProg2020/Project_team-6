@@ -66,4 +66,8 @@ public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
     public ArrayList<Integer> getSoldProductIds(){
         return soldProducts;
     }
+
+    public int getReceivedAmount() {
+        return receivedAmount;
+    }
 }
