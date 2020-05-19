@@ -24,14 +24,14 @@ public class LoginMenu {
             command = view.getInputCommand();
             if (command.matches("login \\S+ \\S+")) {
                 String[] splitCommand = command.split("\\s");
-                login(splitCommand[0], splitCommand[1]);
+                login(splitCommand[1], splitCommand[2]);
             }
             else if (command.matches("create account (buyer|seller|manager) \\S+")) {
                 String[] splitCommand = command.split("\\s");
                 if (splitCommand[1].equals("manager"))
                     System.out.println("You can't make managers here. get away");
                 else
-                    register(splitCommand[0], splitCommand[1]);
+                    register(splitCommand[3], splitCommand[2]);
             }
             else if (command.equals("logout")) {
                 logout();
@@ -67,12 +67,14 @@ public class LoginMenu {
         userData = view.getUserUsualData();
 
         if (role.equals("buyer")) {
+            System.out.println("here now1");
             new Buyer(username, userData[4], userData[0], userData[1], userData[3], userData[2]);
         }
         else if (role.equals("seller")) {
             String company = view.getSellerCompany();
             new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
         }
+        System.out.println("HELLLLL:" + ProgramManager.getProgramManagerInstance().getAllAccounts());
         view.giveOutput("Registered successfully.");
     }
 
