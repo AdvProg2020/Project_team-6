@@ -2,6 +2,7 @@ package view.userPanel;
 
 import controller.ProgramManager;
 import model.account.Seller;
+import model.logs.SellLog;
 import view.Input;
 
 import java.util.ArrayList;
@@ -39,7 +40,19 @@ public class SellerUserPanelView {
 
     public void viewSellLogs(){
         Seller seller = (Seller) ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
-        ArrayList<Integer> ids = seller.getSellLogIds();
-
+        ArrayList<Integer> logIds = seller.getSellLogIds();
+        ProgramManager programManager = ProgramManager.getProgramManagerInstance();
+        for (Integer logId : logIds) {
+            SellLog sellLog = (SellLog) programManager.getLogByLogId(logId);
+            ArrayList<Integer> productIds = sellLog.getSoldProductIds();
+            System.out.print("log" + logId + ": ");
+            for (int i = 0; i < productIds.size(); i++) {
+                Integer productId = productIds.get(i);
+                if (i != 0)
+                    System.out.print(", ");
+                System.out.print(programManager.getProductById(productId).getName());
+            }
+            System.out.println();
+        }
     }
 }
