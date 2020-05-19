@@ -24,7 +24,7 @@ public class MainScreen {
                 LoginMenu.getLoginMenuInstance().start();
             }
             else if (command.equalsIgnoreCase("products")) {
-                CategoriesAndSubCategoriesMenu.getInstance().start();
+                CategoriesAndSubCategoriesMenu.getInstance().startAsBuyer();
             }
             else if (command.equalsIgnoreCase("exit")){
                 return;

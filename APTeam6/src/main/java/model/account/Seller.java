@@ -79,4 +79,12 @@ public class Seller extends Account implements Comparable<Seller>, Request {
     public void decline() {
         ProgramManager.getProgramManagerInstance().removeRequest(this);
     }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public ArrayList<Integer> getSellLogIds() {
+        return sellLogIds;
+    }
 }

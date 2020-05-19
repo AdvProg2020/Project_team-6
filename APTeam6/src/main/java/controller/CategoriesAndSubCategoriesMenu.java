@@ -9,7 +9,11 @@ public class CategoriesAndSubCategoriesMenu {
     }
     ///////////////////////////////
 
-    public void start(){
+    public void startAsManager(){
+
+    }
+
+    public void startAsBuyer(){
 
     }
 }
