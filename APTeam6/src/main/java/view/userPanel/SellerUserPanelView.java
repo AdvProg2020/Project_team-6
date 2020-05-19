@@ -42,10 +42,11 @@ public class SellerUserPanelView {
         Seller seller = (Seller) ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
         ArrayList<Integer> logIds = seller.getSellLogIds();
         ProgramManager programManager = ProgramManager.getProgramManagerInstance();
+        System.out.println("List of all logs:");
         for (Integer logId : logIds) {
             SellLog sellLog = (SellLog) programManager.getLogByLogId(logId);
             ArrayList<Integer> productIds = sellLog.getSoldProductIds();
-            System.out.print("log" + logId + ": ");
+            System.out.print("\tlog" + logId + ": ");
             for (int i = 0; i < productIds.size(); i++) {
                 Integer productId = productIds.get(i);
                 if (i != 0)

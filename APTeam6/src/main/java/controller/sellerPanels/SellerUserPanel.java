@@ -32,6 +32,9 @@ public class SellerUserPanel {
             else if (command.equalsIgnoreCase("view sales history")){
                 view.viewSellLogs();
             }
+            else if (command.equalsIgnoreCase("manage products")){
+                SellerProductsMenu.getInstance().start();
+            }
             else {
                 throw new RuntimeException("Unknown command was passed to SellerUserPanel by view");
             }
