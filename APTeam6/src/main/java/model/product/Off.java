@@ -8,7 +8,14 @@ public class Off {
     private ArrayList<Product> productsInOff;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private OffStatus offStatus;
     private int offAmount;
 
-
+    public Off(ArrayList<Product> productsInOff, LocalDateTime startDate, LocalDateTime endDate, int offAmount) {
+        this.productsInOff = productsInOff;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.offAmount = offAmount;
+        offId++;
+    }
 }

@@ -3,6 +3,7 @@ package controller;
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
 import model.account.Seller;
+import model.product.Off;
 import model.requests.OffRequest;
 import model.requests.ProductRequest;
 import model.requests.Request;
@@ -50,6 +51,7 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
+    private ArrayList<Off> allOffs;
 
     private Account currentlyLoggedInUser;
 
@@ -65,6 +67,7 @@ public class ProgramManager {
     }
     public void createAllCategoriesHashMapForTest(){allCategories = new HashMap<>();}
     public void createAllProductHashMap(){allProducts = new HashMap<>();}
+    public void createAllOffsArrayList(){allOffs = new ArrayList<>();}
     //------------------------ Test----------
 
     private ProgramManager() {
