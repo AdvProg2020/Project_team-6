@@ -35,7 +35,7 @@ public class SellerUserPanelView {
     private void showHelp() {
         System.out.println("List of commands:");
         for (String comm : returningCommand) {
-
+            System.out.println("\t" + comm);
         }
     }
 

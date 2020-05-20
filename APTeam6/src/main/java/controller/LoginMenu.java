@@ -74,7 +74,6 @@ public class LoginMenu {
             String company = view.getSellerCompany();
             new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
         }
-        System.out.println("HELLLLL:" + ProgramManager.getProgramManagerInstance().getAllAccounts());
         view.giveOutput("Registered successfully.");
     }
 
