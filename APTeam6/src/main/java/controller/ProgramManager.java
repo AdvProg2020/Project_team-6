@@ -3,6 +3,7 @@ package controller;
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
 import model.account.Seller;
+import model.product.Off;
 import model.requests.OffRequest;
 import model.requests.ProductRequest;
 import model.requests.Request;
@@ -50,6 +51,8 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
+    //TODO: for Tabaian:please add this arraylist to YAGSON;
+    private ArrayList<Off> allOffs;
 
     private Account currentlyLoggedInUser;
 
@@ -72,6 +75,7 @@ public class ProgramManager {
     public void createAllProductHashMap() {
         allProducts = new HashMap<>();
     }
+    public void createAllOffsArrayList(){allOffs = new ArrayList<>();}
     //------------------------ Test----------
 
     private ProgramManager() {
@@ -122,19 +126,14 @@ public class ProgramManager {
 
             YaGson gsonParser = new YaGson();
             try {
-                allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>() {
-                }.getType());
-                allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<String, LogsInGeneral>>() {
-                }.getType());
-                allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>() {
-                }.getType());
-                allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>() {
-                }.getType());
-                allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>() {
-                }.getType());
-                allRequests = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "requests.json")), new TypeToken<ArrayList<Request>>() {
-                }.getType());
-            } catch (Exception ignored) {
+                allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
+                allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<String, LogsInGeneral>>(){}.getType());
+                allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
+                allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
+                allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>(){}.getType());
+                allRequests = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "requests.json")), new TypeToken<ArrayList<Request>>(){}.getType());
+            }
+            catch (Exception ignored){
                 ignored.printStackTrace();
                 System.out.println("Couldn't read from files...");
             }
@@ -336,6 +335,7 @@ public class ProgramManager {
         ((Seller) currentlyLoggedInUser).getClass();
     }
 
+    //TODO: MKH don't print things here
     public void showAllRequests() {
         for (int i = 0; i < allRequests.size(); i++) {
             if (allRequests.get(i) instanceof ProductRequest) {
@@ -366,6 +366,10 @@ public class ProgramManager {
         else if (allRequests.get(id) instanceof OffRequest) {
             ((OffRequest) allRequests.get(id)).showDetails();
         }
+    }
+
+    public void addOffToArrayList(Off off){
+        allOffs.add(off);
     }
 }
 

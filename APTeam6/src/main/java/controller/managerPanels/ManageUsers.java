@@ -3,6 +3,7 @@ package controller.managerPanels;
 import controller.LoginMenu;
 import controller.ProgramManager;
 import model.account.Account;
+import model.account.Manager;
 import view.ManageUsersView;
 
 public class ManageUsers {
@@ -22,13 +23,13 @@ public class ManageUsers {
             command = view.getInputCommand();
             if(command.matches("view \\S+")) {
                 ViewUser(command.split("\\s")[1]);
-                //TODO: What is this? It doesn't do anything
             }
-            /*else if (command.matches("change type \\S+, \\S+")) {
-                ChangeType(command.split("\\s")[2],command.split("\\s")[3]);
-            }*/
             else if(command.matches("delete user \\S+")){
                 deleteUser(command.split("\\s")[3]);
+            }
+            else if(command.equalsIgnoreCase("create manager profile")){
+                String[] commandSplit = command.split("\\s");
+                createManagerProfile(commandSplit[3],commandSplit[4],commandSplit[5],commandSplit[6],commandSplit[7],commandSplit[8]);
             }
             else if (command.equals("back")){
                 return;
@@ -38,18 +39,18 @@ public class ManageUsers {
             }
         }
     }
-    private Account ViewUser(String username){
-        return ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
+    private void ViewUser(String username){
+        Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
+        System.out.println("the user's first name is :" + tempAccount.getFirstName() + "the user's last name is :" + tempAccount.getLastName());
     }
-    /*private void ChangeType(String username, String role){
-        ProgramManager.getProgramManagerInstance().deleteAccount(ProgramManager.getProgramManagerInstance().getAccountByUsername(username));
-        LoginMenu loginMenu;
-        LoginMenu.getLoginMenuInstance().register(username,role);
-        view.giveOutput("the user's role was successfully changed!");
-    }*/
+
     private void deleteUser(String username){
         ProgramManager.getProgramManagerInstance().deleteAccount(username);
         view.giveOutput("the user was successfully removed!");
+    }
+    private void createManagerProfile(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber){
+        Manager newManager = new Manager(username,password,firstName,lastName,emailAddress,phoneNumber);
+        ProgramManager.getProgramManagerInstance().addAccountToList(username,newManager);
     }
 }
 
