@@ -225,13 +225,13 @@ public class ProgramManager {
     }
 
     public void removeProduct(int productId) {
-        allProducts.remove(Integer.valueOf(productId));
+        allProducts.remove(productId);
         Product product = allProducts.get(productId);
         allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(productId);
     }
 
     public void removeProduct(Product product) {
-        allProducts.remove(Integer.valueOf(product.getId()));
+        allProducts.remove(product.getId());
         allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(product.getId());
     }
 
