@@ -4,6 +4,7 @@ import controller.ProgramManager;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class ProductTest {
@@ -25,6 +26,19 @@ public class ProductTest {
         Assert.assertEquals("nothing...",product.getDescription());
         HashMap<String,String> adInfo = product.getCategoryAdditionalInfo();
         HashMap<String,String> adInfoSub = product.getSubCategoryAdditionalInfo();
+        Assert.assertEquals("electrical",product.getCategoryName());
+        Assert.assertEquals("tv",product.getSubCategoryName());
+        Assert.assertEquals(0,product.getVisitCount());
+        LocalDateTime dateTime = product.getCreationDate();
+        Score score = new Score("ali",Byte.parseByte("20"),product.getId());
+        product.createAllArrayLists();
+        product.addScore(score);
+        Assert.assertEquals(1,product.getScores().size());
+        Assert.assertEquals(20,product.getScores().get(0).getScore());
+        Assert.assertEquals(product.getId(),product.getScores().get(0).getProductId());
+        Assert.assertEquals("ali",score.getUsername());
+        Comment comment = new Comment("ali",product.getId(),"not bad","its very costly",true);
+
 
 
     }

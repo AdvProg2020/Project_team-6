@@ -36,7 +36,7 @@ public class SellerTest {
 
     //sort seller test with decline
     @Test
-    public void sortSellerTest2() {
+    public void sellerTest2() {
         ProgramManager.getProgramManagerInstance().createAllRequestHashMapForTest();
         ProgramManager.getProgramManagerInstance().createAllAccountHashMapForTest();
         ArrayList<Seller> sellers = new ArrayList<Seller>();
@@ -47,6 +47,8 @@ public class SellerTest {
             expectedSeller.accept();
         }
         declineSeller.decline();
+        sellers.get(0).showDetails();
+        Assert.assertNotEquals(sellers.get(0).getCompanyName(),sellers.get(0).getSellLogIds());
         /*for (Seller expectedSeller : sellers) {
             System.out.println(expectedSeller.role);
         }*/

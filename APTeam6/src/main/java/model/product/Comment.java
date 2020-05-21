@@ -11,7 +11,7 @@ public class Comment {
     public Comment(String username, int productId, String title, String text, boolean hasBought) {
         this.username = username;
         this.productId = productId;
-        state = 0;
+        this.state = 0;
         this.title = title;
         this.text = text;
         this.hasBought = hasBought;

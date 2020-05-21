@@ -28,6 +28,12 @@ public class Product {
         nextId++;
     }
 
+    void createAllArrayLists(){
+    //------------------test---------
+        scores = new ArrayList<>();
+        comments = new ArrayList<>();
+    }
+
     public void addComment(Comment comment){
         comments.add(comment);
     }
