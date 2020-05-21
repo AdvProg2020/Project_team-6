@@ -34,7 +34,10 @@ public class LoginMenuView {
     }
 
     private void showHelp() {
-        System.out.println("List of commands:\n\tlogin [username] [password]\n\tcreate account [role] [username]");
+        if (!ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn())
+            System.out.println("List of commands:\n\tlogin [username] [password]\n\tcreate account [role] [username]");
+        else
+            System.out.println("List of commands:\n\tlogout\n\tcreate account [role] [username]");
     }
 
     public void giveOutput(String message) {

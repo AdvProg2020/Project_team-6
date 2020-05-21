@@ -51,23 +51,30 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
-    //NOTE for Tabaeian:please add this arraylist to YAGSON;
+    //TODO: for Tabaian:please add this arraylist to YAGSON;
     private ArrayList<Off> allOffs;
 
     private Account currentlyLoggedInUser;
 
-    private ArrayList<Product> buyBasket;
+    private HashMap<Product, Integer> buyBasket;
 
 
     //------------------------ Test----------
-    public void createAllAccountHashMapForTest(){
+    public void createAllAccountHashMapForTest() {
         allAccounts = new HashMap<>();
     }
-    public void createAllRequestHashMapForTest(){
+
+    public void createAllRequestHashMapForTest() {
         allRequests = new ArrayList<>();
     }
-    public void createAllCategoriesHashMapForTest(){allCategories = new HashMap<>();}
-    public void createAllProductHashMap(){allProducts = new HashMap<>();}
+
+    public void createAllCategoriesHashMapForTest() {
+        allCategories = new HashMap<>();
+    }
+
+    public void createAllProductHashMap() {
+        allProducts = new HashMap<>();
+    }
     public void createAllOffsArrayList(){allOffs = new ArrayList<>();}
     //------------------------ Test----------
 
@@ -82,11 +89,11 @@ public class ProgramManager {
 
         currentlyLoggedInUser = null;
 
-        buyBasket = new ArrayList<>();
+        buyBasket = new HashMap<>();
     }
 
     public void loadFromFiles() {
-        if (!folder.exists()){
+        if (!folder.exists()) {
             folder.mkdir();
             try {
                 accountsFile.createNewFile();
@@ -95,8 +102,7 @@ public class ProgramManager {
                 categoriesFile.createNewFile();
                 discountCodesFile.createNewFile();
                 requestsFile.createNewFile();
-            }
-            catch (Exception ignored){
+            } catch (Exception ignored) {
                 System.out.println("Failed to make files...");
             }
         }
@@ -114,8 +120,7 @@ public class ProgramManager {
                     discountCodesFile.createNewFile();
                 if (!requestsFile.exists())
                     requestsFile.createNewFile();
-            }
-            catch (Exception ignored){
+            } catch (Exception ignored) {
                 System.out.println("Failed to make files...");
             }
 
@@ -168,8 +173,7 @@ public class ProgramManager {
             fileWriter = new FileWriter(requestsFile, false);
             fileWriter.write(gsonCreator.toJson(allRequests));
             fileWriter.close();
-        }
-        catch (Exception ignored){
+        } catch (Exception ignored) {
             System.out.println("Failed to save files...");
         }
     }
@@ -190,8 +194,8 @@ public class ProgramManager {
 
     public void loginSuccessful(Account account) {
         currentlyLoggedInUser = account;
-        if (account.getRole() == 1){
-            ((Buyer)account).addProductToBuyBasket(buyBasket);
+        if (account.getRole() == 1) {
+            ((Buyer) account).addProductToBuyBasket(buyBasket);
             buyBasket.clear();
         }
     }
@@ -207,6 +211,7 @@ public class ProgramManager {
     public void addAccountToList(String username, Account account) {
         allAccounts.put(username, account);
     }
+
     public void addAccountToList(Account account) {
         allAccounts.put(account.getUsername(), account);
     }
@@ -220,132 +225,149 @@ public class ProgramManager {
     }
 
     public void removeProduct(int productId) {
-        allProducts.remove(Integer.valueOf(productId));
+        allProducts.remove(productId);
         Product product = allProducts.get(productId);
         allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(productId);
     }
-    public void removeProduct(Product product){
-        allProducts.remove(Integer.valueOf(product.getId()));
+
+    public void removeProduct(Product product) {
+        allProducts.remove(product.getId());
         allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(product.getId());
     }
 
     /**
      * this method adds the product to productsList and adds it to its subCategory as well
      */
-    public void addProductToList(Product product){
+    public void addProductToList(Product product) {
         try {
             allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).addProduct(product.getId());
             allProducts.put(product.getId(), product);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Fake address");
         }
     }
 
-    public Product getProductById(int id){
+    public Product getProductById(int id) {
         return allProducts.get(id);
     }
 
-    public void deleteDiscountCode(DiscountCode discountCode){
+    public void deleteDiscountCode(DiscountCode discountCode) {
         allDiscountCodes.remove(discountCode);
     }
 
-    public void deleteAccount(String username){
+    public void deleteAccount(String username) {
         allAccounts.remove(username);
     }
 
-    public Account getCurrentlyLoggedInUser(){
+    public Account getCurrentlyLoggedInUser() {
         return currentlyLoggedInUser;
     }
 
     /**
      * this function gets current user's role
+     *
      * @return 0 if no one is logged in
      */
-    public byte getCurrentlyLoggedInUserRole(){
+    public byte getCurrentlyLoggedInUserRole() {
         if (currentlyLoggedInUser != null)
             return currentlyLoggedInUser.getRole();
         return 0;
     }
 
-    public Collection<Account> getAllAccounts(){
+    public Collection<Account> getAllAccounts() {
         return allAccounts.values();
     }
 
-    public ArrayList<Request> getAllRequests(){
+    public ArrayList<Request> getAllRequests() {
         return allRequests;
     }
 
-    public Collection<Category> getAllCategories(){
+    public Collection<Category> getAllCategories() {
         return allCategories.values();
     }
 
 
-    public LocalDateTime parsingStringToData(String input){
+    public LocalDateTime parsingStringToData(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
         return dateTime;
     }
-    public void addDiscountCodeToArrayList(DiscountCode discountCode){
-        allDiscountCodes.put(discountCode.getCode(),discountCode);
+
+    public void addDiscountCodeToArrayList(DiscountCode discountCode) {
+        allDiscountCodes.put(discountCode.getCode(), discountCode);
     }
-    public DiscountCode getDiscountCodeByCode(String code){
+
+    public DiscountCode getDiscountCodeByCode(String code) {
         return allDiscountCodes.get(code);
     }
 
     /**
      * If a buyer is logged in, this method will add the product to their buyBasket, otherwise it will be added to ProgramManager buyBasket.
+     *
      * @param product the product to be added
      */
-    public void addToCurrentBuyBasket(Product product){
-        if (currentlyLoggedInUser == null)
-            buyBasket.add(product);
+    public void addToCurrentBuyBasket(Product product, int count) {
+        if (currentlyLoggedInUser == null) {
+            if (buyBasket.containsKey(product)) {
+                count += buyBasket.get(product);
+                buyBasket.replace(product, count);
+            }
+            else
+                buyBasket.put(product, count);
+        }
         else if (currentlyLoggedInUser.getRole() == 1)
-            ((Buyer)currentlyLoggedInUser).addProductToBuyBasket(product);
+            ((Buyer) currentlyLoggedInUser).addProductToBuyBasket(product, count);
     }
 
-    public void addRequestToList(Request request){
+    public void addRequestToList(Request request) {
         allRequests.add(request);
     }
 
-    public void removeRequest(Request request){
+    public void removeRequest(Request request) {
         allRequests.remove(request);
     }
 
-    public void addCategory(Category category){
+    public void addCategory(Category category) {
         allCategories.put(category.getName(), category);
     }
-    public void showSellerCompanyInfo(){
-        ((Seller)currentlyLoggedInUser).getClass();
+
+    public void showSellerCompanyInfo() {
+        ((Seller) currentlyLoggedInUser).getClass();
     }
-    public void showAllRequests(){
-        for(int i = 0;i < allRequests.size();i++){
-            if(allRequests.get(i) instanceof ProductRequest){
+
+    //TODO: MKH don't print things here
+    public void showAllRequests() {
+        for (int i = 0; i < allRequests.size(); i++) {
+            if (allRequests.get(i) instanceof ProductRequest) {
                 System.out.println(i + ". " + allRequests.get(i) + "is a ProductRequest");
             }
-            else if(allRequests.get(i) instanceof OffRequest){
+            else if (allRequests.get(i) instanceof OffRequest) {
                 System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
             }
         }
     }
-    public void acceptRequests(int id){
-        if(allRequests.get(id) instanceof ProductRequest){
+
+    public void acceptRequests(int id) {
+        if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).accept();
         }
     }
-    public void declineRequests(int id){
-        if(allRequests.get(id) instanceof ProductRequest){
+
+    public void declineRequests(int id) {
+        if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).decline();
         }
     }
-    public void detailsOfRequest(int id){
-        if(allRequests.get(id) instanceof ProductRequest){
+
+    public void detailsOfRequest(int id) {
+        if (allRequests.get(id) instanceof ProductRequest) {
             ((ProductRequest) allRequests.get(id)).showDetails();
         }
-        else if(allRequests.get(id) instanceof OffRequest){
+        else if (allRequests.get(id) instanceof OffRequest) {
             ((OffRequest) allRequests.get(id)).showDetails();
         }
     }
+
     public void addOffToArrayList(Off off){
         allOffs.add(off);
     }

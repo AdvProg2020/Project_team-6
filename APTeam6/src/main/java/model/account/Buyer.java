@@ -5,14 +5,13 @@ import model.logs.BuyLog;
 import model.logs.LogsInGeneral;
 import model.product.Product;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class Buyer extends Account implements Comparable<Buyer> {
     private long credit;
     public static ArrayList<Integer> buyLogIds = new ArrayList<Integer>();
-    private ArrayList<Integer> buyBasket = new ArrayList<>();
+    private HashMap<Integer, Integer> buyBasket = new HashMap<>();
+    //The HashMap is productId to count
 
     public Buyer(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
@@ -75,11 +74,28 @@ public class Buyer extends Account implements Comparable<Buyer> {
         return buyerArrayList;
     }
 
-    public void addProductToBuyBasket(Product product) {
-        buyBasket.add(product.getId());
+    public void addProductToBuyBasket(Product product, int count) {
+        buyBasket.put(product.getId(), count);
     }
 
-    public void addProductToBuyBasket(ArrayList<Product> products) {
-        for (Product product : products) buyBasket.add(product.getId());
+    public void addProductToBuyBasket(HashMap<Product, Integer> products) {
+        Set<Product> productsOnly = products.keySet();
+        for (Product product : productsOnly) {
+            if (buyBasket.containsKey(product.getId()))
+                increaseProductInBuyBasketBy(product.getId(), products.get(product));
+            else
+                buyBasket.put(product.getId(), products.get(product));
+        }
+    }
+
+    public ArrayList<Integer> getBuyBasketProductIds() {
+        return new ArrayList<>(buyBasket.keySet());
+    }
+
+    public void increaseProductInBuyBasketBy(int productId, int count) {
+        if (buyBasket.containsKey(productId)){
+            count += buyBasket.get(productId);
+            buyBasket.replace(productId, count);
+        }
     }
 }

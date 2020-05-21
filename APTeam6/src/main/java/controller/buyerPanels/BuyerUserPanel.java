@@ -25,8 +25,11 @@ public class BuyerUserPanel {
             if (command.equalsIgnoreCase("view personal info")) {
                 PersonalInfoMenu.getPersonalInfoMenuInstance().start();
             }
-            else if (command.equalsIgnoreCase("login menu")){
+            else if (command.equals("login menu")){
                 LoginMenu.getLoginMenuInstance().start();
+            }
+            else if (command.equals("view cart")){
+                ShowCart.getShowCartInstance().start();
             }
             else {
                 throw new RuntimeException("Unknown command was passed to BuyerUserPanel by view");
