@@ -51,7 +51,7 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
-    //TODO: for Tabaian:please add this arraylist to YAGSON;
+    //TODO: for Tabaian:please add this HashMap to YAGSON;
     private HashMap<Integer,Off> allOffs;
 
     private Account currentlyLoggedInUser;
