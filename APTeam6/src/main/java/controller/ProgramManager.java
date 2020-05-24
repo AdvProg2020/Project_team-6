@@ -371,6 +371,9 @@ public class ProgramManager {
     public void addOffToArrayList(Off off){
         allOffs.put(off.getOffId(),off);
     }
+    public Off getOffById(int id){
+        return allOffs.get(id);
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.
