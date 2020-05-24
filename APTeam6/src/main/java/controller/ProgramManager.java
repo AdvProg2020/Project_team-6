@@ -52,7 +52,7 @@ public class ProgramManager {
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
     //TODO: for Tabaian:please add this arraylist to YAGSON;
-    private ArrayList<Off> allOffs;
+    private HashMap<Integer,Off> allOffs;
 
     private Account currentlyLoggedInUser;
 
@@ -75,7 +75,7 @@ public class ProgramManager {
     public void createAllProductHashMap() {
         allProducts = new HashMap<>();
     }
-    public void createAllOffsArrayList(){allOffs = new ArrayList<>();}
+    public void createAllOffsHashMap(){allOffs = new HashMap<>();}
     //------------------------ Test----------
 
     private ProgramManager() {
@@ -369,7 +369,7 @@ public class ProgramManager {
     }
 
     public void addOffToArrayList(Off off){
-        allOffs.add(off);
+        allOffs.put(off.getOffId(),off);
     }
 }
 

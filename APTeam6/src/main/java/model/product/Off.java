@@ -22,4 +22,8 @@ public class Off {
         offStatus = OffStatus.WaitingForBuild;
         ProgramManager.getProgramManagerInstance().addOffToArrayList(this);
     }
+
+    public int getOffId() {
+        return offId;
+    }
 }
