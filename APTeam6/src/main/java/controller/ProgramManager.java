@@ -378,8 +378,7 @@ public class ProgramManager {
         System.out.println("the Off's Id is " + off.getOffId());
         System.out.println("the Off's StartDate is " + off.getStartDate());
         System.out.println("the Off's EndDate is " + off.getEndDate());
-        System.out.println("the Off's Id is " + off.getOffId());
-        System.out.println("the Off's Id is " + off.getOffId());
+        System.out.println("the Off's amount is " + off.getOffAmount());
     }
 }
 

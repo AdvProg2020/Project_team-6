@@ -1,5 +1,7 @@
 package controller.sellerPanels;
 
+import controller.ProgramManager;
+import model.product.Off;
 import view.userPanel.OffManagementSellerView;
 
 public class OffManagementSeller {
@@ -18,13 +20,15 @@ public class OffManagementSeller {
         while (true) {
             command = view.getInputCommand();
             if (command.matches("view \\.+")) {
-
+                ProgramManager.getProgramManagerInstance().showOff(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(command.split("\\s")[1])));
             }
             else if (command.matches("edit \\.+")) {
-
+                //TODO
+                //must send a request to manager fist
             }
             else if(command.equalsIgnoreCase("add off")){
                 //TODO
+                //must send a request to manager fist
             }
             else if (command.equals("back")) {
                 return;
