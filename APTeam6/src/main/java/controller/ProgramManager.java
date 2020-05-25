@@ -246,6 +246,9 @@ public class ProgramManager {
             System.out.println("Fake address");
         }
     }
+    public void addOffToList(Off off){
+        allOffs.put(off.getOffId(),off);
+    }
 
     public Product getProductById(int id) {
         return allProducts.get(id);
@@ -368,7 +371,7 @@ public class ProgramManager {
         }
     }
 
-    public void addOffToArrayList(Off off){
+    public void addOffToHashMap(Off off){
         allOffs.put(off.getOffId(),off);
     }
     public Off getOffById(int id){

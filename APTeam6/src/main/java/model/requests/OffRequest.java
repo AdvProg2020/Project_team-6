@@ -6,20 +6,22 @@ import model.product.Off;
 public class OffRequest implements Request {
     private Off off;
     private byte action;
+    private String changingFiled;
     // 0 - add Off
     // 1 - edit
 
-    public OffRequest(Off off, byte action) {
+    public OffRequest(Off off, byte action,String changingFiled) {
         this.off = off;
         this.action = action;
+        this.changingFiled = changingFiled;
     }
 
     @Override
     public void accept() {
         if(action == 0){
-
+            ProgramManager.getProgramManagerInstance().addOffToList(off);
         }else if(action == 1){
-
+            //TODO
         }
 
     }

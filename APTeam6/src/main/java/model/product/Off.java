@@ -20,7 +20,7 @@ public class Off {
         this.offAmount = offAmount;
         offId++;
         offStatus = OffStatus.WaitingForBuild;
-        ProgramManager.getProgramManagerInstance().addOffToArrayList(this);
+        ProgramManager.getProgramManagerInstance().addOffToHashMap(this);
     }
 
     public LocalDateTime getStartDate() {
