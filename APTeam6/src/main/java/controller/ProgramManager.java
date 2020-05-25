@@ -374,6 +374,13 @@ public class ProgramManager {
     public Off getOffById(int id){
         return allOffs.get(id);
     }
+    public void showOff(Off off){
+        System.out.println("the Off's Id is " + off.getOffId());
+        System.out.println("the Off's StartDate is " + off.getStartDate());
+        System.out.println("the Off's EndDate is " + off.getEndDate());
+        System.out.println("the Off's Id is " + off.getOffId());
+        System.out.println("the Off's Id is " + off.getOffId());
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.

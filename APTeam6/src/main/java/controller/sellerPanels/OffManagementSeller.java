@@ -18,10 +18,10 @@ public class OffManagementSeller {
         while (true) {
             command = view.getInputCommand();
             if (command.matches("view \\.+")) {
-                //TODO
+
             }
             else if (command.matches("edit \\.+")) {
-                //TODO
+
             }
             else if(command.equalsIgnoreCase("add off")){
                 //TODO

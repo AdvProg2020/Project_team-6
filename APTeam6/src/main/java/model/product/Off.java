@@ -23,6 +23,17 @@ public class Off {
         ProgramManager.getProgramManagerInstance().addOffToArrayList(this);
     }
 
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+    public int getOffAmount() {
+        return offAmount;
+    }
+
     public int getOffId() {
         return offId;
     }
