@@ -9,8 +9,18 @@ public class OffRequest implements Request {
     // 0 - add Off
     // 1 - edit
 
+    public OffRequest(Off off, byte action) {
+        this.off = off;
+        this.action = action;
+    }
+
     @Override
     public void accept() {
+        if(action == 0){
+
+        }else if(action == 1){
+
+        }
 
     }
 
