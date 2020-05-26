@@ -22,6 +22,9 @@ public class Off {
         offStatus = OffStatus.WaitingForBuild;
         ProgramManager.getProgramManagerInstance().addOffToHashMap(this);
     }
+    public void changeField(byte field, String newValue){
+        //TODO
+    }
 
     public LocalDateTime getStartDate() {
         return startDate;
