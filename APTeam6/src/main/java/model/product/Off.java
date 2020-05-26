@@ -23,7 +23,18 @@ public class Off {
         ProgramManager.getProgramManagerInstance().addOffToHashMap(this);
     }
     public void changeField(byte field, String newValue){
-        //TODO
+        if(field == 1){
+
+        }
+        else if(field == 2){
+
+        }
+        else if(field == 3){
+
+        }
+        else if(field == 4) {
+
+        }
     }
 
     public LocalDateTime getStartDate() {
