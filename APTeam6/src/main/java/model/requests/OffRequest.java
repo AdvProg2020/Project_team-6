@@ -8,7 +8,7 @@ public class OffRequest implements Request {
     private byte action;
     private String changingFiled;
     // 0 - add Off
-    // 1 - edit
+    // 1 - OffStatus
     // 2 - startDate
     // 3 - endDate
     // 4 - offAmount

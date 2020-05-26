@@ -24,7 +24,14 @@ public class Off {
     }
     public void changeField(byte field, String newValue){
         if(field == 1){
+            if(newValue.equalsIgnoreCase("WaitingForBuild")){
+                offStatus = OffStatus.WaitingForBuild;
+            }else if(newValue.equalsIgnoreCase("WaitingForEdit")){
+                offStatus = OffStatus.WaitingForEdit;
 
+            }else if(newValue.equalsIgnoreCase("WaitingForConfirmation")){
+                offStatus = OffStatus.WaitingForConfirmation;
+            }
         }
         else if(field == 2){
 
