@@ -389,6 +389,27 @@ public class ProgramManager {
         System.out.println("the Off's EndDate is " + off.getEndDate());
         System.out.println("the Off's amount is " + off.getOffAmount());
     }
+    public void recognizingActionByByte(Byte action){
+        if(action == 0){
+
+        }
+        else if(action == 1){
+
+        }
+        else if(action == 2){
+
+        }
+        else if(action == 3){
+
+        }
+        else if(action == 4){
+
+        }
+        else if(action == 5){
+
+        }
+
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.

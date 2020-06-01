@@ -8,10 +8,10 @@ public class OffRequest implements Request {
     private byte action;
     private String changingFiled;
     // 0 - add Off
-    // 1 - OffStatus
-    // 2 - startDate
-    // 3 - endDate
-    // 4 - offAmount
+    // 1-1 - OffStatus
+    // 1-2 - startDate
+    // 1-3 - endDate
+    // 1-4 - offAmount
 
     public OffRequest(Off off, byte action,String changingFiled) {
         this.off = off;
@@ -24,7 +24,7 @@ public class OffRequest implements Request {
         if(action == 0){
             ProgramManager.getProgramManagerInstance().addOffToList(off);
             ProgramManager.getProgramManagerInstance().removeRequest(this);
-        }else if(action == 1 || action == 2| action == 3| action == 4){
+        }else if(action == 1 ){
             off.changeField(action,changingFiled);
             ProgramManager.getProgramManagerInstance().removeRequest(this);
         }
