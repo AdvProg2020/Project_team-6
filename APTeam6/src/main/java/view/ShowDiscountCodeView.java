@@ -56,11 +56,11 @@ public class ShowDiscountCodeView {
     }
 
     public void editDiscountCodeStartDate(DiscountCode discountCode, String startDate) {
-        discountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToData(startDate));
+        discountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToDate(startDate));
     }
 
     public void editDiscountCodeEndDate(DiscountCode discountCode, String endDate) {
-        discountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToData(endDate));
+        discountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToDate(endDate));
     }
 
     public void editDiscountCodePercentage(DiscountCode discountCode, int percentage) {

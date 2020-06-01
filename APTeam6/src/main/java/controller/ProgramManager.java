@@ -290,7 +290,7 @@ public class ProgramManager {
     }
 
 
-    public LocalDateTime parsingStringToData(String input) {
+    public LocalDateTime parsingStringToDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
         return dateTime;
@@ -354,10 +354,16 @@ public class ProgramManager {
         if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).accept();
         }
+        else if(allRequests.get(id) instanceof OffRequest){
+            allRequests.get(id).accept();
+        }
     }
 
     public void declineRequests(int id) {
         if (allRequests.get(id) instanceof ProductRequest) {
+            allRequests.get(id).decline();
+        }
+        else if(allRequests.get(id) instanceof OffRequest){
             allRequests.get(id).decline();
         }
     }

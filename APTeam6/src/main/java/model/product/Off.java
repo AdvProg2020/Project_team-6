@@ -34,10 +34,10 @@ public class Off {
             }
         }
         else if(field == 2){
-            startDate = ProgramManager.getProgramManagerInstance().parsingStringToData(newValue);
+            startDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(newValue);
         }
         else if(field == 3){
-            endDate = ProgramManager.getProgramManagerInstance().parsingStringToData(newValue);
+            endDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(newValue);
         }
         else if(field == 4) {
             offAmount = Integer.parseInt(newValue);

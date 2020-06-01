@@ -3,8 +3,6 @@ import controller.ProgramManager;
 import model.product.DiscountCode;
 import view.CreateDiscountCodeView;
 
-import java.util.Date;
-
 public class CreateDiscountCode {
     private static CreateDiscountCode instance;
     public static CreateDiscountCode getInstance(){
@@ -25,7 +23,7 @@ public class CreateDiscountCode {
                 String[] input = command.split("\\s");
                 ProgramManager instance = ProgramManager.getProgramManagerInstance();
                 String[] discountDetails = view.getUserUsualData(discountCode);
-                discountCode = new DiscountCode(discountDetails[0], instance.parsingStringToData(discountDetails[1]),instance.parsingStringToData(discountDetails[2]),Integer.parseInt(discountDetails[3]),Integer.parseInt(discountDetails[4]));
+                discountCode = new DiscountCode(discountDetails[0], instance.parsingStringToDate(discountDetails[1]),instance.parsingStringToDate(discountDetails[2]),Integer.parseInt(discountDetails[3]),Integer.parseInt(discountDetails[4]));
                 ProgramManager.getProgramManagerInstance().addDiscountCodeToArrayList(discountCode);
             }
         }
