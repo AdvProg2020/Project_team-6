@@ -32,7 +32,8 @@ public class OffManagementSeller {
             else if(command.equalsIgnoreCase("add off")){
                 //TODO
                 //must send a request to manager fist
-                OffRequest offRequest = new OffRequest(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(command.split("\\s")[1])),(byte)0,command.split("\\s")[2]);
+                OffRequest offRequest = new OffRequest(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(command.split("\\s")[1])),(byte)0,null);
+                ProgramManager.getProgramManagerInstance().addRequestToList(offRequest);
             }
             else if (command.equals("back")) {
                 return;
