@@ -10,8 +10,7 @@ public class MainScreenView {
         System.out.println("List of commands:" +
                 "\n\tlogin menu" +
                 "\n\tproducts" +
-                "\n\texit" +
-                "\n\tkill kamali");
+                "\n\texit");
     }
 
     public String getInputCommand() {
@@ -26,9 +25,6 @@ public class MainScreenView {
             }
             else if (command.equalsIgnoreCase("login menu")){
                 return command;
-            }
-            else if (command.equalsIgnoreCase("kill kamali")){
-                System.out.println("Ahsant");
             }
             else {
                 System.out.println("Invalid command");
