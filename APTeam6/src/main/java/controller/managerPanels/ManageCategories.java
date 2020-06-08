@@ -1,6 +1,7 @@
 package controller.managerPanels;
 
 import controller.LoginMenu;
+import model.product.Category;
 import view.LoginMenuView;
 import view.ManageCategoriesView;
 
@@ -18,26 +19,33 @@ public class ManageCategories {
         String command = null;
         while (true) {
             command = manageCategoriesView.getInputCommand();
-            if (command.matches("login \\S+ \\S+")) {
+            if (command.matches("edit \\.+")) {
                 String[] splitCommand = command.split("\\s");
-                //login(splitCommand[1], splitCommand[2]);
+                edit((Category)splitCommand[1]);
             }
-            else if (command.matches("create account (buyer|seller|manager) \\S+")) {
+            else if (command.matches("add \\.+")) {
                 String[] splitCommand = command.split("\\s");
-                if (splitCommand[1].equals("manager"))
-                    System.out.println("You can't make managers here. get away");
-                //else
-                    //register(splitCommand[3], splitCommand[2]);
+                add((Category)splitCommand[1]);
             }
-            else if (command.equals("logout")) {
-                //logout();
+            else if (command.matches("remove \\.+")) {
+                String[] splitCommand = command.split("\\s");
+                remove((Category)splitCommand[1]);
             }
             else if (command.equals("back")) {
                 return;
             }
             else {
-                throw new RuntimeException("Unknown command was passed to LoginMenu by view");
+                throw new RuntimeException("Unknown command was passed to ManageCategories by view");
             }
         }
+    }
+    public void edit(Category category){
+
+    }
+    public void add(Category category){
+
+    }
+    public void remove(Category category){
+
     }
 }
