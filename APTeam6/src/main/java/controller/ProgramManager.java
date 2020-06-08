@@ -384,6 +384,9 @@ public class ProgramManager {
         System.out.println("the Off's EndDate is " + off.getEndDate());
         System.out.println("the Off's amount is " + off.getOffAmount());
     }
+    public Category getCategoryByName(String name){
+        return allCategories.get(name);
+    }
 }
 
 // Important note: this programManager doesn't and shouldn't have static methods. it is a singleton.

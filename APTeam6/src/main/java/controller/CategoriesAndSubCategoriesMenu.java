@@ -1,19 +1,56 @@
 package controller;
 
+import view.CategoriesAndSubCategoriesMenuView;
+
+
 public class CategoriesAndSubCategoriesMenu {
+    CategoriesAndSubCategoriesMenuView categoriesAndSubCategoriesMenuView;
     private static CategoriesAndSubCategoriesMenu instance;
     public static CategoriesAndSubCategoriesMenu getInstance(){
         if (instance == null)
             instance = new CategoriesAndSubCategoriesMenu();
         return instance;
     }
-    ///////////////////////////////
 
     public void startAsManager(){
+            categoriesAndSubCategoriesMenuView = new CategoriesAndSubCategoriesMenuView();
+            String command = null;
+            while (true) {
+                command = categoriesAndSubCategoriesMenuView.getInputCommand();
+                if (command.matches("edit \\.+")) {
+                    String[] splitCommand = command.split("\\s");
+                    edit(splitCommand[1]);
+                }
+                else if (command.matches("add \\.+")) {
+                    String[] splitCommand = command.split("\\s");
+                    add(splitCommand[1]);
+                }
+                else if (command.matches("remove \\.+")) {
+                    String[] splitCommand = command.split("\\s");
+                    remove(splitCommand[1]);
+                }
+                else if (command.equals("back")) {
+                    return;
+                }
+                else {
+                    throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+                }
+            }
+
+
 
     }
 
     public void startAsBuyer(){
+
+    }
+    public void edit(String name){
+
+    }
+    public void add(String name){
+
+    }
+    public void remove(String name){
 
     }
 }

@@ -13,6 +13,24 @@ public class CategoriesAndSubCategoriesMenuView {
             System.out.println("\t" + category.getName());
         }
     }
+    public String getInputCommand() {
+        String command;
+        while (true) {
+            command = Input.getInput();
+            if(command.matches("edit \\.+")){
+                return command;
+            }
+            else if(command.matches("add \\.+")){
+                return command;
+            }
+            else if(command.matches("remove \\.+")){
+                return command;
+            }
+            else {
+                System.out.println("Invalid command");
+            }
+        }
+    }
     public void giveOutPut(String message){
         System.out.println(message);
 
