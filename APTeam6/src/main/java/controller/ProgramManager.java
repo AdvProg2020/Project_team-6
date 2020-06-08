@@ -387,7 +387,7 @@ public class ProgramManager {
     public Category getCategoryByName(String name){
         return allCategories.get(name);
     }
-    public void editCategoryForName(Category category,String newName){
+    public void editCategoryName(Category category, String newName){
         category.setName(newName);
     }
     public void removeCategory(Category category){

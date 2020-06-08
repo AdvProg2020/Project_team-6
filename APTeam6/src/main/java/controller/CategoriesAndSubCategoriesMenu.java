@@ -53,7 +53,7 @@ public class CategoriesAndSubCategoriesMenu {
 
     }
     public void edit(String name,String newName){
-        ProgramManager.getProgramManagerInstance().editCategoryForName(ProgramManager.getProgramManagerInstance().getCategoryByName(name),newName);
+        ProgramManager.getProgramManagerInstance().editCategoryName(ProgramManager.getProgramManagerInstance().getCategoryByName(name),newName);
     }
     public void add(String name){
         ProgramManager.getProgramManagerInstance().addCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
