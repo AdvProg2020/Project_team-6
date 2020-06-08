@@ -26,6 +26,9 @@ public class CategoriesAndSubCategoriesMenuView {
             else if(command.matches("remove \\.+")){
                 return command;
             }
+            else if(command.equals("show categories")){
+                return command;
+            }
             else {
                 System.out.println("Invalid command");
             }
@@ -33,6 +36,6 @@ public class CategoriesAndSubCategoriesMenuView {
     }
     public void giveOutPut(String message){
         System.out.println(message);
-
     }
+
 }

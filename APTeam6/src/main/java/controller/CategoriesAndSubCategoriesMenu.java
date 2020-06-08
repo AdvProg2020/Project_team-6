@@ -4,16 +4,14 @@ import view.CategoriesAndSubCategoriesMenuView;
 
 
 public class CategoriesAndSubCategoriesMenu {
-    CategoriesAndSubCategoriesMenuView categoriesAndSubCategoriesMenuView;
+    CategoriesAndSubCategoriesMenuView categoriesAndSubCategoriesMenuView = new CategoriesAndSubCategoriesMenuView();
     private static CategoriesAndSubCategoriesMenu instance;
     public static CategoriesAndSubCategoriesMenu getInstance(){
         if (instance == null)
             instance = new CategoriesAndSubCategoriesMenu();
         return instance;
     }
-
     public void startAsManager(){
-            categoriesAndSubCategoriesMenuView = new CategoriesAndSubCategoriesMenuView();
             String command = null;
             while (true) {
                 command = categoriesAndSubCategoriesMenuView.getInputCommand();
@@ -39,6 +37,19 @@ public class CategoriesAndSubCategoriesMenu {
     }
 
     public void startAsBuyer(){
+        String command = null;
+        while (true) {
+            command = categoriesAndSubCategoriesMenuView.getInputCommand();
+            if (command.equals("show categories")) {
+
+            }
+            else if (command.equals("back")) {
+                return;
+            }
+            else {
+                throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+            }
+        }
 
     }
     public void edit(String name,String newName){
@@ -50,5 +61,8 @@ public class CategoriesAndSubCategoriesMenu {
     }
     public void remove(String name){
         ProgramManager.getProgramManagerInstance().removeCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
+    }
+    public void showCategories(){
+
     }
 }
