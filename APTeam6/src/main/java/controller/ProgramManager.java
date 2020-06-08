@@ -44,6 +44,7 @@ public class ProgramManager {
     private File categoriesFile;
     private File discountCodesFile;
     private File requestsFile;
+    private File offsFile;
 
     private HashMap<String, Account> allAccounts;
     private HashMap<Integer, LogsInGeneral> allLogs;
@@ -51,7 +52,6 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
-    //TODO: for Tabaian:please add this HashMap to YAGSON;
     private HashMap<Integer,Off> allOffs;
 
     private Account currentlyLoggedInUser;
@@ -86,6 +86,7 @@ public class ProgramManager {
         categoriesFile = new File(ADDRESS + "categories.json");
         discountCodesFile = new File(ADDRESS + "discountCodes.json");
         requestsFile = new File(ADDRESS + "requests.json");
+        offsFile = new File(ADDRESS + "offs.json");
 
         currentlyLoggedInUser = null;
 
@@ -102,6 +103,7 @@ public class ProgramManager {
                 categoriesFile.createNewFile();
                 discountCodesFile.createNewFile();
                 requestsFile.createNewFile();
+                offsFile.createNewFile();
             } catch (Exception ignored) {
                 System.out.println("Failed to make files...");
             }
@@ -120,6 +122,8 @@ public class ProgramManager {
                     discountCodesFile.createNewFile();
                 if (!requestsFile.exists())
                     requestsFile.createNewFile();
+                if (!offsFile.exists())
+                    offsFile.createNewFile();
             } catch (Exception ignored) {
                 System.out.println("Failed to make files...");
             }
@@ -127,11 +131,12 @@ public class ProgramManager {
             YaGson gsonParser = new YaGson();
             try {
                 allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
-                allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<String, LogsInGeneral>>(){}.getType());
-                allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<String, Product>>(){}.getType());
+                allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<Integer, LogsInGeneral>>(){}.getType());
+                allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<Integer, Product>>(){}.getType());
                 allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
                 allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>(){}.getType());
                 allRequests = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "requests.json")), new TypeToken<ArrayList<Request>>(){}.getType());
+                allOffs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "offs.json")), new TypeToken<HashMap<Integer, Off>>(){}.getType());
             }
             catch (Exception ignored){
                 ignored.printStackTrace();
@@ -150,6 +155,8 @@ public class ProgramManager {
             allDiscountCodes = new HashMap<>();
         if (allRequests == null)
             allRequests = new ArrayList<>();
+        if (allOffs == null)
+            allOffs = new HashMap<>();
     }
 
     public void saveToFiles() {
@@ -172,6 +179,9 @@ public class ProgramManager {
             fileWriter.close();
             fileWriter = new FileWriter(requestsFile, false);
             fileWriter.write(gsonCreator.toJson(allRequests));
+            fileWriter.close();
+            fileWriter = new FileWriter(offsFile, false);
+            fileWriter.write(gsonCreator.toJson(allOffs));
             fileWriter.close();
         } catch (Exception ignored) {
             System.out.println("Failed to save files...");
@@ -246,6 +256,7 @@ public class ProgramManager {
             System.out.println("Fake address");
         }
     }
+
     public void addOffToList(Off off){
         allOffs.put(off.getOffId(),off);
     }
