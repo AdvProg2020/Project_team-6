@@ -65,7 +65,7 @@ public class Category implements Comparable<Category> {
         return false;
     }
 
-    private boolean isExistThisSubCategories(SubCategory subCategory) {
+    private boolean doesThisSubCategoryExist(SubCategory subCategory) {
         return (subCategories.containsKey(subCategory.getName()));
     }
 
@@ -79,7 +79,7 @@ public class Category implements Comparable<Category> {
     }
 
     public void addSubcategory(SubCategory subCategory) {
-        if (!isExistThisSubCategories(subCategory)) {
+        if (!doesThisSubCategoryExist(subCategory)) {
             subCategories.put(subCategory.getName(), subCategory);
         } else {
             categoriesAndSubCategoriesMenuView.giveOutPut("this subCategory already exist");
@@ -87,7 +87,7 @@ public class Category implements Comparable<Category> {
     }
 
     public void removeSubcategory(SubCategory subCategory) {
-        if (isExistThisSubCategories(subCategory)) {
+        if (doesThisSubCategoryExist(subCategory)) {
             subCategories.remove(subCategory.getName());
         } else {
             categoriesAndSubCategoriesMenuView.giveOutPut("this subCategory not exist");
@@ -96,6 +96,10 @@ public class Category implements Comparable<Category> {
 
     public String getName(){
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public SubCategory getSubCategoryByName(String subName){

@@ -19,7 +19,7 @@ public class CategoriesAndSubCategoriesMenu {
                 command = categoriesAndSubCategoriesMenuView.getInputCommand();
                 if (command.matches("edit \\.+")) {
                     String[] splitCommand = command.split("\\s");
-                    edit(splitCommand[1]);
+                    edit(splitCommand[1],splitCommand[2]);
                 }
                 else if (command.matches("add \\.+")) {
                     String[] splitCommand = command.split("\\s");
@@ -36,21 +36,19 @@ public class CategoriesAndSubCategoriesMenu {
                     throw new RuntimeException("Unknown command was passed to ManageCategories by view");
                 }
             }
-
-
-
     }
 
     public void startAsBuyer(){
 
     }
-    public void edit(String name){
+    public void edit(String name,String newName){
+        ProgramManager.getProgramManagerInstance().editCategoryForName(ProgramManager.getProgramManagerInstance().getCategoryByName(name),newName);
 
     }
     public void add(String name){
-
+        ProgramManager.getProgramManagerInstance().addCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
     }
     public void remove(String name){
-
+        ProgramManager.getProgramManagerInstance().removeCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
     }
 }
