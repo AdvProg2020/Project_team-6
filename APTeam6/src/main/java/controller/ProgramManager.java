@@ -354,16 +354,11 @@ public class ProgramManager {
         if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).accept();
         }
-        else if(allRequests.get(id) instanceof OffRequest){
-            allRequests.get(id).accept();
-        }
+        else if(allRequests.get(id) instanceof OffRequest){}
     }
 
     public void declineRequests(int id) {
         if (allRequests.get(id) instanceof ProductRequest) {
-            allRequests.get(id).decline();
-        }
-        else if(allRequests.get(id) instanceof OffRequest){
             allRequests.get(id).decline();
         }
     }

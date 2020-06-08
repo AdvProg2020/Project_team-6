@@ -13,4 +13,7 @@ public class CategoriesAndSubCategoriesMenuView {
             System.out.println("\t" + category.getName());
         }
     }
+    public void giveOutPut(){
+
+    }
 }

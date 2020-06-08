@@ -1,6 +1,7 @@
 package model.product;
 
 import controller.ProgramManager;
+import view.CategoriesAndSubCategoriesMenuView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class Category implements Comparable<Category> {
     private String name;
     private HashMap<String, SubCategory> subCategories;
     private ArrayList<String> additionalAttributes;
+    private CategoriesAndSubCategoriesMenuView categoriesAndSubCategoriesMenuView = new CategoriesAndSubCategoriesMenuView();
 
     public Category(String name) {
         this.name = name;
@@ -47,7 +49,7 @@ public class Category implements Comparable<Category> {
     }
 
     public void addField(String field) {
-        if (!isExistThisAttribute(field)) {
+        if (!doesThisAttributeExist(field)) {
             additionalAttributes.add(field);
         } else {
             //System.out.println("this attribute already exist");
@@ -55,7 +57,7 @@ public class Category implements Comparable<Category> {
         }
     }
 
-    private boolean isExistThisAttribute(String field) {
+    private boolean doesThisAttributeExist(String field) {
         for (String additionalAttribute : additionalAttributes) {
             if (additionalAttribute.equalsIgnoreCase(field)) {
                 return true;
@@ -70,7 +72,7 @@ public class Category implements Comparable<Category> {
 
 
     public void removeField(String field) {
-        if (isExistThisAttribute(field)) {
+        if (doesThisAttributeExist(field)) {
             additionalAttributes.remove(field);
         } else {
             //System.out.println("this attribute not exist");
