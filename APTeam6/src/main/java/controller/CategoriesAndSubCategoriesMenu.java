@@ -41,7 +41,7 @@ public class CategoriesAndSubCategoriesMenu {
         while (true) {
             command = categoriesAndSubCategoriesMenuView.getInputCommand();
             if (command.equals("show categories")) {
-
+                categoriesAndSubCategoriesMenuView.showCategories();
             }
             else if (command.equals("back")) {
                 return;
@@ -54,7 +54,6 @@ public class CategoriesAndSubCategoriesMenu {
     }
     public void edit(String name,String newName){
         ProgramManager.getProgramManagerInstance().editCategoryForName(ProgramManager.getProgramManagerInstance().getCategoryByName(name),newName);
-
     }
     public void add(String name){
         ProgramManager.getProgramManagerInstance().addCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
@@ -62,7 +61,5 @@ public class CategoriesAndSubCategoriesMenu {
     public void remove(String name){
         ProgramManager.getProgramManagerInstance().removeCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
     }
-    public void showCategories(){
 
-    }
 }

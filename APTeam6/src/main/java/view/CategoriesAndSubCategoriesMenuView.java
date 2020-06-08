@@ -37,5 +37,7 @@ public class CategoriesAndSubCategoriesMenuView {
     public void giveOutPut(String message){
         System.out.println(message);
     }
-
+    public void showCategories(){
+        System.out.println(ProgramManager.getProgramManagerInstance().getAllCategories());
+    }
 }
