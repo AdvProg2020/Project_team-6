@@ -76,7 +76,8 @@ public class MainScreen extends Application {
         Label percentOfProgress = new Label("0%");
         ImageView logo = new ImageView();
         ImageView logo2 = new ImageView();
-        //logo.setImage(new Image(getClass().getResourceAsStream("java/view/pictures/icon.png")));
+        //TODO
+        //logo.setImage(new Image(getClass().getResourceAsStream("/pictures/icon.png")));
         //logo2.setImage(new Image(getClass().getResourceAsStream("pictures/loading/loading.gif")));
         logo2.setFitHeight(250);
         logo2.setPreserveRatio(true);
