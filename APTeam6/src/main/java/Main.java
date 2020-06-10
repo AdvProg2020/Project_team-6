@@ -2,6 +2,7 @@ import controller.MainScreen;
 import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import view.MainScreenView;
 
 public class Main extends Application {
 
@@ -14,6 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         ProgramManager programManager = ProgramManager.getProgramManagerInstance();
         MainScreen mainScreen = MainScreen.getMainScreenInstance();
+        MainScreenView mainScreenView = MainScreenView.getMainScreenViewInstance();
 
         programManager.loadFromFiles();
 
@@ -24,7 +26,7 @@ public class Main extends Application {
 
 
         try {
-            mainScreen.start(stage);
+            mainScreenView.start(stage);
         } catch (Exception e) {
             e.printStackTrace();
         }
