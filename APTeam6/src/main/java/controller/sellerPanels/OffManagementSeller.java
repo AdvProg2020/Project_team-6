@@ -25,13 +25,10 @@ public class OffManagementSeller {
                 ProgramManager.getProgramManagerInstance().showOff(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(command.split("\\s")[1])));
             }
             else if (command.matches("edit \\.+")) {
-                //TODO
                 OffRequest offRequest = new OffRequest(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(command.split("\\s")[1])), (byte) 1,command.split("\\s")[2]);
                 ProgramManager.getProgramManagerInstance().addRequestToList(offRequest);
             }
             else if(command.equalsIgnoreCase("add off")){
-                //TODO
-                //must send a request to manager fist
                 OffRequest offRequest = new OffRequest(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(command.split("\\s")[1])),(byte)0,null);
                 ProgramManager.getProgramManagerInstance().addRequestToList(offRequest);
             }
