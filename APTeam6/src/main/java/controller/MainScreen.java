@@ -3,8 +3,8 @@ package controller;
 import controller.buyerPanels.BuyerUserPanel;
 import controller.managerPanels.ManagerUserPanel;
 import controller.sellerPanels.SellerUserPanel;
-import view.LoginMenuView;
 import view.MainScreenView;
+
 
 public class MainScreen {
     private static MainScreen mainScreenInstance = null;
@@ -44,4 +44,7 @@ public class MainScreen {
             }
         }
     }
+
+
+
 }

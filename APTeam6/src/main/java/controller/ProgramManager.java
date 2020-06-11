@@ -35,6 +35,8 @@ public class ProgramManager {
 
 
     //////////////////////////////////////////////
+    public final String PROGRAM_NAME = "supermarket";
+
     private final String ADDRESS = "files\\";
 
     private File folder;
