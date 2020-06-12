@@ -20,6 +20,9 @@ public class CategoriesAndSubCategoriesMenuView {
             if(command.matches("edit \\.+")){
                 return command;
             }
+            else if(command.equals("help")){
+                showHelp();
+            }
             else if(command.matches("add \\.+")){
                 return command;
             }
@@ -34,6 +37,11 @@ public class CategoriesAndSubCategoriesMenuView {
             }
         }
     }
+
+    private void showHelp() {
+        System.out.println("List of commands:\n\tadd [Category's name]\n\tedit [Category's name] [newValue]\n\tremove [Category's name]");
+    }
+
     public void giveOutPut(String message){
         System.out.println(message);
     }
