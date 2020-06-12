@@ -17,6 +17,9 @@ public class ManageRequestsView {
             if (command.equals("back")) {
                 return command;
             }
+            else if(command.equals("help")){
+                showHelp();
+            }
             else if(command.matches("details \\.+")){
                 return command;
             }
@@ -28,6 +31,10 @@ public class ManageRequestsView {
             }
         }
     }
+
+    private void showHelp() {
+    }
+
     public void accept(int id){
         ProgramManager.getProgramManagerInstance().acceptRequests(id);
     }
