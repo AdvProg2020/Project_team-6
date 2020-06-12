@@ -33,6 +33,7 @@ public class ManageRequestsView {
     }
 
     private void showHelp() {
+        System.out.println("List of commands:\n\tdetails [requestId]\n\taccept [requestId]\n\tdecline [requestId]");
     }
 
     public void accept(int id){
