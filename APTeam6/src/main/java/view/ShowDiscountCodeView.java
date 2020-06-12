@@ -46,6 +46,7 @@ public class ShowDiscountCodeView {
     }
 
     private void showHelp() {
+        System.out.println("List of commands:\n\tview discount code [discountCode code]\n\t edit discount code [discountCode code] [changingValue]\n\t remove discount code [discountCode code]\n\t");
     }
 
     public void viewDiscountCode(DiscountCode discountCode) {
