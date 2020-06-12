@@ -25,10 +25,9 @@ public class ManageUsersView {
             }
 
         }
-
     }
-
     private void showHelp() {
+        System.out.println("List of commands:\n\tview [username]\n\tdelete user [username]");
     }
 
     public void giveOutput(String message){
