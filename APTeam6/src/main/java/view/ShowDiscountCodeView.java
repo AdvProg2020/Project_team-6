@@ -27,6 +27,9 @@ public class ShowDiscountCodeView {
             if (command.equals("back")) {
                 return command;
             }
+            else if(command.equals("help")){
+                showHelp();
+            }
             else if (command.matches("view discount code \\.+")) {
                 return command;
             }
@@ -40,6 +43,9 @@ public class ShowDiscountCodeView {
                 System.out.println("Invalid command");
             }
         }
+    }
+
+    private void showHelp() {
     }
 
     public void viewDiscountCode(DiscountCode discountCode) {
