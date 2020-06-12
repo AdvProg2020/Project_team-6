@@ -11,6 +11,9 @@ public class ManageUsersView {
             if(command.matches("view \\S+")){
                 return command;
             }
+            else if(command.equals("help")){
+                showHelp();
+            }
             else if(command.matches("delete user \\S+")){
                 return command;
             }
@@ -24,6 +27,10 @@ public class ManageUsersView {
         }
 
     }
+
+    private void showHelp() {
+    }
+
     public void giveOutput(String message){
         System.out.println(message);
     }
