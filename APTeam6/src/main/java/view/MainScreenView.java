@@ -222,6 +222,16 @@ public class MainScreenView extends Application {
                 lastNameLabel.setVisible(lastNameTextField.getText().equals(""));
                 emailAddressLabel.setVisible(emailTextField.getText().equals(""));
                 phoneNumberLabel.setVisible(phoneNumberTextField.getText().equals(""));
+                if(!(usernameTextField.getText().equals("") || passwordField.getText().equals("") || firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") || emailTextField.getText().equals("") || phoneNumberTextField.getText().equals(""))){
+                    new Manager(usernameTextField.getText(),passwordField.getText(),firstNameTextField.getText(),lastNameTextField.getText(),emailTextField.getText(),phoneNumberTextField.getText());
+                    try {
+                        System.out.println("a");
+                        new Alert().showAlert("Account created!","Ok");
+                        window.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
             });
         }
