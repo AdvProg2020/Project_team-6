@@ -2,6 +2,7 @@ package controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
+import model.account.Manager;
 import model.account.Seller;
 import model.product.Off;
 import model.requests.OffRequest;
@@ -145,8 +146,10 @@ public class ProgramManager {
                 System.out.println("Couldn't read from files...");
             }
         }
-        if (allAccounts == null)
+        if (allAccounts == null) {
             allAccounts = new HashMap<>();
+            allAccounts.put("admin", new Manager("admin", "admin", "Dr." , "Kamali", "admin@kamali.org", "00000000"));
+        }
         if (allLogs == null)
             allLogs = new HashMap<>();
         if (allProducts == null)

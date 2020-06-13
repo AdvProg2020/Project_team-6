@@ -5,15 +5,23 @@ import model.account.Buyer;
 import view.Input;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class ShowCartView {
     public ShowCartView() {
         System.out.println("=== Cart screen (Buy basket -_-)");
-        ((Buyer)ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser()).getBuyBasketProductIds();
+        HashMap<Integer, Integer> productHashMap = ((Buyer)ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser()).getBuyBasket();
+        int i = 0;
+        for (Map.Entry<Integer, Integer> entry : productHashMap.entrySet()) {
+            i++;
+            System.out.println(i + ". " + ProgramManager.getProgramManagerInstance().getProductById(entry.getKey()).getName() + ": " + entry.getValue());
+        }
     }
 
     private final HashSet<String> returningCommand = new HashSet<>(Arrays.asList("login menu", ""));
+    //TODO: i should regex
 
     public String getInputCommand() {
         String command;
