@@ -36,6 +36,8 @@ public class ProgramManager {
 
 
     //////////////////////////////////////////////
+    public final String PROGRAM_NAME = "supermarket";
+
     private final String ADDRESS = "files\\";
 
     private File folder;
@@ -401,7 +403,7 @@ public class ProgramManager {
     public Category getCategoryByName(String name){
         return allCategories.get(name);
     }
-    public void editCategoryForName(Category category,String newName){
+    public void editCategoryName(Category category, String newName){
         category.setName(newName);
     }
     public void removeCategory(Category category){

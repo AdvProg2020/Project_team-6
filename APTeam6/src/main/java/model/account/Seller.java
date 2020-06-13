@@ -82,6 +82,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
 
     @Override
     public void showDetails() {
+        //TODO
 
     }
 

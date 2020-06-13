@@ -15,6 +15,9 @@ public class OffManagementSellerView {
             if (command.equals("back")) {
                 return command;
             }
+            else if(command.equals("help")){
+                showHelp();
+            }
             else if (command.matches("view \\.+")) {
                 return command;
             }
@@ -28,5 +31,9 @@ public class OffManagementSellerView {
                 System.out.println("Invalid command");
             }
         }
+    }
+
+    private void showHelp() {
+        System.out.println("List of commands:\n\tview [offId]\n\tadd off [offValues]\n\tedit [offId] [newValue]");
     }
 }
