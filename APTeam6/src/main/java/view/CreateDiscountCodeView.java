@@ -16,7 +16,9 @@ public class CreateDiscountCodeView {
             {
                 return command;
             }
-
+            else if(command.equals("help")){
+                showHelp();
+            }
             if(command.equals("back")){
                 return command;
             }
@@ -25,6 +27,11 @@ public class CreateDiscountCodeView {
             }
         }
         }
+
+    private void showHelp() {
+        System.out.println("List of commands:\n\tcreate discount code [discountCodeInfo]\n\t");
+    }
+
     public String[] getUserUsualData(DiscountCode discountCode) {
         String[] discountCodeInfo = new String[4];
         System.out.println("Enter the discountCode:");

@@ -11,6 +11,9 @@ public class ManageAllProductsView {
             if(command.matches("remove \\.+")){
                 return command;
             }
+            else if(command.equals("help")){
+                showHelp();
+            }
             else if(command.equals("back")){
                 return command;
             }
@@ -19,6 +22,11 @@ public class ManageAllProductsView {
             }
         }
     }
+
+    private void showHelp() {
+        System.out.println("List of commands:\n\tremove [productId]\n\t");
+    }
+
     public void giveOutput(String message){
         System.out.println(message);
     }

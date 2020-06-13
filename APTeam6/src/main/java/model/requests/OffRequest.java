@@ -38,7 +38,7 @@ public class OffRequest implements Request {
 
     @Override
     public void showDetails() {
-        //TODO
+        ProgramManager.getProgramManagerInstance().showOff(off);
     }
 
 }
