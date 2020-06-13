@@ -2,6 +2,7 @@ package controller;
 
 import model.account.Account;
 import model.account.Buyer;
+import model.account.Manager;
 import model.account.Seller;
 import view.LoginMenuView;
 

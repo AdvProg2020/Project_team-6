@@ -11,10 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -162,9 +159,22 @@ public class MainScreenView extends Application {
             public void run() {
                 Platform.runLater(() -> {
                     primaryStage.close();
-
+                    try {
+                        mainScreenPage(new Stage());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 });
             }
         }, 7150);
     }
+
+    public void mainScreenPage(Stage window) throws FileNotFoundException {
+        window.setTitle("HOME");
+        window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        Pane pane = new Pane();
+        window.setScene(new Scene(pane,200,200));
+        window.show();
+    }
+
 }
