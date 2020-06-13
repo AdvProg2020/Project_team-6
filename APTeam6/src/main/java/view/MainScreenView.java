@@ -16,8 +16,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -77,19 +81,25 @@ public class MainScreenView extends Application {
         loadingPage(stage);
     }
 
-    private void loadingPage(Stage primaryStage) {
+    private void loadingPage(Stage primaryStage) throws FileNotFoundException {
         Label percentOfProgress = new Label("0%");
         ImageView logo = new ImageView();
         ImageView logo2 = new ImageView();
         //TODO
-        //logo.setImage(new Image(getClass().getResourceAsStream("icon.png")));
-        //logo2.setImage(new Image(getClass().getResourceAsStream("pictures/loading/loading.gif")));
-        logo2.setFitHeight(250);
+        logo.setImage(new Image(new FileInputStream("src/main/java/view/pictures/loading/loading (15).gif")));
+        logo2.setImage(new Image(new FileInputStream("src/main/java/view/pictures/loading/loading (10).gif")));
+        logo.setFitWidth(450);
+        logo.setFitHeight(330);
+        logo2.setFitHeight(150);
         logo2.setPreserveRatio(true);
         VBox root2 = new VBox(1);
+        Label space = new Label("+");
+        space.setFont(new Font(30));
+        percentOfProgress.setFont(new Font(30));
+        space.setVisible(false);
         root2.setAlignment(Pos.CENTER);
-        root2.getChildren().addAll(logo, logo2, percentOfProgress);
-        root2.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root2.getChildren().addAll(logo, logo2, space, percentOfProgress);
+        root2.setBackground(new Background(new BackgroundFill(new Color(0.964,0.964,0.964,1), CornerRadii.EMPTY, Insets.EMPTY)));
         primaryStage.setTitle(ProgramManager.getProgramManagerInstance().PROGRAM_NAME.toUpperCase());
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("pictures/icon.png")));
         primaryStage.setScene(new Scene(root2, 450, 700));
@@ -134,19 +144,19 @@ public class MainScreenView extends Application {
             public void run() {
                 Platform.runLater(() -> percentOfProgress.setText("90%"));
             }
-        }, 3300);
+        }, 4300);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(() -> percentOfProgress.setText("95%"));
             }
-        }, 5500);
+        }, 6100);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(() -> percentOfProgress.setText("100%"));
             }
-        }, 5800);
+        }, 6950);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -155,6 +165,6 @@ public class MainScreenView extends Application {
 
                 });
             }
-        }, 5950);
+        }, 7150);
     }
 }
