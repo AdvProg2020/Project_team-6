@@ -37,7 +37,7 @@ public class ProgramManager {
 
     //////////////////////////////////////////////
     public final String PROGRAM_NAME = "supermarket";
-
+    public boolean existManager = false;
     private final String ADDRESS = "files\\";
 
     private File folder;
@@ -148,7 +148,13 @@ public class ProgramManager {
         }
         if (allAccounts == null) {
             allAccounts = new HashMap<>();
-            allAccounts.put("admin", new Manager("admin", "admin", "Dr." , "Kamali", "admin@kamali.org", "00000000"));
+            existManager = false;
+        }else{
+            allAccounts.forEach((s, account) ->{
+                if (account.getRole()==3){
+                    existManager = true;
+                }
+            });
         }
         if (allLogs == null)
             allLogs = new HashMap<>();

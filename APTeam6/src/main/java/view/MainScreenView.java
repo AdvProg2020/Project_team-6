@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.account.Manager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -170,11 +171,15 @@ public class MainScreenView extends Application {
     }
 
     public void mainScreenPage(Stage window) throws FileNotFoundException {
-        window.setTitle("HOME");
-        window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
-        Pane pane = new Pane();
-        window.setScene(new Scene(pane,200,200));
-        window.show();
+        if(ProgramManager.getProgramManagerInstance().existManager) {
+            window.setTitle("HOME");
+            window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+            Pane pane = new Pane();
+            window.setScene(new Scene(pane, 200, 200));
+            window.show();
+        }else{
+            new Manager("a","a","a","a","a","01");
+        }
     }
 
 }

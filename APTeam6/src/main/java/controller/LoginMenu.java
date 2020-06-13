@@ -29,7 +29,7 @@ public class LoginMenu {
             }
             else if (command.matches("create account (buyer|seller|manager) \\S+")) {
                 String[] splitCommand = command.split("\\s");
-                if (splitCommand[1].equals("manager"))
+                if (splitCommand[2].equals("manager"))
                     System.out.println("You can't make managers here. get away");
                 else
                     register(splitCommand[3], splitCommand[2]);
