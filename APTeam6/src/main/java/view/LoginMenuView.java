@@ -2,10 +2,17 @@ package view;
 
 import controller.LoginMenu;
 import controller.ProgramManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class LoginMenuView {
+public class LoginMenuView extends Application {
     public LoginMenuView() {
         System.out.println("=== Login/register menu");
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
     }
 
     public String getInputCommand() {

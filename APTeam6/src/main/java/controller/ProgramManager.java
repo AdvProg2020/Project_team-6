@@ -2,6 +2,7 @@ package controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
+import model.account.Manager;
 import model.account.Seller;
 import model.product.Off;
 import model.requests.OffRequest;
@@ -36,7 +37,7 @@ public class ProgramManager {
 
     //////////////////////////////////////////////
     public final String PROGRAM_NAME = "supermarket";
-
+    public boolean existManager = false;
     private final String ADDRESS = "files\\";
 
     private File folder;
@@ -145,8 +146,16 @@ public class ProgramManager {
                 System.out.println("Couldn't read from files...");
             }
         }
-        if (allAccounts == null)
+        if (allAccounts == null) {
             allAccounts = new HashMap<>();
+            existManager = false;
+        }else{
+            allAccounts.forEach((s, account) ->{
+                if (account.getRole()==3){
+                    existManager = true;
+                }
+            });
+        }
         if (allLogs == null)
             allLogs = new HashMap<>();
         if (allProducts == null)
