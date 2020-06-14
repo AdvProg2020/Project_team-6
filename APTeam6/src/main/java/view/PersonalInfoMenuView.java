@@ -164,30 +164,6 @@ public class PersonalInfoMenuView extends Application {
             showDiscountCode.setVisible(false);
         }
 
-        Button manageUsers = new Button("Manage users");
-        Button manageAllProduct = new Button("Manage all product");
-        Button createDiscountCode = new Button("Create discount code");
-        Button viewDiscountCode = new Button("View Discount code");
-        Button manageRequest = new Button("Manage request");
-
-        if (currentlyLoggedInUser.getRole() != 3) {
-            manageAllProduct.setVisible(false);
-            manageRequest.setVisible(false);
-            manageUsers.setVisible(false);
-            createDiscountCode.setVisible(false);
-            viewDiscountCode.setVisible(false);
-        }
-
-
-        pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
-                password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
-                lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField,
-                phone, phoneNumberLabel, phoneNumberTextField, openCart, openBuyHistory, showDiscountCode, manageAllProduct, manageRequest, manageUsers,
-                createDiscountCode, viewDiscountCode, change, close);
-
-        window.setScene(new Scene(pane, 400, 750));
-        window.show();
-
         openCart.setOnAction(actionEvent -> {
             //TODO
         });
@@ -199,6 +175,114 @@ public class PersonalInfoMenuView extends Application {
         showDiscountCode.setOnAction(actionEvent -> {
             //TODO
         });
+
+
+
+        Button manageUsers = new Button("Manage users");
+        Button manageAllProduct = new Button("Manage all product");
+        Button createDiscountCode = new Button("Create discount code");
+        Button viewDiscountCode = new Button("View Discount code");
+        Button manageRequest = new Button("Manage request");
+        Button manageCategories = new Button("Manage categories");
+
+        if (currentlyLoggedInUser.getRole() != 3) {
+            manageAllProduct.setVisible(false);
+            manageRequest.setVisible(false);
+            manageUsers.setVisible(false);
+            createDiscountCode.setVisible(false);
+            viewDiscountCode.setVisible(false);
+            manageCategories.setVisible(false);
+        }
+
+        manageUsers.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        manageAllProduct.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        createDiscountCode.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        viewDiscountCode.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        manageRequest.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        manageCategories.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+
+        Button viewCompanyInfo = new Button("View company information");
+        Button viewSalesHistory = new Button("View sales history");
+        Button manageProducts = new Button("Manage products");
+        Button addProduct = new Button("Add product");
+        Button removeProduct = new Button("Remove Product");
+        Button showCategories = new Button("Show categories");
+        Button viewOffs = new Button("View offs");
+        Button viewBalance = new Button("View balance");
+
+        if (currentlyLoggedInUser.getRole() != 2) {
+            viewBalance.setVisible(false);
+            viewCompanyInfo.setVisible(false);
+            viewSalesHistory.setVisible(false);
+            manageProducts.setVisible(false);
+            addProduct.setVisible(false);
+            removeProduct.setVisible(false);
+            showCategories.setVisible(false);
+            viewOffs.setVisible(false);
+        }
+
+        viewBalance.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        viewCompanyInfo.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        viewSalesHistory.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        manageProducts.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        addProduct.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        removeProduct.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        showCategories.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        viewOffs.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+
+        pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
+                password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
+                lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField,
+                phone, phoneNumberLabel, phoneNumberTextField, openCart, openBuyHistory, showDiscountCode,
+                manageAllProduct, manageRequest, manageUsers, createDiscountCode, viewDiscountCode, manageCategories,
+                viewBalance, viewCompanyInfo, viewSalesHistory, manageProducts, addProduct, removeProduct, showCategories,
+                viewOffs, change, close);
+
+        window.setScene(new Scene(pane, 400, 750));
+        window.show();
+
 
         close.setOnAction(actionEvent -> {
             window.close();
