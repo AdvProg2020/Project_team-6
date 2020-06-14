@@ -111,5 +111,13 @@ public class PersonalInfoMenuView extends Application {
         close.setOnAction(actionEvent -> {
             window.close();
         });
+        change.setOnAction(actionEvent -> {
+            System.out.println("change");
+
+
+
+
+
+        });
     }
 }
