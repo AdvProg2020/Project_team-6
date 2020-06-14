@@ -20,7 +20,7 @@ import java.io.FileInputStream;
 
 public class PersonalInfoMenuView extends Application {
 
-    public PersonalInfoMenuView(){
+    public PersonalInfoMenuView() {
         Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
         System.out.println("Your personal info is as follows:" +
                 "\n\tUsername: " + currentUser.getUsername() +
@@ -29,10 +29,9 @@ public class PersonalInfoMenuView extends Application {
                 "\n\tEmail address: " + currentUser.getEmailAddress() +
                 "\n\tTelephone num: " + currentUser.getPhoneNumber() +
                 "\n\tRole: " + currentUser.getRole());
-        if (currentUser.getRole() == 2){
+        if (currentUser.getRole() == 2) {
             System.out.println("\tCredit: " + ((Seller) currentUser).getCredit());
-        }
-        else if (currentUser.getRole() == 1){
+        } else if (currentUser.getRole() == 1) {
             System.out.println("\tCredit: " + ((Buyer) currentUser).getCredit());
         }
     }
@@ -43,14 +42,11 @@ public class PersonalInfoMenuView extends Application {
             command = Input.getInput();
             if (command.equals("help")) {
                 showHelp();
-            }
-            else if (command.equals("back")) {
+            } else if (command.equals("back")) {
                 return command;
-            }
-            else if (command.matches("edit (password|firstName|lastName|phoneNumber|email)")) {
+            } else if (command.matches("edit (password|firstName|lastName|phoneNumber|email)")) {
                 return command;
-            }
-            else {
+            } else {
                 System.out.println("Invalid command");
             }
         }
@@ -60,7 +56,7 @@ public class PersonalInfoMenuView extends Application {
         System.out.println("List of commands:\n\tedit [password/firstName/lastName/phoneNumber/email]\n\tback");
     }
 
-    public String getNewValueForField(String field){
+    public String getNewValueForField(String field) {
         System.out.println("Enter your new " + field);
         return Input.getInput();
     }
@@ -73,6 +69,43 @@ public class PersonalInfoMenuView extends Application {
         VBox pane = new VBox(10);
         pane.setAlignment(Pos.CENTER);
 
+        Account currentlyLoggedInUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
+
+        Label credit = new Label("Credit");
+        Label credit2 = new Label();
+        if (currentlyLoggedInUser.getRole() == 2) {
+            Seller seller = (Seller) currentlyLoggedInUser;
+            credit2.setText(" $ " + seller.getCredit());
+        } else if (currentlyLoggedInUser.getRole() == 1) {
+            Buyer buyer = (Buyer) currentlyLoggedInUser;
+            credit2.setText(" $ " + buyer.getCredit());
+        } else {
+            credit.setVisible(false);
+            credit2.setVisible(false);
+        }
+
+        Label company = new Label("Company");
+        Label company2 = new Label();
+        if (currentlyLoggedInUser.getRole() == 2) {
+            Seller seller = (Seller) currentlyLoggedInUser;
+            company2.setText(seller.getCompanyName());
+        } else {
+            company.setVisible(false);
+            company2.setVisible(false);
+        }
+
+
+        Label role = new Label("your role is : ");
+        Label role2 = new Label();
+        if (currentlyLoggedInUser.getRole() == 1) {
+            role2.setText("Buyer");
+        } else if (currentlyLoggedInUser.getRole() == 2) {
+            role2.setText("Seller");
+        } else {
+            role2.setText("Manager");
+        }
+
+
         Label username = new Label("Username");
         Label usernameLabel = new Label("This username already exist!");
         Label usernameLabel2 = new Label("write your username here");
@@ -81,48 +114,65 @@ public class PersonalInfoMenuView extends Application {
         TextField usernameTextField = new TextField();
         usernameTextField.setEditable(false);
         usernameTextField.setPromptText("Username");
-        usernameTextField.setText(ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getUsername());
+        usernameTextField.setText(currentlyLoggedInUser.getUsername());
 
         Label password = new Label("Password");
         Label passwordLabel = new Label("please fill this field");
         passwordLabel.setVisible(false);
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
-        passwordField.setText(ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getPassword());
+        passwordField.setText(currentlyLoggedInUser.getPassword());
 
         Label firstName = new Label("FirstName");
         Label firstNameLabel = new Label("write your first name here");
         firstNameLabel.setVisible(false);
         TextField firstNameTextField = new TextField();
         firstNameTextField.setPromptText("FirstName");
-        firstNameTextField.setText(ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getFirstName());
+        firstNameTextField.setText(currentlyLoggedInUser.getFirstName());
 
         Label lastName = new Label("LastName");
         Label lastNameLabel = new Label("write your last name here");
         lastNameLabel.setVisible(false);
         TextField lastNameTextField = new TextField();
         lastNameTextField.setPromptText("LastName");
-        lastNameTextField.setText(ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getLastName());
+        lastNameTextField.setText(currentlyLoggedInUser.getLastName());
 
         Label email = new Label("Email");
         Label emailAddressLabel = new Label("write your email here");
         emailAddressLabel.setVisible(false);
         TextField emailTextField = new TextField();
         emailTextField.setPromptText("Email");
-        emailTextField.setText(ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getEmailAddress());
+        emailTextField.setText(currentlyLoggedInUser.getEmailAddress());
 
         Label phone = new Label("PhoneNumber");
         Label phoneNumberLabel = new Label("write a PhoneNumber");
         phoneNumberLabel.setVisible(false);
         TextField phoneNumberTextField = new TextField();
         phoneNumberTextField.setPromptText("e.g. 09123456789");
-        phoneNumberTextField.setText(ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getPhoneNumber());
+        phoneNumberTextField.setText(currentlyLoggedInUser.getPhoneNumber());
 
         Button change = new Button("Change Information");
         Button close = new Button("Close");
-        pane.getChildren().addAll(username,usernameLabel, usernameLabel2, usernameTextField,password, passwordLabel, passwordField,firstName, firstNameLabel, firstNameTextField,lastName, lastNameLabel, lastNameTextField,email, emailAddressLabel, emailTextField,phone, phoneNumberLabel, phoneNumberTextField, change,close);
+        Button openBasket = new Button("Go to basket");
+        Button openBuyHistory = new Button("Go to buy history");
+        Button showDiscountCode = new Button("Show my discount code");
+
+
+        pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField, password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName, lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField, phone, phoneNumberLabel, phoneNumberTextField, change, close);
         window.setScene(new Scene(pane, 400, 600));
         window.show();
+
+        openBasket.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        openBuyHistory.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        showDiscountCode.setOnAction(actionEvent -> {
+            //TODO
+        });
 
         close.setOnAction(actionEvent -> {
             window.close();
@@ -143,20 +193,20 @@ public class PersonalInfoMenuView extends Application {
 
             if (!(usernameTextField.getText().equals("") || passwordField.getText().equals("") || firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") || emailTextField.getText().equals("") || phoneNumberTextField.getText().equals("") || !phoneNumberTextField.getText().matches("[0-9]+"))) {
 
-                if(!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(usernameTextField.getText())){
+                if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(usernameTextField.getText())) {
 
-                    ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().setPassword(passwordField.getText());
-                    ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().setEmailAddress(emailTextField.getText());
-                    ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().setFirstName(firstNameTextField.getText());
-                    ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().setLastName(lastNameTextField.getText());
-                    ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().setPhoneNumber(phoneNumberTextField.getText());
+                    currentlyLoggedInUser.setPassword(passwordField.getText());
+                    currentlyLoggedInUser.setEmailAddress(emailTextField.getText());
+                    currentlyLoggedInUser.setFirstName(firstNameTextField.getText());
+                    currentlyLoggedInUser.setLastName(lastNameTextField.getText());
+                    currentlyLoggedInUser.setPhoneNumber(phoneNumberTextField.getText());
 
                     try {
                         new Alert().showAlert("Information Changed", "Ok", 0);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     System.err.println("!!");
                 }
 
