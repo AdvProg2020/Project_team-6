@@ -39,6 +39,8 @@ public class Alert extends Application {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }else if(destination==0){
+                //nothing
             }
         });
     }
