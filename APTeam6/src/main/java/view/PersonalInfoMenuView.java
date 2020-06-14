@@ -71,7 +71,7 @@ public class PersonalInfoMenuView extends Application {
         window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         VBox pane = new VBox(10);
         pane.setAlignment(Pos.CENTER);
-        Label username = new Label("Username:");
+        Label username = new Label("Username");
         Label usernameLabel = new Label("This username already exist!");
         Label usernameLabel2 = new Label("write your username here");
         usernameLabel.setVisible(false);
@@ -93,17 +93,23 @@ public class PersonalInfoMenuView extends Application {
         lastNameLabel.setVisible(false);
         TextField lastNameTextField = new TextField();
         lastNameTextField.setPromptText("LastName");
+        Label email = new Label("Email");
         Label emailAddressLabel = new Label("write your email here");
         emailAddressLabel.setVisible(false);
         TextField emailTextField = new TextField();
         emailTextField.setPromptText("Email");
+        Label phone = new Label("PhoneNumber");
         Label phoneNumberLabel = new Label("write a PhoneNumber");
         phoneNumberLabel.setVisible(false);
         TextField phoneNumberTextField = new TextField();
         phoneNumberTextField.setPromptText("e.g. 09123456789");
-        Button create = new Button("Create");
-        pane.getChildren().addAll(usernameLabel, usernameLabel2, usernameTextField, passwordLabel, passwordField, firstNameLabel, firstNameTextField, lastNameLabel, lastNameTextField, emailAddressLabel, emailTextField, phoneNumberLabel, phoneNumberTextField, create);
-        window.setScene(new Scene(pane, 400, 500));
+        Button change = new Button("Change Information");
+        Button close = new Button("Close");
+        pane.getChildren().addAll(username,usernameLabel, usernameLabel2, usernameTextField,password, passwordLabel, passwordField,firstName, firstNameLabel, firstNameTextField,lastName, lastNameLabel, lastNameTextField,email, emailAddressLabel, emailTextField,phone, phoneNumberLabel, phoneNumberTextField, change,close);
+        window.setScene(new Scene(pane, 400, 600));
         window.show();
+        close.setOnAction(actionEvent -> {
+            window.close();
+        });
     }
 }
