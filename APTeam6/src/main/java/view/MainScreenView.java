@@ -182,6 +182,7 @@ public class MainScreenView extends Application {
             Button offs = new Button("حراج ها");
 
             account.setOnAction(actionEvent -> {
+                ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername("a"));
                 if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
                     try {
                         new PersonalInfoMenuView().start(new Stage());

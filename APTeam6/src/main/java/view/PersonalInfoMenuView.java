@@ -66,7 +66,7 @@ public class PersonalInfoMenuView extends Application {
         Stage window = stage;
         window.setTitle("Personal Information");
         window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
-        VBox pane = new VBox(10);
+        VBox pane = new VBox();
         pane.setAlignment(Pos.CENTER);
 
         Account currentlyLoggedInUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
@@ -177,7 +177,6 @@ public class PersonalInfoMenuView extends Application {
         });
 
 
-
         Button manageUsers = new Button("Manage users");
         Button manageAllProduct = new Button("Manage all product");
         Button createDiscountCode = new Button("Create discount code");
@@ -271,14 +270,25 @@ public class PersonalInfoMenuView extends Application {
             //TODO
         });
 
+        if (currentlyLoggedInUser.getRole() == 1) {
+            pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
+                    password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
+                    lastNameLabel, lastNameTextField, email, emailAddressLabel, emailTextField,
+                    phone, phoneNumberLabel, phoneNumberTextField, openCart, openBuyHistory, showDiscountCode, change, close);
+        } else if (currentlyLoggedInUser.getRole() == 2) {
+            pane.getChildren().addAll(role, role2, username, usernameLabel, usernameLabel2, usernameTextField,
+                    password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
+                    lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField,
+                    phone, phoneNumberLabel, phoneNumberTextField, viewBalance, viewCompanyInfo, viewSalesHistory,
+                    manageProducts, addProduct, removeProduct, showCategories, viewOffs, change, close);
+        } else if (currentlyLoggedInUser.getRole() == 3) {
+            pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
+                    password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
+                    lastNameLabel, lastNameTextField, email, emailAddressLabel, emailTextField, phone, phoneNumberLabel,
+                    phoneNumberTextField, manageAllProduct, manageRequest, manageUsers, createDiscountCode, viewDiscountCode,
+                    manageCategories, change, close);
+        }
 
-        pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
-                password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
-                lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField,
-                phone, phoneNumberLabel, phoneNumberTextField, openCart, openBuyHistory, showDiscountCode,
-                manageAllProduct, manageRequest, manageUsers, createDiscountCode, viewDiscountCode, manageCategories,
-                viewBalance, viewCompanyInfo, viewSalesHistory, manageProducts, addProduct, removeProduct, showCategories,
-                viewOffs, change, close);
 
         window.setScene(new Scene(pane, 400, 750));
         window.show();
@@ -286,6 +296,7 @@ public class PersonalInfoMenuView extends Application {
 
         close.setOnAction(actionEvent -> {
             window.close();
+            ProgramManager.getProgramManagerInstance().saveToFiles();
         });
 
         change.setOnAction(actionEvent -> {
@@ -303,7 +314,7 @@ public class PersonalInfoMenuView extends Application {
 
             if (!(usernameTextField.getText().equals("") || passwordField.getText().equals("") || firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") || emailTextField.getText().equals("") || phoneNumberTextField.getText().equals("") || !phoneNumberTextField.getText().matches("[0-9]+"))) {
 
-                if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(usernameTextField.getText())) {
+                if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(usernameTextField.getText())) {
 
                     currentlyLoggedInUser.setPassword(passwordField.getText());
                     currentlyLoggedInUser.setEmailAddress(emailTextField.getText());
