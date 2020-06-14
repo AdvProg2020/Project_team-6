@@ -1,11 +1,23 @@
 package view;
 
 import controller.ProgramManager;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
 import model.account.Seller;
 
-public class PersonalInfoMenuView {
+import java.io.FileInputStream;
+
+public class PersonalInfoMenuView extends Application {
 
     public PersonalInfoMenuView(){
         Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
@@ -50,5 +62,48 @@ public class PersonalInfoMenuView {
     public String getNewValueForField(String field){
         System.out.println("Enter your new " + field);
         return Input.getInput();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Stage window = stage;
+        window.setTitle("Personal Information");
+        window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        VBox pane = new VBox(10);
+        pane.setAlignment(Pos.CENTER);
+        Label username = new Label("Username:");
+        Label usernameLabel = new Label("This username already exist!");
+        Label usernameLabel2 = new Label("write your username here");
+        usernameLabel.setVisible(false);
+        usernameLabel2.setVisible(false);
+        TextField usernameTextField = new TextField();
+        usernameTextField.setPromptText("Username");
+        Label password = new Label("Password");
+        Label passwordLabel = new Label("please fill this field");
+        passwordLabel.setVisible(false);
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Password");
+        Label firstName = new Label("FirstName");
+        Label firstNameLabel = new Label("write your first name here");
+        firstNameLabel.setVisible(false);
+        TextField firstNameTextField = new TextField();
+        firstNameTextField.setPromptText("FirstName");
+        Label lastName = new Label("LastName");
+        Label lastNameLabel = new Label("write your last name here");
+        lastNameLabel.setVisible(false);
+        TextField lastNameTextField = new TextField();
+        lastNameTextField.setPromptText("LastName");
+        Label emailAddressLabel = new Label("write your email here");
+        emailAddressLabel.setVisible(false);
+        TextField emailTextField = new TextField();
+        emailTextField.setPromptText("Email");
+        Label phoneNumberLabel = new Label("write a PhoneNumber");
+        phoneNumberLabel.setVisible(false);
+        TextField phoneNumberTextField = new TextField();
+        phoneNumberTextField.setPromptText("e.g. 09123456789");
+        Button create = new Button("Create");
+        pane.getChildren().addAll(usernameLabel, usernameLabel2, usernameTextField, passwordLabel, passwordField, firstNameLabel, firstNameTextField, lastNameLabel, lastNameTextField, emailAddressLabel, emailTextField, phoneNumberLabel, phoneNumberTextField, create);
+        window.setScene(new Scene(pane, 400, 500));
+        window.show();
     }
 }

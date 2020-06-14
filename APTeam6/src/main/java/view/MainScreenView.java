@@ -179,7 +179,13 @@ public class MainScreenView extends Application {
             Button products = new Button("محصولات");
             Button offs = new Button("حراج ها");
 
+            account.setOnAction(actionEvent -> {
+                if(ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()){
 
+                }else{
+
+                }
+            });
 
             pane.setBackground(new Background(new BackgroundImage(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,new BackgroundSize(400,500,false,false,true,false))));
             pane.getChildren().addAll(account,products,offs);
