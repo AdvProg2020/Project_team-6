@@ -3,6 +3,9 @@ package view;
 import controller.LoginMenu;
 import controller.ProgramManager;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LoginMenuView extends Application {
@@ -12,6 +15,39 @@ public class LoginMenuView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        VBox vBox = new VBox(10);
+
+        Button login = new Button("login");
+        Button register = new Button("register");
+        Button logout = new Button("logout");
+        Button back = new Button("back");
+
+        if(ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()){
+            login.setVisible(false);
+            register.setVisible(false);
+        }else{
+            logout.setVisible(false);
+        }
+
+        vBox.getChildren().addAll(login,register,logout,back);
+        stage.setScene(new Scene(vBox,250,350));
+        stage.show();
+
+        login.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        register.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        logout.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        back.setOnAction(actionEvent -> {
+            //TODO
+        });
 
     }
 

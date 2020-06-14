@@ -189,8 +189,13 @@ public class MainScreenView extends Application {
                         e.printStackTrace();
                     }
                 } else {
-                    // you must login
+                    try {
+                        new LoginMenuView().start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+                window.close();
             });
 
             pane.setBackground(new Background(new BackgroundImage(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(400, 500, false, false, true, false))));
