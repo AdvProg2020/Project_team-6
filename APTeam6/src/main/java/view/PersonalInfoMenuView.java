@@ -153,16 +153,42 @@ public class PersonalInfoMenuView extends Application {
 
         Button change = new Button("Change Information");
         Button close = new Button("Close");
-        Button openBasket = new Button("Go to basket");
+
+        Button openCart = new Button("Go to cart");
         Button openBuyHistory = new Button("Go to buy history");
         Button showDiscountCode = new Button("Show my discount code");
 
+        if (currentlyLoggedInUser.getRole() != 1) {
+            openCart.setVisible(false);
+            openBuyHistory.setVisible(false);
+            showDiscountCode.setVisible(false);
+        }
 
-        pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField, password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName, lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField, phone, phoneNumberLabel, phoneNumberTextField, change, close);
-        window.setScene(new Scene(pane, 400, 600));
+        Button manageUsers = new Button("Manage users");
+        Button manageAllProduct = new Button("Manage all product");
+        Button createDiscountCode = new Button("Create discount code");
+        Button viewDiscountCode = new Button("View Discount code");
+        Button manageRequest = new Button("Manage request");
+
+        if (currentlyLoggedInUser.getRole() != 3) {
+            manageAllProduct.setVisible(false);
+            manageRequest.setVisible(false);
+            manageUsers.setVisible(false);
+            createDiscountCode.setVisible(false);
+            viewDiscountCode.setVisible(false);
+        }
+
+
+        pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
+                password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
+                lastNameLabel, lastNameTextField, company, company2, email, emailAddressLabel, emailTextField,
+                phone, phoneNumberLabel, phoneNumberTextField, openCart, openBuyHistory, showDiscountCode, manageAllProduct, manageRequest, manageUsers,
+                createDiscountCode, viewDiscountCode, change, close);
+
+        window.setScene(new Scene(pane, 400, 750));
         window.show();
 
-        openBasket.setOnAction(actionEvent -> {
+        openCart.setOnAction(actionEvent -> {
             //TODO
         });
 
