@@ -13,9 +13,11 @@ import javafx.stage.Stage;
 public class Alert extends Application {
     private String text = "";
     private String btnText = "";
-    public void showAlert(String text,String buttonText) throws Exception {
+    private int destination = 0;
+    public void showAlert(String text,String buttonText,int destination) throws Exception {
         this.text = text;
         this.btnText = buttonText;
+        this.destination = destination;
         this.start(new Stage());
     }
 
@@ -31,6 +33,13 @@ public class Alert extends Application {
         ok.setOnAction(actionEvent -> {
             ProgramManager.getProgramManagerInstance().saveToFiles();
             stage.close();
+            if(destination==1){
+                try {
+                    MainScreenView.getMainScreenViewInstance().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 }

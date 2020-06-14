@@ -28,6 +28,7 @@ import java.util.TimerTask;
 
 public class MainScreenView extends Application {
     private static MainScreenView mainScreenViewInstance = null;
+    private boolean managerCreated = false;
 
     public static MainScreenView getMainScreenViewInstance() {
         if (mainScreenViewInstance == null)
@@ -85,7 +86,6 @@ public class MainScreenView extends Application {
         Label percentOfProgress = new Label("0%");
         ImageView logo = new ImageView();
         ImageView logo2 = new ImageView();
-        //TODO
         logo.setImage(new Image(new FileInputStream("src/main/java/view/pictures/loading/loading (15).gif")));
         logo2.setImage(new Image(new FileInputStream("src/main/java/view/pictures/loading/loading (10).gif")));
         logo.setFitWidth(450);
@@ -102,14 +102,12 @@ public class MainScreenView extends Application {
         root2.setBackground(new Background(new BackgroundFill(new Color(0.964, 0.964, 0.964, 1), CornerRadii.EMPTY, Insets.EMPTY)));
         primaryStage.setTitle(ProgramManager.getProgramManagerInstance().PROGRAM_NAME.toUpperCase());
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("pictures/icon.png")));
+        primaryStage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         primaryStage.setScene(new Scene(root2, 450, 700));
 
         primaryStage.show();
         loadingPercent(primaryStage, percentOfProgress);
-        //---------load faster
-        //primaryStage.close();
-        //mainMenu();
-        //----------
+
 
     }
 
@@ -173,14 +171,13 @@ public class MainScreenView extends Application {
     }
 
     public void mainScreenPage(Stage window) throws FileNotFoundException {
-        if (ProgramManager.getProgramManagerInstance().existManager) {
+        if (ProgramManager.getProgramManagerInstance().existManager || managerCreated) {
             window.setTitle("HOME");
             window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
             Pane pane = new Pane();
             window.setScene(new Scene(pane, 200, 200));
             window.show();
         } else {
-            //new Manager("a","a","a","a","a","01");
             window.setTitle("Create new manager");
             window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
             VBox pane = new VBox(10);
@@ -225,8 +222,8 @@ public class MainScreenView extends Application {
                 if(!(usernameTextField.getText().equals("") || passwordField.getText().equals("") || firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") || emailTextField.getText().equals("") || phoneNumberTextField.getText().equals(""))){
                     new Manager(usernameTextField.getText(),passwordField.getText(),firstNameTextField.getText(),lastNameTextField.getText(),emailTextField.getText(),phoneNumberTextField.getText());
                     try {
-                        System.out.println("a");
-                        new Alert().showAlert("Account created!","Ok");
+                        managerCreated = true;
+                        new Alert().showAlert("Account created!","Ok",1);
                         window.close();
                     } catch (Exception e) {
                         e.printStackTrace();
