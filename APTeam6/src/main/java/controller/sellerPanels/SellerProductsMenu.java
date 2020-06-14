@@ -14,6 +14,16 @@ public class SellerProductsMenu {
 
     public void start(){
         view = new SellerProductsMenuView();
+        String command = null;
+        while (true) {
+            command = view.getInputCommand();
+            if (command.equals("back")) {
+                return;
+            }
+            else {
+                throw new RuntimeException("Unknown command was passed to LoginMenu by view");
+            }
+        }
         //TODO: make this page
     }
 }
