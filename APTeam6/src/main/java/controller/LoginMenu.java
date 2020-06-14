@@ -63,6 +63,7 @@ public class LoginMenu {
     public void register(String username, String role) {
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
             view.giveOutput("This username is already occupied");
+            return;
         }
         String[] userData = null;
         userData = view.getUserUsualData();

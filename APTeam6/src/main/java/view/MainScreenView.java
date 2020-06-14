@@ -167,15 +167,24 @@ public class MainScreenView extends Application {
                     }
                 });
             }
-        }, 1000);
+        }, 500);
     }
 
     public void mainScreenPage(Stage window) throws FileNotFoundException {
         if (ProgramManager.getProgramManagerInstance().existManager || managerCreated) {
             window.setTitle("HOME");
             window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
-            Pane pane = new Pane();
-            window.setScene(new Scene(pane, 200, 200));
+            VBox pane = new VBox(15);
+            Button account = new Button("ناحیه کاربری");
+            Button products = new Button("محصولات");
+            Button offs = new Button("حراج ها");
+
+
+
+            pane.setBackground(new Background(new BackgroundImage(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,new BackgroundSize(400,500,false,false,true,false))));
+            pane.getChildren().addAll(account,products,offs);
+            pane.setAlignment(Pos.CENTER);
+            window.setScene(new Scene(pane, 400, 500));
             window.show();
         } else {
             window.setTitle("Create new manager");
