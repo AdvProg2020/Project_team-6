@@ -79,6 +79,7 @@ public class LoginMenuView extends Application {
 
         vBox.getChildren().addAll(doesntExistUsername,passwordFalse,usernameIsNull,usernameTextField,passwordIsNull,passwordField,login,close);
 
+
         close.setOnAction(actionEvent -> {
             //TODO
         });
