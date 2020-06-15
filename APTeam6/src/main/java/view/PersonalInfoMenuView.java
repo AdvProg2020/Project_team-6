@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
@@ -78,15 +79,22 @@ public class PersonalInfoMenuView extends Application {
         stage.show();
 
         viewUser.setOnAction(actionEvent -> {
+            stage.close();
             viewUser();
         });
 
         deleteUser.setOnAction(actionEvent -> {
+            stage.close();
             deleteUser();
         });
 
         createManager.setOnAction(actionEvent -> {
-            //TODO
+            stage.close();
+            try {
+                createManager();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         stage.setOnCloseRequest(windowEvent -> {
@@ -107,6 +115,94 @@ public class PersonalInfoMenuView extends Application {
             }
         });
     }
+
+    public void createManager() throws FileNotFoundException {
+        Stage window = new Stage();
+        window.setTitle("Create manager");
+        window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        VBox pane = new VBox(11);
+        pane.setAlignment(Pos.CENTER);
+
+        Label usernameLabel = new Label("This username already exist!");
+        Label usernameLabel2 = new Label("write a username here");
+        usernameLabel.setTextFill(Color.RED);
+        usernameLabel2.setTextFill(Color.RED);
+        usernameLabel.setVisible(false);
+        usernameLabel2.setVisible(false);
+        TextField usernameTextField = new TextField();
+        usernameTextField.setPromptText("Username");
+
+        Label passwordLabel = new Label("please fill this field ");
+        passwordLabel.setTextFill(Color.RED);
+        passwordLabel.setVisible(false);
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Password");
+
+        Label firstNameLabel = new Label("write a first name here");
+        firstNameLabel.setTextFill(Color.RED);
+        firstNameLabel.setVisible(false);
+        TextField firstNameTextField = new TextField();
+        firstNameTextField.setPromptText("FirstName");
+
+        Label lastNameLabel = new Label("write a last name here");
+        lastNameLabel.setTextFill(Color.RED);
+        lastNameLabel.setVisible(false);
+        TextField lastNameTextField = new TextField();
+        lastNameTextField.setPromptText("LastName");
+
+        Label emailAddressLabel = new Label("write an email here");
+        emailAddressLabel.setTextFill(Color.RED);
+        emailAddressLabel.setVisible(false);
+        TextField emailTextField = new TextField();
+        emailTextField.setPromptText("Email");
+
+        Label phoneNumberLabel = new Label("write a PhoneNumber");
+        phoneNumberLabel.setTextFill(Color.RED);
+        phoneNumberLabel.setVisible(false);
+        TextField phoneNumberTextField = new TextField();
+        phoneNumberTextField.setPromptText("e.g. 09123456789");
+
+        Button create = new Button("Create manager");
+        pane.getChildren().addAll(usernameLabel, usernameLabel2, usernameTextField, passwordLabel, passwordField, firstNameLabel, firstNameTextField, lastNameLabel, lastNameTextField, emailAddressLabel, emailTextField, phoneNumberLabel, phoneNumberTextField, create);
+        window.setScene(new Scene(pane, 350, 550));
+        window.show();
+
+        window.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        create.setOnAction(actionEvent -> {
+            //check field data:
+            usernameLabel2.setVisible(usernameTextField.getText().equals(""));
+            passwordLabel.setVisible(passwordField.getText().equals(""));
+            firstNameLabel.setVisible(firstNameTextField.getText().equals(""));
+            lastNameLabel.setVisible(lastNameTextField.getText().equals(""));
+            emailAddressLabel.setVisible(emailTextField.getText().equals(""));
+            phoneNumberLabel.setVisible(phoneNumberTextField.getText().equals(""));
+            phoneNumberLabel.setVisible(!phoneNumberTextField.getText().matches("[0-9]+"));
+            //----------------
+
+            if (!(usernameTextField.getText().equals("") || passwordField.getText().equals("") || firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") || emailTextField.getText().equals("") || phoneNumberTextField.getText().equals("") || !phoneNumberTextField.getText().matches("[0-9]+"))) {
+
+                new Manager(usernameTextField.getText(), passwordField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), phoneNumberTextField.getText());
+
+                try {
+                    new Alert().showAlert("Account created!", "Ok", 3);
+                    window.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+    }
+
 
     public void deleteUser() {
         Stage stage = new Stage();
@@ -135,7 +231,7 @@ public class PersonalInfoMenuView extends Application {
                     stage.close();
                     ProgramManager.getProgramManagerInstance().deleteAccount(username.getText());
                     try {
-                        new Alert().showAlert("Deleted!","Ok",3);
+                        new Alert().showAlert("Deleted!", "Ok", 3);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -297,17 +393,17 @@ public class PersonalInfoMenuView extends Application {
 
 
         if (user.getRole() == 1) {
-            pane.getChildren().addAll(role, role2, credit, credit2, usernameLabel, usernameLabel, usernameTextField,
+            pane.getChildren().addAll(role, role2, credit, credit2, usernameLabel, usernameTextField,
                     password, passwordField, firstName, firstNameTextField, lastName,
                     lastNameTextField, email, emailTextField,
                     phone, phoneNumberTextField, back);
         } else if (user.getRole() == 2) {
-            pane.getChildren().addAll(role, role2, usernameLabel, usernameLabel, usernameTextField,
+            pane.getChildren().addAll(role, role2, usernameLabel, usernameTextField,
                     password, passwordField, firstName, firstNameTextField, lastName,
                     lastNameTextField, company, company2, email, emailTextField,
                     phone, phoneNumberTextField, back);
         } else if (user.getRole() == 3) {
-            pane.getChildren().addAll(role, role2, credit, credit2, usernameLabel, usernameLabel, usernameTextField,
+            pane.getChildren().addAll(role, role2, credit, credit2, usernameLabel, usernameTextField,
                     password, passwordField, firstName, firstNameTextField, lastName,
                     lastNameTextField, email, emailTextField, phone,
                     phoneNumberTextField, back);
@@ -320,7 +416,7 @@ public class PersonalInfoMenuView extends Application {
         back.setOnAction(actionEvent -> {
             stage.close();
             try {
-                MainScreenView.getMainScreenViewInstance().start(new Stage());
+                this.manageUsers();
             } catch (Exception e) {
                 e.printStackTrace();
             }

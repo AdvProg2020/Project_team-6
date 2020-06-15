@@ -23,7 +23,9 @@ public class LoginMenuView extends Application {
 
     private int destination = 0;
 
-    public void start(int destination) throws Exception {
+
+
+    public LoginMenuView(int destination) throws Exception {
         this.destination = destination;
         start(new Stage());
     }
@@ -31,6 +33,8 @@ public class LoginMenuView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
+
+        System.out.println(destination);
 
         Button login = new Button("login");
         Button register = new Button("register");
@@ -59,12 +63,12 @@ public class LoginMenuView extends Application {
 
         login.setOnAction(actionEvent -> {
             stage.close();
-            loginPanel();
+            loginPanel(this);
         });
 
         register.setOnAction(actionEvent -> {
             stage.close();
-            register();
+            register(this);
         });
 
         logout.setOnAction(actionEvent -> {
@@ -85,12 +89,18 @@ public class LoginMenuView extends Application {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }else{
+                try {
+                    MainScreenView.getMainScreenViewInstance().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
     }
 
-    public void register() {
+    public void register(LoginMenuView loginMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
 
@@ -100,12 +110,12 @@ public class LoginMenuView extends Application {
 
         buyer.setOnAction(actionEvent -> {
             stage.close();
-            registerBuyer();
+            registerBuyer(loginMenuView);
         });
 
         seller.setOnAction(actionEvent -> {
             stage.close();
-            registerSeller();
+            registerSeller(loginMenuView);
         });
 
         back.setOnAction(actionEvent -> {
@@ -136,7 +146,7 @@ public class LoginMenuView extends Application {
 
     }
 
-    public void registerSeller() {
+    public void registerSeller(LoginMenuView loginMenuView) {
         Stage window = new Stage();
         VBox vBox = new VBox(6);
         vBox.setAlignment(Pos.CENTER);
@@ -217,7 +227,7 @@ public class LoginMenuView extends Application {
         cancel.setOnAction(actionEvent -> {
             window.close();
             try {
-                this.start(new Stage());
+                loginMenuView.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -256,7 +266,7 @@ public class LoginMenuView extends Application {
 
     }
 
-    public void registerBuyer() {
+    public void registerBuyer(LoginMenuView loginMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(5);
         vBox.setAlignment(Pos.CENTER);
@@ -330,7 +340,7 @@ public class LoginMenuView extends Application {
         cancel.setOnAction(actionEvent -> {
             stage.close();
             try {
-                this.start(new Stage());
+                loginMenuView.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -368,7 +378,7 @@ public class LoginMenuView extends Application {
 
     }
 
-    public void loginPanel() {
+    public void loginPanel(LoginMenuView loginMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
 
@@ -404,7 +414,7 @@ public class LoginMenuView extends Application {
         close.setOnAction(actionEvent -> {
             try {
                 stage.close();
-                this.start(new Stage());
+                loginMenuView.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -422,7 +432,8 @@ public class LoginMenuView extends Application {
                         ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername(usernameTextField.getText()));
                         try {
                             stage.close();
-                            new Alert().showAlert("login successful", "Ok", 2);
+                            loginMenuView.start(new Stage());
+                            new Alert().showAlert("login successful", "Ok", 0);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

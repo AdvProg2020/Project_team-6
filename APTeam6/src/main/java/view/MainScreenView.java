@@ -204,7 +204,7 @@ public class MainScreenView extends Application {
                     }
                 } else {
                     try {
-                        new LoginMenuView().start(1);
+                        new LoginMenuView(1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
