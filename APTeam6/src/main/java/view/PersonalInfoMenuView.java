@@ -78,15 +78,24 @@ public class PersonalInfoMenuView extends Application {
         stage.show();
 
         viewUser.setOnAction(actionEvent -> {
-            //TODO
+            viewUser();
         });
 
         deleteUser.setOnAction(actionEvent -> {
-            //TODO
+            deleteUser();
         });
 
         createManager.setOnAction(actionEvent -> {
             //TODO
+        });
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         back.setOnAction(actionEvent -> {
@@ -96,6 +105,62 @@ public class PersonalInfoMenuView extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    public void deleteUser() {
+        Stage stage = new Stage();
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        Button delete = new Button("Delete");
+        Button back = new Button("Back");
+
+        VBox vBox = new VBox(7);
+        vBox.setAlignment(Pos.BOTTOM_CENTER);
+        vBox.getChildren().addAll(username, delete, back);
+
+        Scene scene = new Scene(vBox, 300, 450);
+        stage.setScene(scene);
+        stage.show();
+
+        delete.setOnAction(actionEvent -> {
+            if (username.getText().equals("")) {
+                try {
+                    new Alert().showAlert("Please fill username text field", "Ok", 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username.getText())) {
+                    stage.close();
+                    ProgramManager.getProgramManagerInstance().deleteAccount(username.getText());
+                    try {
+                        new Alert().showAlert("Deleted!","Ok",3);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        new Alert().showAlert("There is no user with this username. Please select another", "Ok", 0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        back.setOnAction(actionEvent -> {
+            stage.close();
+            manageUsers();
         });
     }
 
@@ -136,6 +201,15 @@ public class PersonalInfoMenuView extends Application {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 

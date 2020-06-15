@@ -47,6 +47,8 @@ public class Alert extends Application {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }else if(destination==3){
+                new PersonalInfoMenuView().manageUsers();
             }
         });
     }
