@@ -21,6 +21,13 @@ public class LoginMenuView extends Application {
         System.out.println("=== Login/register menu");
     }
 
+    private int destination = 0;
+
+    public void start(int destination) throws Exception {
+        this.destination = destination;
+        start(new Stage());
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
@@ -62,7 +69,14 @@ public class LoginMenuView extends Application {
         });
 
         back.setOnAction(actionEvent -> {
-            //TODO
+            stage.close();
+            if(destination==1){
+                try {
+                    MainScreenView.getMainScreenViewInstance().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
     }
@@ -87,7 +101,8 @@ public class LoginMenuView extends Application {
 
         back.setOnAction(actionEvent -> {
             try {
-                new LoginMenuView().start(new Stage());
+                stage.close();
+                this.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -175,7 +190,7 @@ public class LoginMenuView extends Application {
         cancel.setOnAction(actionEvent -> {
             window.close();
             try {
-                new LoginMenuView().start(new Stage());
+                this.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -226,7 +241,7 @@ public class LoginMenuView extends Application {
         usernameLabel2.setVisible(false);
         TextField usernameTextField = new TextField();
         usernameTextField.setPromptText("Username");
-        username.setTextFill(Color.RED);
+        usernameLabel2.setTextFill(Color.RED);
         usernameLabel.setTextFill(Color.RED);
 
         Label password = new Label("Password");
@@ -279,7 +294,7 @@ public class LoginMenuView extends Application {
         cancel.setOnAction(actionEvent -> {
             stage.close();
             try {
-                new LoginMenuView().start(new Stage());
+                this.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }

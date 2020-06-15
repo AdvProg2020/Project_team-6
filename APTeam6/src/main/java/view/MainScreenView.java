@@ -191,7 +191,7 @@ public class MainScreenView extends Application {
                     }
                 } else {
                     try {
-                        new LoginMenuView().start(new Stage());
+                        new LoginMenuView().start(1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -212,32 +212,39 @@ public class MainScreenView extends Application {
 
             Label usernameLabel = new Label("This username already exist!");
             Label usernameLabel2 = new Label("write your username here");
+            usernameLabel.setTextFill(Color.RED);
+            usernameLabel2.setTextFill(Color.RED);
             usernameLabel.setVisible(false);
             usernameLabel2.setVisible(false);
             TextField usernameTextField = new TextField();
             usernameTextField.setPromptText("Username");
 
             Label passwordLabel = new Label("این فیلد نباید خالی باشد");
+            passwordLabel.setTextFill(Color.RED);
             passwordLabel.setVisible(false);
             PasswordField passwordField = new PasswordField();
             passwordField.setPromptText("Password");
 
             Label firstNameLabel = new Label("write your first name here");
+            firstNameLabel.setTextFill(Color.RED);
             firstNameLabel.setVisible(false);
             TextField firstNameTextField = new TextField();
             firstNameTextField.setPromptText("FirstName");
 
             Label lastNameLabel = new Label("write your last name here");
+            lastNameLabel.setTextFill(Color.RED);
             lastNameLabel.setVisible(false);
             TextField lastNameTextField = new TextField();
             lastNameTextField.setPromptText("LastName");
 
             Label emailAddressLabel = new Label("write your email here");
+            emailAddressLabel.setTextFill(Color.RED);
             emailAddressLabel.setVisible(false);
             TextField emailTextField = new TextField();
             emailTextField.setPromptText("Email");
 
             Label phoneNumberLabel = new Label("write a PhoneNumber");
+            phoneNumberLabel.setTextFill(Color.RED);
             phoneNumberLabel.setVisible(false);
             TextField phoneNumberTextField = new TextField();
             phoneNumberTextField.setPromptText("e.g. 09123456789");
