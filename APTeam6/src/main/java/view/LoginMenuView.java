@@ -25,19 +25,20 @@ public class LoginMenuView extends Application {
         Button logout = new Button("logout");
         Button back = new Button("back");
 
-        if(ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()){
+        if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
             login.setVisible(false);
             register.setVisible(false);
-        }else{
+        } else {
             logout.setVisible(false);
         }
 
-        vBox.getChildren().addAll(login,register,logout,back);
-        stage.setScene(new Scene(vBox,250,350));
+        vBox.getChildren().addAll(login, register, logout, back);
+        stage.setScene(new Scene(vBox, 250, 350));
         stage.show();
 
         login.setOnAction(actionEvent -> {
-            //TODO
+            stage.close();
+            loginPanel();
         });
 
         register.setOnAction(actionEvent -> {
@@ -54,7 +55,7 @@ public class LoginMenuView extends Application {
 
     }
 
-    public void loginPanel(){
+    public void loginPanel() {
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
 
@@ -77,16 +78,47 @@ public class LoginMenuView extends Application {
         Button login = new Button("Login");
         Button close = new Button("Close");
 
-        vBox.getChildren().addAll(doesntExistUsername,passwordFalse,usernameIsNull,usernameTextField,passwordIsNull,passwordField,login,close);
+        vBox.getChildren().addAll(doesntExistUsername, passwordFalse, usernameIsNull, usernameTextField, passwordIsNull, passwordField, login, close);
 
 
         close.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                stage.close();
+                this.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         login.setOnAction(actionEvent -> {
-            //TODO
+            doesntExistUsername.setVisible(false);
+            passwordFalse.setVisible(false);
+            usernameIsNull.setVisible(usernameTextField.getText().equals(""));
+            passwordIsNull.setVisible(passwordField.getText().equals(""));
+
+            if(!(usernameTextField.getText().equals("")||passwordField.getText().equals(""))) {
+                if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(usernameTextField.getText())) {
+                    if(ProgramManager.getProgramManagerInstance().getAccountByUsername(usernameTextField.getText()).checkPassword(passwordField.getText())){
+                        ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername(usernameTextField.getText()));
+                        try {
+                            stage.close();
+                            new Alert().showAlert("login successful","Ok",2);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        passwordFalse.setVisible(true);
+                    }
+                }else{
+                    doesntExistUsername.setVisible(true);
+                }
+            }
         });
+
+        Scene scene = new Scene(vBox, 250, 450);
+        stage.setScene(scene);
+        stage.setTitle("login/logout/register");
+        stage.show();
 
     }
 
@@ -105,11 +137,9 @@ public class LoginMenuView extends Application {
                 if (command.equals("logout")) {
                     return command;
                 }
-            }
-            else if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller|manager) \\S+")) {
+            } else if (command.matches("login \\S+ \\S+") || command.matches("create account (buyer|seller|manager) \\S+")) {
                 return command;
-            }
-            else {
+            } else {
                 System.out.println("Invalid command");
             }
         }

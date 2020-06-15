@@ -41,6 +41,12 @@ public class Alert extends Application {
                 }
             }else if(destination==0){
                 //nothing
+            }else if(destination==2){
+                try {
+                    new LoginMenuView().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
