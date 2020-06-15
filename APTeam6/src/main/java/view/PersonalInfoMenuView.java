@@ -17,6 +17,7 @@ import model.account.Manager;
 import model.account.Seller;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class PersonalInfoMenuView extends Application {
 
@@ -61,11 +62,210 @@ public class PersonalInfoMenuView extends Application {
         return Input.getInput();
     }
 
+    public void manageUsers() {
+        Stage stage = new Stage();
+        Button viewUser = new Button("View user");
+        Button deleteUser = new Button("Delete user");
+        Button createManager = new Button("Create manager");
+        Button back = new Button("Back");
+
+        VBox vBox = new VBox(5);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(viewUser, deleteUser, createManager, back);
+
+        Scene scene = new Scene(vBox, 250, 450);
+        stage.setScene(scene);
+        stage.show();
+
+        viewUser.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        deleteUser.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        createManager.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        back.setOnAction(actionEvent -> {
+            stage.close();
+            try {
+                this.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void viewUser() {
+        Stage stage = new Stage();
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        Button view = new Button("view");
+        Button back = new Button("Back");
+
+        VBox vBox = new VBox(6);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(username, view, back);
+
+        Scene scene = new Scene(vBox, 250, 450);
+        stage.setScene(scene);
+        stage.show();
+
+        view.setOnAction(actionEvent -> {
+            if (username.getText().equals("")) {
+                try {
+                    new Alert().showAlert("Please fill username text field", "Ok", 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username.getText())) {
+                    stage.close();
+                    try {
+                        viewUserWithUsername(username.getText());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        new Alert().showAlert("There is no user with this username. Please search another", "Ok", 0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        back.setOnAction(actionEvent -> {
+            stage.close();
+            manageUsers();
+        });
+    }
+
+    public void viewUserWithUsername(String username) throws FileNotFoundException {
+        Stage stage = new Stage();
+        stage.setTitle(username + " Information");
+        stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.CENTER);
+
+        Account user = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
+
+        Label credit = new Label("Credit:");
+        Label credit2 = new Label("");
+        if (2 == user.getRole()) {
+            Seller seller = (Seller) user;
+            credit2.setText("  $ " + seller.getCredit());
+        } else if (user.getRole() == 1) {
+            Buyer buyer = (Buyer) user;
+            credit2.setText("  $ " + buyer.getCredit());
+        } else {
+            credit.setVisible(false);
+            credit2.setVisible(false);
+        }
+
+        Label company = new Label("Company:");
+        Label company2 = new Label();
+        if (user.getRole() == 2) {
+            Seller seller = (Seller) user;
+            company2.setText(seller.getCompanyName());
+        } else {
+            company.setVisible(false);
+            company2.setVisible(false);
+        }
+
+
+        Label role = new Label("role is : ");
+        Label role2 = new Label("");
+        if (user.getRole() == 1) {
+            role2.setText("Buyer");
+        } else if (user.getRole() == 2) {
+            role2.setText("Seller");
+        } else {
+            role2.setText("Manager");
+        }
+
+
+        Label usernameLabel = new Label("Username");
+        TextField usernameTextField = new TextField();
+        usernameTextField.setEditable(false);
+        usernameTextField.setText(user.getUsername());
+
+        Label password = new Label("Password");
+        TextField passwordField = new TextField();
+        passwordField.setEditable(false);
+        passwordField.setText(user.getPassword());
+
+        Label firstName = new Label("FirstName");
+        TextField firstNameTextField = new TextField();
+        firstNameTextField.setEditable(false);
+        firstNameTextField.setText(user.getFirstName());
+
+        Label lastName = new Label("LastName");
+        TextField lastNameTextField = new TextField();
+        lastNameTextField.setEditable(false);
+        lastNameTextField.setText(user.getLastName());
+
+        Label email = new Label("Email");
+        TextField emailTextField = new TextField();
+        emailTextField.setEditable(false);
+        emailTextField.setText(user.getEmailAddress());
+
+        Label phone = new Label("PhoneNumber");
+        TextField phoneNumberTextField = new TextField();
+        phoneNumberTextField.setEditable(false);
+        phoneNumberTextField.setText(user.getPhoneNumber());
+
+        Button back = new Button("Back");
+
+
+        if (user.getRole() == 1) {
+            pane.getChildren().addAll(role, role2, credit, credit2, usernameLabel, usernameLabel, usernameTextField,
+                    password, passwordField, firstName, firstNameTextField, lastName,
+                    lastNameTextField, email, emailTextField,
+                    phone, phoneNumberTextField, back);
+        } else if (user.getRole() == 2) {
+            pane.getChildren().addAll(role, role2, usernameLabel, usernameLabel, usernameTextField,
+                    password, passwordField, firstName, firstNameTextField, lastName,
+                    lastNameTextField, company, company2, email, emailTextField,
+                    phone, phoneNumberTextField, back);
+        } else if (user.getRole() == 3) {
+            pane.getChildren().addAll(role, role2, credit, credit2, usernameLabel, usernameLabel, usernameTextField,
+                    password, passwordField, firstName, firstNameTextField, lastName,
+                    lastNameTextField, email, emailTextField, phone,
+                    phoneNumberTextField, back);
+        }
+
+
+        stage.setScene(new Scene(pane, 350, 600));
+        stage.show();
+
+        back.setOnAction(actionEvent -> {
+            stage.close();
+            try {
+                MainScreenView.getMainScreenViewInstance().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-        Stage window = stage;
-        window.setTitle("Personal Information");
-        window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        stage.setTitle("Personal Information");
+        stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         VBox pane = new VBox();
         pane.setAlignment(Pos.CENTER);
 
@@ -152,7 +352,7 @@ public class PersonalInfoMenuView extends Application {
         phoneNumberTextField.setText(currentlyLoggedInUser.getPhoneNumber());
 
         Button change = new Button("Change Information");
-        Button close = new Button("Close");
+        Button close = new Button("Back");
 
         Button openCart = new Button("Go to cart");
         Button openBuyHistory = new Button("Go to buy history");
@@ -194,7 +394,8 @@ public class PersonalInfoMenuView extends Application {
         }
 
         manageUsers.setOnAction(actionEvent -> {
-            //TODO
+            manageUsers();
+            stage.close();
         });
 
         manageAllProduct.setOnAction(actionEvent -> {
@@ -290,10 +491,10 @@ public class PersonalInfoMenuView extends Application {
         }
 
 
-        window.setScene(new Scene(pane, 400, 750));
-        window.show();
+        stage.setScene(new Scene(pane, 400, 750));
+        stage.show();
 
-        window.setOnCloseRequest(windowEvent -> {
+        stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
             try {
                 new Exit().start(new Stage());
@@ -303,8 +504,12 @@ public class PersonalInfoMenuView extends Application {
         });
 
         close.setOnAction(actionEvent -> {
-            window.close();
-            ProgramManager.getProgramManagerInstance().saveToFiles();
+            stage.close();
+            try {
+                MainScreenView.getMainScreenViewInstance().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         change.setOnAction(actionEvent -> {
