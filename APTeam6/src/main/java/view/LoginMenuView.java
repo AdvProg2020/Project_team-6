@@ -3,6 +3,7 @@ package view;
 import controller.LoginMenu;
 import controller.ProgramManager;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,7 +43,8 @@ public class LoginMenuView extends Application {
         });
 
         register.setOnAction(actionEvent -> {
-            //TODO
+            stage.close();
+            register();
         });
 
         logout.setOnAction(actionEvent -> {
@@ -52,6 +54,36 @@ public class LoginMenuView extends Application {
         back.setOnAction(actionEvent -> {
             //TODO
         });
+
+    }
+
+    public void register(){
+        Stage stage = new Stage();
+        VBox vBox = new VBox(10);
+
+        Button buyer = new Button("register as buyer");
+        Button seller = new Button("register as seller");
+        Button back = new Button("back");
+
+        buyer.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        seller.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        back.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        vBox.getChildren().addAll(buyer,seller,back);
+        Scene scene = new Scene(vBox,200,300);
+        vBox.setAlignment(Pos.CENTER);
+
+        stage.setScene(scene);
+        stage.setTitle("Register");
+        stage.show();
 
     }
 
