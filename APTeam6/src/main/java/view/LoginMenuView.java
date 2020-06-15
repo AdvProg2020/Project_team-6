@@ -5,6 +5,9 @@ import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -46,6 +49,41 @@ public class LoginMenuView extends Application {
         });
 
         back.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+    }
+
+    public void loginPanel(){
+        Stage stage = new Stage();
+        VBox vBox = new VBox(10);
+
+        Label doesntExistUsername = new Label("Username doesnt exist");
+        doesntExistUsername.setVisible(false);
+
+        Label passwordFalse = new Label("Password is incorrect");
+        passwordFalse.setVisible(false);
+
+        Label usernameIsNull = new Label("please fill this field");
+        usernameIsNull.setVisible(false);
+
+        TextField usernameTextField = new TextField();
+
+        Label passwordIsNull = new Label("please fill this field");
+        passwordIsNull.setVisible(false);
+
+        PasswordField passwordField = new PasswordField();
+
+        Button login = new Button("Login");
+        Button close = new Button("Close");
+
+        vBox.getChildren().addAll(doesntExistUsername,passwordFalse,usernameIsNull,usernameTextField,passwordIsNull,passwordField,login,close);
+
+        close.setOnAction(actionEvent -> {
+            //TODO
+        });
+
+        login.setOnAction(actionEvent -> {
             //TODO
         });
 
