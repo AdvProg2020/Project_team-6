@@ -109,6 +109,10 @@ public class MainScreenView extends Application {
         primaryStage.show();
         loadingPercent(primaryStage, percentOfProgress);
 
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+        });
+
 
     }
 
@@ -180,6 +184,15 @@ public class MainScreenView extends Application {
             Button account = new Button("ناحیه کاربری");
             Button products = new Button("محصولات");
             Button offs = new Button("حراج ها");
+
+            window.setOnCloseRequest(windowEvent -> {
+                windowEvent.consume();
+                try {
+                    new Exit().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
 
             account.setOnAction(actionEvent -> {
                 //ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername("a"));
@@ -253,6 +266,15 @@ public class MainScreenView extends Application {
             pane.getChildren().addAll(usernameLabel, usernameLabel2, usernameTextField, passwordLabel, passwordField, firstNameLabel, firstNameTextField, lastNameLabel, lastNameTextField, emailAddressLabel, emailTextField, phoneNumberLabel, phoneNumberTextField, create);
             window.setScene(new Scene(pane, 400, 500));
             window.show();
+
+            window.setOnCloseRequest(windowEvent -> {
+                windowEvent.consume();
+                try {
+                    new Exit().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
 
             create.setOnAction(actionEvent -> {
                 //check field data:

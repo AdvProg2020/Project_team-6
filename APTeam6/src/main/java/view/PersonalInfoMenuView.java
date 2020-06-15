@@ -293,6 +293,14 @@ public class PersonalInfoMenuView extends Application {
         window.setScene(new Scene(pane, 400, 750));
         window.show();
 
+        window.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         close.setOnAction(actionEvent -> {
             window.close();

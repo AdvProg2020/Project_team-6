@@ -48,6 +48,15 @@ public class LoginMenuView extends Application {
         stage.setScene(new Scene(vBox, 250, 350));
         stage.show();
 
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         login.setOnAction(actionEvent -> {
             stage.close();
             loginPanel();
@@ -115,6 +124,15 @@ public class LoginMenuView extends Application {
         stage.setScene(scene);
         stage.setTitle("Register");
         stage.show();
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
@@ -186,6 +204,15 @@ public class LoginMenuView extends Application {
         window.setScene(scene);
         window.setTitle("Register new Seller");
         window.show();
+
+        window.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         cancel.setOnAction(actionEvent -> {
             window.close();
@@ -290,6 +317,15 @@ public class LoginMenuView extends Application {
         stage.setScene(scene);
         stage.setTitle("Register new Buyer");
         stage.show();
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         cancel.setOnAction(actionEvent -> {
             stage.close();
@@ -401,8 +437,17 @@ public class LoginMenuView extends Application {
 
         Scene scene = new Scene(vBox, 250, 450);
         stage.setScene(scene);
-        stage.setTitle("login/logout/register");
+        stage.setTitle("login");
         stage.show();
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
