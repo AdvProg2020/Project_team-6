@@ -101,7 +101,7 @@ public class MainScreenView extends Application {
         space.setVisible(false);
         root2.setAlignment(Pos.CENTER);
         root2.getChildren().addAll(logo, logo2, space, percentOfProgress);
-        root2.setBackground(new Background(new BackgroundFill(new Color(0.964, 0.964, 0.964, 1), CornerRadii.EMPTY, Insets.EMPTY)));
+        root2.setBackground(new Background(new BackgroundFill(new Color(0.964F, 0.964F, 0.964F, 1), CornerRadii.EMPTY, Insets.EMPTY)));
         primaryStage.setTitle(ProgramManager.getProgramManagerInstance().PROGRAM_NAME.toUpperCase());
         primaryStage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         primaryStage.setScene(new Scene(root2, 450, 700));
@@ -182,7 +182,7 @@ public class MainScreenView extends Application {
             Button offs = new Button("حراج ها");
 
             account.setOnAction(actionEvent -> {
-                ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername("a"));
+                //ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername("a"));
                 if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
                     try {
                         new PersonalInfoMenuView().start(new Stage());
