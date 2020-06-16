@@ -14,10 +14,12 @@ public class Alert extends Application {
     private String text = "";
     private String btnText = "";
     private int destination = 0;
-    public void showAlert(String text,String buttonText,int destination) throws Exception {
+    private PersonalInfoMenuView personalInfoMenuView = null;
+    public void showAlert(String text,String buttonText,int destination,PersonalInfoMenuView personalInfoMenuView) throws Exception {
         this.text = text;
         this.btnText = buttonText;
         this.destination = destination;
+        this.personalInfoMenuView = personalInfoMenuView;
         this.start(new Stage());
     }
 
@@ -48,7 +50,7 @@ public class Alert extends Application {
                     e.printStackTrace();
                 }
             }else if(destination==3){
-                new PersonalInfoMenuView().manageUsers();
+                new ManageUsersView().manageUsers(this.personalInfoMenuView);
             }
         });
     }

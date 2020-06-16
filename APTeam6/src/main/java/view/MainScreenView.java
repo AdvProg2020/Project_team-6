@@ -294,7 +294,7 @@ public class MainScreenView extends Application {
                     try {
 
                         managerCreated = true;
-                        new Alert().showAlert("Account created!", "Ok", 1);
+                        new Alert().showAlert("Account created!", "Ok", 1,null);
                         window.close();
 
                     } catch (Exception e) {
