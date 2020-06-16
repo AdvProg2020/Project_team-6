@@ -407,10 +407,6 @@ public class ProgramManager {
         return allCategories.get(name);
     }
 
-    public void editCategoryName(Category category, String newName){
-        category.setName(newName);
-    }
-
     public void removeCategory(Category category){
         allCategories.remove(category);
     }

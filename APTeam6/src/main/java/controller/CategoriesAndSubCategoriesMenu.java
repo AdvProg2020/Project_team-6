@@ -153,14 +153,30 @@ public class CategoriesAndSubCategoriesMenu {
     private void edit(int index, String newName) {
         if (state == 0) {
             Category category = allCategoriesArrayList.get(index);
-            ProgramManager.getProgramManagerInstance().editCategoryName(category, newName);
+            category.setName(newName);
+            updateCategoriesArrayList();
+        }
+        else if (state == 1){
+            SubCategory subCategory = allSubCategoriesArrayList.get(index);
+            subCategory.setName(newName);
+            updateSubCategoriesArrayList();
         }
     }
 
     private void add(String name) {
         if (state == 0) {
-            if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null)
+            if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
                 ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
+                updateCategoriesArrayList();
+            }
+            else
+                view.giveOutPut("Repeated name");
+        }
+        else if (state == 1) {
+            if (currentCategory.getSubCategoryByName(name) == null) {
+                currentCategory.addSubcategory(new SubCategory(name));
+                updateSubCategoriesArrayList();
+            }
             else
                 view.giveOutPut("Repeated name");
         }
@@ -170,6 +186,17 @@ public class CategoriesAndSubCategoriesMenu {
         if (state == 0) {
             Category category = allCategoriesArrayList.get(index);
             ProgramManager.getProgramManagerInstance().removeCategory(category);
+            updateCategoriesArrayList();
+        }
+        if (state == 1) {
+            SubCategory subCategory = allSubCategoriesArrayList.get(index);
+            currentCategory.removeSubcategory(subCategory);
+            updateSubCategoriesArrayList();
+        }
+        if (state == 2) {
+            Product product = allProductsArrayList.get(index);
+            currentSubCategory.removeProduct(product.getId());
+            updateProductsArrayList();
         }
     }
 
