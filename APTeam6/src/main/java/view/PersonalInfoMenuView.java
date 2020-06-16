@@ -214,7 +214,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageRequest.setOnAction(actionEvent -> {
-            //TODO
+            new ManageRequestsView().manageRequestPage(this);
+            stage.close();
         });
 
         manageCategories.setOnAction(actionEvent -> {
