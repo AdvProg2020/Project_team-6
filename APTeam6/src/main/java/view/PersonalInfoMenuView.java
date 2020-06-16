@@ -248,7 +248,12 @@ public class PersonalInfoMenuView extends Application {
         });
 
         viewCompanyInfo.setOnAction(actionEvent -> {
-            //TODO
+            Seller seller = (Seller) currentlyLoggedInUser;
+            try {
+                new Alert().showAlert(seller.getCompanyName(),"Ok",0,null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         viewSalesHistory.setOnAction(actionEvent -> {

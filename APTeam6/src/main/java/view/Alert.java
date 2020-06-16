@@ -27,10 +27,12 @@ public class Alert extends Application {
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
         Label text = new Label(this.text);
+        text.setWrapText(true);
+        text.prefHeight(200);
         Button ok = new Button(this.btnText);
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(text,ok);
-        stage.setScene(new Scene(vBox,300,150));
+        stage.setScene(new Scene(vBox,400,300));
         stage.show();
         ok.setOnAction(actionEvent -> {
             ProgramManager.getProgramManagerInstance().saveToFiles();
