@@ -151,23 +151,31 @@ public class CategoriesAndSubCategoriesMenu {
 
     ///////////////////////////////////
     private void edit(int index, String newName) {
-        Category category = allCategoriesArrayList.get(index);
-        ProgramManager.getProgramManagerInstance().editCategoryName(category, newName);
+        if (state == 0) {
+            Category category = allCategoriesArrayList.get(index);
+            ProgramManager.getProgramManagerInstance().editCategoryName(category, newName);
+        }
     }
 
     private void add(String name) {
-        if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null)
-            ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
-        else
-            view.giveOutPut("Repeated name");
+        if (state == 0) {
+            if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null)
+                ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
+            else
+                view.giveOutPut("Repeated name");
+        }
     }
 
     private void remove(int index) {
-        Category category = allCategoriesArrayList.get(index);
-        ProgramManager.getProgramManagerInstance().removeCategory(category);
+        if (state == 0) {
+            Category category = allCategoriesArrayList.get(index);
+            ProgramManager.getProgramManagerInstance().removeCategory(category);
+        }
     }
 
     private void open(int index) {
-
+        if (state == 0) {
+            //TODO: please write me
+        }
     }
 }
