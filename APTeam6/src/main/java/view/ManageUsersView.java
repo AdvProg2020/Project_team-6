@@ -23,13 +23,11 @@ public class ManageUsersView {
             else {
                 System.out.println("Invalid command");
             }
-
         }
     }
     private void showHelp() {
         System.out.println("List of commands:\n\tview [username]\n\tdelete user [username]");
     }
-
     public void giveOutput(String message){
         System.out.println(message);
     }

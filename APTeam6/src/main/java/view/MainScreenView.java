@@ -112,10 +112,7 @@ public class MainScreenView extends Application {
         primaryStage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
         });
-
-
     }
-
     private void loadingPercent(Stage primaryStage, Label percentOfProgress) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -181,9 +178,9 @@ public class MainScreenView extends Application {
             window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
             VBox pane = new VBox(15);
 
-            Button account = new Button("ناحیه کاربری");
-            Button products = new Button("محصولات");
-            Button offs = new Button("حراج ها");
+            Button account = new Button("User Panel");
+            Button products = new Button("Products");
+            Button offs = new Button("Offs");
 
             window.setOnCloseRequest(windowEvent -> {
                 windowEvent.consume();

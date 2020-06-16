@@ -22,9 +22,6 @@ public class LoginMenuView extends Application {
     }
 
     private int destination = 0;
-
-
-
     public LoginMenuView(int destination) throws Exception {
         this.destination = destination;
         start(new Stage());
