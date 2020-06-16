@@ -1,8 +1,11 @@
 package controller;
 
 import model.product.Category;
+import model.product.Product;
 import model.product.SubCategory;
 import view.CategoriesAndSubCategoriesMenuView;
+
+import java.util.ArrayList;
 
 
 public class CategoriesAndSubCategoriesMenu {
@@ -13,11 +16,17 @@ public class CategoriesAndSubCategoriesMenu {
             instance = new CategoriesAndSubCategoriesMenu();
         return instance;
     }
+
     ///////////////////////////////////////////
     private CategoriesAndSubCategoriesMenuView view;
     private byte state = 0;
+
     private Category currentCategory = null;
     private SubCategory currentSubCategory = null;
+
+    private ArrayList<Category> allCategoriesArrayList;
+    private ArrayList<SubCategory> allSubCategoriesArrayList;
+    private ArrayList<Product> allProductsArrayList;
 
     public void startAsManager() {
         view = new CategoriesAndSubCategoriesMenuView();
@@ -27,21 +36,21 @@ public class CategoriesAndSubCategoriesMenu {
             switch (state) {
                 case 0:
                     command = view.getInputCommandManagerCategory();
-                    if (command.matches("edit \\S+ \\S+")) {
+                    if (command.matches("edit \\d+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
-                        edit(splitCommand[1], splitCommand[2]);
+                        edit(Integer.parseInt(splitCommand[1]), splitCommand[2]);
                     }
                     else if (command.matches("add \\S+")) {
                         String[] splitCommand = command.split("\\s");
                         add(splitCommand[1]);
                     }
-                    else if (command.matches("remove \\S+")) {
+                    else if (command.matches("remove \\d+")) {
                         String[] splitCommand = command.split("\\s");
-                        remove(splitCommand[1]);
+                        remove(Integer.parseInt(splitCommand[1]));
                     }
-                    else if (command.matches("open \\S+")) {
+                    else if (command.matches("open \\d+")) {
                         String[] splitCommand = command.split("\\s");
-                        remove(splitCommand[1]);
+                        open(Integer.parseInt(splitCommand[1]));
                     }
                     else if (command.equals("back")) {
                         return;
@@ -52,17 +61,21 @@ public class CategoriesAndSubCategoriesMenu {
                     break;
                 case 1:
                     command = view.getInputCommandManagerCategory();
-                    if (command.matches("edit \\S+ \\S+")) {
+                    if (command.matches("edit \\d+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
-                        edit(splitCommand[1], splitCommand[2]);
+                        edit(Integer.parseInt(splitCommand[1]), splitCommand[2]);
                     }
                     else if (command.matches("add \\S+")) {
                         String[] splitCommand = command.split("\\s");
                         add(splitCommand[1]);
                     }
-                    else if (command.matches("remove \\S+")) {
+                    else if (command.matches("remove \\d+")) {
                         String[] splitCommand = command.split("\\s");
-                        remove(splitCommand[1]);
+                        remove(Integer.parseInt(splitCommand[1]));
+                    }
+                    else if (command.matches("open \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        open(Integer.parseInt(splitCommand[1]));
                     }
                     else if (command.equals("back")) {
                         state = 0;
@@ -73,9 +86,9 @@ public class CategoriesAndSubCategoriesMenu {
                     break;
                 case 2:
                     command = view.getInputCommandManagerProduct();
-                    if (command.matches("remove \\S+")) {
+                    if (command.matches("remove \\d+")) {
                         String[] splitCommand = command.split("\\s");
-                        remove(splitCommand[1]);
+                        remove(Integer.parseInt(splitCommand[1]));
                     }
                     else if (command.equals("back")) {
                         state = 1;
@@ -103,7 +116,7 @@ public class CategoriesAndSubCategoriesMenu {
                     command = view.getInputCommandBuyerProduct();
                     break;
             }
-            if (command.matches("open \\S+")){
+            if (command.matches("open \\d+")) {
 
             }
             else if (command.equals("back")) {
@@ -116,16 +129,45 @@ public class CategoriesAndSubCategoriesMenu {
 
     }
 
-    public void edit(String name, String newName) {
-        ProgramManager.getProgramManagerInstance().editCategoryName(ProgramManager.getProgramManagerInstance().getCategoryByName(name), newName);
+    private void updateCategoriesArrayList() {
+        allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
+        //TODO: maybe do some sorting?
     }
 
-    public void add(String name) {
-        ProgramManager.getProgramManagerInstance().addCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
+    private void updateSubCategoriesArrayList() {
+        allSubCategoriesArrayList = new ArrayList<>(currentCategory.getAllSubCategories());
+        //TODO: maybe do some sorting?
     }
 
-    public void remove(String name) {
-        ProgramManager.getProgramManagerInstance().removeCategory(ProgramManager.getProgramManagerInstance().getCategoryByName(name));
+    private void updateProductsArrayList() {
+        ArrayList<Integer> productIds = currentSubCategory.getAllProductIds();
+        allProductsArrayList = new ArrayList<>();
+        ProgramManager programManager = ProgramManager.getProgramManagerInstance();
+        for (Integer id : productIds) {
+            allProductsArrayList.add(programManager.getProductById(id));
+        }
+        //TODO: maybe do some sorting?
     }
 
+    ///////////////////////////////////
+    private void edit(int index, String newName) {
+        Category category = allCategoriesArrayList.get(index);
+        ProgramManager.getProgramManagerInstance().editCategoryName(category, newName);
+    }
+
+    private void add(String name) {
+        if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null)
+            ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
+        else
+            view.giveOutPut("Repeated name");
+    }
+
+    private void remove(int index) {
+        Category category = allCategoriesArrayList.get(index);
+        ProgramManager.getProgramManagerInstance().removeCategory(category);
+    }
+
+    private void open(int index) {
+
+    }
 }

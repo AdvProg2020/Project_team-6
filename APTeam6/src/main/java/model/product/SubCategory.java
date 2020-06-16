@@ -17,6 +17,10 @@ public class SubCategory {
         return name;
     }
 
+    public ArrayList<Integer> getAllProductIds() {
+        return productIds;
+    }
+
     private boolean isExistThisAttribute(String field) {
         for (String additionalAttribute : additionalAttributes) {
             if (additionalAttribute.equalsIgnoreCase(field)) {
