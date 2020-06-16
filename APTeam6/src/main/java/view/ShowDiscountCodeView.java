@@ -4,12 +4,17 @@ import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.product.DiscountCode;
 import model.requests.Request;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
@@ -113,4 +118,108 @@ public class ShowDiscountCodeView extends Application {
     public void removeDiscountCode(DiscountCode discountCode) {
         ProgramManager.getProgramManagerInstance().deleteDiscountCode(discountCode);
     }
+
+    public void manageRequestPage(PersonalInfoMenuView personalInfoMenuView) {
+            Stage stage = new Stage();
+            VBox vBox = new VBox();
+            Label label = new Label("Enter Discount Code");
+            Label fill = new Label("please fill this field");
+            fill.setVisible(false);
+            fill.setTextFill(Color.RED);
+            TextField discountCode = new TextField();
+            Button view = new Button("View");
+            Label detailLabel = new Label("");
+            detailLabel.setWrapText(true);
+            Button edit = new Button("Edit");
+            Button remove = new Button("Remove");
+            Button back = new Button("Back");
+
+            vBox.setAlignment(Pos.CENTER);
+            vBox.getChildren().addAll(label,fill,discountCode,view,detailLabel,view,remove,back);
+
+            stage.setScene(new Scene(vBox,400,700));
+            stage.setTitle("Manage Discounts");
+            stage.show();
+
+            edit.setOnAction(actionEvent -> {
+                fill.setVisible(discountCode.getText().equals(""));
+                fill.setVisible(!discountCode.getText().matches("\\.+"));
+                if(!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")){
+                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())!=null){
+                        detailLabel.setText(//TODO);
+                    }else{
+                        try {
+                            new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            view.setOnAction(actionEvent -> {
+                fill.setVisible(discountCode.getText().equals(""));
+                fill.setVisible(!discountCode.getText().matches("[0-9]+"));
+                if(!discountCode.getText().equals("") && discountCode.getText().matches("[0-9]+")){
+                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())!=null){
+                        detailLabel.setText(viewDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
+                        detailLabel.setText("");
+                        discountCode.setText("");
+                        try {
+                            new Alert().showAlert("Accepted!","Ok",0,null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        try {
+                            new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+
+            remove.setOnAction(actionEvent -> {
+                fill.setVisible(discountCode.getText().equals(""));
+                fill.setVisible(!discountCode.getText().matches("[0-9]+"));
+                if(!discountCode.getText().equals("") && discountCode.getText().matches("[0-9]+")){
+                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())!=null){
+                        removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()));
+                        detailLabel.setText("");
+                        discountCode.setText("");
+                        try {
+                            new Alert().showAlert("Declined!","Ok",0,null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        try {
+                            new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            stage.setOnCloseRequest(windowEvent -> {
+                windowEvent.consume();
+                try {
+                    new Exit().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            back.setOnAction(actionEvent -> {
+                stage.close();
+                try {
+                    personalInfoMenuView.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
 }

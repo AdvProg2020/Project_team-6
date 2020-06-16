@@ -210,7 +210,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         viewDiscountCode.setOnAction(actionEvent -> {
-            //TODO
+            new ShowDiscountCodeView().manageRequestPage(this);
+            stage.close();
         });
 
         manageRequest.setOnAction(actionEvent -> {
