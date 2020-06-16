@@ -385,13 +385,14 @@ public class ProgramManager {
         }
     }
 
-    public void detailsOfRequest(int id) {
+    public String detailsOfRequest(int id) {
         if (allRequests.get(id) instanceof ProductRequest) {
-            ((ProductRequest) allRequests.get(id)).showDetails();
+            return ((ProductRequest) allRequests.get(id)).showDetails(1);
         }
         else if (allRequests.get(id) instanceof OffRequest) {
-            ((OffRequest) allRequests.get(id)).showDetails();
+            return ((OffRequest) allRequests.get(id)).showDetails(1);
         }
+        return null;
     }
 
     public void addOffToHashMap(Off off){
@@ -407,6 +408,15 @@ public class ProgramManager {
         System.out.println("the Off's StartDate is " + off.getStartDate());
         System.out.println("the Off's EndDate is " + off.getEndDate());
         System.out.println("the Off's amount is " + off.getOffAmount());
+    }
+
+    public String showOff(Off off,int a){
+        String s="";
+        s += "the Off's Id is " + off.getOffId() + "\n";
+        s += "the Off's StartDate is " + off.getStartDate() + "\n";
+        s += "the Off's EndDate is " + off.getEndDate() + "\n";
+        s += "the Off's amount is " + off.getOffAmount() + "\n";
+        return s;
     }
 
     public Category getCategoryByName(String name){

@@ -50,4 +50,13 @@ public class ProductRequest implements Request{
         System.out.println("the product's categoryName :" + product.getCategoryName());
     }
 
+    public String showDetails(int a) {
+        String s = "";
+        s += "the product's name :" + product.getName() + "\n";
+        s += "the product's Id :" + product.getId() + "\n";
+        s += "the product's description :" + product.getDescription() + "\n";
+        s += "the product's categoryName :" + product.getCategoryName();
+        return s;
+    }
+
 }
