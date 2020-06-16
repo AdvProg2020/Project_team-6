@@ -2,6 +2,7 @@ package controller;
 
 import model.account.Account;
 import model.account.Buyer;
+import model.account.Manager;
 import model.account.Seller;
 import view.LoginMenuView;
 
@@ -28,7 +29,7 @@ public class LoginMenu {
             }
             else if (command.matches("create account (buyer|seller|manager) \\S+")) {
                 String[] splitCommand = command.split("\\s");
-                if (splitCommand[1].equals("manager"))
+                if (splitCommand[2].equals("manager"))
                     System.out.println("You can't make managers here. get away");
                 else
                     register(splitCommand[3], splitCommand[2]);
@@ -62,6 +63,7 @@ public class LoginMenu {
     public void register(String username, String role) {
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
             view.giveOutput("This username is already occupied");
+            return;
         }
         String[] userData = null;
         userData = view.getUserUsualData();

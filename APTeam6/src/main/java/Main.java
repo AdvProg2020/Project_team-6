@@ -19,18 +19,17 @@ public class Main extends Application {
 
         programManager.loadFromFiles();
 
-        Thread commandLineThread = new Thread(() -> {
-            mainScreen.start();
-        });
-        commandLineThread.start();
+        mainScreen.start();
+
 
 
         try {
-            mainScreenView.start(stage);
+            //mainScreenView.start(stage);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         programManager.saveToFiles();
+        System.exit(0);
     }
 }

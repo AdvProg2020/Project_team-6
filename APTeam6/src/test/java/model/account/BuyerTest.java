@@ -22,8 +22,8 @@ public class BuyerTest {
         ArrayList<Product> productArrayList = new ArrayList<>();
         productArrayList.add(new Product("chair","a","b"));
         productArrayList.add(new Product("table","a","c"));
-        expectedBuyers.get(0).addProductToBuyBasket(productArrayList.get(0));
-        expectedBuyers.get(0).addProductToBuyBasket(productArrayList);
+        //expectedBuyers.get(0).addProductToBuyBasket(productArrayList.get(0));
+        //expectedBuyers.get(0).addProductToBuyBasket(productArrayList);
         Assert.assertNotEquals(expectedBuyers,Buyer.sortBuyers(0));
         Assert.assertNotEquals(expectedBuyers,Buyer.sortBuyers(1));
         Assert.assertNotEquals(expectedBuyers,Buyer.sortBuyers(2));
