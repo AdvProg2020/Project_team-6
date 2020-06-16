@@ -1,14 +1,47 @@
 package view;
 
 import controller.ProgramManager;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class SellerProductsMenuView {
+import java.io.FileInputStream;
+
+public class SellerProductsMenuView extends Application {
     public String getInputCommand() {
         String command;
         while (true) {
             command = Input.getInput();
-
+            // please complete graphical menu
+            // این بخش رو رها کنید و یکسره گرافیکی رو بزنید
         }
     }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        //TODO
+
+        VBox vBox = new VBox();
+        stage.setTitle("Products");
+        stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        Scene scene = new Scene(vBox,300,600);
+        vBox.setAlignment(Pos.CENTER);
+        stage.setScene(scene);
+        stage.show();
+
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
 }
-//TODO
