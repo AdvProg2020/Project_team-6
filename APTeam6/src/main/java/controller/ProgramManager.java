@@ -397,21 +397,22 @@ public class ProgramManager {
     public void addOffToHashMap(Off off){
         allOffs.put(off.getOffId(),off);
     }
+
     public Off getOffById(int id){
         return allOffs.get(id);
     }
+
     public void showOff(Off off){
         System.out.println("the Off's Id is " + off.getOffId());
         System.out.println("the Off's StartDate is " + off.getStartDate());
         System.out.println("the Off's EndDate is " + off.getEndDate());
         System.out.println("the Off's amount is " + off.getOffAmount());
     }
+
     public Category getCategoryByName(String name){
         return allCategories.get(name);
     }
-    public void editCategoryName(Category category, String newName){
-        category.setName(newName);
-    }
+
     public void removeCategory(Category category){
         allCategories.remove(category);
     }

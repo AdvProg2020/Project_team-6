@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class ShowCartView {
-    public ShowCartView() {
+    /*public ShowCartView() {
         System.out.println("=== Cart screen (Buy basket -_-)");
         HashMap<Integer, Integer> productHashMap = ((Buyer)ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser()).getBuyBasket();
         int i = 0;
@@ -18,7 +18,7 @@ public class ShowCartView {
             i++;
             System.out.println(i + ". " + ProgramManager.getProgramManagerInstance().getProductById(entry.getKey()).getName() + ": " + entry.getValue());
         }
-    }
+    }*/
 
     private final HashSet<String> returningCommand = new HashSet<>(Arrays.asList("login menu", ""));
     //TODO: i should regex
