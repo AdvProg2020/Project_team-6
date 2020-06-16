@@ -92,6 +92,10 @@ public class Buyer extends Account implements Comparable<Buyer> {
         return new ArrayList<>(buyBasket.keySet());
     }
 
+    public HashMap<Integer, Integer> getBuyBasket() {
+        return buyBasket;
+    }
+
     public void increaseProductInBuyBasketBy(int productId, int count) {
         if (buyBasket.containsKey(productId)){
             count += buyBasket.get(productId);

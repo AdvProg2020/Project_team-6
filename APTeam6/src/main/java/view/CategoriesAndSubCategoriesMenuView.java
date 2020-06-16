@@ -13,39 +13,66 @@ public class CategoriesAndSubCategoriesMenuView {
             System.out.println("\t" + category.getName());
         }
     }
-    public String getInputCommand() {
+
+    /////////////////////////////////////////////////
+
+    public String getInputCommandManagerCategory() {
         String command;
         while (true) {
             command = Input.getInput();
-            if(command.matches("edit \\.+")){
+            if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back"))
                 return command;
-            }
-            else if(command.equals("help")){
-                showHelp();
-            }
-            else if(command.matches("add \\.+")){
-                return command;
-            }
-            else if(command.matches("remove \\.+")){
-                return command;
-            }
-            else if(command.equals("show categories")){
-                return command;
-            }
-            else {
+            else if (command.equals("help"))
+                System.out.println("List of commands:\n\tadd [index]\n\tedit [index] [newName]\n\tremove [index]\n\topen [index]");
+            else
                 System.out.println("Invalid command");
-            }
         }
     }
 
-    private void showHelp() {
-        System.out.println("List of commands:\n\tadd [Category's name]\n\tedit [Category's name] [newValue]\n\tremove [Category's name]");
+    public String getInputCommandManagerProduct() {
+        String command;
+        while (true) {
+            command = Input.getInput();
+            if (command.matches("remove \\d+") || command.equals("back"))
+                return command;
+            else if (command.equals("help"))
+                System.out.println("List of commands:\n\tremove [index]");
+            else
+                System.out.println("Invalid command");
+        }
     }
+
+    /////////////////////////////////////////////////
+
+    public String getInputCommandBuyerCategory() {
+        String command;
+        while (true) {
+            command = Input.getInput();
+            if (command.matches("open \\d+") || command.equals("back"))
+                return command;
+            else if (command.equals("help"))
+                System.out.println("List of commands:\n\tadd [index]\n\tedit [index] [newName]\n\tremove [index]\n\topen [index]");
+            else
+                System.out.println("Invalid command");
+        }
+    }
+
+    public String getInputCommandBuyerProduct() {
+        String command;
+        while (true) {
+            command = Input.getInput();
+            if (command.matches("remove \\d+") || command.equals("back"))
+                return command;
+            else if (command.equals("help"))
+                System.out.println("List of commands:\n\tremove [index]");
+            else
+                System.out.println("Invalid command");
+        }
+    }
+
+    /////////////////////////////////////////////////
 
     public void giveOutPut(String message){
         System.out.println(message);
-    }
-    public void showCategories(){
-        System.out.println(ProgramManager.getProgramManagerInstance().getAllCategories());
     }
 }
