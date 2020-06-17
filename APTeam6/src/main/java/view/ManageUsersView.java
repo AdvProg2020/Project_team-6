@@ -20,36 +20,34 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class ManageUsersView {
-    public ManageUsersView(){
+    public ManageUsersView() {
         System.out.println("=== Manage Users Menu");
     }
-    public String getInputCommand(){
+
+    public String getInputCommand() {
         String command;
-        while (true){
+        while (true) {
             command = Input.getInput();
-            if(command.matches("view \\S+")){
+            if (command.matches("view \\S+")) {
                 return command;
-            }
-            else if(command.equals("help")){
+            } else if (command.equals("help")) {
                 showHelp();
-            }
-            else if(command.matches("delete user \\S+")){
+            } else if (command.matches("delete user \\S+")) {
                 return command;
-            }
-            else if(command.equals("back")){
+            } else if (command.equals("back")) {
                 return command;
-            }
-            else {
+            } else {
                 System.out.println("Invalid command");
             }
 
         }
     }
+
     private void showHelp() {
         System.out.println("List of commands:\n\tview [username]\n\tdelete user [username]");
     }
 
-    public void giveOutput(String message){
+    public void giveOutput(String message) {
         System.out.println(message);
     }
 
@@ -185,7 +183,7 @@ public class ManageUsersView {
                 new Manager(usernameTextField.getText(), passwordField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), phoneNumberTextField.getText());
 
                 try {
-                    new Alert().showAlert("Account created!", "Ok", 3,personalInfoMenuView);
+                    new Alert().showAlert("Account created!", "Ok", 3, personalInfoMenuView);
                     window.close();
 
                 } catch (Exception e) {
@@ -214,7 +212,7 @@ public class ManageUsersView {
         delete.setOnAction(actionEvent -> {
             if (username.getText().equals("")) {
                 try {
-                    new Alert().showAlert("Please fill username text field", "Ok", 0,null);
+                    new Alert().showAlert("Please fill username text field", "Ok", 0, null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -223,13 +221,13 @@ public class ManageUsersView {
                     stage.close();
                     ProgramManager.getProgramManagerInstance().deleteAccount(username.getText());
                     try {
-                        new Alert().showAlert("Deleted!", "Ok", 3,personalInfoMenuView);
+                        new Alert().showAlert("Deleted!", "Ok", 3, personalInfoMenuView);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        new Alert().showAlert("There is no user with this username. Please select another", "Ok", 0,null);
+                        new Alert().showAlert("There is no user with this username. Please select another", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -270,7 +268,7 @@ public class ManageUsersView {
         view.setOnAction(actionEvent -> {
             if (username.getText().equals("")) {
                 try {
-                    new Alert().showAlert("Please fill username text field", "Ok", 0,null);
+                    new Alert().showAlert("Please fill username text field", "Ok", 0, null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -278,13 +276,13 @@ public class ManageUsersView {
                 if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username.getText())) {
                     stage.close();
                     try {
-                        viewUserWithUsername(username.getText(),personalInfoMenuView);
+                        viewUserWithUsername(username.getText(), personalInfoMenuView);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        new Alert().showAlert("There is no user with this username. Please search another", "Ok", 0,null);
+                        new Alert().showAlert("There is no user with this username. Please search another", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -307,7 +305,7 @@ public class ManageUsersView {
         });
     }
 
-    public void viewUserWithUsername(String username,PersonalInfoMenuView personalInfoMenuView) throws FileNotFoundException {
+    public void viewUserWithUsername(String username, PersonalInfoMenuView personalInfoMenuView) throws FileNotFoundException {
         Stage stage = new Stage();
         stage.setTitle(username + " Information");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));

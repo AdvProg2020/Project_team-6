@@ -251,7 +251,7 @@ public class PersonalInfoMenuView extends Application {
         viewCompanyInfo.setOnAction(actionEvent -> {
             Seller seller = (Seller) currentlyLoggedInUser;
             try {
-                new Alert().showAlert(seller.getCompanyName(),"Ok",0,null);
+                new Alert().showAlert(seller.getCompanyName(), "Ok", 0, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -346,7 +346,7 @@ public class PersonalInfoMenuView extends Application {
                     currentlyLoggedInUser.setPhoneNumber(phoneNumberTextField.getText());
 
                     try {
-                        new Alert().showAlert("Information Changed", "Ok", 0,null);
+                        new Alert().showAlert("Information Changed", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

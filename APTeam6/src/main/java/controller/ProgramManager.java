@@ -55,7 +55,7 @@ public class ProgramManager {
     private HashMap<String, Category> allCategories;
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
-    private HashMap<Integer,Off> allOffs;
+    private HashMap<Integer, Off> allOffs;
 
     private Account currentlyLoggedInUser;
 
@@ -78,7 +78,10 @@ public class ProgramManager {
     public void createAllProductHashMap() {
         allProducts = new HashMap<>();
     }
-    public void createAllOffsHashMap(){allOffs = new HashMap<>();}
+
+    public void createAllOffsHashMap() {
+        allOffs = new HashMap<>();
+    }
     //------------------------ Test----------
 
     private ProgramManager() {
@@ -110,8 +113,7 @@ public class ProgramManager {
             } catch (Exception ignored) {
                 System.out.println("Failed to make files...");
             }
-        }
-        else {
+        } else {
             try {
                 if (!accountsFile.exists())
                     accountsFile.createNewFile();
@@ -133,15 +135,21 @@ public class ProgramManager {
 
             YaGson gsonParser = new YaGson();
             try {
-                allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>(){}.getType());
-                allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<Integer, LogsInGeneral>>(){}.getType());
-                allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<Integer, Product>>(){}.getType());
-                allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>(){}.getType());
-                allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>(){}.getType());
-                allRequests = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "requests.json")), new TypeToken<ArrayList<Request>>(){}.getType());
-                allOffs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "offs.json")), new TypeToken<HashMap<Integer, Off>>(){}.getType());
-            }
-            catch (Exception ignored){
+                allAccounts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "accounts.json")), new TypeToken<HashMap<String, Account>>() {
+                }.getType());
+                allLogs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "logs.json")), new TypeToken<HashMap<Integer, LogsInGeneral>>() {
+                }.getType());
+                allProducts = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "products.json")), new TypeToken<HashMap<Integer, Product>>() {
+                }.getType());
+                allCategories = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "categories.json")), new TypeToken<HashMap<String, Category>>() {
+                }.getType());
+                allDiscountCodes = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "discountCodes.json")), new TypeToken<HashMap<String, DiscountCode>>() {
+                }.getType());
+                allRequests = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "requests.json")), new TypeToken<ArrayList<Request>>() {
+                }.getType());
+                allOffs = gsonParser.fromJson(Files.readString(Paths.get(ADDRESS + "offs.json")), new TypeToken<HashMap<Integer, Off>>() {
+                }.getType());
+            } catch (Exception ignored) {
                 ignored.printStackTrace();
                 System.out.println("Couldn't read from files...");
             }
@@ -149,9 +157,9 @@ public class ProgramManager {
         if (allAccounts == null) {
             allAccounts = new HashMap<>();
             existManager = false;
-        }else{
-            allAccounts.forEach((s, account) ->{
-                if (account.getRole()==3){
+        } else {
+            allAccounts.forEach((s, account) -> {
+                if (account.getRole() == 3) {
                     existManager = true;
                 }
             });
@@ -268,8 +276,8 @@ public class ProgramManager {
         }
     }
 
-    public void addOffToList(Off off){
-        allOffs.put(off.getOffId(),off);
+    public void addOffToList(Off off) {
+        allOffs.put(off.getOffId(), off);
     }
 
     public Product getProductById(int id) {
@@ -336,11 +344,9 @@ public class ProgramManager {
             if (buyBasket.containsKey(product)) {
                 count += buyBasket.get(product);
                 buyBasket.replace(product, count);
-            }
-            else
+            } else
                 buyBasket.put(product, count);
-        }
-        else if (currentlyLoggedInUser.getRole() == 1)
+        } else if (currentlyLoggedInUser.getRole() == 1)
             ((Buyer) currentlyLoggedInUser).addProductToBuyBasket(product, count);
     }
 
@@ -365,8 +371,7 @@ public class ProgramManager {
         for (int i = 0; i < allRequests.size(); i++) {
             if (allRequests.get(i) instanceof ProductRequest) {
                 System.out.println(i + ". " + allRequests.get(i) + "is a ProductRequest");
-            }
-            else if (allRequests.get(i) instanceof OffRequest) {
+            } else if (allRequests.get(i) instanceof OffRequest) {
                 System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
             }
         }
@@ -375,8 +380,8 @@ public class ProgramManager {
     public void acceptRequests(int id) {
         if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).accept();
+        } else if (allRequests.get(id) instanceof OffRequest) {
         }
-        else if(allRequests.get(id) instanceof OffRequest){}
     }
 
     public void declineRequests(int id) {
@@ -388,30 +393,29 @@ public class ProgramManager {
     public String detailsOfRequest(int id) {
         if (allRequests.get(id) instanceof ProductRequest) {
             return ((ProductRequest) allRequests.get(id)).showDetails(1);
-        }
-        else if (allRequests.get(id) instanceof OffRequest) {
+        } else if (allRequests.get(id) instanceof OffRequest) {
             return ((OffRequest) allRequests.get(id)).showDetails(1);
         }
         return null;
     }
 
-    public void addOffToHashMap(Off off){
-        allOffs.put(off.getOffId(),off);
+    public void addOffToHashMap(Off off) {
+        allOffs.put(off.getOffId(), off);
     }
 
-    public Off getOffById(int id){
+    public Off getOffById(int id) {
         return allOffs.get(id);
     }
 
-    public void showOff(Off off){
+    public void showOff(Off off) {
         System.out.println("the Off's Id is " + off.getOffId());
         System.out.println("the Off's StartDate is " + off.getStartDate());
         System.out.println("the Off's EndDate is " + off.getEndDate());
         System.out.println("the Off's amount is " + off.getOffAmount());
     }
 
-    public String showOff(Off off,int a){
-        String s="";
+    public String showOff(Off off, int a) {
+        String s = "";
         s += "the Off's Id is " + off.getOffId() + "\n";
         s += "the Off's StartDate is " + off.getStartDate() + "\n";
         s += "the Off's EndDate is " + off.getEndDate() + "\n";
@@ -419,11 +423,11 @@ public class ProgramManager {
         return s;
     }
 
-    public Category getCategoryByName(String name){
+    public Category getCategoryByName(String name) {
         return allCategories.get(name);
     }
 
-    public void removeCategory(Category category){
+    public void removeCategory(Category category) {
         allCategories.remove(category);
     }
 }

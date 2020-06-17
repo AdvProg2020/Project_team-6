@@ -113,6 +113,7 @@ public class MainScreenView extends Application {
             windowEvent.consume();
         });
     }
+
     private void loadingPercent(Stage primaryStage, Label percentOfProgress) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -291,7 +292,7 @@ public class MainScreenView extends Application {
                     try {
 
                         managerCreated = true;
-                        new Alert().showAlert("Account created!", "Ok", 1,null);
+                        new Alert().showAlert("Account created!", "Ok", 1, null);
                         window.close();
 
                     } catch (Exception e) {
