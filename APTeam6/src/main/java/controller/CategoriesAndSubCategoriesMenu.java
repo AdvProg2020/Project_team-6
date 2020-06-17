@@ -108,8 +108,41 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    public void startAsSeller(){
-        //TODO: write
+    public void startAsSeller() {
+        String command = null;
+        state = 0;
+        while (true) {
+            switch (state) {
+                case 0:
+                    view.showCategoriesList(allCategoriesArrayList);
+                    command = view.getInputCommandSellerCategory();
+                    if (command.matches("open \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        open(Integer.parseInt(splitCommand[1]));
+                    }
+                    else if (command.equals("back")) {
+                        return;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+                    }
+                    break;
+                case 1:
+                    view.showSubCategoriesList(allSubCategoriesArrayList);
+                    command = view.getInputCommandSellerSubCategory();
+                    if (command.matches("addTo \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        addProduct(Integer.parseInt(splitCommand[1]));
+                    }
+                    else if (command.equals("back")) {
+                        state = 0;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+                    }
+                    break;
+            }
+        }
     }
 
     public void startAsBuyer() {
@@ -120,24 +153,45 @@ public class CategoriesAndSubCategoriesMenu {
                 case 0:
                     view.showCategoriesList(allCategoriesArrayList);
                     command = view.getInputCommandBuyer();
+                    if (command.matches("open \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        open(Integer.parseInt(splitCommand[1]));
+                    }
+                    else if (command.equals("back")) {
+                        return;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+                    }
                     break;
                 case 1:
                     view.showSubCategoriesList(allSubCategoriesArrayList);
                     command = view.getInputCommandBuyer();
+                    if (command.matches("open \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        open(Integer.parseInt(splitCommand[1]));
+                    }
+                    else if (command.equals("back")) {
+                        state = 0;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+                    }
                     break;
                 case 2:
                     view.showProductsList(allProductsArrayList);
                     command = view.getInputCommandBuyer();
+                    if (command.matches("open \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        open(Integer.parseInt(splitCommand[1]));
+                    }
+                    else if (command.equals("back")) {
+                        state = 1;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown command was passed to ManageCategories by view");
+                    }
                     break;
-            }
-            if (command.matches("open \\d+")) {
-
-            }
-            else if (command.equals("back")) {
-                return;
-            }
-            else {
-                throw new RuntimeException("Unknown command was passed to ManageCategories by view");
             }
         }
 
@@ -170,7 +224,7 @@ public class CategoriesAndSubCategoriesMenu {
             category.setName(newName);
             updateCategoriesArrayList();
         }
-        else if (state == 1){
+        else if (state == 1) {
             SubCategory subCategory = allSubCategoriesArrayList.get(index);
             subCategory.setName(newName);
             updateSubCategoriesArrayList();
@@ -223,6 +277,17 @@ public class CategoriesAndSubCategoriesMenu {
             currentSubCategory = allSubCategoriesArrayList.get(index);
             state = 2;
         }
+        else if (state == 2) {
+            Product product = allProductsArrayList.get(index);
+            SingleProductScreen.getInstance().start(product);
+        }
+    }
+
+    private void addProduct(int index){
+        SubCategory subCategory = allSubCategoriesArrayList.get(index);
+        //Product product = new Product();
+        //ProgramManager.getProgramManagerInstance().addProductToList();
+        //TODO: add a new menu called CreateNewProductMenu
     }
 
     //TODO: check for index out of bound in all methods

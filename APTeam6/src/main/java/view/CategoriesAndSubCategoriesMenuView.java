@@ -53,7 +53,6 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
 
     /////////////////////////////////////////////////
 
-    //TODO: Seller view
     public String getInputCommandSellerCategory() {
         String command;
         while (true) {
@@ -61,7 +60,20 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             if (command.matches("open \\d+") || command.equals("back"))
                 return command;
             else if (command.equals("help"))
-                System.out.println("List of commands:\n\tadd [index]\n\tedit [index] [newName]\n\tremove [index]\n\topen [index]");
+                System.out.println("List of commands:\n\topen [index]");
+            else
+                System.out.println("Invalid command");
+        }
+    }
+
+    public String getInputCommandSellerSubCategory() {
+        String command;
+        while (true) {
+            command = Input.getInput();
+            if (command.matches("addTo \\d+") || command.equals("back"))
+                return command;
+            else if (command.equals("help"))
+                System.out.println("List of commands:\n\taddTo [index]");
             else
                 System.out.println("Invalid command");
         }
