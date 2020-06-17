@@ -158,54 +158,51 @@ public class ShowDiscountCodeView extends Application {
 
             fill.setVisible(discountCode.getText().equals(""));
             fill.setVisible(!discountCode.getText().matches("\\.+"));
-            if(!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")){
-                if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())!=null){
-        Label codeLabel = new Label("Enter your new code:");
-        codeLabel.setVisible(false);
-        TextField codeTextField = new TextField();
-        codeTextField.setPromptText("Code");
-        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),codeTextField.getText());
+            if (!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")) {
+                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null) {
+                    Label codeLabel = new Label("Enter your new code:");
+                    codeLabel.setVisible(false);
+                    TextField codeTextField = new TextField();
+                    codeTextField.setPromptText("Code");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), codeTextField.getText());
 
 
-        Label startDateLabel = new Label("Enter your new Start Date:");
-        startDateLabel.setVisible(false);
-        TextField startDateTextField = new TextField();
-        startDateTextField.setPromptText("Start Date");
-        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),startDateTextField.getText());
+                    Label startDateLabel = new Label("Enter your new Start Date:");
+                    startDateLabel.setVisible(false);
+                    TextField startDateTextField = new TextField();
+                    startDateTextField.setPromptText("Start Date");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), startDateTextField.getText());
 
 
-
-        Label endDateLabel = new Label("Enter your new End Date:");
-        endDateLabel.setVisible(false);
-        TextField endDateTextField = new TextField();
-        endDateTextField.setPromptText("End Date");
-        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),endDateTextField.getText());
-
+                    Label endDateLabel = new Label("Enter your new End Date:");
+                    endDateLabel.setVisible(false);
+                    TextField endDateTextField = new TextField();
+                    endDateTextField.setPromptText("End Date");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), endDateTextField.getText());
 
 
-        Label percentageLabel = new Label("Enter your new Percentage:");
-        percentageLabel.setVisible(false);
-        TextField percentageTextField = new TextField();
-        percentageTextField.setPromptText("Percentage");
-        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),Integer.parseInt(codeTextField.getText()));
+                    Label percentageLabel = new Label("Enter your new Percentage:");
+                    percentageLabel.setVisible(false);
+                    TextField percentageTextField = new TextField();
+                    percentageTextField.setPromptText("Percentage");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), Integer.parseInt(codeTextField.getText()));
 
 
-
-        Label repetitionTimeLabel = new Label("Enter your new Repetition Time:");
-        repetitionTimeLabel.setVisible(false);
-        TextField repetitionTextField = new TextField();
-        repetitionTextField.setPromptText("RepetitionTime");
-        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),Integer.parseInt(codeTextField.getText()));
-                    vBox.getChildren().addAll(codeLabel,endDateLabel,startDateLabel,repetitionTimeLabel,percentageLabel,codeTextField,endDateTextField,startDateTextField,percentageTextField,repetitionTextField);
-                }else{
-                        try {
-                            new Alert().showAlert("DiscountCode with this Code doesn't exist","Ok",0,null);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    Label repetitionTimeLabel = new Label("Enter your new Repetition Time:");
+                    repetitionTimeLabel.setVisible(false);
+                    TextField repetitionTextField = new TextField();
+                    repetitionTextField.setPromptText("RepetitionTime");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), Integer.parseInt(codeTextField.getText()));
+                    vBox.getChildren().addAll(codeLabel, endDateLabel, startDateLabel, repetitionTimeLabel, percentageLabel, codeTextField, endDateTextField, startDateTextField, percentageTextField, repetitionTextField);
+                } else {
+                    try {
+                        new Alert().showAlert("DiscountCode with this Code doesn't exist", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
-            });
+            }
+        });
 
         view.setOnAction(actionEvent -> {
             fill.setVisible(discountCode.getText().equals(""));
