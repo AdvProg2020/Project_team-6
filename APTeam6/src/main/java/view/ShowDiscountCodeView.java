@@ -86,7 +86,47 @@ public class ShowDiscountCodeView extends Application {
         System.out.println("List of commands:\n\tview discount code [discountCode code]\n\t edit discount code [discountCode code] [changingValue]\n\t remove discount code [discountCode code]\n\t");
     }
 
-    public void viewDiscountCode(DiscountCode discountCode) {
+    public String viewDiscountCode1(DiscountCode discountCode) {
+        System.out.println("the discountCode's ID is " + discountCode.getId());
+        System.out.println("the discountCode's code is " + discountCode.getCode());
+        System.out.println("the discountCode's startDate is " + discountCode.getStart());
+        System.out.println("the discountCode's endDate is " + discountCode.getEnd());
+        System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
+        System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
+    }
+    public String viewDiscountCode1(DiscountCode discountCode) {
+        System.out.println("the discountCode's ID is " + discountCode.getId());
+        System.out.println("the discountCode's code is " + discountCode.getCode());
+        System.out.println("the discountCode's startDate is " + discountCode.getStart());
+        System.out.println("the discountCode's endDate is " + discountCode.getEnd());
+        System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
+        System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
+    }
+    public String viewDiscountCode1(DiscountCode discountCode) {
+        System.out.println("the discountCode's ID is " + discountCode.getId());
+        System.out.println("the discountCode's code is " + discountCode.getCode());
+        System.out.println("the discountCode's startDate is " + discountCode.getStart());
+        System.out.println("the discountCode's endDate is " + discountCode.getEnd());
+        System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
+        System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
+    }
+    public String viewDiscountCode1(DiscountCode discountCode) {
+        System.out.println("the discountCode's ID is " + discountCode.getId());
+        System.out.println("the discountCode's code is " + discountCode.getCode());
+        System.out.println("the discountCode's startDate is " + discountCode.getStart());
+        System.out.println("the discountCode's endDate is " + discountCode.getEnd());
+        System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
+        System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
+    }
+    public String viewDiscountCode1(DiscountCode discountCode) {
+        System.out.println("the discountCode's ID is " + discountCode.getId());
+        System.out.println("the discountCode's code is " + discountCode.getCode());
+        System.out.println("the discountCode's startDate is " + discountCode.getStart());
+        System.out.println("the discountCode's endDate is " + discountCode.getEnd());
+        System.out.println("the discountCode's percentage is " + discountCode.getPercentage());
+        System.out.println("the discountCode's repetitionTime is " + discountCode.getRepetitionTime());
+    }
+    public String viewDiscountCode1(DiscountCode discountCode) {
         System.out.println("the discountCode's ID is " + discountCode.getId());
         System.out.println("the discountCode's code is " + discountCode.getCode());
         System.out.println("the discountCode's startDate is " + discountCode.getStart());
@@ -161,7 +201,7 @@ public class ShowDiscountCodeView extends Application {
                 fill.setVisible(discountCode.getText().equals(""));
                 fill.setVisible(!discountCode.getText().matches("[0-9]+"));
                 if(!discountCode.getText().equals("") && discountCode.getText().matches("[0-9]+")){
-                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())!=null){
+                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null){
                         detailLabel.setText(viewDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
                         detailLabel.setText("");
                         discountCode.setText("");
@@ -183,20 +223,20 @@ public class ShowDiscountCodeView extends Application {
 
             remove.setOnAction(actionEvent -> {
                 fill.setVisible(discountCode.getText().equals(""));
-                fill.setVisible(!discountCode.getText().matches("[0-9]+"));
-                if(!discountCode.getText().equals("") && discountCode.getText().matches("[0-9]+")){
-                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())!=null){
+                fill.setVisible(!discountCode.getText().matches("\\.+"));
+                if(!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")){
+                    if(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null){
                         removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()));
                         detailLabel.setText("");
                         discountCode.setText("");
                         try {
-                            new Alert().showAlert("Declined!","Ok",0,null);
+                            new Alert().showAlert("DiscountCode removed successfully!","Ok",0,null);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }else{
                         try {
-                            new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                            new Alert().showAlert("Discount Code with this code doesnt exist","Ok",0,null);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
