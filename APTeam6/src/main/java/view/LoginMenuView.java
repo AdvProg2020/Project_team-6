@@ -22,9 +22,6 @@ public class LoginMenuView extends Application {
     }
 
     private int destination = 0;
-
-
-
     public LoginMenuView(int destination) throws Exception {
         this.destination = destination;
         start(new Stage());
@@ -74,7 +71,7 @@ public class LoginMenuView extends Application {
         logout.setOnAction(actionEvent -> {
             ProgramManager.getProgramManagerInstance().logoutSuccessful();
             try {
-                new Alert().showAlert("logout successful","Ok",2);
+                new Alert().showAlert("logout successful","Ok",2,null);
                 stage.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -253,7 +250,7 @@ public class LoginMenuView extends Application {
                     new Seller(usernameTextField.getText(),passwordField.getText(),firstNameTextField.getText(),lastNameTextField.getText(),emailTextField.getText(),phoneNumberTextField.getText(),companyTextField.getText());
 
                     try {
-                        new Alert().showAlert("Register successfully. Please wait for accept", "Ok", 2);
+                        new Alert().showAlert("Register successfully. Please wait for accept", "Ok", 2,null);
                         window.close();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -365,7 +362,7 @@ public class LoginMenuView extends Application {
                     new Buyer(usernameTextField.getText(), passwordField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), phoneNumberTextField.getText());
 
                     try {
-                        new Alert().showAlert("Register successfully", "Ok", 2);
+                        new Alert().showAlert("Register successfully", "Ok", 2,null);
                         stage.close();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -433,7 +430,7 @@ public class LoginMenuView extends Application {
                         try {
                             stage.close();
                             loginMenuView.start(new Stage());
-                            new Alert().showAlert("login successful", "Ok", 0);
+                            new Alert().showAlert("login successful", "Ok", 0,null);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

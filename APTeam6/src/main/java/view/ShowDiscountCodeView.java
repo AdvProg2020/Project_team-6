@@ -1,12 +1,19 @@
 package view;
 
 import controller.ProgramManager;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.product.DiscountCode;
 import model.requests.Request;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
-public class ShowDiscountCodeView {
+public class ShowDiscountCodeView extends Application {
 
     public void giveOutput(String message) {
         System.out.println(message);
@@ -18,6 +25,31 @@ public class ShowDiscountCodeView {
         for (Request request : requests) {
             System.out.println("\t\t" + request);
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        //TODO
+
+        VBox vBox = new VBox();
+        stage.setTitle("Discount code");
+        stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        Scene scene = new Scene(vBox,300,600);
+        vBox.setAlignment(Pos.CENTER);
+        stage.setScene(scene);
+        stage.show();
+
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     public String getInputCommand() {

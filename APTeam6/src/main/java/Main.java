@@ -19,17 +19,16 @@ public class Main extends Application {
 
         programManager.loadFromFiles();
 
-        mainScreen.start();
-
+        //mainScreen.start();
 
 
         try {
-            //mainScreenView.start(stage);
+            mainScreenView.start(stage);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         programManager.saveToFiles();
-        System.exit(0);
+        //System.exit(0);
     }
 }

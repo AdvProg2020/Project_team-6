@@ -14,10 +14,12 @@ public class Alert extends Application {
     private String text = "";
     private String btnText = "";
     private int destination = 0;
-    public void showAlert(String text,String buttonText,int destination) throws Exception {
+    private PersonalInfoMenuView personalInfoMenuView = null;
+    public void showAlert(String text,String buttonText,int destination,PersonalInfoMenuView personalInfoMenuView) throws Exception {
         this.text = text;
         this.btnText = buttonText;
         this.destination = destination;
+        this.personalInfoMenuView = personalInfoMenuView;
         this.start(new Stage());
     }
 
@@ -25,10 +27,12 @@ public class Alert extends Application {
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
         Label text = new Label(this.text);
+        text.setWrapText(true);
+        text.prefHeight(200);
         Button ok = new Button(this.btnText);
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(text,ok);
-        stage.setScene(new Scene(vBox,300,150));
+        stage.setScene(new Scene(vBox,400,300));
         stage.show();
         ok.setOnAction(actionEvent -> {
             ProgramManager.getProgramManagerInstance().saveToFiles();
@@ -48,7 +52,7 @@ public class Alert extends Application {
                     e.printStackTrace();
                 }
             }else if(destination==3){
-                new PersonalInfoMenuView().manageUsers();
+                new ManageUsersView().manageUsers(this.personalInfoMenuView);
             }
         });
     }

@@ -41,4 +41,8 @@ public class OffRequest implements Request {
         ProgramManager.getProgramManagerInstance().showOff(off);
     }
 
+    public String showDetails(int a) {
+        return ProgramManager.getProgramManagerInstance().showOff(off,1);
+    }
+
 }

@@ -1,9 +1,17 @@
 package view;
 
 import controller.ProgramManager;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.product.DiscountCode;
 
-public class CreateDiscountCodeView {
+import java.io.FileInputStream;
+
+public class CreateDiscountCodeView extends Application {
     public CreateDiscountCodeView(){
         System.out.println("=== Create DiscountCode menu");
     }
@@ -54,4 +62,30 @@ public class CreateDiscountCodeView {
     public void giveOutput(String message){
         System.out.println(message);
     }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        //TODO
+
+        VBox vBox = new VBox();
+        stage.setTitle("Create discount code");
+        stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
+        Scene scene = new Scene(vBox,300,600);
+        vBox.setAlignment(Pos.CENTER);
+        stage.setScene(scene);
+        stage.show();
+
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            try {
+                new Exit().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
+
 }
