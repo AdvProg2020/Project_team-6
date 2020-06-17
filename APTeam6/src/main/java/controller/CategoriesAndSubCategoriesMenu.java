@@ -35,6 +35,7 @@ public class CategoriesAndSubCategoriesMenu {
         while (true) {
             switch (state) {
                 case 0:
+                    view.showCategoriesList(allCategoriesArrayList);
                     command = view.getInputCommandManagerCategory();
                     if (command.matches("edit \\d+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
@@ -60,6 +61,7 @@ public class CategoriesAndSubCategoriesMenu {
                     }
                     break;
                 case 1:
+                    view.showSubCategoriesList(allSubCategoriesArrayList);
                     command = view.getInputCommandManagerCategory();
                     if (command.matches("edit \\d+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
@@ -85,6 +87,7 @@ public class CategoriesAndSubCategoriesMenu {
                     }
                     break;
                 case 2:
+                    view.showProductsList(allProductsArrayList);
                     command = view.getInputCommandManagerProduct();
                     if (command.matches("remove \\d+")) {
                         String[] splitCommand = command.split("\\s");
@@ -110,7 +113,7 @@ public class CategoriesAndSubCategoriesMenu {
                     command = view.getInputCommandBuyerCategory();
                     break;
                 case 1:
-                    command = view.getInputCommandBuyerProduct();
+                    command = view.getInputCommandBuyerCategory();
                     break;
                 case 2:
                     command = view.getInputCommandBuyerProduct();
@@ -202,7 +205,14 @@ public class CategoriesAndSubCategoriesMenu {
 
     private void open(int index) {
         if (state == 0) {
-            //TODO: please write me
+            currentCategory = allCategoriesArrayList.get(index);
+            state = 1;
+        }
+        else if (state == 1) {
+            currentSubCategory = allSubCategoriesArrayList.get(index);
+            state = 2;
         }
     }
+
+    //TODO: check for index out of bound in all methods
 }
