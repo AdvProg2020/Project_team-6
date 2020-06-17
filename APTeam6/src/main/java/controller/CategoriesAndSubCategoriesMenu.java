@@ -93,6 +93,10 @@ public class CategoriesAndSubCategoriesMenu {
                         String[] splitCommand = command.split("\\s");
                         remove(Integer.parseInt(splitCommand[1]));
                     }
+                    else if (command.matches("open \\d+")) {
+                        String[] splitCommand = command.split("\\s");
+                        open(Integer.parseInt(splitCommand[1]));
+                    }
                     else if (command.equals("back")) {
                         state = 1;
                     }
@@ -104,19 +108,26 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
+    public void startAsSeller(){
+        //TODO: write
+    }
+
     public void startAsBuyer() {
         String command = null;
         state = 0;
         while (true) {
             switch (state) {
                 case 0:
-                    command = view.getInputCommandBuyerCategory();
+                    view.showCategoriesList(allCategoriesArrayList);
+                    command = view.getInputCommandBuyer();
                     break;
                 case 1:
-                    command = view.getInputCommandBuyerCategory();
+                    view.showSubCategoriesList(allSubCategoriesArrayList);
+                    command = view.getInputCommandBuyer();
                     break;
                 case 2:
-                    command = view.getInputCommandBuyerProduct();
+                    view.showProductsList(allProductsArrayList);
+                    command = view.getInputCommandBuyer();
                     break;
             }
             if (command.matches("open \\d+")) {

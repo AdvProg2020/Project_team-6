@@ -47,10 +47,7 @@ public class CategoriesAndSubCategoriesMenuView {
     /////////////////////////////////////////////////
 
     //TODO: Seller view
-
-    /////////////////////////////////////////////////
-
-    public String getInputCommandBuyerCategory() {
+    public String getInputCommandSellerCategory() {
         String command;
         while (true) {
             command = Input.getInput();
@@ -63,7 +60,9 @@ public class CategoriesAndSubCategoriesMenuView {
         }
     }
 
-    public String getInputCommandBuyerProduct() {
+    /////////////////////////////////////////////////
+
+    public String getInputCommandBuyer() {
         String command;
         while (true) {
             command = Input.getInput();
