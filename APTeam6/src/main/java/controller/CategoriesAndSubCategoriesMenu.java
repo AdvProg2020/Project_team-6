@@ -283,11 +283,9 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    private void addProduct(int index){
+    private void addProduct(int index) {
         SubCategory subCategory = allSubCategoriesArrayList.get(index);
-        //Product product = new Product();
-        //ProgramManager.getProgramManagerInstance().addProductToList();
-        //TODO: add a new menu called CreateNewProductMenu
+        //TODO: add a new menu called CreateNewProductMenu or maybe SellerProductsMenu
     }
 
     //TODO: check for index out of bound in all methods
