@@ -10,15 +10,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
-import model.account.Manager;
 import model.account.Seller;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class PersonalInfoMenuView extends Application {
 
@@ -210,7 +207,7 @@ public class PersonalInfoMenuView extends Application {
         });
 
         viewDiscountCode.setOnAction(actionEvent -> {
-            new ShowDiscountCodeView().manageRequestPage(this);
+            new ShowDiscountCodeView().manageDiscountCodePage(this);
             stage.close();
         });
 

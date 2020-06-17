@@ -23,20 +23,20 @@ public class ShowDiscountCode {
                 viewDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]));
             }
             else if (command.matches("edit discount code \\.+")) {
-                if(command.split("\\s")[4].equalsIgnoreCase("code")) {
-                    editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[5]);
+                if(command.split("\\s")[3].equalsIgnoreCase("code")) {
+                    editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[4]),command.split("\\s")[5]);
                 }
-                else if(command.split("\\s")[4].equalsIgnoreCase("startDate")){
-                    editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[5]);
+                else if(command.split("\\s")[3].equalsIgnoreCase("startDate")){
+                    editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[4]),command.split("\\s")[5]);
                 }
-                else if(command.split("\\s")[4].equalsIgnoreCase("endDate")){
-                    editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),command.split("\\s")[5]);
+                else if(command.split("\\s")[3].equalsIgnoreCase("endDate")){
+                    editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[4]),command.split("\\s")[5]);
                 }
-                else if(command.split("\\s")[4].equalsIgnoreCase("percentage")){
-                    editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),Integer.parseInt(command.split("\\s")[5]));
+                else if(command.split("\\s")[3].equalsIgnoreCase("percentage")){
+                    editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[4]),Integer.parseInt(command.split("\\s")[5]));
                 }
                 else{
-                    editDiscountCodeCRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[3]),Integer.parseInt(command.split("\\s")[5]));
+                    editDiscountCodeCRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(command.split("\\s")[4]),Integer.parseInt(command.split("\\s")[5]));
                 }
             }
             else if (command.equals("remove discount code \\.+")){
@@ -52,7 +52,12 @@ public class ShowDiscountCode {
     }
 
     public void viewDiscountCode(DiscountCode discountCode){
-        view.viewDiscountCode(discountCode);
+        view.viewDiscountCode1(discountCode);
+        view.viewDiscountCode2(discountCode);
+        view.viewDiscountCode3(discountCode);
+        view.viewDiscountCode4(discountCode);
+        view.viewDiscountCode5(discountCode);
+        view.viewDiscountCode6(discountCode);
     }
     public void editDiscountCodeCode(DiscountCode discountCode, String code){
         view.editDiscountCodeCode(discountCode,code);

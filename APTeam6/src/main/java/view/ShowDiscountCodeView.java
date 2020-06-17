@@ -1,6 +1,7 @@
 package view;
 
 import controller.ProgramManager;
+import controller.managerPanels.ShowDiscountCode;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -129,7 +130,7 @@ public class ShowDiscountCodeView extends Application {
         ProgramManager.getProgramManagerInstance().deleteDiscountCode(discountCode);
     }
 
-    public void manageRequestPage(PersonalInfoMenuView personalInfoMenuView) {
+    public void manageDiscountCodePage(PersonalInfoMenuView personalInfoMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox();
         Label label = new Label("Enter Discount Code");
@@ -155,6 +156,51 @@ public class ShowDiscountCodeView extends Application {
         stage.setTitle("Manage Discounts");
         stage.show();
         //TODO
+        Label code = new Label("Code");
+        Label codeLabel = new Label("Enter your new code:");
+        codeLabel.setVisible(false);
+        TextField codeTextField = new TextField();
+        codeTextField.setPromptText("Code");
+        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),codeTextField.getText());
+
+
+
+        Label code = new Label("Code");
+        Label codeLabel = new Label("Enter your new code:");
+        codeLabel.setVisible(false);
+        TextField codeTextField = new TextField();
+        codeTextField.setPromptText("Code");
+        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),codeTextField.getText());
+
+
+
+
+
+        Label code = new Label("Code");
+        Label codeLabel = new Label("Enter your new code:");
+        codeLabel.setVisible(false);
+        TextField codeTextField = new TextField();
+        codeTextField.setPromptText("Code");
+        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),codeTextField.getText());
+
+
+
+        Label code = new Label("Code");
+        Label codeLabel = new Label("Enter your new code:");
+        codeLabel.setVisible(false);
+        TextField codeTextField = new TextField();
+        codeTextField.setPromptText("Code");
+        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),codeTextField.getText());
+
+
+
+
+        Label code = new Label("Code");
+        Label codeLabel = new Label("Enter your new code:");
+        codeLabel.setVisible(false);
+        TextField codeTextField = new TextField();
+        codeTextField.setPromptText("Code");
+        ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()),codeTextField.getText());
             /*
             edit.setOnAction(actionEvent -> {
                 fill.setVisible(discountCode.getText().equals(""));
