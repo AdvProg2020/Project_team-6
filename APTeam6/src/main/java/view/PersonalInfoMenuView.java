@@ -88,6 +88,11 @@ public class PersonalInfoMenuView extends Application {
             credit2.setVisible(false);
         }
 
+        credit.setFont(arial12);
+        credit.setTextFill(Color.DARKBLUE);
+        credit2.setFont(arial12);
+        credit2.setTextFill(Color.DARKBLUE);
+
         Label company = new Label("Company");
         Label company2 = new Label();
         if (currentlyLoggedInUser.getRole() == 2) {
@@ -97,6 +102,11 @@ public class PersonalInfoMenuView extends Application {
             company.setVisible(false);
             company2.setVisible(false);
         }
+
+        company.setFont(arial12);
+        company.setTextFill(Color.DARKBLUE);
+        company2.setFont(arial12);
+        company2.setTextFill(Color.DARKBLUE);
 
 
         Label role = new Label("your role is : ");
@@ -109,6 +119,11 @@ public class PersonalInfoMenuView extends Application {
             role2.setText("Manager");
         }
 
+        role.setFont(arial12);
+        role.setTextFill(Color.DARKBLUE);
+        role2.setFont(arial12);
+        role2.setTextFill(Color.DARKBLUE);
+
 
         Label username = new Label("Username");
         Label usernameLabel = new Label("This username already exist!");
@@ -119,8 +134,12 @@ public class PersonalInfoMenuView extends Application {
         usernameTextField.setEditable(false);
         usernameTextField.setPromptText("Username");
         usernameTextField.setText(currentlyLoggedInUser.getUsername());
+        username.setFont(arial12);
+        username.setTextFill(Color.DARKBLUE);
 
         Label password = new Label("Password");
+        password.setFont(arial12);
+        password.setTextFill(Color.DARKBLUE);
         Label passwordLabel = new Label("please fill this field");
         passwordLabel.setVisible(false);
         PasswordField passwordField = new PasswordField();
@@ -128,6 +147,8 @@ public class PersonalInfoMenuView extends Application {
         passwordField.setText(currentlyLoggedInUser.getPassword());
 
         Label firstName = new Label("FirstName");
+        firstName.setFont(arial12);
+        firstName.setTextFill(Color.DARKBLUE);
         Label firstNameLabel = new Label("write your first name here");
         firstNameLabel.setVisible(false);
         TextField firstNameTextField = new TextField();
@@ -135,6 +156,8 @@ public class PersonalInfoMenuView extends Application {
         firstNameTextField.setText(currentlyLoggedInUser.getFirstName());
 
         Label lastName = new Label("LastName");
+        lastName.setFont(arial12);
+        lastName.setTextFill(Color.DARKBLUE);
         Label lastNameLabel = new Label("write your last name here");
         lastNameLabel.setVisible(false);
         TextField lastNameTextField = new TextField();
@@ -142,6 +165,8 @@ public class PersonalInfoMenuView extends Application {
         lastNameTextField.setText(currentlyLoggedInUser.getLastName());
 
         Label email = new Label("Email");
+        email.setFont(arial12);
+        email.setTextFill(Color.DARKBLUE);
         Label emailAddressLabel = new Label("write your email here");
         emailAddressLabel.setVisible(false);
         TextField emailTextField = new TextField();
@@ -149,6 +174,8 @@ public class PersonalInfoMenuView extends Application {
         emailTextField.setText(currentlyLoggedInUser.getEmailAddress());
 
         Label phone = new Label("PhoneNumber");
+        phone.setFont(arial12);
+        phone.setTextFill(Color.DARKBLUE);
         Label phoneNumberLabel = new Label("write a PhoneNumber");
         phoneNumberLabel.setVisible(false);
         TextField phoneNumberTextField = new TextField();
