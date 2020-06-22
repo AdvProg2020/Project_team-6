@@ -10,6 +10,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
@@ -69,6 +71,7 @@ public class PersonalInfoMenuView extends Application {
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         VBox pane = new VBox();
         pane.setAlignment(Pos.CENTER);
+        Font arial12 = new Font("Arial" , 12);
 
         Account currentlyLoggedInUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
 
@@ -153,11 +156,21 @@ public class PersonalInfoMenuView extends Application {
         phoneNumberTextField.setText(currentlyLoggedInUser.getPhoneNumber());
 
         Button change = new Button("Change Information");
+        change.setFont(arial12);
+        change.setTextFill(Color.DARKBLUE);
         Button close = new Button("Back");
+        close.setFont(arial12);
+        close.setTextFill(Color.DARKBLUE);
 
         Button openCart = new Button("Go to cart");
         Button openBuyHistory = new Button("Go to buy history");
         Button showDiscountCode = new Button("Show my discount code");
+        openCart.setFont(arial12);
+        openCart.setTextFill(Color.DARKBLUE);
+        openBuyHistory.setFont(arial12);
+        openBuyHistory.setTextFill(Color.DARKBLUE);
+        showDiscountCode.setFont(arial12);
+        showDiscountCode.setTextFill(Color.DARKBLUE);
 
         if (currentlyLoggedInUser.getRole() != 1) {
             openCart.setVisible(false);
@@ -192,6 +205,19 @@ public class PersonalInfoMenuView extends Application {
         Button viewDiscountCode = new Button("View Discount code");
         Button manageRequest = new Button("Manage request");
         Button manageCategories = new Button("Manage categories");
+
+        manageUsers.setFont(arial12);
+        manageUsers.setTextFill(Color.DARKBLUE);
+        manageAllProduct.setFont(arial12);
+        manageAllProduct.setTextFill(Color.DARKBLUE);
+        createDiscountCode.setFont(arial12);
+        createDiscountCode.setTextFill(Color.DARKBLUE);
+        viewDiscountCode.setFont(arial12);
+        viewDiscountCode.setTextFill(Color.DARKBLUE);
+        manageRequest.setFont(arial12);
+        manageRequest.setTextFill(Color.DARKBLUE);
+        manageCategories.setFont(arial12);
+        manageCategories.setTextFill(Color.DARKBLUE);
 
         if (currentlyLoggedInUser.getRole() != 3) {
             manageAllProduct.setVisible(false);
@@ -238,6 +264,23 @@ public class PersonalInfoMenuView extends Application {
         Button showCategories = new Button("Show categories");
         Button viewOffs = new Button("View offs");
         Button viewBalance = new Button("View balance");
+
+        viewCompanyInfo.setFont(arial12);
+        viewCompanyInfo.setTextFill(Color.DARKBLUE);
+        viewSalesHistory.setFont(arial12);
+        viewSalesHistory.setTextFill(Color.DARKBLUE);
+        manageProducts.setFont(arial12);
+        manageProducts.setTextFill(Color.DARKBLUE);
+        addProduct.setFont(arial12);
+        addProduct.setTextFill(Color.DARKBLUE);
+        removeProduct.setFont(arial12);
+        removeProduct.setTextFill(Color.DARKBLUE);
+        showCategories.setFont(arial12);
+        showCategories.setTextFill(Color.DARKBLUE);
+        viewOffs.setFont(arial12);
+        viewOffs.setTextFill(Color.DARKBLUE);
+        viewBalance.setFont(arial12);
+        viewBalance.setTextFill(Color.DARKBLUE);
 
         if (currentlyLoggedInUser.getRole() != 2) {
             viewBalance.setVisible(false);
@@ -286,6 +329,7 @@ public class PersonalInfoMenuView extends Application {
         viewOffs.setOnAction(actionEvent -> {
             //TODO
         });
+
 
         if (currentlyLoggedInUser.getRole() == 1) {
             pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,

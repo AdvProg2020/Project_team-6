@@ -180,8 +180,16 @@ public class MainScreenView extends Application {
             VBox pane = new VBox(15);
 
             Button account = new Button("User Panel");
+            account.setFont(new Font("Arial", 12));
+            account.setTextFill(Color.DARKBLUE);
+
             Button products = new Button("Products");
+            products.setFont(new Font("Arial", 12));
+            products.setTextFill(Color.DARKBLUE);
+
             Button offs = new Button("Offs");
+            offs.setFont(new Font("Arial", 12));
+            offs.setTextFill(Color.DARKBLUE);
 
             window.setOnCloseRequest(windowEvent -> {
                 windowEvent.consume();
@@ -221,6 +229,7 @@ public class MainScreenView extends Application {
             VBox pane = new VBox(10);
             pane.setAlignment(Pos.CENTER);
 
+            Label label1 = new Label("Username : ");
             Label usernameLabel = new Label("This username already exist!");
             Label usernameLabel2 = new Label("write your username here");
             usernameLabel.setTextFill(Color.RED);
@@ -230,30 +239,36 @@ public class MainScreenView extends Application {
             TextField usernameTextField = new TextField();
             usernameTextField.setPromptText("Username");
 
-            Label passwordLabel = new Label("این فیلد نباید خالی باشد");
+
+            Label label2 = new Label("Password : ");
+            Label passwordLabel = new Label("please fill this field");
             passwordLabel.setTextFill(Color.RED);
             passwordLabel.setVisible(false);
             PasswordField passwordField = new PasswordField();
             passwordField.setPromptText("Password");
 
+            Label label3 = new Label("FirstName : ");
             Label firstNameLabel = new Label("write your first name here");
             firstNameLabel.setTextFill(Color.RED);
             firstNameLabel.setVisible(false);
             TextField firstNameTextField = new TextField();
             firstNameTextField.setPromptText("FirstName");
 
+            Label label4 = new Label("LastName : ");
             Label lastNameLabel = new Label("write your last name here");
             lastNameLabel.setTextFill(Color.RED);
             lastNameLabel.setVisible(false);
             TextField lastNameTextField = new TextField();
             lastNameTextField.setPromptText("LastName");
 
+            Label label5 = new Label("Email : ");
             Label emailAddressLabel = new Label("write your email here");
             emailAddressLabel.setTextFill(Color.RED);
             emailAddressLabel.setVisible(false);
             TextField emailTextField = new TextField();
             emailTextField.setPromptText("Email");
 
+            Label label6 = new Label("PhoneNumber : ");
             Label phoneNumberLabel = new Label("write a PhoneNumber");
             phoneNumberLabel.setTextFill(Color.RED);
             phoneNumberLabel.setVisible(false);
@@ -261,7 +276,13 @@ public class MainScreenView extends Application {
             phoneNumberTextField.setPromptText("e.g. 09123456789");
 
             Button create = new Button("Create");
-            pane.getChildren().addAll(usernameLabel, usernameLabel2, usernameTextField, passwordLabel, passwordField, firstNameLabel, firstNameTextField, lastNameLabel, lastNameTextField, emailAddressLabel, emailTextField, phoneNumberLabel, phoneNumberTextField, create);
+            create.setFont(new Font("Arial", 12));
+            create.setTextFill(Color.DARKBLUE);
+
+            pane.getChildren().addAll(label1, usernameLabel, usernameLabel2, usernameTextField,
+                    label2, passwordLabel, passwordField, label3, firstNameLabel, firstNameTextField,
+                    label4, lastNameLabel, lastNameTextField, label5, emailAddressLabel, emailTextField,
+                    label6, phoneNumberLabel, phoneNumberTextField, create);
             window.setScene(new Scene(pane, 400, 500));
             window.show();
 
