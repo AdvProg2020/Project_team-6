@@ -208,6 +208,7 @@ public class PersonalInfoMenuView extends Application {
         openCart.setOnAction(actionEvent -> {
             try {
                 new ShowCartView().start(new Stage());
+                stage.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -220,6 +221,7 @@ public class PersonalInfoMenuView extends Application {
         showDiscountCode.setOnAction(actionEvent -> {
             try {
                 new ShowDiscountCodeView().start(new Stage());
+                stage.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -265,7 +267,12 @@ public class PersonalInfoMenuView extends Application {
         });
 
         createDiscountCode.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                new CreateDiscountCodeView().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            stage.close();
         });
 
         viewDiscountCode.setOnAction(actionEvent -> {

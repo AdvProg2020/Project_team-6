@@ -45,6 +45,7 @@ public class LoginMenuView extends Application {
         }
 
         vBox.getChildren().addAll(login, register, logout, back);
+        vBox.setAlignment(Pos.CENTER);
         stage.setScene(new Scene(vBox, 250, 350));
         stage.show();
 
@@ -390,10 +391,14 @@ public class LoginMenuView extends Application {
         usernameIsNull.setVisible(false);
         usernameIsNull.setTextFill(Color.RED);
 
+        Label label1 = new Label();
+        label1.setText("Username :  ");
         TextField usernameTextField = new TextField();
         usernameTextField.setPromptText("Username");
 
 
+        Label label2 = new Label();
+        label2.setText("Password :  ");
         Label passwordIsNull = new Label("please fill this field");
         passwordIsNull.setVisible(false);
         passwordIsNull.setTextFill(Color.RED);
@@ -404,7 +409,8 @@ public class LoginMenuView extends Application {
         Button login = new Button("Login");
         Button close = new Button("Close");
 
-        vBox.getChildren().addAll(doesntExistUsername, passwordFalse, usernameIsNull, usernameTextField, passwordIsNull, passwordField, login, close);
+        vBox.getChildren().addAll(label1,doesntExistUsername, passwordFalse, usernameIsNull, usernameTextField,
+                label2, passwordIsNull, passwordField, login, close);
 
 
         close.setOnAction(actionEvent -> {
