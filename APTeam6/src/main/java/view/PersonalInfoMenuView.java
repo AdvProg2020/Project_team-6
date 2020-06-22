@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
 import model.account.Seller;
+import view.userPanel.ShowCartView;
 
 import java.io.FileInputStream;
 
@@ -165,7 +166,11 @@ public class PersonalInfoMenuView extends Application {
         }
 
         openCart.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                new ShowCartView().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         openBuyHistory.setOnAction(actionEvent -> {
@@ -173,7 +178,11 @@ public class PersonalInfoMenuView extends Application {
         });
 
         showDiscountCode.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                new ShowDiscountCodeView().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 

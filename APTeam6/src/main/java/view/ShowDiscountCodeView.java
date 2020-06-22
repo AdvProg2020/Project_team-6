@@ -35,7 +35,29 @@ public class ShowDiscountCodeView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-   /*  stage.setOnCloseRequest(windowEvent -> {
+        VBox vBox = new VBox(8);
+        vBox.setAlignment(Pos.CENTER);
+
+        Label label = new Label();
+        label.setText("Discount codes : ");
+        Label disCode = new Label();
+        disCode.setWrapText(true);
+
+        StringBuilder dis = new StringBuilder();
+        ArrayList<Request> requests = ProgramManager.getProgramManagerInstance().getAllRequests();
+        for (Request request : requests) {
+            dis.append(request.toString());
+        }
+        disCode.setText(dis.toString());
+
+        vBox.getChildren().addAll(label,disCode);
+
+        Scene scene = new Scene(vBox,300,500);
+        stage.setScene(scene);
+        stage.setTitle("Discount code");
+        stage.show();
+
+        stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
             try {
                 new Exit().start(new Stage());
@@ -43,10 +65,10 @@ public class ShowDiscountCodeView extends Application {
                 e.printStackTrace();
             }
         });
-*/
+
     }
 
-public String getInputCommand() {
+    public String getInputCommand() {
         String command;
         while (true) {
             command = Input.getInput();
@@ -118,33 +140,40 @@ public String getInputCommand() {
         ProgramManager.getProgramManagerInstance().deleteDiscountCode(discountCode);
     }
 
-    public void manageDiscountCodePage(PersonalInfoMenuView personalInfoMenuView) { Stage stage = new Stage();
+    public void manageDiscountCodePage(PersonalInfoMenuView personalInfoMenuView) {
+        Stage stage = new Stage();
         VBox vBox = new VBox(10);
         Label label = new Label("Enter Discount Code");
         Label fill = new Label("please fill this field");
         fill.setVisible(false);
         fill.setTextFill(Color.RED);
+
         TextField discountCode = new TextField();
         discountCode.setPrefWidth(200);
         discountCode.setMaxWidth(200);
         discountCode.setMinWidth(200);
+
         Button view = new Button("View");
+
         Label codeLabel = new Label();
         Label startDateLabel = new Label();
-        Label endDateLabel =  new Label();
+        Label endDateLabel = new Label();
         Label percentageLabel = new Label();
-        Label repetitionTimeLabel =  new Label();
+        Label repetitionTimeLabel = new Label();
+
         TextField codeTextField = new TextField();
         TextField startDateTextField = new TextField();
         TextField endDateTextField = new TextField();
         TextField percentageTextField = new TextField();
         TextField repetitionTimeTextField = new TextField();
+
         codeLabel.setWrapText(true);
         Button edit = new Button("Edit");
         Button remove = new Button("Remove");
         Button back = new Button("Back");
+
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(label, fill, discountCode, view,edit,remove, back,codeLabel, startDateLabel, endDateLabel, percentageLabel, repetitionTimeLabel);
+        vBox.getChildren().addAll(label, fill, discountCode, view, edit, remove, back, codeLabel, startDateLabel, endDateLabel, percentageLabel, repetitionTimeLabel);
 
         stage.setScene(new Scene(vBox, 400, 700));
         stage.setTitle("Manage Discounts");
