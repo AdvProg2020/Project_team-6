@@ -263,7 +263,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageAllProduct.setOnAction(actionEvent -> {
-            //TODO
+            new ManageAllProductsView().manageProducts(this);
+            stage.close();
         });
 
         createDiscountCode.setOnAction(actionEvent -> {

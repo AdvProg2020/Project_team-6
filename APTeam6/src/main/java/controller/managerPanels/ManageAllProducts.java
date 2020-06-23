@@ -3,6 +3,7 @@ package controller.managerPanels;
 import controller.ProgramManager;
 
 import view.ManageAllProductsView;
+import view.PersonalInfoMenuView;
 
 public class ManageAllProducts {
     private static ManageAllProducts manageAllProductsInstance = null;
@@ -14,18 +15,16 @@ public class ManageAllProducts {
     ////////////////////////////////////////
     private ManageAllProductsView view;
 
-    public void start(){
+    public void start() {
         view = new ManageAllProductsView();
         String command = null;
-        while (true){
+        while (true) {
             command = view.getInputCommand();
-            if(command.matches("remove \\.+")){
+            if (command.matches("remove \\.+")) {
                 remove(Integer.parseInt(command.split("\\s")[1]));
-            }
-            else if (command.equalsIgnoreCase("back")){
+            } else if (command.equalsIgnoreCase("back")) {
                 return;
-            }
-            else {
+            } else {
                 throw new RuntimeException("unknown command was passed to manageAllProducts");
             }
         }
