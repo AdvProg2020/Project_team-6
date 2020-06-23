@@ -13,8 +13,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.requests.Request;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 public class ManageAllProductsView extends Application {
     public ManageAllProductsView() {
@@ -27,9 +29,7 @@ public class ManageAllProductsView extends Application {
             command = Input.getInput();
             if (command.matches("remove \\.+")) {
                 return command;
-            } else if (command.equals("help")) {
-                showHelp();
-            } else if (command.equals("back")) {
+            }else if (command.equals("back")) {
                 return command;
             } else {
                 giveOutput("Invalid Command!");
@@ -49,23 +49,6 @@ public class ManageAllProductsView extends Application {
         productId.setPrefWidth(200);
         productId.setMaxWidth(200);
         productId.setMinWidth(200);
-
-        //Button view = new Button("View");
-
-//        Label codeLabel = new Label();
-//        Label startDateLabel = new Label();
-//        Label endDateLabel = new Label();
-//        Label percentageLabel = new Label();
-//        Label repetitionTimeLabel = new Label();
-//
-//        TextField codeTextField = new TextField();
-//        TextField startDateTextField = new TextField();
-//        TextField endDateTextField = new TextField();
-//        TextField percentageTextField = new TextField();
-//        TextField repetitionTimeTextField = new TextField();
-
-//        codeLabel.setWrapText(true);
-        //Button edit = new Button("Edit");
         Button remove = new Button("Remove");
         Button back = new Button("Back");
 
@@ -75,40 +58,12 @@ public class ManageAllProductsView extends Application {
         stage.setScene(new Scene(vBox, 400, 700));
         stage.setTitle("Manage All Products");
         stage.show();
-//        view.setOnAction(actionEvent -> {
-//            fill.setVisible(discountCode.getText().equals(""));
-//            fill.setVisible(!discountCode.getText().matches("\\.+"));
-//            if (!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")) {
-//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null) {
-//                    codeLabel.setText(viewDiscountCode1(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
-//                    startDateLabel.setText(viewDiscountCode2(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
-//                    endDateLabel.setText(viewDiscountCode3(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
-//                    percentageLabel.setText(viewDiscountCode4(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
-//                    repetitionTimeLabel.setText(viewDiscountCode5(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText())));
-//                    codeLabel.setText("");
-//                    startDateLabel.setText("");
-//                    endDateLabel.setText("");
-//                    percentageLabel.setText("");
-//                    repetitionTimeLabel.setText("");
-//                    discountCode.setText("");
-//                } else {
-//                    try {
-//                        new Alert().showAlert("DiscountCode with this code doesnt exist", "Ok", 0, null);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-
-
         remove.setOnAction(actionEvent -> {
             fill.setVisible(productId.getText().equals(""));
             fill.setVisible(!productId.getText().matches("\\.+"));
             if (!productId.getText().equals("") && productId.getText().matches("\\.+")) {
                 if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(productId.getText()) != null) {
                     manageAllProducts.remove(Integer.parseInt(productId.getText()));
-//                    codeLabel.setText("");
                     productId.setText("");
                     try {
                         new Alert().showAlert("Product removed successfully!", "Ok", 0, null);
@@ -143,22 +98,12 @@ public class ManageAllProductsView extends Application {
             }
         });
     }
-
-
-    private void showHelp() {
-        System.out.println("List of commands:\n\tremove [productId]\n\t");
-    }
-
     public void giveOutput(String message) {
         System.out.println(message);
     }
-
     @Override
     public void start(Stage stage) throws Exception {
-
-        //TODO
-
-        VBox vBox = new VBox();
+        VBox vBox = new VBox(8);
         stage.setTitle("Manage products");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         Scene scene = new Scene(vBox, 300, 600);
