@@ -287,7 +287,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageCategories.setOnAction(actionEvent -> {
-            //TODO
+            new CategoriesAndSubCategoriesMenuView().manageCategories(this);
+            stage.close();
         });
 
 
