@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" rotate="21.8" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ad">
+
+    <padding>
+
+        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+
+    </padding>
+
+    <children>
+
+        <VBox fx:id="vbox1" alignment="CENTER" layoutX="250.0" layoutY="250.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" AnchorPane.rightAnchor="304.0" AnchorPane.topAnchor="172.0">
+
+            <children>
+
+                <ImageView fx:id="buyProduct" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="-36.9" VBox.vgrow="NEVER">
+
+                    <image>
+
+                        <Image url="@pictures/icon.png" />
+
+                    </image>
+
+                    <effect>
+
+                        <InnerShadow />
+
+                    </effect>
+
+                    <cursor>
+
+                        <Cursor fx:constant="WAIT" />
+
+                    </cursor>
+
+                    <VBox.margin>
+
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+
+                    </VBox.margin></ImageView>
+
+
+            </children>
+
+
+        </VBox>
+
+        <VBox layoutX="248.0" layoutY="60.0" prefHeight="200.0" prefWidth="100.0">
+
+            <children>
+
+                <Button mnemonicParsing="false" text="buy" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+
+                    <font>
+
+                        <Font name="System Bold Italic" size="22.0" />
+
+                    </font>
+
+                </Button>
+
+            </children>
+
+        </VBox>
+
+        <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="102.0" layoutY="373.0" prefHeight="200.0" prefWidth="506.0" />
+
+        <WebView fx:id="webView" layoutX="521.0" layoutY="272.0" prefHeight="200.0" prefWidth="200.0" />
+
+    </children>
+
+</AnchorPane>
