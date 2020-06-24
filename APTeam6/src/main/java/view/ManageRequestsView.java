@@ -26,7 +26,7 @@ public class ManageRequestsView extends Application {
 
     }
 
-    public void manageRequestPage(PersonalInfoMenuView personalInfoMenuView){
+    public void manageRequestPage(PersonalInfoMenuView personalInfoMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox();
 
@@ -43,21 +43,21 @@ public class ManageRequestsView extends Application {
         Button back = new Button("Back");
 
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(label,fill,id,detail,detailLabel,accept,decline,back);
+        vBox.getChildren().addAll(label, fill, id, detail, detailLabel, accept, decline, back);
 
-        stage.setScene(new Scene(vBox,400,700));
+        stage.setScene(new Scene(vBox, 400, 700));
         stage.setTitle("manage requests");
         stage.show();
 
         detail.setOnAction(actionEvent -> {
             fill.setVisible(id.getText().equals(""));
             fill.setVisible(!id.getText().matches("[0-9]+"));
-            if(!id.getText().equals("") && id.getText().matches("[0-9]+")){
-                if(details(Integer.parseInt(id.getText()))!=null){
+            if (!id.getText().equals("") && id.getText().matches("[0-9]+")) {
+                if (details(Integer.parseInt(id.getText())) != null) {
                     detailLabel.setText(details(Integer.parseInt(id.getText())));
-                }else{
+                } else {
                     try {
-                        new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                        new Alert().showAlert("Request with this id doesnt exist", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -68,19 +68,19 @@ public class ManageRequestsView extends Application {
         accept.setOnAction(actionEvent -> {
             fill.setVisible(id.getText().equals(""));
             fill.setVisible(!id.getText().matches("[0-9]+"));
-            if(!id.getText().equals("") && id.getText().matches("[0-9]+")){
-                if(details(Integer.parseInt(id.getText()))!=null){
+            if (!id.getText().equals("") && id.getText().matches("[0-9]+")) {
+                if (details(Integer.parseInt(id.getText())) != null) {
                     accept(Integer.parseInt(id.getText()));
                     detailLabel.setText("");
                     id.setText("");
                     try {
-                        new Alert().showAlert("Accepted!","Ok",0,null);
+                        new Alert().showAlert("Accepted!", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     try {
-                        new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                        new Alert().showAlert("Request with this id doesnt exist", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -92,19 +92,19 @@ public class ManageRequestsView extends Application {
         decline.setOnAction(actionEvent -> {
             fill.setVisible(id.getText().equals(""));
             fill.setVisible(!id.getText().matches("[0-9]+"));
-            if(!id.getText().equals("") && id.getText().matches("[0-9]+")){
-                if(details(Integer.parseInt(id.getText()))!=null){
+            if (!id.getText().equals("") && id.getText().matches("[0-9]+")) {
+                if (details(Integer.parseInt(id.getText())) != null) {
                     accept(Integer.parseInt(id.getText()));
                     detailLabel.setText("");
                     id.setText("");
                     try {
-                        new Alert().showAlert("Declined!","Ok",0,null);
+                        new Alert().showAlert("Declined!", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     try {
-                        new Alert().showAlert("Request with this id doesnt exist","Ok",0,null);
+                        new Alert().showAlert("Request with this id doesnt exist", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -138,17 +138,13 @@ public class ManageRequestsView extends Application {
             command = Input.getInput();
             if (command.equals("back")) {
                 return command;
-            }
-            else if(command.equals("help")){
+            } else if (command.equals("help")) {
                 showHelp();
-            }
-            else if(command.matches("details \\.+")){
+            } else if (command.matches("details \\.+")) {
                 return command;
-            }
-            else if(command.matches("(accept|decline) \\.+")){
+            } else if (command.matches("(accept|decline) \\.+")) {
                 return command;
-            }
-            else {
+            } else {
                 System.out.println("Invalid command");
             }
         }
@@ -158,13 +154,15 @@ public class ManageRequestsView extends Application {
         System.out.println("List of commands:\n\tdetails [requestId]\n\taccept [requestId]\n\tdecline [requestId]");
     }
 
-    public void accept(int id){
+    public void accept(int id) {
         ProgramManager.getProgramManagerInstance().acceptRequests(id);
     }
-    public void decline(int id){
+
+    public void decline(int id) {
         ProgramManager.getProgramManagerInstance().declineRequests(id);
     }
-    public String details(int id){
+
+    public String details(int id) {
         return ProgramManager.getProgramManagerInstance().detailsOfRequest(id);
     }
 }

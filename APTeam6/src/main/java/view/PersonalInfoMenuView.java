@@ -11,14 +11,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
-import model.account.Manager;
 import model.account.Seller;
+import view.userPanel.ShowCartView;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class PersonalInfoMenuView extends Application {
 
@@ -71,6 +71,7 @@ public class PersonalInfoMenuView extends Application {
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         VBox pane = new VBox();
         pane.setAlignment(Pos.CENTER);
+        Font arial12 = new Font("Arial" , 12);
 
         Account currentlyLoggedInUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
 
@@ -87,6 +88,11 @@ public class PersonalInfoMenuView extends Application {
             credit2.setVisible(false);
         }
 
+        credit.setFont(arial12);
+        credit.setTextFill(Color.DARKBLUE);
+        credit2.setFont(arial12);
+        credit2.setTextFill(Color.DARKBLUE);
+
         Label company = new Label("Company");
         Label company2 = new Label();
         if (currentlyLoggedInUser.getRole() == 2) {
@@ -96,6 +102,11 @@ public class PersonalInfoMenuView extends Application {
             company.setVisible(false);
             company2.setVisible(false);
         }
+
+        company.setFont(arial12);
+        company.setTextFill(Color.DARKBLUE);
+        company2.setFont(arial12);
+        company2.setTextFill(Color.DARKBLUE);
 
 
         Label role = new Label("your role is : ");
@@ -108,6 +119,11 @@ public class PersonalInfoMenuView extends Application {
             role2.setText("Manager");
         }
 
+        role.setFont(arial12);
+        role.setTextFill(Color.DARKBLUE);
+        role2.setFont(arial12);
+        role2.setTextFill(Color.DARKBLUE);
+
 
         Label username = new Label("Username");
         Label usernameLabel = new Label("This username already exist!");
@@ -118,8 +134,12 @@ public class PersonalInfoMenuView extends Application {
         usernameTextField.setEditable(false);
         usernameTextField.setPromptText("Username");
         usernameTextField.setText(currentlyLoggedInUser.getUsername());
+        username.setFont(arial12);
+        username.setTextFill(Color.DARKBLUE);
 
         Label password = new Label("Password");
+        password.setFont(arial12);
+        password.setTextFill(Color.DARKBLUE);
         Label passwordLabel = new Label("please fill this field");
         passwordLabel.setVisible(false);
         PasswordField passwordField = new PasswordField();
@@ -127,6 +147,8 @@ public class PersonalInfoMenuView extends Application {
         passwordField.setText(currentlyLoggedInUser.getPassword());
 
         Label firstName = new Label("FirstName");
+        firstName.setFont(arial12);
+        firstName.setTextFill(Color.DARKBLUE);
         Label firstNameLabel = new Label("write your first name here");
         firstNameLabel.setVisible(false);
         TextField firstNameTextField = new TextField();
@@ -134,6 +156,8 @@ public class PersonalInfoMenuView extends Application {
         firstNameTextField.setText(currentlyLoggedInUser.getFirstName());
 
         Label lastName = new Label("LastName");
+        lastName.setFont(arial12);
+        lastName.setTextFill(Color.DARKBLUE);
         Label lastNameLabel = new Label("write your last name here");
         lastNameLabel.setVisible(false);
         TextField lastNameTextField = new TextField();
@@ -141,6 +165,8 @@ public class PersonalInfoMenuView extends Application {
         lastNameTextField.setText(currentlyLoggedInUser.getLastName());
 
         Label email = new Label("Email");
+        email.setFont(arial12);
+        email.setTextFill(Color.DARKBLUE);
         Label emailAddressLabel = new Label("write your email here");
         emailAddressLabel.setVisible(false);
         TextField emailTextField = new TextField();
@@ -148,6 +174,8 @@ public class PersonalInfoMenuView extends Application {
         emailTextField.setText(currentlyLoggedInUser.getEmailAddress());
 
         Label phone = new Label("PhoneNumber");
+        phone.setFont(arial12);
+        phone.setTextFill(Color.DARKBLUE);
         Label phoneNumberLabel = new Label("write a PhoneNumber");
         phoneNumberLabel.setVisible(false);
         TextField phoneNumberTextField = new TextField();
@@ -155,11 +183,21 @@ public class PersonalInfoMenuView extends Application {
         phoneNumberTextField.setText(currentlyLoggedInUser.getPhoneNumber());
 
         Button change = new Button("Change Information");
+        change.setFont(arial12);
+        change.setTextFill(Color.DARKBLUE);
         Button close = new Button("Back");
+        close.setFont(arial12);
+        close.setTextFill(Color.DARKBLUE);
 
         Button openCart = new Button("Go to cart");
         Button openBuyHistory = new Button("Go to buy history");
         Button showDiscountCode = new Button("Show my discount code");
+        openCart.setFont(arial12);
+        openCart.setTextFill(Color.DARKBLUE);
+        openBuyHistory.setFont(arial12);
+        openBuyHistory.setTextFill(Color.DARKBLUE);
+        showDiscountCode.setFont(arial12);
+        showDiscountCode.setTextFill(Color.DARKBLUE);
 
         if (currentlyLoggedInUser.getRole() != 1) {
             openCart.setVisible(false);
@@ -168,7 +206,12 @@ public class PersonalInfoMenuView extends Application {
         }
 
         openCart.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                new ShowCartView().start(new Stage());
+                stage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         openBuyHistory.setOnAction(actionEvent -> {
@@ -176,7 +219,12 @@ public class PersonalInfoMenuView extends Application {
         });
 
         showDiscountCode.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                new ShowDiscountCodeView().start(new Stage());
+                stage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -186,6 +234,19 @@ public class PersonalInfoMenuView extends Application {
         Button viewDiscountCode = new Button("View Discount code");
         Button manageRequest = new Button("Manage request");
         Button manageCategories = new Button("Manage categories");
+
+        manageUsers.setFont(arial12);
+        manageUsers.setTextFill(Color.DARKBLUE);
+        manageAllProduct.setFont(arial12);
+        manageAllProduct.setTextFill(Color.DARKBLUE);
+        createDiscountCode.setFont(arial12);
+        createDiscountCode.setTextFill(Color.DARKBLUE);
+        viewDiscountCode.setFont(arial12);
+        viewDiscountCode.setTextFill(Color.DARKBLUE);
+        manageRequest.setFont(arial12);
+        manageRequest.setTextFill(Color.DARKBLUE);
+        manageCategories.setFont(arial12);
+        manageCategories.setTextFill(Color.DARKBLUE);
 
         if (currentlyLoggedInUser.getRole() != 3) {
             manageAllProduct.setVisible(false);
@@ -202,15 +263,22 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageAllProduct.setOnAction(actionEvent -> {
-            //TODO
+            new ManageAllProductsView().manageProducts(this);
+            stage.close();
         });
 
         createDiscountCode.setOnAction(actionEvent -> {
-            //TODO
+            try {
+                new CreateDiscountCodeView().start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            stage.close();
         });
 
         viewDiscountCode.setOnAction(actionEvent -> {
-            //TODO
+            new ShowDiscountCodeView().manageDiscountCodePage(this);
+            stage.close();
         });
 
         manageRequest.setOnAction(actionEvent -> {
@@ -232,6 +300,23 @@ public class PersonalInfoMenuView extends Application {
         Button viewOffs = new Button("View offs");
         Button viewBalance = new Button("View balance");
 
+        viewCompanyInfo.setFont(arial12);
+        viewCompanyInfo.setTextFill(Color.DARKBLUE);
+        viewSalesHistory.setFont(arial12);
+        viewSalesHistory.setTextFill(Color.DARKBLUE);
+        manageProducts.setFont(arial12);
+        manageProducts.setTextFill(Color.DARKBLUE);
+        addProduct.setFont(arial12);
+        addProduct.setTextFill(Color.DARKBLUE);
+        removeProduct.setFont(arial12);
+        removeProduct.setTextFill(Color.DARKBLUE);
+        showCategories.setFont(arial12);
+        showCategories.setTextFill(Color.DARKBLUE);
+        viewOffs.setFont(arial12);
+        viewOffs.setTextFill(Color.DARKBLUE);
+        viewBalance.setFont(arial12);
+        viewBalance.setTextFill(Color.DARKBLUE);
+
         if (currentlyLoggedInUser.getRole() != 2) {
             viewBalance.setVisible(false);
             viewCompanyInfo.setVisible(false);
@@ -250,7 +335,7 @@ public class PersonalInfoMenuView extends Application {
         viewCompanyInfo.setOnAction(actionEvent -> {
             Seller seller = (Seller) currentlyLoggedInUser;
             try {
-                new Alert().showAlert(seller.getCompanyName(),"Ok",0,null);
+                new Alert().showAlert(seller.getCompanyName(), "Ok", 0, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -279,6 +364,7 @@ public class PersonalInfoMenuView extends Application {
         viewOffs.setOnAction(actionEvent -> {
             //TODO
         });
+
 
         if (currentlyLoggedInUser.getRole() == 1) {
             pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,
@@ -345,7 +431,7 @@ public class PersonalInfoMenuView extends Application {
                     currentlyLoggedInUser.setPhoneNumber(phoneNumberTextField.getText());
 
                     try {
-                        new Alert().showAlert("Information Changed", "Ok", 0,null);
+                        new Alert().showAlert("Information Changed", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
