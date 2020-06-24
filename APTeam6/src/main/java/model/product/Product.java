@@ -101,4 +101,8 @@ public class Product {
     public ArrayList<Comment> getComments() {
         return comments;
     }
+
+    public void addVisitCount(){
+        visitCount++;
+    }
 }
