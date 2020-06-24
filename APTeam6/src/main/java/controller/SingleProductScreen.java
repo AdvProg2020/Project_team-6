@@ -18,7 +18,7 @@ public class SingleProductScreen {
 
     //TODO: Pass the product stuff to view
     //TODO: add to buyBasket for buyer
-    //TODO: Compare products ToT 😭
+    //TODO: Compare products ToT
 
     public void start(Product product){
         view = new SingleProductScreenView(product.getName());

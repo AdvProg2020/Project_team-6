@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -36,9 +37,13 @@ public class SingleProductScreenView extends Application {
         Scene scene = new Scene(vBox,300,600);
         vBox.setAlignment(Pos.CENTER);
         label = new Label();
+        Button addToBuyBasket = new Button("Add to buyBasket");
         stage.setScene(scene);
         stage.show();
 
+        addToBuyBasket.setOnAction(actionEvent -> {
+
+        });
 
         stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
