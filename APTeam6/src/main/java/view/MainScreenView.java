@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.account.Manager;
 
@@ -179,6 +180,25 @@ public class MainScreenView extends Application {
             window.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
             VBox pane = new VBox(15);
 
+
+            WebView webView = new WebView();
+            webView.setPrefWidth(350);
+            webView.setMinWidth(350);
+            webView.setMaxWidth(350);
+            webView.setMaxHeight(35);
+            webView.setMinHeight(35);
+            webView.setPrefHeight(35);
+
+            String data = "";
+            StringBuilder sb = new StringBuilder(data);
+            sb.append("<body style=\"background-color: Yellow\">");
+            sb.append("<marquee behavior=\"scroll\" direction=\"left\" scrollamount=\"5\">welcome to our market</marquee>");
+            sb.append("</body>");
+
+            data = sb.toString();
+            webView.getEngine().loadContent(data);
+
+
             Button account = new Button("User Panel");
             account.setFont(new Font("Arial", 12));
             account.setTextFill(Color.DARKBLUE);
@@ -219,7 +239,7 @@ public class MainScreenView extends Application {
             });
 
             pane.setBackground(new Background(new BackgroundImage(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(400, 500, false, false, true, false))));
-            pane.getChildren().addAll(account, products, offs);
+            pane.getChildren().addAll(webView, account, products, offs);
             pane.setAlignment(Pos.CENTER);
             window.setScene(new Scene(pane, 400, 500));
             window.show();
