@@ -172,6 +172,76 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         stage.setScene(new Scene(vBox, 400, 700));
         stage.setTitle("Manage Discounts");
         stage.show();
+
+        edit.setOnAction(actionEvent -> {
+            fill.setVisible(categoryName.getText().equals(""));
+            fill.setVisible(!categoryName.getText().matches(".+"));
+            if (!categoryName.getText().equals("") && categoryName.getText().matches(".+")) {
+                if (ProgramManager.getProgramManagerInstance().getCategoryByName(categoryName.getText()) != null) {
+                    nameLabel.setText("Enter your new name:");
+                    nameTextField.setPromptText("Name");
+
+                    //TODO
+
+                    try {
+                        new Alert().showAlert("", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        open.setOnAction(actionEvent -> {
+            fill.setVisible(categoryName.getText().equals(""));
+            fill.setVisible(!categoryName.getText().matches("\\.+"));
+            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
+                if (ProgramManager.getProgramManagerInstance().getCategoryByName(categoryName.getText()) != null) {
+
+
+                    //TODO
+                    nameLabel.setText("");
+                    categoryName.setText("");
+                } else {
+                    try {
+                        new Alert().showAlert("", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+        remove.setOnAction(actionEvent -> {
+            fill.setVisible(categoryName.getText().equals(""));
+            fill.setVisible(!categoryName.getText().matches("\\.+"));
+            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
+                if (ProgramManager.getProgramManagerInstance().getCategoryByName(categoryName.getText()) != null) {
+
+                    //TODO
+
+                    nameLabel.setText("");
+                    categoryName.setText("");
+                    try {
+                        new Alert().showAlert("", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+
+                        //TODO
+
+                        new Alert().showAlert("", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
 //        edit.setOnAction(actionEvent -> {
 //            fill.setVisible(categoryName.getText().equals(""));
 //            fill.setVisible(!categoryName.getText().matches("\\.+"));

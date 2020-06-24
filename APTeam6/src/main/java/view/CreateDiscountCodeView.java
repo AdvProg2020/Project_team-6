@@ -195,6 +195,7 @@ public class CreateDiscountCodeView extends Application {
         back.setOnAction(actionEvent -> {
             try {
                 new PersonalInfoMenuView().start(new Stage());
+                stage.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
