@@ -15,6 +15,10 @@ public class Score {
         return username;
     }
 
+    /**
+     * What is the maximum you ask? I don't know either
+     * @return score :)
+     */
     public byte getScore() {
         return score;
     }

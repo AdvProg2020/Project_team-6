@@ -74,15 +74,31 @@ public class Buyer extends Account implements Comparable<Buyer> {
         return buyerArrayList;
     }
 
+    /**
+     * Adds the product to this Buyer's buyBasket. Increases the count if the product is already in the buyBasket.
+     */
     public void addProductToBuyBasket(Product product, int count) {
-        buyBasket.put(product.getId(), count);
+        if (buyBasket.containsKey(product.getId()))
+            buyBasket.replace(product.getId(), buyBasket.get(product.getId() + count));
+        else
+            buyBasket.put(product.getId(), count);
+    }
+
+    /**
+     * Adds the product to this Buyer's buyBasket. Increases the count if the product is already in the buyBasket.
+     */
+    public void addProductToBuyBasket(int productId, int count) {
+        if (buyBasket.containsKey(productId))
+            buyBasket.replace(productId, buyBasket.get(productId + count));
+        else
+            buyBasket.put(productId, count);
     }
 
     public void addProductToBuyBasket(HashMap<Product, Integer> products) {
         Set<Product> productsOnly = products.keySet();
         for (Product product : productsOnly) {
             if (buyBasket.containsKey(product.getId()))
-                increaseProductInBuyBasketBy(product.getId(), products.get(product));
+                buyBasket.replace(product.getId(), buyBasket.get(product.getId() + products.get(product)));
             else
                 buyBasket.put(product.getId(), products.get(product));
         }
@@ -96,10 +112,13 @@ public class Buyer extends Account implements Comparable<Buyer> {
         return buyBasket;
     }
 
+    //TODO: Whoever made this method please delete it
+    /*
     public void increaseProductInBuyBasketBy(int productId, int count) {
-        if (buyBasket.containsKey(productId)){
+        if (buyBasket.containsKey(productId)) {
             count += buyBasket.get(productId);
             buyBasket.replace(productId, count);
         }
     }
+     */
 }
