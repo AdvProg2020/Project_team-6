@@ -1,5 +1,6 @@
 package view;
 
+import controller.CategoriesAndSubCategoriesMenu;
 import controller.PersonalInfoMenu;
 import controller.ProgramManager;
 import controller.managerPanels.ShowDiscountCode;
@@ -21,12 +22,18 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class CategoriesAndSubCategoriesMenuView extends Application {
+    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
     public CategoriesAndSubCategoriesMenuView(){
         System.out.println("=== Categories menu");
-        ArrayList<Category> categories = (ArrayList<Category>) ProgramManager.getProgramManagerInstance().getAllCategories();
-        for (Category category : categories) {
-            System.out.println("\t" + category.getName());
-        }
+//        ArrayList<Category> categories = (ArrayList<Category>) ProgramManager.getProgramManagerInstance().getAllCategories();
+//        if(categories.size() != 0) {
+//            for (Category category : categories) {
+//                System.out.println("\t" + category.getName());
+//            }
+//        }
+//        else{
+//            System.out.println("No Categories Yet!");
+//        }
     }
 
     /////////////////////////////////////////////////
@@ -133,6 +140,10 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     // Graphical menu :
     // edit/add/remove/open
     public void manageCategories(PersonalInfoMenuView personalInfoMenuView){
+        byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole();
+        //int subCategorySize = categoriesAndSubCategoriesMenu.getSubCategorySize();
+//        TextField[] textFields = new TextField[subCategorySize];
+//        Label[] labels = new Label[subCategorySize];
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
         Label label = new Label("Enter Category Name");
@@ -145,19 +156,10 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         categoryName.setMaxWidth(200);
         categoryName.setMinWidth(200);
 
-        Label codeLabel = new Label();
-        Label startDateLabel = new Label();
-        Label endDateLabel = new Label();
-        Label percentageLabel = new Label();
-        Label repetitionTimeLabel = new Label();
+        Label nameLabel = new Label();
+        TextField nameTextField = new TextField();
 
-        TextField codeTextField = new TextField();
-        TextField startDateTextField = new TextField();
-        TextField endDateTextField = new TextField();
-        TextField percentageTextField = new TextField();
-        TextField repetitionTimeTextField = new TextField();
-
-        codeLabel.setWrapText(true);
+        nameLabel.setWrapText(true);
         Button open = new Button("Open");
         Button add = new Button("Add");
         Button edit = new Button("Edit");
@@ -165,95 +167,95 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         Button back = new Button("Back");
 
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(label, fill, categoryName, open, add, edit, remove, back, codeLabel, startDateLabel, endDateLabel, percentageLabel, repetitionTimeLabel);
+        vBox.getChildren().addAll(label, fill, categoryName, open, add, edit, remove, back, nameLabel,nameTextField);
 
         stage.setScene(new Scene(vBox, 400, 700));
         stage.setTitle("Manage Discounts");
         stage.show();
-        edit.setOnAction(actionEvent -> {
-            fill.setVisible(categoryName.getText().equals(""));
-            fill.setVisible(!categoryName.getText().matches("\\.+"));
-            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
-                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
-                    codeLabel.setText("Enter your new code:");
-                    codeTextField.setPromptText("Code");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), codeTextField.getText());
-
-                    startDateLabel.setText("Enter your new Start Date:");
-                    startDateTextField.setPromptText("Start Date");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), startDateTextField.getText());
-
-                    endDateLabel.setText("Enter your new End Date:");
-                    endDateTextField.setPromptText("End Date");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), endDateTextField.getText());
-
-
-                    percentageLabel.setText("Enter your new Percentage:");
-                    percentageTextField.setPromptText("Percentage");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(percentageTextField.getText()));
-
-
-                    repetitionTimeLabel.setText("Enter your new Repetition Time:");
-                    repetitionTimeTextField.setPromptText("RepetitionTime");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(repetitionTimeTextField.getText()));
-                    try {
-                        new Alert().showAlert("DiscountCode with this Code doesn't exist", "Ok", 0, null);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        open.setOnAction(actionEvent -> {
-            fill.setVisible(categoryName.getText().equals(""));
-            fill.setVisible(!categoryName.getText().matches("\\.+"));
-            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
-                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
-                    codeLabel.setText(viewDiscountCode1(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-                    startDateLabel.setText(viewDiscountCode2(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-                    endDateLabel.setText(viewDiscountCode3(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-                    percentageLabel.setText(viewDiscountCode4(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-                    repetitionTimeLabel.setText(viewDiscountCode5(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-                    codeLabel.setText("");
-                    startDateLabel.setText("");
-                    endDateLabel.setText("");
-                    percentageLabel.setText("");
-                    repetitionTimeLabel.setText("");
-                    categoryName.setText("");
-                } else {
-                    try {
-                        new Alert().showAlert("DiscountCode with this code doesnt exist", "Ok", 0, null);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-
-        remove.setOnAction(actionEvent -> {
-            fill.setVisible(categoryName.getText().equals(""));
-            fill.setVisible(!categoryName.getText().matches("\\.+"));
-            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
-                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
-                    removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()));
-                    codeLabel.setText("");
-                    categoryName.setText("");
-                    try {
-                        new Alert().showAlert("DiscountCode removed successfully!", "Ok", 0, null);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        new Alert().showAlert("Discount Code with this code doesnt exist", "Ok", 0, null);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+//        edit.setOnAction(actionEvent -> {
+//            fill.setVisible(categoryName.getText().equals(""));
+//            fill.setVisible(!categoryName.getText().matches("\\.+"));
+//            if (!categoryName.getText().equals("") && categoryName.getText().matches(".+")) {
+//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
+//                    nameLabel.setText("Enter your new name:");
+//                    nameTextField.setPromptText("Name");
+//                    categoriesAndSubCategoriesMenu.edit();
+//
+//                    startDateLabel.setText("Enter your new Start Date:");
+//                    startDateTextField.setPromptText("Start Date");
+//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), startDateTextField.getText());
+//
+//                    endDateLabel.setText("Enter your new End Date:");
+//                    endDateTextField.setPromptText("End Date");
+//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), endDateTextField.getText());
+//
+//
+//                    percentageLabel.setText("Enter your new Percentage:");
+//                    percentageTextField.setPromptText("Percentage");
+//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(percentageTextField.getText()));
+//
+//
+//                    repetitionTimeLabel.setText("Enter your new Repetition Time:");
+//                    repetitionTimeTextField.setPromptText("RepetitionTime");
+//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(repetitionTimeTextField.getText()));
+//                    try {
+//                        new Alert().showAlert("DiscountCode with this Code doesn't exist", "Ok", 0, null);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//        open.setOnAction(actionEvent -> {
+//            fill.setVisible(categoryName.getText().equals(""));
+//            fill.setVisible(!categoryName.getText().matches("\\.+"));
+//            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
+//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
+//                    nameLabel.setText(viewDiscountCode1(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+//                    startDateLabel.setText(viewDiscountCode2(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+//                    endDateLabel.setText(viewDiscountCode3(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+//                    percentageLabel.setText(viewDiscountCode4(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+//                    repetitionTimeLabel.setText(viewDiscountCode5(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+//                    nameLabel.setText("");
+//                    startDateLabel.setText("");
+//                    endDateLabel.setText("");
+//                    percentageLabel.setText("");
+//                    repetitionTimeLabel.setText("");
+//                    categoryName.setText("");
+//                } else {
+//                    try {
+//                        new Alert().showAlert("DiscountCode with this code doesnt exist", "Ok", 0, null);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//
+//        remove.setOnAction(actionEvent -> {
+//            fill.setVisible(categoryName.getText().equals(""));
+//            fill.setVisible(!categoryName.getText().matches("\\.+"));
+//            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
+//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
+//                    removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()));
+//                    nameLabel.setText("");
+//                    categoryName.setText("");
+//                    try {
+//                        new Alert().showAlert("DiscountCode removed successfully!", "Ok", 0, null);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    try {
+//                        new Alert().showAlert("Discount Code with this code doesnt exist", "Ok", 0, null);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
 
         stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
@@ -272,8 +274,6 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                 e.printStackTrace();
             }
         });
-    }
-
     }
 
     @Override

@@ -69,7 +69,6 @@ public class Category implements Comparable<Category> {
         return (subCategories.containsKey(subCategory.getName()));
     }
 
-
     public void removeField(String field) {
         if (doesThisAttributeExist(field)) {
             additionalAttributes.remove(field);

@@ -37,19 +37,19 @@ public class CategoriesAndSubCategoriesMenu {
                 case 0:
                     view.showCategoriesList(allCategoriesArrayList);
                     command = view.getInputCommandManagerCategory();
-                    if (command.matches("edit \\d+ \\S+")) {
+                    if (command.matches("edit \\w+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
                         edit(Integer.parseInt(splitCommand[1]), splitCommand[2]);
                     }
-                    else if (command.matches("add \\S+")) {
+                    else if (command.matches("add .+")) {
                         String[] splitCommand = command.split("\\s");
                         add(splitCommand[1]);
                     }
-                    else if (command.matches("remove \\d+")) {
+                    else if (command.matches("remove .+")) {
                         String[] splitCommand = command.split("\\s");
                         remove(Integer.parseInt(splitCommand[1]));
                     }
-                    else if (command.matches("open \\d+")) {
+                    else if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -63,19 +63,19 @@ public class CategoriesAndSubCategoriesMenu {
                 case 1:
                     view.showSubCategoriesList(allSubCategoriesArrayList);
                     command = view.getInputCommandManagerCategory();
-                    if (command.matches("edit \\d+ \\S+")) {
+                    if (command.matches("edit \\w+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
                         edit(Integer.parseInt(splitCommand[1]), splitCommand[2]);
                     }
-                    else if (command.matches("add \\S+")) {
+                    else if (command.matches("add .+")) {
                         String[] splitCommand = command.split("\\s");
                         add(splitCommand[1]);
                     }
-                    else if (command.matches("remove \\d+")) {
+                    else if (command.matches("remove .+")) {
                         String[] splitCommand = command.split("\\s");
                         remove(Integer.parseInt(splitCommand[1]));
                     }
-                    else if (command.matches("open \\d+")) {
+                    else if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -89,11 +89,11 @@ public class CategoriesAndSubCategoriesMenu {
                 case 2:
                     view.showProductsList(allProductsArrayList);
                     command = view.getInputCommandManagerProduct();
-                    if (command.matches("remove \\d+")) {
+                    if (command.matches("remove .+")) {
                         String[] splitCommand = command.split("\\s");
                         remove(Integer.parseInt(splitCommand[1]));
                     }
-                    else if (command.matches("open \\d+")) {
+                    else if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -116,7 +116,7 @@ public class CategoriesAndSubCategoriesMenu {
                 case 0:
                     view.showCategoriesList(allCategoriesArrayList);
                     command = view.getInputCommandSellerCategory();
-                    if (command.matches("open \\d+")) {
+                    if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -130,7 +130,7 @@ public class CategoriesAndSubCategoriesMenu {
                 case 1:
                     view.showSubCategoriesList(allSubCategoriesArrayList);
                     command = view.getInputCommandSellerSubCategory();
-                    if (command.matches("addTo \\d+")) {
+                    if (command.matches("addTo .+")) {
                         String[] splitCommand = command.split("\\s");
                         addProduct(Integer.parseInt(splitCommand[1]));
                     }
@@ -153,7 +153,7 @@ public class CategoriesAndSubCategoriesMenu {
                 case 0:
                     view.showCategoriesList(allCategoriesArrayList);
                     command = view.getInputCommandBuyer();
-                    if (command.matches("open \\d+")) {
+                    if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -167,7 +167,7 @@ public class CategoriesAndSubCategoriesMenu {
                 case 1:
                     view.showSubCategoriesList(allSubCategoriesArrayList);
                     command = view.getInputCommandBuyer();
-                    if (command.matches("open \\d+")) {
+                    if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -181,7 +181,7 @@ public class CategoriesAndSubCategoriesMenu {
                 case 2:
                     view.showProductsList(allProductsArrayList);
                     command = view.getInputCommandBuyer();
-                    if (command.matches("open \\d+")) {
+                    if (command.matches("open .+")) {
                         String[] splitCommand = command.split("\\s");
                         open(Integer.parseInt(splitCommand[1]));
                     }
@@ -218,7 +218,7 @@ public class CategoriesAndSubCategoriesMenu {
     }
 
     ///////////////////////////////////
-    private void edit(int index, String newName) {
+    public void edit(int index, String newName) {
         if (state == 0) {
             Category category = allCategoriesArrayList.get(index);
             category.setName(newName);
@@ -231,7 +231,7 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    private void add(String name) {
+    public void add(String name) {
         if (state == 0) {
             if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
                 ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
@@ -250,7 +250,7 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    private void remove(int index) {
+    public void remove(int index) {
         if (state == 0) {
             Category category = allCategoriesArrayList.get(index);
             ProgramManager.getProgramManagerInstance().removeCategory(category);
@@ -268,7 +268,7 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    private void open(int index) {
+    public void open(int index) {
         if (state == 0) {
             currentCategory = allCategoriesArrayList.get(index);
             state = 1;
@@ -283,11 +283,14 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    private void addProduct(int index){
+    public void addProduct(int index){
         SubCategory subCategory = allSubCategoriesArrayList.get(index);
         //Product product = new Product();
         //ProgramManager.getProgramManagerInstance().addProductToList();
         //TODO: add a new menu called CreateNewProductMenu
+    }
+    public int getSubCategorySize(){
+        return allSubCategoriesArrayList.size();
     }
 
     //TODO: check for index out of bound in all methods

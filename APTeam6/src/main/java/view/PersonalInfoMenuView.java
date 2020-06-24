@@ -291,7 +291,6 @@ public class PersonalInfoMenuView extends Application {
             stage.close();
         });
 
-
         Button viewCompanyInfo = new Button("View company information");
         Button viewSalesHistory = new Button("View sales history");
         Button manageProducts = new Button("Manage products");
