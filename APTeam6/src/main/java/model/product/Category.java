@@ -12,7 +12,6 @@ public class Category implements Comparable<Category> {
     private String name;
     private HashMap<String, SubCategory> subCategories;
     private ArrayList<String> additionalAttributes;
-    private CategoriesAndSubCategoriesMenuView categoriesAndSubCategoriesMenuView = new CategoriesAndSubCategoriesMenuView();
 
     public Category(String name) {
         this.name = name;
@@ -51,8 +50,6 @@ public class Category implements Comparable<Category> {
     public void addField(String field) {
         if (!doesThisAttributeExist(field)) {
             additionalAttributes.add(field);
-        } else {
-            categoriesAndSubCategoriesMenuView.giveOutPut("this attribute already exist");
         }
     }
 
@@ -72,24 +69,18 @@ public class Category implements Comparable<Category> {
     public void removeField(String field) {
         if (doesThisAttributeExist(field)) {
             additionalAttributes.remove(field);
-        } else {
-            categoriesAndSubCategoriesMenuView.giveOutPut("this attribute not exist");
         }
     }
 
     public void addSubcategory(SubCategory subCategory) {
         if (!doesThisSubCategoryExist(subCategory)) {
             subCategories.put(subCategory.getName(), subCategory);
-        } else {
-            categoriesAndSubCategoriesMenuView.giveOutPut("this subCategory already exist");
         }
     }
 
     public void removeSubcategory(SubCategory subCategory) {
         if (doesThisSubCategoryExist(subCategory)) {
             subCategories.remove(subCategory.getName());
-        } else {
-            categoriesAndSubCategoriesMenuView.giveOutPut("this subCategory not exist");
         }
     }
 
