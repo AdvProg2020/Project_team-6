@@ -21,6 +21,16 @@ public class SingleProductScreen {
     //TODO: Compare products ToT
 
     public void start(Product product){
+        byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole();
+        if(role == 1){
+            buyerWorks();
+        }
+        else if(role == 2){
+            sellerWorks();
+        }
+        else if(role == 3){
+            managerWorks();
+        }
         view = new SingleProductScreenView(product.getName());
         ArrayList<Score> scores = product.getScores();
         double averageScore = 0.0;
@@ -30,5 +40,14 @@ public class SingleProductScreen {
         averageScore /= scores.size();
         view.printProductDetails(product.getName(), product.getSubCategoryName(), product.getCategoryName(), product.getDescription(), product.getCreationDate().toString(), product.getVisitCount(), averageScore);
         product.addVisitCount();
+    }
+    public void managerWorks(){
+
+    }
+    public void buyerWorks(){
+
+    }
+    public void sellerWorks(){
+
     }
 }

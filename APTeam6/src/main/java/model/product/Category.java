@@ -51,7 +51,7 @@ public class Category implements Comparable<Category> {
         if (!doesThisAttributeExist(field)) {
             additionalAttributes.add(field);
         } else {
-            //categoriesAndSubCategoriesMenuView.giveOutPut("this attribute already exist");
+            System.out.println("this attribute already exist");
         }
     }
 
@@ -72,7 +72,7 @@ public class Category implements Comparable<Category> {
         if (doesThisAttributeExist(field)) {
             additionalAttributes.remove(field);
         } else {
-            //categoriesAndSubCategoriesMenuView.giveOutPut("this attribute not exist");
+            System.out.println("this attribute not exist");
         }
     }
 
@@ -80,7 +80,7 @@ public class Category implements Comparable<Category> {
         if (!doesThisSubCategoryExist(subCategory)) {
             subCategories.put(subCategory.getName(), subCategory);
         } else {
-            //categoriesAndSubCategoriesMenuView.giveOutPut("this subCategory already exist");
+            System.out.println("this subCategory already exist");
         }
     }
 
@@ -88,7 +88,7 @@ public class Category implements Comparable<Category> {
         if (doesThisSubCategoryExist(subCategory)) {
             subCategories.remove(subCategory.getName());
         } else {
-            //categoriesAndSubCategoriesMenuView.giveOutPut("this subCategory not exist");
+            System.out.println("this subCategory not exist");
         }
     }
 
