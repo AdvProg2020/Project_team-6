@@ -3,6 +3,8 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,6 +30,9 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             System.out.println("No Categories Yet!");
         }
 */
+        ListView list = new ListView();
+        vBox.getChildren().add(list);
+        list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
     }
 
@@ -341,9 +346,11 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         });
     }*/
 
+    VBox vBox;
+
     @Override
     public void start(Stage stage) throws Exception {
-        VBox vBox = new VBox();
+        vBox = new VBox();
         stage.setTitle("Categories and SubCategories and product menu");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         Scene scene = new Scene(vBox,300,600);
