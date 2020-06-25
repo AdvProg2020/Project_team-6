@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
@@ -17,6 +18,12 @@ import java.util.ArrayList;
 
 public class CategoriesAndSubCategoriesMenuView extends Application {
     //CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
+
+    VBox vBox;
+    Label title;
+    ListView<String> list;
+    Scene scene;
+
     public CategoriesAndSubCategoriesMenuView(){
         System.out.println("=== Categories menu");
 /*
@@ -30,10 +37,14 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             System.out.println("No Categories Yet!");
         }
 */
-        ListView list = new ListView();
+        vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
+        scene = new Scene(vBox,300,600);
+        list = new ListView<String>();
+        title = new Label();
+        vBox.getChildren().add(title);
         vBox.getChildren().add(list);
         list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
     }
 
     /////////////////////////////////////////////////
@@ -110,26 +121,33 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public void showCategoriesList(ArrayList<Category> categories){
+        //TODO: also change this println
         System.out.println("List of Categories:");
+        list.getItems().clear();
         for (int i = 0, categoriesSize = categories.size(); i < categoriesSize; i++) {
             Category category = categories.get(i);
-            System.out.println("\t" + i + ". " + category.getName());
+            //System.out.println("\t" + i + ". " + category.getName());
+            list.getItems().add(i + ". " + category.getName());
         }
     }
 
     public void showSubCategoriesList(ArrayList<SubCategory> subCategories){
         System.out.println("List of SubCategories:");
+        list.getItems().clear();
         for (int i = 0, subCategoriesSize = subCategories.size(); i < subCategoriesSize; i++) {
             SubCategory subCategory = subCategories.get(i);
-            System.out.println("\t" + i + ". " + subCategory.getName());
+            //System.out.println("\t" + i + ". " + subCategory.getName());
+            list.getItems().add(i + ". " + subCategory.getName());
         }
     }
 
     public void showProductsList(ArrayList<Product> products){
         System.out.println("List of Products:");
+        list.getItems().clear();
         for (int i = 0, productsSize = products.size(); i < productsSize; i++) {
             Product product = products.get(i);
-            System.out.println("\t" + i + ". " + product.getName());
+            //System.out.println("\t" + i + ". " + product.getName());
+            list.getItems().add(i + ". " + product.getName());
         }
     }
 
@@ -346,15 +364,10 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         });
     }*/
 
-    VBox vBox;
-
     @Override
     public void start(Stage stage) throws Exception {
-        vBox = new VBox();
         stage.setTitle("Categories and SubCategories and product menu");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
-        Scene scene = new Scene(vBox,300,600);
-        vBox.setAlignment(Pos.CENTER);
         stage.setScene(scene);
         stage.show();
 
