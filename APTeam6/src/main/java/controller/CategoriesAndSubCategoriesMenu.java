@@ -5,6 +5,7 @@ import model.product.Category;
 import model.product.Product;
 import model.product.SubCategory;
 import view.CategoriesAndSubCategoriesMenuView;
+import view.PersonalInfoMenuView;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,9 @@ public class CategoriesAndSubCategoriesMenu {
     private ArrayList<SubCategory> allSubCategoriesArrayList;
     private ArrayList<Product> allProductsArrayList;
 
-    public void startAsManager() {
+    private PersonalInfoMenuView personalInfoMenuView;
+
+    /*public void startAsManager() {
         view = new CategoriesAndSubCategoriesMenuView();
         try {
             view.start(new Stage());
@@ -205,6 +208,19 @@ public class CategoriesAndSubCategoriesMenu {
             }
         }
 
+    }*/
+
+    public void start(PersonalInfoMenuView personalInfoMenuView){
+        this.personalInfoMenuView = personalInfoMenuView;
+        view = new CategoriesAndSubCategoriesMenuView(this);
+        try {
+            view.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        updateCategoriesArrayList();
+        view.showCategoriesList(allCategoriesArrayList);
+        state = 0;
     }
 
     private void updateCategoriesArrayList() {
@@ -228,64 +244,78 @@ public class CategoriesAndSubCategoriesMenu {
     }
 
     ///////////////////////////////////
-    private void edit(int index, String newName) {
-        if (state == 0) {
+    public void edit(int index, String newName) {
+        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             Category category = allCategoriesArrayList.get(index);
             category.setName(newName);
             updateCategoriesArrayList();
+            view.showCategoriesList(allCategoriesArrayList);
         }
-        else if (state == 1) {
+        else if (state == 1 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             SubCategory subCategory = allSubCategoriesArrayList.get(index);
             subCategory.setName(newName);
             updateSubCategoriesArrayList();
+            view.showSubCategoriesList(allSubCategoriesArrayList);
         }
     }
 
-    private void add(String name) {
-        if (state == 0) {
+    public void add(String name) {
+        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
                 ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
                 updateCategoriesArrayList();
+                view.showCategoriesList(allCategoriesArrayList);
             }
             else
                 view.giveOutPutError("Repeated name");
         }
-        else if (state == 1) {
+        else if (state == 1 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             if (currentCategory.getSubCategoryByName(name) == null) {
                 currentCategory.addSubcategory(new SubCategory(name));
                 updateSubCategoriesArrayList();
+                view.showSubCategoriesList(allSubCategoriesArrayList);
             }
             else
                 view.giveOutPutError("Repeated name");
         }
+        else if (state == 2 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 2) {
+            //TODO: new product kamali menu
+        }
     }
 
-    private void remove(int index) {
-        if (state == 0) {
+    public void remove(int index) {
+        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             Category category = allCategoriesArrayList.get(index);
             ProgramManager.getProgramManagerInstance().removeCategory(category);
             updateCategoriesArrayList();
+            view.showCategoriesList(allCategoriesArrayList);
         }
-        if (state == 1) {
+        if (state == 1 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             SubCategory subCategory = allSubCategoriesArrayList.get(index);
             currentCategory.removeSubcategory(subCategory);
             updateSubCategoriesArrayList();
+            view.showSubCategoriesList(allSubCategoriesArrayList);
         }
-        if (state == 2) {
+        if (state == 2 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             Product product = allProductsArrayList.get(index);
             currentSubCategory.removeProduct(product.getId());
             updateProductsArrayList();
+            view.showProductsList(allProductsArrayList);
         }
     }
 
-    private void open(int index) {
+    public void open(int index) {
         if (state == 0) {
             currentCategory = allCategoriesArrayList.get(index);
+            updateSubCategoriesArrayList();
             state = 1;
+            view.showSubCategoriesList(allSubCategoriesArrayList);
         }
         else if (state == 1) {
             currentSubCategory = allSubCategoriesArrayList.get(index);
+            updateProductsArrayList();
             state = 2;
+            view.showProductsList(allProductsArrayList);
         }
         else if (state == 2) {
             Product product = allProductsArrayList.get(index);
@@ -293,9 +323,23 @@ public class CategoriesAndSubCategoriesMenu {
         }
     }
 
-    private void addProduct(int index) {
-        SubCategory subCategory = allSubCategoriesArrayList.get(index);
-        //TODO: add a new menu called CreateNewProductMenu or maybe SellerProductsMenu
+    public void back(){
+        if (state == 0) {
+            view.closeStage();
+            try {
+                personalInfoMenuView.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (state == 1) {
+            state = 0;
+            view.showCategoriesList(allCategoriesArrayList);
+        }
+        else if (state == 2) {
+            state = 1;
+            view.showSubCategoriesList(allSubCategoriesArrayList);
+        }
     }
 
     //TODO: check for index out of bound in all methods

@@ -1,6 +1,8 @@
 package view;
 
+import controller.CategoriesAndSubCategoriesMenu;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,8 +21,6 @@ import java.util.concurrent.CountDownLatch;
 public class CategoriesAndSubCategoriesMenuView extends Application {
     //CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
 
-    CountDownLatch downLatch = new CountDownLatch(1);
-    Thread waitingThread;
     String command = "";
 
     VBox vBox;
@@ -28,14 +28,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     ListView<String> list;
     Scene scene;
 
+    private CategoriesAndSubCategoriesMenu controller;
+
     Button openButton = new Button("Open");
     Button editButton = new Button("Edit");
     Button addButton = new Button("Add");
     Button removeButton = new Button("Remove");
     Button backButton = new Button("Backu");
+    TextField nameTextField = new TextField();
 
-    public CategoriesAndSubCategoriesMenuView(){
+    public CategoriesAndSubCategoriesMenuView(CategoriesAndSubCategoriesMenu controller) {
         System.out.println("=== Categories menu");
+        this.controller = controller;
 /*
         ArrayList<Category> categories = (ArrayList<Category>) ProgramManager.getProgramManagerInstance().getAllCategories();
         if(categories.size() != 0) {
@@ -47,9 +51,10 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             System.out.println("No Categories Yet!");
         }
 */
+
         vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
-        scene = new Scene(vBox,300,600);
+        scene = new Scene(vBox, 300, 600);
         System.out.println(scene);
         list = new ListView<String>();
         list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -70,6 +75,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         backButton.setLayoutY(550);
         vBox.getChildren().add(title);
         vBox.getChildren().add(list);
+        vBox.getChildren().add(nameTextField);
         vBox.getChildren().add(openButton);
         vBox.getChildren().add(editButton);
         vBox.getChildren().add(addButton);
@@ -79,7 +85,22 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         System.out.println(vBox.getChildren());
 
         openButton.setOnAction(actionEvent -> {
-            downLatch.countDown();
+            if (list.getSelectionModel().getSelectedIndices().size() == 1)
+                controller.open(list.getSelectionModel().getSelectedIndices().get(0));
+        });
+        editButton.setOnAction(actionEvent -> {
+            if (list.getSelectionModel().getSelectedIndices().size() == 1)
+                controller.edit(list.getSelectionModel().getSelectedIndices().get(0), nameTextField.getText());
+        });
+        addButton.setOnAction(actionEvent -> {
+            controller.add(nameTextField.getText());
+        });
+        removeButton.setOnAction(actionEvent -> {
+            if (list.getSelectionModel().getSelectedIndices().size() == 1)
+                controller.remove(list.getSelectionModel().getSelectedIndices().get(0));
+        });
+        backButton.setOnAction(actionEvent -> {
+            controller.back();
         });
     }
 
@@ -92,14 +113,6 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         removeButton.setDisable(false);
         backButton.setDisable(false);
         while (true) {
-            System.out.println("before");
-            giveOutPutError("boro baba");
-            try {
-                downLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("after");
             //command = Input.getInput();
             if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back")) {
                 String returnString = command;
@@ -194,7 +207,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
 
     /////////////////////////////////////////////////
 
-    public void showCategoriesList(ArrayList<Category> categories){
+    public void showCategoriesList(ArrayList<Category> categories) {
         //System.out.println("List of Categories:");
         title.setText("List of Categories:");
         list.getItems().clear();
@@ -206,7 +219,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         }
     }
 
-    public void showSubCategoriesList(ArrayList<SubCategory> subCategories){
+    public void showSubCategoriesList(ArrayList<SubCategory> subCategories) {
         //System.out.println("List of SubCategories:");
         title.setText("List of SubCategories:");
         list.getItems().clear();
@@ -217,7 +230,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         }
     }
 
-    public void showProductsList(ArrayList<Product> products){
+    public void showProductsList(ArrayList<Product> products) {
         //System.out.println("List of Products:");
         title.setText("List of Products:");
         list.getItems().clear();
@@ -228,7 +241,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         }
     }
 
-    public void giveOutPutError(String message){
+    public void giveOutPutError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.showAndWait();
         System.out.println(message);
@@ -443,17 +456,15 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         });
     }*/
 
-    public void closeStage(){/*
+    public void closeStage() {
         stage.close();
-        try {
-            personalInfoMenuView.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
+
+    private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
+        this.stage = stage;
         stage.setTitle("Categories and SubCategories and product menu");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         stage.setScene(scene);
