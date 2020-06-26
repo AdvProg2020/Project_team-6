@@ -35,6 +35,7 @@ public class SellerProductsMenuView extends Application {
 
 
         VBox vBox = new VBox(10);
+        vBox.setStyle("-fx-background-color: #8b13ff");
         stage.setTitle("Products");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
         vBox.setAlignment(Pos.CENTER);

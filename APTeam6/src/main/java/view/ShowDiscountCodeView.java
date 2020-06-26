@@ -143,6 +143,7 @@ public class ShowDiscountCodeView extends Application {
     public void manageDiscountCodePage(PersonalInfoMenuView personalInfoMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
+        vBox.setStyle("-fx-background-color: #bdff18");
         Label label = new Label("Enter Discount Code");
         Label fill = new Label("please fill this field");
         fill.setVisible(false);
