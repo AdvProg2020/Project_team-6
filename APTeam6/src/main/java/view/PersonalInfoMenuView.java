@@ -296,8 +296,13 @@ public class PersonalInfoMenuView extends Application {
             stage.close();
         });
         SingleProductMenu.setOnAction(actionEvent -> {
-            new SingleProductScreenView().singleProductGraphics(this);
-            stage.close();
+            try {
+                new Alert().showAlert("please select your product from category","ok",0,null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //new SingleProductScreenView();
+            //stage.close();
         });
 
         Button viewCompanyInfo = new Button("View company information");

@@ -40,12 +40,12 @@ public class CategorySort {
         subCategory.addField("size");
         subCategory.addField("sizz");
         subCategory.removeField("sizz");
-        Product product = new Product("tv", "electrical", "tv");
+        /*Product product = new Product("tv", "electrical", "tv");
         Product product1 = new Product("tvvvv", "electrical", "tv");
         subCategory.addProduct(product.getId());
         subCategory.addProduct(product1.getId());
         subCategory.removeProduct(product1.getId());
-
+*/
 
     }
 

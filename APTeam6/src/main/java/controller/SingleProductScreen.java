@@ -23,7 +23,7 @@ public class SingleProductScreen {
     //TODO: Compare products ToT
 
     public void start(Product product) throws Exception {
-        view = new SingleProductScreenView(product.getName());
+        view = new SingleProductScreenView(product.getId());
         view.start(new Stage());
         ArrayList<Score> scores = product.getScores();
         double averageScore = 0.0;
@@ -35,7 +35,7 @@ public class SingleProductScreen {
         product.addVisitCount();
         String command = null;
         while (true) {
-            command = view.getInputCommand();
+            //command = view.getInputCommand();
             if(command.matches("add to buy basket \\w+")) {
 //                addToBuyBasket(ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(command.split("\\s")[4])));
             }
