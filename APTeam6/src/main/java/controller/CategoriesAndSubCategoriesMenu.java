@@ -319,7 +319,7 @@ public class CategoriesAndSubCategoriesMenu {
         }
         else if (state == 2) {
             Product product = allProductsArrayList.get(index);
-            SingleProductScreen.getInstance().start(product);
+//            SingleProductScreen.getInstance().start(product);
         }
     }
 

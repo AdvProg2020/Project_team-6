@@ -23,8 +23,6 @@ public class OffManagementMenuView extends Application {
         vBox.setAlignment(Pos.CENTER);
         stage.setScene(scene);
         stage.show();
-
-
         stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
             try {

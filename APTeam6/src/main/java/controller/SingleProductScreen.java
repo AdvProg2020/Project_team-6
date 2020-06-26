@@ -1,7 +1,9 @@
 package controller;
 
+import javafx.stage.Stage;
 import model.product.Product;
 import model.product.Score;
+import view.ManageUsersView;
 import view.SingleProductScreenView;
 
 import java.util.ArrayList;
@@ -20,18 +22,9 @@ public class SingleProductScreen {
     //TODO: add to buyBasket for buyer
     //TODO: Compare products ToT
 
-    public void start(Product product){
-        byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole();
-        if(role == 1){
-            buyerWorks();
-        }
-        else if(role == 2){
-            sellerWorks();
-        }
-        else if(role == 3){
-            managerWorks();
-        }
+    public void start(Product product) throws Exception {
         view = new SingleProductScreenView(product.getName());
+        view.start(new Stage());
         ArrayList<Score> scores = product.getScores();
         double averageScore = 0.0;
         for (Score score : scores) {
@@ -40,14 +33,24 @@ public class SingleProductScreen {
         averageScore /= scores.size();
         view.printProductDetails(product.getName(), product.getSubCategoryName(), product.getCategoryName(), product.getDescription(), product.getCreationDate().toString(), product.getVisitCount(), averageScore);
         product.addVisitCount();
+        String command = null;
+        while (true) {
+            command = view.getInputCommand();
+            if(command.matches("add to buy basket \\w+")) {
+//                addToBuyBasket(ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(command.split("\\s")[4])));
+            }
+            else if(command.matches("Compare \\w+ \\w+")){
+                compare(ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(command.split("\\s")[1])),ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(command.split("\\s")[2])));
+            }
+            else if (command.equals("back")){
+                return;
+            }
+            else {
+                throw new RuntimeException("Unknown command was passed to ManageUsersMenu by view");
+            }
+        }
     }
-    public void managerWorks(){
-
-    }
-    public void buyerWorks(){
-
-    }
-    public void sellerWorks(){
+    public void compare(Product product1,Product product2){
 
     }
 }

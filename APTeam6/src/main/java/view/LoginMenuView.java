@@ -29,7 +29,7 @@ public class LoginMenuView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
-
+        vBox.setStyle("-fx-background-color: #78ff0c");
         System.out.println(destination);
 
         Button login = new Button("login");
@@ -44,7 +44,7 @@ public class LoginMenuView extends Application {
             logout.setVisible(false);
         }
 
-        vBox.getChildren().addAll(login, register, logout, back);
+        vBox.getChildren().addAll(login, register, back, logout);
         vBox.setAlignment(Pos.CENTER);
         stage.setScene(new Scene(vBox, 250, 350));
         stage.show();
@@ -100,6 +100,7 @@ public class LoginMenuView extends Application {
     public void register(LoginMenuView loginMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
+        vBox.setStyle("-fx-background-color: #00ffb1");
 
         Button buyer = new Button("register as buyer");
         Button seller = new Button("register as seller");
@@ -146,6 +147,7 @@ public class LoginMenuView extends Application {
     public void registerSeller(LoginMenuView loginMenuView) {
         Stage window = new Stage();
         VBox vBox = new VBox(6);
+        vBox.setStyle("-fx-background-color: #00c7ff");
         vBox.setAlignment(Pos.CENTER);
 
         Label username = new Label("Username");
@@ -266,6 +268,7 @@ public class LoginMenuView extends Application {
     public void registerBuyer(LoginMenuView loginMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(5);
+        vBox.setStyle("-fx-background-color: #00c7ff");
         vBox.setAlignment(Pos.CENTER);
 
         Label username = new Label("Username");
@@ -378,7 +381,7 @@ public class LoginMenuView extends Application {
     public void loginPanel(LoginMenuView loginMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
-
+        vBox.setStyle("-fx-background-color: #ff8400");
         Label doesntExistUsername = new Label("Username doesnt exist");
         doesntExistUsername.setVisible(false);
         doesntExistUsername.setTextFill(Color.RED);

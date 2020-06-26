@@ -140,9 +140,9 @@ public class ManageRequestsView extends Application {
                 return command;
             } else if (command.equals("help")) {
                 showHelp();
-            } else if (command.matches("details \\.+")) {
+            } else if (command.matches("details .+")) {
                 return command;
-            } else if (command.matches("(accept|decline) \\.+")) {
+            } else if (command.matches("(accept|decline) .+")) {
                 return command;
             } else {
                 System.out.println("Invalid command");
