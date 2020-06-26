@@ -316,7 +316,7 @@ public class MainScreenView extends Application {
                     label2, passwordLabel, passwordField, label3, firstNameLabel, firstNameTextField,
                     label4, lastNameLabel, lastNameTextField, label5, emailAddressLabel, emailTextField,
                     label6, phoneNumberLabel, phoneNumberTextField, create);
-            window.setScene(new Scene(pane, 400, 500));
+            window.setScene(new Scene(pane, 400, 650));
             window.show();
 
             window.setOnCloseRequest(windowEvent -> {
