@@ -34,7 +34,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     Button editButton = new Button("Edit");
     Button addButton = new Button("Add");
     Button removeButton = new Button("Remove");
-    Button backButton = new Button("Backu");
+    Button backButton = new Button("Back");
     TextField nameTextField = new TextField();
 
     public CategoriesAndSubCategoriesMenuView(CategoriesAndSubCategoriesMenu controller) {
