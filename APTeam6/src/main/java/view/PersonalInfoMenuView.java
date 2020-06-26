@@ -1,5 +1,6 @@
 package view;
 
+import controller.CategoriesAndSubCategoriesMenu;
 import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -287,8 +288,9 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageCategories.setOnAction(actionEvent -> {
-            new CategoriesAndSubCategoriesMenuView().manageCategories(this);
-            stage.close();
+            stage.setOpacity(0);
+            CategoriesAndSubCategoriesMenu.getInstance().startAsManager();
+            stage.setOpacity(100);
         });
 
         Button viewCompanyInfo = new Button("View company information");

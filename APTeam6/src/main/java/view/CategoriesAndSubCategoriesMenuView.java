@@ -1,18 +1,12 @@
 package view;
 
-import controller.CategoriesAndSubCategoriesMenu;
-import controller.PersonalInfoMenu;
-import controller.ProgramManager;
-import controller.managerPanels.ShowDiscountCode;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.product.Category;
 import model.product.Product;
@@ -20,30 +14,98 @@ import model.product.SubCategory;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 public class CategoriesAndSubCategoriesMenuView extends Application {
-    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
+    //CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
+
+    CountDownLatch downLatch = new CountDownLatch(1);
+    Thread waitingThread;
+    String command = "";
+
+    VBox vBox;
+    Label title;
+    ListView<String> list;
+    Scene scene;
+
+    Button openButton = new Button("Open");
+    Button editButton = new Button("Edit");
+    Button addButton = new Button("Add");
+    Button removeButton = new Button("Remove");
+    Button backButton = new Button("Backu");
+
     public CategoriesAndSubCategoriesMenuView(){
         System.out.println("=== Categories menu");
-//        ArrayList<Category> categories = (ArrayList<Category>) ProgramManager.getProgramManagerInstance().getAllCategories();
-//        if(categories.size() != 0) {
-//            for (Category category : categories) {
-//                System.out.println("\t" + category.getName());
-//            }
-//        }
-//        else{
-//            System.out.println("No Categories Yet!");
-//        }
+/*
+        ArrayList<Category> categories = (ArrayList<Category>) ProgramManager.getProgramManagerInstance().getAllCategories();
+        if(categories.size() != 0) {
+            for (Category category : categories) {
+                System.out.println("\t" + category.getName());
+            }
+        }
+        else{
+            System.out.println("No Categories Yet!");
+        }
+*/
+        vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
+        scene = new Scene(vBox,300,600);
+        System.out.println(scene);
+        list = new ListView<String>();
+        list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        list.setLayoutX(10);
+        list.setLayoutY(50);
+        title = new Label();
+        title.setLayoutX(10);
+        title.setLayoutY(10);
+        openButton.setLayoutX(10);
+        editButton.setLayoutX(70);
+        addButton.setLayoutX(130);
+        removeButton.setLayoutX(190);
+        backButton.setLayoutX(10);
+        openButton.setLayoutY(520);
+        editButton.setLayoutX(520);
+        addButton.setLayoutX(520);
+        removeButton.setLayoutX(520);
+        backButton.setLayoutY(550);
+        vBox.getChildren().add(title);
+        vBox.getChildren().add(list);
+        vBox.getChildren().add(openButton);
+        vBox.getChildren().add(editButton);
+        vBox.getChildren().add(addButton);
+        vBox.getChildren().add(removeButton);
+        vBox.getChildren().add(backButton);
+
+        System.out.println(vBox.getChildren());
+
+        openButton.setOnAction(actionEvent -> {
+            downLatch.countDown();
+        });
     }
 
     /////////////////////////////////////////////////
 
-    public String getInputCommandManagerCategory() {
-        String command;
+    public synchronized String getInputCommandManagerCategory() {
+        openButton.setDisable(false);
+        editButton.setDisable(false);
+        addButton.setDisable(false);
+        removeButton.setDisable(false);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back"))
-                return command;
+            System.out.println("before");
+            giveOutPutError("boro baba");
+            try {
+                downLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("after");
+            //command = Input.getInput();
+            if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\tadd [index]\n\tedit [index] [newName]\n\tremove [index]\n\topen [index]");
             else
@@ -52,11 +114,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     }
 
     public String getInputCommandManagerProduct() {
-        String command;
+        openButton.setDisable(true);
+        editButton.setDisable(true);
+        addButton.setDisable(true);
+        removeButton.setDisable(false);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("remove \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("remove \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\tremove [index]");
             else
@@ -67,11 +136,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public String getInputCommandSellerCategory() {
-        String command;
+        openButton.setDisable(false);
+        editButton.setDisable(true);
+        addButton.setDisable(true);
+        removeButton.setDisable(true);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("open \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("open \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\topen [index]");
             else
@@ -80,11 +156,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     }
 
     public String getInputCommandSellerSubCategory() {
-        String command;
+        openButton.setDisable(false);
+        editButton.setDisable(false);
+        addButton.setDisable(false);
+        removeButton.setDisable(false);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("addTo \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("addTo \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\taddTo [index]");
             else
@@ -95,11 +178,13 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public String getInputCommandBuyer() {
-        String command;
         while (true) {
-            command = Input.getInput();
-            if (command.matches("open \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("open \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\topen [index]");
             else
@@ -110,36 +195,48 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public void showCategoriesList(ArrayList<Category> categories){
-        System.out.println("List of Categories:");
-        for (int i = 0, categoriesSize = categories.size(); i < categoriesSize; i++) {
+        //System.out.println("List of Categories:");
+        title.setText("List of Categories:");
+        list.getItems().clear();
+        int length = categories.size();
+        for (int i = 0; i < length; i++) {
             Category category = categories.get(i);
-            System.out.println("\t" + i + ". " + category.getName());
+            //System.out.println("\t" + i + ". " + category.getName());
+            list.getItems().add(i + ". " + category.getName());
         }
     }
 
     public void showSubCategoriesList(ArrayList<SubCategory> subCategories){
-        System.out.println("List of SubCategories:");
+        //System.out.println("List of SubCategories:");
+        title.setText("List of SubCategories:");
+        list.getItems().clear();
         for (int i = 0, subCategoriesSize = subCategories.size(); i < subCategoriesSize; i++) {
             SubCategory subCategory = subCategories.get(i);
-            System.out.println("\t" + i + ". " + subCategory.getName());
+            //System.out.println("\t" + i + ". " + subCategory.getName());
+            list.getItems().add(i + ". " + subCategory.getName());
         }
     }
 
     public void showProductsList(ArrayList<Product> products){
-        System.out.println("List of Products:");
+        //System.out.println("List of Products:");
+        title.setText("List of Products:");
+        list.getItems().clear();
         for (int i = 0, productsSize = products.size(); i < productsSize; i++) {
             Product product = products.get(i);
-            System.out.println("\t" + i + ". " + product.getName());
+            //System.out.println("\t" + i + ". " + product.getName());
+            list.getItems().add(i + ". " + product.getName());
         }
     }
 
-    public void giveOutPut(String message){
+    public void giveOutPutError(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
         System.out.println(message);
     }
 
     // Graphical menu :
     // edit/add/remove/open
-    public void manageCategories(PersonalInfoMenuView personalInfoMenuView){
+    /*public void manageCategories(PersonalInfoMenuView personalInfoMenuView){
         byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole();
         //int subCategorySize = categoriesAndSubCategoriesMenu.getSubCategorySize();
 //        TextField[] textFields = new TextField[subCategorySize];
@@ -242,90 +339,90 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         });
 
 
-//        edit.setOnAction(actionEvent -> {
-//            fill.setVisible(categoryName.getText().equals(""));
-//            fill.setVisible(!categoryName.getText().matches("\\.+"));
-//            if (!categoryName.getText().equals("") && categoryName.getText().matches(".+")) {
-//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
-//                    nameLabel.setText("Enter your new name:");
-//                    nameTextField.setPromptText("Name");
-//                    categoriesAndSubCategoriesMenu.edit();
-//
-//                    startDateLabel.setText("Enter your new Start Date:");
-//                    startDateTextField.setPromptText("Start Date");
-//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), startDateTextField.getText());
-//
-//                    endDateLabel.setText("Enter your new End Date:");
-//                    endDateTextField.setPromptText("End Date");
-//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), endDateTextField.getText());
-//
-//
-//                    percentageLabel.setText("Enter your new Percentage:");
-//                    percentageTextField.setPromptText("Percentage");
-//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(percentageTextField.getText()));
-//
-//
-//                    repetitionTimeLabel.setText("Enter your new Repetition Time:");
-//                    repetitionTimeTextField.setPromptText("RepetitionTime");
-//                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(repetitionTimeTextField.getText()));
-//                    try {
-//                        new Alert().showAlert("DiscountCode with this Code doesn't exist", "Ok", 0, null);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//
-//        open.setOnAction(actionEvent -> {
-//            fill.setVisible(categoryName.getText().equals(""));
-//            fill.setVisible(!categoryName.getText().matches("\\.+"));
-//            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
-//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
-//                    nameLabel.setText(viewDiscountCode1(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-//                    startDateLabel.setText(viewDiscountCode2(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-//                    endDateLabel.setText(viewDiscountCode3(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-//                    percentageLabel.setText(viewDiscountCode4(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-//                    repetitionTimeLabel.setText(viewDiscountCode5(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
-//                    nameLabel.setText("");
-//                    startDateLabel.setText("");
-//                    endDateLabel.setText("");
-//                    percentageLabel.setText("");
-//                    repetitionTimeLabel.setText("");
-//                    categoryName.setText("");
-//                } else {
-//                    try {
-//                        new Alert().showAlert("DiscountCode with this code doesnt exist", "Ok", 0, null);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//
-//
-//        remove.setOnAction(actionEvent -> {
-//            fill.setVisible(categoryName.getText().equals(""));
-//            fill.setVisible(!categoryName.getText().matches("\\.+"));
-//            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
-//                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
-//                    removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()));
-//                    nameLabel.setText("");
-//                    categoryName.setText("");
-//                    try {
-//                        new Alert().showAlert("DiscountCode removed successfully!", "Ok", 0, null);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                } else {
-//                    try {
-//                        new Alert().showAlert("Discount Code with this code doesnt exist", "Ok", 0, null);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
+        edit.setOnAction(actionEvent -> {
+            fill.setVisible(categoryName.getText().equals(""));
+            fill.setVisible(!categoryName.getText().matches("\\.+"));
+            if (!categoryName.getText().equals("") && categoryName.getText().matches(".+")) {
+                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
+                    nameLabel.setText("Enter your new name:");
+                    nameTextField.setPromptText("Name");
+                    categoriesAndSubCategoriesMenu.edit();
+
+                    startDateLabel.setText("Enter your new Start Date:");
+                    startDateTextField.setPromptText("Start Date");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), startDateTextField.getText());
+
+                    endDateLabel.setText("Enter your new End Date:");
+                    endDateTextField.setPromptText("End Date");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), endDateTextField.getText());
+
+
+                    percentageLabel.setText("Enter your new Percentage:");
+                    percentageTextField.setPromptText("Percentage");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(percentageTextField.getText()));
+
+
+                    repetitionTimeLabel.setText("Enter your new Repetition Time:");
+                    repetitionTimeTextField.setPromptText("RepetitionTime");
+                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()), Integer.parseInt(repetitionTimeTextField.getText()));
+                    try {
+                        new Alert().showAlert("DiscountCode with this Code doesn't exist", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        open.setOnAction(actionEvent -> {
+            fill.setVisible(categoryName.getText().equals(""));
+            fill.setVisible(!categoryName.getText().matches("\\.+"));
+            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
+                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
+                    nameLabel.setText(viewDiscountCode1(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+                    startDateLabel.setText(viewDiscountCode2(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+                    endDateLabel.setText(viewDiscountCode3(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+                    percentageLabel.setText(viewDiscountCode4(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+                    repetitionTimeLabel.setText(viewDiscountCode5(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText())));
+                    nameLabel.setText("");
+                    startDateLabel.setText("");
+                    endDateLabel.setText("");
+                    percentageLabel.setText("");
+                    repetitionTimeLabel.setText("");
+                    categoryName.setText("");
+                } else {
+                    try {
+                        new Alert().showAlert("DiscountCode with this code doesnt exist", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+        remove.setOnAction(actionEvent -> {
+            fill.setVisible(categoryName.getText().equals(""));
+            fill.setVisible(!categoryName.getText().matches("\\.+"));
+            if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
+                if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()) != null) {
+                    removeDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(categoryName.getText()));
+                    nameLabel.setText("");
+                    categoryName.setText("");
+                    try {
+                        new Alert().showAlert("DiscountCode removed successfully!", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        new Alert().showAlert("Discount Code with this code doesnt exist", "Ok", 0, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
@@ -344,15 +441,21 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                 e.printStackTrace();
             }
         });
+    }*/
+
+    public void closeStage(){/*
+        stage.close();
+        try {
+            personalInfoMenuView.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        VBox vBox = new VBox();
-        stage.setTitle("Categories");
+        stage.setTitle("Categories and SubCategories and product menu");
         stage.getIcons().add(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")));
-        Scene scene = new Scene(vBox,300,600);
-        vBox.setAlignment(Pos.CENTER);
         stage.setScene(scene);
         stage.show();
 
@@ -366,6 +469,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             }
         });
 
+        System.out.println(scene);
     }
 
 }
