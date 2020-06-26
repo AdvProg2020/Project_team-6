@@ -1,5 +1,6 @@
 package view;
 
+import controller.CategoriesAndSubCategoriesMenu;
 import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -291,7 +292,7 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageCategories.setOnAction(actionEvent -> {
-            new CategoriesAndSubCategoriesMenuView().manageCategories(this);
+            CategoriesAndSubCategoriesMenu.getInstance().start(this);
             stage.close();
         });
         SingleProductMenu.setOnAction(actionEvent -> {

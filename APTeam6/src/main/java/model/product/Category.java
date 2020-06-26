@@ -50,8 +50,6 @@ public class Category implements Comparable<Category> {
     public void addField(String field) {
         if (!doesThisAttributeExist(field)) {
             additionalAttributes.add(field);
-        } else {
-            System.out.println("this attribute already exist");
         }
     }
 
@@ -71,24 +69,18 @@ public class Category implements Comparable<Category> {
     public void removeField(String field) {
         if (doesThisAttributeExist(field)) {
             additionalAttributes.remove(field);
-        } else {
-            System.out.println("this attribute not exist");
         }
     }
 
     public void addSubcategory(SubCategory subCategory) {
         if (!doesThisSubCategoryExist(subCategory)) {
             subCategories.put(subCategory.getName(), subCategory);
-        } else {
-            System.out.println("this subCategory already exist");
         }
     }
 
     public void removeSubcategory(SubCategory subCategory) {
         if (doesThisSubCategoryExist(subCategory)) {
             subCategories.remove(subCategory.getName());
-        } else {
-            System.out.println("this subCategory not exist");
         }
     }
 

@@ -211,6 +211,10 @@ public class MainScreenView extends Application {
             offs.setFont(new Font("Arial", 12));
             offs.setTextFill(Color.DARKBLUE);
 
+            Button loginMenu = new Button("loginMenu");
+            loginMenu.setFont(new Font("Arial", 12));
+            loginMenu.setTextFill(Color.DARKBLUE);
+
             window.setOnCloseRequest(windowEvent -> {
                 windowEvent.consume();
                 try {
@@ -238,8 +242,16 @@ public class MainScreenView extends Application {
                 window.close();
             });
 
+            loginMenu.setOnAction(actionEvent -> {
+                try {
+                    new LoginMenuView().start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
             pane.setBackground(new Background(new BackgroundImage(new Image(new FileInputStream("src/main/java/view/pictures/icon.png")), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(400, 500, false, false, true, false))));
-            pane.getChildren().addAll(webView, account, products, offs);
+            pane.getChildren().addAll(webView, account, products, offs,loginMenu);
             pane.setAlignment(Pos.CENTER);
             window.setScene(new Scene(pane, 400, 500));
             window.show();

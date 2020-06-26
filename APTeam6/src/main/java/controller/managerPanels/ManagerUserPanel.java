@@ -46,7 +46,7 @@ public class ManagerUserPanel {
                 ManageRequests.getManageRequestsInstance().start();
             }
             else if (command.equalsIgnoreCase("manage categories")){
-                CategoriesAndSubCategoriesMenu.getInstance().startAsManager();
+                //CategoriesAndSubCategoriesMenu.getInstance().start();
             }
             else {
                 throw new RuntimeException("Unknown command was passed to ManagerUserPanel by view");
