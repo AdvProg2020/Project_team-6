@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -121,8 +122,8 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public void showCategoriesList(ArrayList<Category> categories){
-        //TODO: also change this println
-        System.out.println("List of Categories:");
+        //System.out.println("List of Categories:");
+        title.setText("List of Categories:");
         list.getItems().clear();
         for (int i = 0, categoriesSize = categories.size(); i < categoriesSize; i++) {
             Category category = categories.get(i);
@@ -132,7 +133,8 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     }
 
     public void showSubCategoriesList(ArrayList<SubCategory> subCategories){
-        System.out.println("List of SubCategories:");
+        //System.out.println("List of SubCategories:");
+        title.setText("List of SubCategories:");
         list.getItems().clear();
         for (int i = 0, subCategoriesSize = subCategories.size(); i < subCategoriesSize; i++) {
             SubCategory subCategory = subCategories.get(i);
@@ -142,7 +144,8 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     }
 
     public void showProductsList(ArrayList<Product> products){
-        System.out.println("List of Products:");
+        //System.out.println("List of Products:");
+        title.setText("List of Products:");
         list.getItems().clear();
         for (int i = 0, productsSize = products.size(); i < productsSize; i++) {
             Product product = products.get(i);
@@ -151,7 +154,9 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         }
     }
 
-    public void giveOutPut(String message){
+    public void giveOutPutError(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
         System.out.println(message);
     }
 

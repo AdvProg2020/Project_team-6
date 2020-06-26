@@ -238,7 +238,7 @@ public class CategoriesAndSubCategoriesMenu {
                 updateCategoriesArrayList();
             }
             else
-                view.giveOutPut("Repeated name");
+                view.giveOutPutError("Repeated name");
         }
         else if (state == 1) {
             if (currentCategory.getSubCategoryByName(name) == null) {
@@ -246,7 +246,7 @@ public class CategoriesAndSubCategoriesMenu {
                 updateSubCategoriesArrayList();
             }
             else
-                view.giveOutPut("Repeated name");
+                view.giveOutPutError("Repeated name");
         }
     }
 
