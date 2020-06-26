@@ -296,7 +296,11 @@ public class PersonalInfoMenuView extends Application {
             stage.close();
         });
         SingleProductMenu.setOnAction(actionEvent -> {
-            new SingleProductScreenView().singleProductGraphics(this);
+            try {
+                new SingleProductScreenView().start(stage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             stage.close();
         });
 

@@ -62,6 +62,7 @@ public class ManageUsersView {
         Button back = new Button("Back");
 
         VBox vBox = new VBox(5);
+        vBox.setStyle("-fx-background-color: #00ffa6");
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(viewUser, deleteUser, createManager, back);
 

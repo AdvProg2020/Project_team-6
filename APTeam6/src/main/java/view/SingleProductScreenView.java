@@ -23,6 +23,10 @@ public class SingleProductScreenView extends Application {
     public SingleProductScreenView(String name) {
         System.out.println("Product: " + name);
     }
+
+    public SingleProductScreenView() {
+
+    }
     //TODO: guess yourself
 
     public void printProductDetails(String name, String subCategoryName, String categoryName, String description, String creationTime, int visitCount, Double averageScore) {

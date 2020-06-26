@@ -29,7 +29,7 @@ public class ManageRequestsView extends Application {
     public void manageRequestPage(PersonalInfoMenuView personalInfoMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox();
-
+        vBox.setStyle("-fx-background-color: #86fffa");
         Label label = new Label("Please enter ID");
         Label fill = new Label("please fill this field");
         fill.setVisible(false);
