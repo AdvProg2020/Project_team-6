@@ -62,14 +62,14 @@ public class SingleProductScreenView extends Application {
         Label label7 = new Label("" + this.product.getVisitCount());
 
         Label label8 = new Label("description");
-        label8.setWrapText(true);
         Label label9 = new Label(this.product.getDescription());
+        label9.setWrapText(true);
 
         Label label10 = new Label("Additional Info");
-        label10.setWrapText(true);
         Label label11 = new Label(this.product.getCategoryAdditionalInfo().toString());
+        label11.setWrapText(true);
 
-        Label label12 = new Label("");
+        Label label12 = new Label("comment");
         label12.setWrapText(true);
         StringBuilder s = new StringBuilder();
         for (Comment comment : this.product.getComments()) {
