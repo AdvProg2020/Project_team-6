@@ -27,7 +27,7 @@ public class ManageAllProductsView extends Application {
         String command;
         while (true) {
             command = Input.getInput();
-            if (command.matches("remove \\.+")) {
+            if (command.matches("remove .+")) {
                 return command;
             }else if (command.equals("back")) {
                 return command;

@@ -9,13 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import model.account.Buyer;
 import model.account.Seller;
+
+import java.io.FileInputStream;
 
 public class LoginMenuView extends Application {
     public LoginMenuView() {
@@ -32,6 +32,7 @@ public class LoginMenuView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
+        vBox.setBackground(new Background(new BackgroundImage(new Image(new FileInputStream("src/main/java/view/pictures/login.png")), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(400, 500, false, false, true, false))));
         System.out.println(destination);
         vBox.setStyle("-fx-background-color: #ffaf00");
         Button login = new Button("login");

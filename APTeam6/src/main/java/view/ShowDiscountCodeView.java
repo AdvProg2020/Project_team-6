@@ -76,11 +76,11 @@ public class ShowDiscountCodeView extends Application {
                 return command;
             } else if (command.equals("help")) {
                 showHelp();
-            } else if (command.matches("view discount code \\.+")) {
+            } else if (command.matches("view discount code .+")) {
                 return command;
-            } else if (command.matches("edit discount code \\.+")) {
+            } else if (command.matches("edit discount code .+")) {
                 return command;
-            } else if (command.matches("remove discount code \\.+")) {
+            } else if (command.matches("remove discount code .+")) {
                 return command;
             } else {
                 System.out.println("Invalid command");
