@@ -234,13 +234,16 @@ public class PersonalInfoMenuView extends Application {
         Button viewDiscountCode = new Button("View Discount code");
         Button manageRequest = new Button("Manage request");
         Button manageCategories = new Button("Manage categories");
+        Button SingleProductMenu = new Button("Single Product Menu");
 
         manageUsers.setFont(arial12);
         manageUsers.setTextFill(Color.DARKBLUE);
         manageAllProduct.setFont(arial12);
         manageAllProduct.setTextFill(Color.DARKBLUE);
         createDiscountCode.setFont(arial12);
+        SingleProductMenu.setFont(arial12);
         createDiscountCode.setTextFill(Color.DARKBLUE);
+        SingleProductMenu.setTextFill(Color.DARKBLUE);
         viewDiscountCode.setFont(arial12);
         viewDiscountCode.setTextFill(Color.DARKBLUE);
         manageRequest.setFont(arial12);
@@ -255,6 +258,7 @@ public class PersonalInfoMenuView extends Application {
             createDiscountCode.setVisible(false);
             viewDiscountCode.setVisible(false);
             manageCategories.setVisible(false);
+            SingleProductMenu.setVisible(false);
         }
 
         manageUsers.setOnAction(actionEvent -> {
@@ -288,6 +292,10 @@ public class PersonalInfoMenuView extends Application {
 
         manageCategories.setOnAction(actionEvent -> {
             new CategoriesAndSubCategoriesMenuView().manageCategories(this);
+            stage.close();
+        });
+        SingleProductMenu.setOnAction(actionEvent -> {
+            new SingleProductScreenView().singleProductGraphics(this);
             stage.close();
         });
 
