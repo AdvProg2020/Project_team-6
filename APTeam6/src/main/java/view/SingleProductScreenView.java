@@ -20,10 +20,11 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class SingleProductScreenView extends Application {
-    Label label;
+    Label label = new Label();
     public SingleProductScreenView(String name){
         System.out.println("Product: " + name);
     }
+    public SingleProductScreenView(){}
     public String getInputCommand() {
         String command;
         while (true) {
@@ -44,21 +45,26 @@ public class SingleProductScreenView extends Application {
     public void printProductDetails(String name, String subCategoryName, String categoryName, String description, String creationTime, int visitCount, Double averageScore){
         label.setText("Name: " + name + "\n\nAt " + subCategoryName + "at " + categoryName + "\n\nDescription: " + description + "\n\nCreated at: " + creationTime + "\n\nVisited " + visitCount + " times\nAverage score: " + averageScore);
     }
-    public void singleProductGraphics(PersonalInfoMenu personalInfoMenu){
+    public void singleProductGraphics(PersonalInfoMenuView personalInfoMenuView){
         Stage stage = new Stage();
         VBox vBox = new VBox(10);
         Button addToBuyBasket = new Button("add to buy basket");
         Button back = new Button("Back");
         Label productId = new Label("Enter the Product ID: ");
+        Label fill = new Label("please fill this field");
+        fill.setVisible(false);
+        fill.setTextFill(Color.RED);
         TextField productIdTextField = new TextField();
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(label, productId, productIdTextField,addToBuyBasket, back);
+        vBox.getChildren().addAll(label, fill, productId, productIdTextField,addToBuyBasket, back);
 
         stage.setScene(new Scene(vBox, 400, 700));
         stage.setTitle("Single Product Screen Menu");
         stage.show();
         addToBuyBasket.setOnAction(actionEvent -> {
-            if (!productIdTextField.getText().equals("") && productIdTextField.getText().matches("\\.+")) {
+            fill.setVisible(productId.getText().equals(""));
+            fill.setVisible(!productId.getText().matches(".+"));
+            if (!productIdTextField.getText().equals("") && productIdTextField.getText().matches(".+")) {
                 if (ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(productIdTextField.getText())) != null) {
                     ProgramManager.getProgramManagerInstance().addToCurrentBuyBasket(ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(productIdTextField.getText())),1);
                     try {
@@ -69,7 +75,6 @@ public class SingleProductScreenView extends Application {
                 }
             }
         });
-
         stage.setOnCloseRequest(windowEvent -> {
             windowEvent.consume();
             try {
@@ -92,6 +97,5 @@ public class SingleProductScreenView extends Application {
     //////////////////////////////////////////////////////////////////////
     @Override
     public void start(Stage stage) throws Exception {
-
     }
 }

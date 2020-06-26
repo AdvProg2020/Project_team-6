@@ -8,8 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import model.account.Buyer;
 import model.account.Seller;
@@ -29,9 +32,8 @@ public class LoginMenuView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox vBox = new VBox(10);
-
         System.out.println(destination);
-
+        vBox.setStyle("-fx-background-color: #ffaf00");
         Button login = new Button("login");
         Button register = new Button("register");
         Button logout = new Button("logout");
@@ -44,7 +46,7 @@ public class LoginMenuView extends Application {
             logout.setVisible(false);
         }
 
-        vBox.getChildren().addAll(login, register, logout, back);
+        vBox.getChildren().addAll(login, register, back, logout);
         vBox.setAlignment(Pos.CENTER);
         stage.setScene(new Scene(vBox, 250, 350));
         stage.show();

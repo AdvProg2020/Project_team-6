@@ -390,7 +390,7 @@ public class PersonalInfoMenuView extends Application {
                     password, passwordLabel, passwordField, firstName, firstNameLabel, firstNameTextField, lastName,
                     lastNameLabel, lastNameTextField, email, emailAddressLabel, emailTextField, phone, phoneNumberLabel,
                     phoneNumberTextField, manageAllProduct, manageRequest, manageUsers, createDiscountCode, viewDiscountCode,
-                    manageCategories, change, close);
+                    manageCategories, SingleProductMenu,change, close);
         }
 
 

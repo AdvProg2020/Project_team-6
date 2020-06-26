@@ -181,8 +181,8 @@ public class ShowDiscountCodeView extends Application {
         edit.setOnAction(actionEvent -> {
 
             fill.setVisible(discountCode.getText().equals(""));
-            fill.setVisible(!discountCode.getText().matches("\\.+"));
-            if (!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")) {
+            fill.setVisible(!discountCode.getText().matches(".+"));
+            if (!discountCode.getText().equals("") && discountCode.getText().matches(".+")) {
                 if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null) {
                     codeLabel.setText("Enter your new code:");
                     codeTextField.setPromptText("Code");

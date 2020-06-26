@@ -4,6 +4,7 @@ import controller.CategoriesAndSubCategoriesMenu;
 import controller.LoginMenu;
 import controller.PersonalInfoMenu;
 import controller.ProgramManager;
+import javafx.stage.Stage;
 import view.userPanel.ManagerUserPanelView;
 
 public class ManagerUserPanel {
@@ -24,7 +25,7 @@ public class ManagerUserPanel {
         while (true) {
             command = view.getInputCommand();
             if (command.equalsIgnoreCase("view personal info")) {
-                PersonalInfoMenu.getPersonalInfoMenuInstance().start();
+                PersonalInfoMenu.getPersonalInfoMenuInstance().start(new Stage());
             }
             else if (command.equalsIgnoreCase("login menu")){
                 LoginMenu.getLoginMenuInstance().start();
