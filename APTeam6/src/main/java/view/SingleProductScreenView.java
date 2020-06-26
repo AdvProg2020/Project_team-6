@@ -21,8 +21,9 @@ public class SingleProductScreenView extends Application {
     Label label;
     Product product;
 
-    public SingleProductScreenView(int id) {
-        ProgramManager.getProgramManagerInstance().getProductById(id);
+    public SingleProductScreenView(int id) throws Exception {
+        product = ProgramManager.getProgramManagerInstance().getProductById(id);
+        start(new Stage());
     }
 
 
