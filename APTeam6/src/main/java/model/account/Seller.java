@@ -27,6 +27,24 @@ public class Seller extends Account implements Comparable<Seller>, Request {
     public long getCredit() {
         return credit;
     }
+    public String showDetails(int a){
+        String detail = "\n";
+        detail += "\nname : ";
+        detail += getUsername();
+        detail+= "\nfirst name : ";
+        detail += getFirstName();
+        detail += "\nlast name : ";
+        detail += getLastName();
+        detail += "\nemail : ";
+        detail+= getEmailAddress();
+        detail+= "\nphone number : ";
+        detail += getPhoneNumber();
+        detail += "\ncompany : ";
+        detail+= companyName;
+
+        return detail;
+
+    }
 
     private static int field = 1;
     private static ArrayList<Seller> sellerArrayList;
@@ -82,9 +100,10 @@ public class Seller extends Account implements Comparable<Seller>, Request {
 
     @Override
     public void showDetails() {
-        //TODO
-
+        //
     }
+
+
 
     public String getCompanyName() {
         return companyName;

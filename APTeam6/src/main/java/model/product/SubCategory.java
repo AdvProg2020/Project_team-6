@@ -34,30 +34,30 @@ public class SubCategory {
         return false;
     }
 
-    public void addField(String field) {
+    public boolean addField(String field) {
         if (!isExistThisAttribute(field)) {
             additionalAttributes.add(field);
+            return true;
         } else {
-            //System.out.println("this attribute already exist");
-            // TODO
+            return false;
         }
     }
 
-    public void removeField(String field) {
+    public boolean removeField(String field) {
         if (isExistThisAttribute(field)) {
             additionalAttributes.remove(field);
+            return true;
         } else {
-            //System.out.println("this attribute not exist");
-            // TODO
+            return false;
         }
     }
 
-    public void addProduct(int productId) {
+    public boolean addProduct(int productId) {
         if (!isExistThisProduct(productId)) {
             productIds.add(productId);
+            return true;
         } else {
-            //System.out.println("this product already exist in this sub category");
-            // TODO
+            return false;
         }
     }
 
@@ -70,12 +70,12 @@ public class SubCategory {
         return false;
     }
 
-    public void removeProduct(int productId) {
+    public boolean removeProduct(int productId) {
         if (isExistThisProduct(productId)) {
             productIds.remove((Integer) productId);
+            return true;
         } else {
-            //System.out.println("this product not exist in this sub category");
-            // TODO
+            return false;
         }
     }
 }
