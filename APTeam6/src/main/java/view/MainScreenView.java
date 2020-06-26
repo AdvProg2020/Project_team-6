@@ -171,7 +171,7 @@ public class MainScreenView extends Application {
                     }
                 });
             }
-        }, 500);
+        }, 6700);
     }
 
     public void mainScreenPage(Stage window) throws FileNotFoundException {
