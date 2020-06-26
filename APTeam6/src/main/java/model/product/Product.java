@@ -1,5 +1,7 @@
 package model.product;
 
+import controller.ProgramManager;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,10 +22,14 @@ public class Product {
     private ArrayList<Score> scores;
     private ArrayList<Comment> comments;
 
-    public Product(String name, String categoryName, String subCategoryName){
+    public Product(String name, String categoryName, String subCategoryName,String date,
+                   HashMap<String,String> categoryAdditionalInfo,HashMap<String,String> subCategoryAdditionalInfo){
         this.name = name;
         this.categoryName = categoryName;
         this.subCategoryName = subCategoryName;
+        this.CategoryAdditionalInfo = categoryAdditionalInfo;
+        this.SubCategoryAdditionalInfo = subCategoryAdditionalInfo;
+        this.creationDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(date);
         id = nextId;
         nextId++;
     }

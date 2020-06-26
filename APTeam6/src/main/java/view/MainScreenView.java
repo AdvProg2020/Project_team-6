@@ -244,6 +244,7 @@ public class MainScreenView extends Application {
 
             loginMenu.setOnAction(actionEvent -> {
                 try {
+                    window.close();
                     new LoginMenuView().start(new Stage());
                 } catch (Exception e) {
                     e.printStackTrace();
