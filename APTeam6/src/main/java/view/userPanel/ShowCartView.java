@@ -4,6 +4,8 @@ import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -66,6 +68,21 @@ public class ShowCartView extends Application {
         vBox.setAlignment(Pos.CENTER);
         stage.setScene(scene);
         stage.show();
+
+        HashMap<Integer, Integer> buyBasket = ((Buyer)ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser()).getBuyBasket();
+        ListView<String> productList = new ListView<>();
+        vBox.getChildren().add(productList);
+        for (Integer id : buyBasket.keySet()) {
+            StringBuilder row = new StringBuilder(ProgramManager.getProgramManagerInstance().getProductById(id).getName());
+            while (row.length() < 16)
+                row.append(" ");
+            row.setCharAt(13, (char) (48 + buyBasket.get(id) / 100));
+            row.setCharAt(14, (char) (48 + buyBasket.get(id) % 100 / 10));
+            row.setCharAt(15, (char) (48 + buyBasket.get(id) % 10));
+            productList.getItems().add(new String(row));
+        }
+        Button buyButton = new Button("BUY!!!");
+        vBox.getChildren().add(buyButton);
 
 
         stage.setOnCloseRequest(windowEvent -> {

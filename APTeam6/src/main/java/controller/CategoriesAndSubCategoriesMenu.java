@@ -6,6 +6,8 @@ import model.product.Product;
 import model.product.SubCategory;
 import view.CategoriesAndSubCategoriesMenuView;
 import view.PersonalInfoMenuView;
+import view.SellerProductsMenuView;
+import view.SingleProductScreenView;
 
 import java.util.ArrayList;
 
@@ -279,7 +281,12 @@ public class CategoriesAndSubCategoriesMenu {
                 view.giveOutPutError("Repeated name");
         }
         else if (state == 2 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 2) {
-            //TODO: new product kamali menu
+            try {
+                new SellerProductsMenuView().start(new Stage());
+            } catch (Exception e) {
+                System.err.println("Zahr e mar");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -319,7 +326,7 @@ public class CategoriesAndSubCategoriesMenu {
         }
         else if (state == 2) {
             Product product = allProductsArrayList.get(index);
-            SingleProductScreen.getInstance().start(product);
+            new SingleProductScreenView(product.getId()).start(new Stage());
         }
     }
 
@@ -341,6 +348,4 @@ public class CategoriesAndSubCategoriesMenu {
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
     }
-
-    //TODO: check for index out of bound in all methods
 }
