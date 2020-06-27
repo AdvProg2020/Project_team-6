@@ -18,7 +18,7 @@ public class ManageRequestsView extends Application {
     public ManageRequestsView() {
         System.out.println("=== Manage Requests menu");
         System.out.println("The requests are (respectively):");
-        ProgramManager.getProgramManagerInstance().showAllRequests();
+        System.out.println(ProgramManager.getProgramManagerInstance().showAllRequests());
     }
 
     @Override
