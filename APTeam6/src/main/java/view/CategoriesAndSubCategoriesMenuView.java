@@ -14,10 +14,13 @@ import model.product.SubCategory;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 public class CategoriesAndSubCategoriesMenuView extends Application {
     //CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
 
+    CountDownLatch downLatch = new CountDownLatch(1);
+    Thread waitingThread;
     String command = "";
 
     VBox vBox;
@@ -76,19 +79,27 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         System.out.println(vBox.getChildren());
 
         openButton.setOnAction(actionEvent -> {
-
+            downLatch.countDown();
         });
     }
 
     /////////////////////////////////////////////////
 
-    public String getInputCommandManagerCategory() {
+    public synchronized String getInputCommandManagerCategory() {
         openButton.setDisable(false);
         editButton.setDisable(false);
         addButton.setDisable(false);
         removeButton.setDisable(false);
         backButton.setDisable(false);
         while (true) {
+            System.out.println("before");
+            giveOutPutError("boro baba");
+            try {
+                downLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("after");
             //command = Input.getInput();
             if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back")) {
                 String returnString = command;

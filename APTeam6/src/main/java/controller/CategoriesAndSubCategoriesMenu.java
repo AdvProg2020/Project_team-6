@@ -45,11 +45,6 @@ public class CategoriesAndSubCategoriesMenu {
                     System.out.println("a");
                     view.showCategoriesList(allCategoriesArrayList);
                     System.out.println("b");
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     command = view.getInputCommandManagerCategory();
                     System.out.println("c");
                     if (command.matches("edit \\d+ \\S+")) {
