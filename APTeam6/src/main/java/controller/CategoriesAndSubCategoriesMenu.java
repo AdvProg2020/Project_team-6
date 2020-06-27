@@ -326,7 +326,11 @@ public class CategoriesAndSubCategoriesMenu {
         }
         else if (state == 2) {
             Product product = allProductsArrayList.get(index);
-            new SingleProductScreenView(product.getId()).start(new Stage());
+            try {
+                new SingleProductScreenView(product.getId()).start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
