@@ -29,7 +29,7 @@ public class ManageRequestsView extends Application {
     public void manageRequestPage(PersonalInfoMenuView personalInfoMenuView) {
         Stage stage = new Stage();
         VBox vBox = new VBox();
-
+        vBox.setStyle("-fx-background-color: #86fffa");
         Label label = new Label("Please enter ID");
         Label fill = new Label("please fill this field");
         fill.setVisible(false);
@@ -140,9 +140,9 @@ public class ManageRequestsView extends Application {
                 return command;
             } else if (command.equals("help")) {
                 showHelp();
-            } else if (command.matches("details \\.+")) {
+            } else if (command.matches("details .+")) {
                 return command;
-            } else if (command.matches("(accept|decline) \\.+")) {
+            } else if (command.matches("(accept|decline) .+")) {
                 return command;
             } else {
                 System.out.println("Invalid command");

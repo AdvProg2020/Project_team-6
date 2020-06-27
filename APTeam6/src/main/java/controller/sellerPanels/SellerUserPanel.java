@@ -3,6 +3,7 @@ package controller.sellerPanels;
 import controller.LoginMenu;
 import controller.PersonalInfoMenu;
 import controller.ProgramManager;
+import javafx.stage.Stage;
 import view.userPanel.SellerUserPanelView;
 
 public class SellerUserPanel {
@@ -21,7 +22,7 @@ public class SellerUserPanel {
         while (true) {
             command = view.getInputCommand();
             if (command.equals("view personal info")) {
-                PersonalInfoMenu.getPersonalInfoMenuInstance().start();
+                PersonalInfoMenu.getPersonalInfoMenuInstance().start(new Stage());
             }
             else if (command.equals("login menu")){
                 LoginMenu.getLoginMenuInstance().start();

@@ -20,8 +20,8 @@ public class BuyerTest {
             System.out.println(expectedBuyer.username);
         }*/
         ArrayList<Product> productArrayList = new ArrayList<>();
-        productArrayList.add(new Product("chair","a","b"));
-        productArrayList.add(new Product("table","a","c"));
+        //productArrayList.add(new Product("chair","a","b"));
+        //productArrayList.add(new Product("table","a","c"));
         //expectedBuyers.get(0).addProductToBuyBasket(productArrayList.get(0));
         //expectedBuyers.get(0).addProductToBuyBasket(productArrayList);
         Assert.assertNotEquals(expectedBuyers,Buyer.sortBuyers(0));

@@ -76,11 +76,11 @@ public class ShowDiscountCodeView extends Application {
                 return command;
             } else if (command.equals("help")) {
                 showHelp();
-            } else if (command.matches("view discount code \\.+")) {
+            } else if (command.matches("view discount code .+")) {
                 return command;
-            } else if (command.matches("edit discount code \\.+")) {
+            } else if (command.matches("edit discount code .+")) {
                 return command;
-            } else if (command.matches("remove discount code \\.+")) {
+            } else if (command.matches("remove discount code .+")) {
                 return command;
             } else {
                 System.out.println("Invalid command");
@@ -181,8 +181,8 @@ public class ShowDiscountCodeView extends Application {
         edit.setOnAction(actionEvent -> {
 
             fill.setVisible(discountCode.getText().equals(""));
-            fill.setVisible(!discountCode.getText().matches("\\.+"));
-            if (!discountCode.getText().equals("") && discountCode.getText().matches("\\.+")) {
+            fill.setVisible(!discountCode.getText().matches(".+"));
+            if (!discountCode.getText().equals("") && discountCode.getText().matches(".+")) {
                 if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null) {
                     codeLabel.setText("Enter your new code:");
                     codeTextField.setPromptText("Code");

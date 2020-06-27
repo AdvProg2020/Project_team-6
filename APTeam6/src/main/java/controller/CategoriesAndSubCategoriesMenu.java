@@ -348,4 +348,6 @@ public class CategoriesAndSubCategoriesMenu {
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
     }
+
+    //TODO: check for index out of bound in all methods
 }

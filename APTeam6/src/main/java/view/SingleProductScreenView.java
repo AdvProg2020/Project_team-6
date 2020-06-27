@@ -1,5 +1,6 @@
 package view;
 
+import controller.ProgramManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,10 +21,10 @@ public class SingleProductScreenView extends Application {
     Label label;
     Product product;
 
-    public SingleProductScreenView(String name) {
-        System.out.println("Product: " + name);
+    public SingleProductScreenView(int id) {
+        ProgramManager.getProgramManagerInstance().getProductById(id);
     }
-    //TODO: guess yourself
+
 
     public void printProductDetails(String name, String subCategoryName, String categoryName, String description, String creationTime, int visitCount, Double averageScore) {
         label.setText("Name: " + name + "\n\nAt " + subCategoryName + "at " + categoryName + "\n\nDescription: " + description + "\n\nCreated at: " + creationTime + "\n\nVisited " + visitCount + " times\nAverage score: " + averageScore);

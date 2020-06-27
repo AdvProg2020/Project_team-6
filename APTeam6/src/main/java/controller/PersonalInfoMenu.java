@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.stage.Stage;
 import model.account.Account;
 import model.account.Buyer;
 import model.account.Seller;
@@ -17,7 +18,7 @@ public class PersonalInfoMenu {
     PersonalInfoMenuView view;
     private Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
 
-    public void start(){
+    public void start(Stage stage){
         view = new PersonalInfoMenuView();
         String command = null;
         while (true) {
