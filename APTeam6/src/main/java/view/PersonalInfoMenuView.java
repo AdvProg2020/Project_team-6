@@ -288,8 +288,9 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageCategories.setOnAction(actionEvent -> {
+            stage.setOpacity(0);
             CategoriesAndSubCategoriesMenu.getInstance().startAsManager();
-            stage.close();
+            stage.setOpacity(100);
         });
 
         Button viewCompanyInfo = new Button("View company information");

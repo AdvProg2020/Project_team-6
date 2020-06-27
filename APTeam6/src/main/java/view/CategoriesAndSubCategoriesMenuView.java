@@ -3,10 +3,8 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,10 +18,18 @@ import java.util.ArrayList;
 public class CategoriesAndSubCategoriesMenuView extends Application {
     //CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = new CategoriesAndSubCategoriesMenu();
 
+    String command = "";
+
     VBox vBox;
     Label title;
     ListView<String> list;
     Scene scene;
+
+    Button openButton = new Button("Open");
+    Button editButton = new Button("Edit");
+    Button addButton = new Button("Add");
+    Button removeButton = new Button("Remove");
+    Button backButton = new Button("Backu");
 
     public CategoriesAndSubCategoriesMenuView(){
         System.out.println("=== Categories menu");
@@ -41,21 +47,54 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         scene = new Scene(vBox,300,600);
+        System.out.println(scene);
         list = new ListView<String>();
+        list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        list.setLayoutX(10);
+        list.setLayoutY(50);
         title = new Label();
+        title.setLayoutX(10);
+        title.setLayoutY(10);
+        openButton.setLayoutX(10);
+        editButton.setLayoutX(70);
+        addButton.setLayoutX(130);
+        removeButton.setLayoutX(190);
+        backButton.setLayoutX(10);
+        openButton.setLayoutY(520);
+        editButton.setLayoutX(520);
+        addButton.setLayoutX(520);
+        removeButton.setLayoutX(520);
+        backButton.setLayoutY(550);
         vBox.getChildren().add(title);
         vBox.getChildren().add(list);
-        list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        vBox.getChildren().add(openButton);
+        vBox.getChildren().add(editButton);
+        vBox.getChildren().add(addButton);
+        vBox.getChildren().add(removeButton);
+        vBox.getChildren().add(backButton);
+
+        System.out.println(vBox.getChildren());
+
+        openButton.setOnAction(actionEvent -> {
+
+        });
     }
 
     /////////////////////////////////////////////////
 
     public String getInputCommandManagerCategory() {
-        String command;
+        openButton.setDisable(false);
+        editButton.setDisable(false);
+        addButton.setDisable(false);
+        removeButton.setDisable(false);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("edit \\d+ \\S+") || command.matches("add \\d+") || command.matches("remove \\d+") || command.matches("open \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\tadd [index]\n\tedit [index] [newName]\n\tremove [index]\n\topen [index]");
             else
@@ -64,11 +103,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     }
 
     public String getInputCommandManagerProduct() {
-        String command;
+        openButton.setDisable(true);
+        editButton.setDisable(true);
+        addButton.setDisable(true);
+        removeButton.setDisable(false);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("remove \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("remove \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\tremove [index]");
             else
@@ -79,11 +125,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public String getInputCommandSellerCategory() {
-        String command;
+        openButton.setDisable(false);
+        editButton.setDisable(true);
+        addButton.setDisable(true);
+        removeButton.setDisable(true);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("open \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("open \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\topen [index]");
             else
@@ -92,11 +145,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     }
 
     public String getInputCommandSellerSubCategory() {
-        String command;
+        openButton.setDisable(false);
+        editButton.setDisable(false);
+        addButton.setDisable(false);
+        removeButton.setDisable(false);
+        backButton.setDisable(false);
         while (true) {
-            command = Input.getInput();
-            if (command.matches("addTo \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("addTo \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\taddTo [index]");
             else
@@ -107,11 +167,13 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
     /////////////////////////////////////////////////
 
     public String getInputCommandBuyer() {
-        String command;
         while (true) {
-            command = Input.getInput();
-            if (command.matches("open \\d+") || command.equals("back"))
-                return command;
+            //command = Input.getInput();
+            if (command.matches("open \\d+") || command.equals("back")) {
+                String returnString = command;
+                command = "";
+                return returnString;
+            }
             else if (command.equals("help"))
                 System.out.println("List of commands:\n\topen [index]");
             else
@@ -125,7 +187,8 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         //System.out.println("List of Categories:");
         title.setText("List of Categories:");
         list.getItems().clear();
-        for (int i = 0, categoriesSize = categories.size(); i < categoriesSize; i++) {
+        int length = categories.size();
+        for (int i = 0; i < length; i++) {
             Category category = categories.get(i);
             //System.out.println("\t" + i + ". " + category.getName());
             list.getItems().add(i + ". " + category.getName());
@@ -369,6 +432,15 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         });
     }*/
 
+    public void closeStage(){/*
+        stage.close();
+        try {
+            personalInfoMenuView.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Categories and SubCategories and product menu");
@@ -386,6 +458,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             }
         });
 
+        System.out.println(scene);
     }
 
 }

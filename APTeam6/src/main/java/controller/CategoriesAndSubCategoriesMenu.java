@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.stage.Stage;
 import model.product.Category;
 import model.product.Product;
 import model.product.SubCategory;
@@ -30,13 +31,27 @@ public class CategoriesAndSubCategoriesMenu {
 
     public void startAsManager() {
         view = new CategoriesAndSubCategoriesMenuView();
+        try {
+            view.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        updateCategoriesArrayList();
         String command = null;
         state = 0;
         while (true) {
             switch (state) {
                 case 0:
+                    System.out.println("a");
                     view.showCategoriesList(allCategoriesArrayList);
+                    System.out.println("b");
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     command = view.getInputCommandManagerCategory();
+                    System.out.println("c");
                     if (command.matches("edit \\d+ \\S+")) {
                         String[] splitCommand = command.split("\\s");
                         edit(Integer.parseInt(splitCommand[1]), splitCommand[2]);
