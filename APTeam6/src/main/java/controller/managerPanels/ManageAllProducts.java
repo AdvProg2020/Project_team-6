@@ -1,11 +1,12 @@
 package controller.managerPanels;
 
+import controller.Parent;
 import controller.ProgramManager;
 
 import view.ManageAllProductsView;
 import view.PersonalInfoMenuView;
 
-public class ManageAllProducts {
+public class ManageAllProducts implements Parent {
     private static ManageAllProducts manageAllProductsInstance = null;
     public static ManageAllProducts getLoginMenuInstance() {
         if (manageAllProductsInstance == null)

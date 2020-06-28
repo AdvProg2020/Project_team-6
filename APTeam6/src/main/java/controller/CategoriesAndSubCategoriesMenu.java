@@ -12,7 +12,7 @@ import view.SingleProductScreenView;
 import java.util.ArrayList;
 
 
-public class CategoriesAndSubCategoriesMenu {
+public class CategoriesAndSubCategoriesMenu implements Parent{
     private static CategoriesAndSubCategoriesMenu instance;
 
     public static CategoriesAndSubCategoriesMenu getInstance() {
@@ -351,6 +351,11 @@ public class CategoriesAndSubCategoriesMenu {
             state = 1;
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
+    }
+
+    @Override
+    public void start() {
+
     }
 
     //TODO: check for index out of bound in all methods

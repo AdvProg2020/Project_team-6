@@ -1,12 +1,13 @@
 package controller.sellerPanels;
 
+import controller.Parent;
 import controller.ProgramManager;
 import model.product.Off;
 import model.requests.OffRequest;
 import model.requests.Request;
 import view.userPanel.OffManagementSellerView;
 
-public class OffManagementSeller {
+public class OffManagementSeller implements Parent {
     private static OffManagementSeller instance;
     public static OffManagementSeller getInstance(){
         if (instance == null)

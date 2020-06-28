@@ -1,13 +1,14 @@
 package controller.managerPanels;
 
 import controller.LoginMenu;
+import controller.Parent;
 import controller.ProgramManager;
 import model.requests.ProductRequest;
 import model.requests.Request;
 import view.LoginMenuView;
 import view.ManageRequestsView;
 
-public class ManageRequests {
+public class ManageRequests implements Parent {
     private static ManageRequests ManageRequestsInstance = null;
 
     public static ManageRequests getManageRequestsInstance() {

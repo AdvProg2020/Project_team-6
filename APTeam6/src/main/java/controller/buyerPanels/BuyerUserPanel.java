@@ -1,12 +1,13 @@
 package controller.buyerPanels;
 
 import controller.LoginMenu;
+import controller.Parent;
 import controller.PersonalInfoMenu;
 import controller.ProgramManager;
 import javafx.stage.Stage;
 import view.userPanel.BuyerUserPanelView;
 
-public class BuyerUserPanel {
+public class BuyerUserPanel implements Parent {
     private static BuyerUserPanel buyerUserPanelInstance;
 
     public static BuyerUserPanel getBuyerUserPanelInstance() {
@@ -24,7 +25,7 @@ public class BuyerUserPanel {
         while (true) {
             command = view.getInputCommand();
             if (command.equalsIgnoreCase("view personal info")) {
-                PersonalInfoMenu.getPersonalInfoMenuInstance().start(new Stage());
+                //PersonalInfoMenu.getPersonalInfoMenuInstance().start(new Stage());
             }
             else if (command.equals("login menu")){
                 LoginMenu.getLoginMenuInstance().start();

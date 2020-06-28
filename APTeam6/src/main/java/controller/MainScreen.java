@@ -6,7 +6,7 @@ import controller.sellerPanels.SellerUserPanel;
 import view.MainScreenView;
 
 
-public class MainScreen {
+public class MainScreen implements Parent{
     private static MainScreen mainScreenInstance = null;
 
     public static MainScreen getMainScreenInstance() {

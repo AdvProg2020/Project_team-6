@@ -1,10 +1,11 @@
 package controller.managerPanels;
 
+import controller.Parent;
 import controller.ProgramManager;
 import model.product.DiscountCode;
 import view.ShowDiscountCodeView;
 
-public class ShowDiscountCode {
+public class ShowDiscountCode implements Parent {
     private static ShowDiscountCode showDiscountCode = null;
     public static ShowDiscountCode getShowDiscountCodeInstance() {
         if (showDiscountCode == null)

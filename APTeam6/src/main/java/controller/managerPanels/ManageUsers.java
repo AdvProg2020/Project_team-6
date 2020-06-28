@@ -1,12 +1,13 @@
 package controller.managerPanels;
 
 import controller.LoginMenu;
+import controller.Parent;
 import controller.ProgramManager;
 import model.account.Account;
 import model.account.Manager;
 import view.ManageUsersView;
 
-public class ManageUsers {
+public class ManageUsers implements Parent {
     private static ManageUsers manageUsersInstance = null;
     public static ManageUsers getManageUsersInstance() {
         if (manageUsersInstance == null)

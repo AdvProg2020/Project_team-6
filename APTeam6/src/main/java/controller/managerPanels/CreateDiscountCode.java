@@ -1,9 +1,10 @@
 package controller.managerPanels;
+import controller.Parent;
 import controller.ProgramManager;
 import model.product.DiscountCode;
 import view.CreateDiscountCodeView;
 
-public class CreateDiscountCode {
+public class CreateDiscountCode implements Parent {
     private static CreateDiscountCode instance;
     public static CreateDiscountCode getInstance(){
         if (instance == null)

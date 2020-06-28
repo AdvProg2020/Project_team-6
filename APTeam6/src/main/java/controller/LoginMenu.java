@@ -6,7 +6,7 @@ import model.account.Manager;
 import model.account.Seller;
 import view.LoginMenuView;
 
-public class LoginMenu {
+public class LoginMenu implements Parent{
     private static LoginMenu loginMenuInstance = null;
 
     public static LoginMenu getLoginMenuInstance() {

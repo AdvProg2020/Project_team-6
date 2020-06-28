@@ -1,13 +1,10 @@
 package controller.managerPanels;
 
-import controller.CategoriesAndSubCategoriesMenu;
-import controller.LoginMenu;
-import controller.PersonalInfoMenu;
-import controller.ProgramManager;
+import controller.*;
 import javafx.stage.Stage;
 import view.userPanel.ManagerUserPanelView;
 
-public class ManagerUserPanel {
+public class ManagerUserPanel implements Parent {
     private static ManagerUserPanel managerUserPanelInstance;
 
     public static ManagerUserPanel getManagerUserPanelInstance() {
@@ -25,7 +22,7 @@ public class ManagerUserPanel {
         while (true) {
             command = view.getInputCommand();
             if (command.equalsIgnoreCase("view personal info")) {
-                PersonalInfoMenu.getPersonalInfoMenuInstance().start(new Stage());
+                //PersonalInfoMenu.getPersonalInfoMenuInstance().start(new Stage());
             }
             else if (command.equalsIgnoreCase("login menu")){
                 LoginMenu.getLoginMenuInstance().start();

@@ -6,7 +6,7 @@ import model.account.Buyer;
 import model.account.Seller;
 import view.PersonalInfoMenuView;
 
-public class PersonalInfoMenu {
+public class PersonalInfoMenu implements Parent{
     private static PersonalInfoMenu personalInfoMenuInstance = null;
     public static PersonalInfoMenu getPersonalInfoMenuInstance() {
         if (personalInfoMenuInstance == null)
@@ -18,7 +18,7 @@ public class PersonalInfoMenu {
     PersonalInfoMenuView view;
     private Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
 
-    public void start(Stage stage){
+    public void start(){
         view = new PersonalInfoMenuView();
         String command = null;
         while (true) {

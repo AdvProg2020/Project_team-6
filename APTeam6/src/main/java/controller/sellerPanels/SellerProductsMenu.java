@@ -1,8 +1,9 @@
 package controller.sellerPanels;
 
+import controller.Parent;
 import view.SellerProductsMenuView;
 
-public class SellerProductsMenu {
+public class SellerProductsMenu implements Parent {
     private static SellerProductsMenu instance;
     public static SellerProductsMenu getInstance(){
         if (instance == null)
