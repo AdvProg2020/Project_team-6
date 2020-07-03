@@ -1,8 +1,8 @@
-import controller.MainScreen;
-import controller.ProgramManager;
+import server.controller.MainScreen;
+import server.controller.ProgramManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.MainScreenView;
+import client.view.MainScreenView;
 
 public class Main extends Application {
 
