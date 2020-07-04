@@ -9,8 +9,9 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client extends Application {
     public static void main(String[] args) {
@@ -40,6 +41,7 @@ public class Client extends Application {
                 System.out.println("connecting...");
                 Socket serverSocket = new Socket(ipAddress.getText(), Integer.parseInt(serverPort.getText()));
                 System.out.println("connected!");
+                stage.close();
                 run(serverSocket);
                 new Alert().showAlert("connected!","ok",0,null);
             } catch (IOException e) {
@@ -73,7 +75,16 @@ public class Client extends Application {
     }
 
 
-    public void run(Socket serverSocket){
-        System.out.println("runnnnnn");
+    public void run(Socket serverSocket) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(serverSocket.getInputStream()));
+        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(serverSocket.getOutputStream()));
+        while (true){
+            String s = scanner.nextLine();
+            dataOutputStream.writeUTF(s);
+            dataOutputStream.flush();
+            s = dataInputStream.readUTF();
+            System.out.println(s);
+        }
     }
 }
