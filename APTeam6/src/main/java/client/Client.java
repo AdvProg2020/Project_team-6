@@ -1,12 +1,10 @@
 package client;
 
+import client.view.Alert;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -39,8 +37,14 @@ public class Client extends Application {
         connect.setOnAction(actionEvent -> {
             // TODO check data validation  ip & port
             try {
+                System.out.println("connecting...");
                 Socket serverSocket = new Socket(ipAddress.getText(), Integer.parseInt(serverPort.getText()));
+                System.out.println("connected!");
+                run(serverSocket);
+                new Alert().showAlert("connected!","ok",0,null);
             } catch (IOException e) {
+                System.out.println("an error happened in connecting to server!");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -70,6 +74,6 @@ public class Client extends Application {
 
 
     public void run(Socket serverSocket){
-
+        System.out.println("runnnnnn");
     }
 }
