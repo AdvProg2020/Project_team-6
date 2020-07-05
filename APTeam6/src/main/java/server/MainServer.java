@@ -23,8 +23,8 @@ public class MainServer {
             Socket clientSocket = serverSocket.accept();
             runningServer++;
             System.out.println("new client connected");
-            Server server = new Server(clientSocket);
-            server.run();
+            System.out.println("the number of connected client : "+runningServer);
+            new Thread(new Server(clientSocket)).start();
         }
     }
 }

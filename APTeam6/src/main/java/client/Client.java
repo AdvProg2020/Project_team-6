@@ -4,8 +4,10 @@ import client.view.Alert;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.Border;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -14,6 +16,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client extends Application {
+
+    private Socket serverSocket = null;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -42,7 +47,8 @@ public class Client extends Application {
                 Socket serverSocket = new Socket(ipAddress.getText(), Integer.parseInt(serverPort.getText()));
                 System.out.println("connected!");
                 stage.close();
-                run(serverSocket);
+                this.serverSocket = serverSocket;
+                run();
                 new Alert().showAlert("connected!","ok",0,null);
             } catch (IOException e) {
                 System.out.println("an error happened in connecting to server!");
@@ -75,16 +81,27 @@ public class Client extends Application {
     }
 
 
-    public void run(Socket serverSocket) throws IOException {
+    public void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(serverSocket.getInputStream()));
-        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(serverSocket.getOutputStream()));
         while (true){
             String s = scanner.nextLine();
-            dataOutputStream.writeUTF(s);
-            dataOutputStream.flush();
-            s = dataInputStream.readUTF();
+            sendMessage(s);
+            s = getMessage();
             System.out.println(s);
         }
+    }
+
+    public String getMessage() throws IOException {
+        DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
+        String command = dataInputStream.readUTF();
+        //TODO decode
+        return command;
+    }
+
+    public void sendMessage(String command) throws IOException {
+        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
+        //TODO encode
+        dataOutputStream.writeUTF(command);
+        dataOutputStream.flush();
     }
 }
