@@ -1,7 +1,7 @@
 package server.controller.managerPanels;
 
 import server.controller.Parent;
-import client.view.ManageRequestsView;
+import client.view.old.ManageRequestsView;
 
 public class ManageRequests implements Parent {
     private static ManageRequests ManageRequestsInstance = null;

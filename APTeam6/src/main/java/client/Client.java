@@ -1,6 +1,6 @@
 package client;
 
-import client.view.Alert;
+import client.view.old.Alert;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -94,13 +94,13 @@ public class Client extends Application {
     public String getMessage() throws IOException {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
         String command = dataInputStream.readUTF();
-        //TODO decode
+        //TODO: decode
         return command;
     }
 
     public void sendMessage(String command) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
-        //TODO encode
+        //TODO: encode
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();
     }

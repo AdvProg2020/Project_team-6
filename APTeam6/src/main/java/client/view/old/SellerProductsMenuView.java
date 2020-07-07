@@ -1,4 +1,4 @@
-package client.view;
+package client.view.old;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;

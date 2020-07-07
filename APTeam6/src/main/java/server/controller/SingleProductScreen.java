@@ -3,7 +3,7 @@ package server.controller;
 import javafx.stage.Stage;
 import server.model.product.Product;
 import server.model.product.Score;
-import client.view.SingleProductScreenView;
+import client.view.old.SingleProductScreenView;
 
 import java.util.ArrayList;
 

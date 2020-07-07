@@ -3,7 +3,7 @@ package client.view.userPanel;
 import server.controller.ProgramManager;
 import server.model.account.Seller;
 import server.model.logs.SellLog;
-import client.view.Input;
+import client.view.old.Input;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import server.model.account.Buyer;
-import client.view.Exit;
-import client.view.Input;
+import client.view.old.Exit;
+import client.view.old.Input;
 
 import java.io.FileInputStream;
 import java.util.Arrays;

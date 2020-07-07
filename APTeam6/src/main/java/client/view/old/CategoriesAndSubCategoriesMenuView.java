@@ -1,4 +1,4 @@
-package client.view;
+package client.view.old;
 
 import server.controller.CategoriesAndSubCategoriesMenu;
 import javafx.application.Application;
@@ -213,7 +213,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         for (int i = 0; i < length; i++) {
             Category category = categories.get(i);
             //System.out.println("\t" + i + ". " + category.getName());
-            list.getItems().add(i + ". " + category.getName());
+            list.getItems().add(i + " " + category.getName());
         }
     }
 
@@ -224,7 +224,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         for (int i = 0, subCategoriesSize = subCategories.size(); i < subCategoriesSize; i++) {
             SubCategory subCategory = subCategories.get(i);
             //System.out.println("\t" + i + ". " + subCategory.getName());
-            list.getItems().add(i + ". " + subCategory.getName());
+            list.getItems().add(i + " " + subCategory.getName());
         }
     }
 
@@ -235,7 +235,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         for (int i = 0, productsSize = products.size(); i < productsSize; i++) {
             Product product = products.get(i);
             //System.out.println("\t" + i + ". " + product.getName());
-            list.getItems().add(i + ". " + product.getName());
+            list.getItems().add(i + " " + product.getName());
         }
     }
 

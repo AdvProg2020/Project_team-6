@@ -1,9 +1,9 @@
-package client.view;
+package client.view.news;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class ad {
+public class ad_V {
 
     public ImageView buyProduct;
 

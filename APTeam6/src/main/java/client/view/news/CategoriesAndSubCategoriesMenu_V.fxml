@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.CategoriesAndSubCategoriesMenu_V">
+   <children>
+      <ListView fx:id="listView" layoutX="14.0" layoutY="33.0" prefHeight="228.0" prefWidth="432.0" />
+      <Button layoutX="14.0" layoutY="276.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="52.0" text="Add" />
+      <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="141.0" text="Remove" />
+      <Button layoutX="14.0" layoutY="347.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="86.0" text="Edit" />
+      <Button layoutX="69.0" layoutY="276.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="86.0" text="Open" />
+      <Button layoutX="103.0" layoutY="347.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="52.0" text="Back" />
+      <ListView fx:id="attributesListView" layoutX="168.0" layoutY="298.0" prefHeight="188.0" prefWidth="278.0" />
+      <Label layoutX="14.0" layoutY="8.0" text="List of categories:" />
+      <Label layoutX="169.0" layoutY="276.0" text="Attributes:" />
+   </children>
+</AnchorPane>

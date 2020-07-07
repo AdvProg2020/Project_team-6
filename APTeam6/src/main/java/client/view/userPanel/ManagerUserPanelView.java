@@ -1,6 +1,6 @@
 package client.view.userPanel;
 
-import client.view.Input;
+import client.view.old.Input;
 
 import java.util.Arrays;
 import java.util.HashSet;

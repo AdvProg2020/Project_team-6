@@ -3,7 +3,7 @@ package server.controller.managerPanels;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 
-import client.view.ManageAllProductsView;
+import client.view.old.ManageAllProductsView;
 
 public class ManageAllProducts implements Parent {
     private static ManageAllProducts manageAllProductsInstance = null;

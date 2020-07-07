@@ -1,7 +1,7 @@
 package server.controller.sellerPanels;
 
 import server.controller.Parent;
-import client.view.SellerProductsMenuView;
+import client.view.old.SellerProductsMenuView;
 
 public class SellerProductsMenu implements Parent {
     private static SellerProductsMenu instance;
