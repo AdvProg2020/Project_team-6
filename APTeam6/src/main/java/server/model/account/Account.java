@@ -8,6 +8,7 @@ public abstract class Account {
     protected String emailAddress = null;
     protected String phoneNumber = null;
     protected byte role;
+    protected boolean isOnline;
 
     public Account(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
         this.username = username;
@@ -74,5 +75,9 @@ public abstract class Account {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 }
