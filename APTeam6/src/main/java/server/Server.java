@@ -10,13 +10,15 @@ import server.controller.ProgramManager;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Server implements Runnable {
 
     private Socket clientSocket;
     private Parent thisParent = new MainScreen();
     private Parent preParent = null;
-    private Scene scene;
+    private Log log = null;
 
 
     Server(Socket clientSocket) {
@@ -25,17 +27,23 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-        this.scene = createLogsPage();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("\'log--\'yyyy-MM-dd--HH+mm+ss");
+        LocalDateTime now = LocalDateTime.now();
+        Log log = new Log(dtf.format(now));
+        this.log = log;
+
         while (true) {
             String command = "";
             try {
                 command = getMessage();
             } catch (IOException e) {
-                System.out.println("disconnected!");
+                this.log.addLog("disconnected!",2);
+                this.log.addLog(e.getMessage(),2);
                 ProgramManager.getProgramManagerInstance().saveToFiles();
                 MainServer.runningServer--;
                 break;
             }
+
 
 
             /*
@@ -61,7 +69,8 @@ public class Server implements Runnable {
             try {
                 sendMessage(command);
             } catch (IOException e) {
-                System.out.println("disconnected!");
+                this.log.addLog("disconnected!",2);
+                this.log.addLog(e.getMessage(),2);
                 ProgramManager.getProgramManagerInstance().saveToFiles();
                 MainServer.runningServer--;
                 break;
@@ -70,6 +79,7 @@ public class Server implements Runnable {
         }
     }
 
+    /*
     public Scene createLogsPage(){
         Stage stage = new Stage();
         VBox vBox = new VBox();
@@ -80,17 +90,19 @@ public class Server implements Runnable {
         stage.show();
         System.out.println("--..--");
         return scene;
-    }
+    }*/
 
     public String getMessage() throws IOException {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.clientSocket.getInputStream()));
         String command = dataInputStream.readUTF();
+        this.log.addLog(command,1);
         //TODO decode
         return command;
     }
 
     public void sendMessage(String command) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.clientSocket.getOutputStream()));
+        this.log.addLog(command,0);
         //TODO encode
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();
