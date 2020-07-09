@@ -1,4 +1,4 @@
-package client.view;
+package client.view.old;
 
 import java.util.Scanner;
 

@@ -3,7 +3,7 @@ import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.product.DiscountCode;
-import client.view.CreateDiscountCodeView;
+import client.view.old.CreateDiscountCodeView;
 
 public class CreateDiscountCode implements Parent {
     /*

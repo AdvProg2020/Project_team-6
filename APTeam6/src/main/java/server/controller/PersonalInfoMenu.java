@@ -4,7 +4,7 @@ import server.Server;
 import server.model.account.Account;
 import server.model.account.Buyer;
 import server.model.account.Seller;
-import client.view.PersonalInfoMenuView;
+import client.view.old.PersonalInfoMenuView;
 
 public class PersonalInfoMenu implements Parent{
     /*

@@ -5,7 +5,7 @@ import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.account.Account;
 import server.model.account.Manager;
-import client.view.ManageUsersView;
+import client.view.old.ManageUsersView;
 
 public class ManageUsers implements Parent {
     /*

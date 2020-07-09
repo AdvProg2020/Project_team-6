@@ -4,7 +4,7 @@ import server.Server;
 import server.controller.buyerPanels.BuyerUserPanel;
 import server.controller.managerPanels.ManagerUserPanel;
 import server.controller.sellerPanels.SellerUserPanel;
-import client.view.MainScreenView;
+import client.view.old.MainScreenView;
 
 
 public class MainScreen implements Parent{

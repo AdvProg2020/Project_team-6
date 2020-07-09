@@ -4,7 +4,7 @@ import server.Server;
 import server.model.account.Account;
 import server.model.account.Buyer;
 import server.model.account.Seller;
-import client.view.LoginMenuView;
+import client.view.old.LoginMenuView;
 
 public class LoginMenu implements Parent{
 

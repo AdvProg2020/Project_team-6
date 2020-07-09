@@ -1,6 +1,6 @@
 package client.view.userPanel;
 
-import client.view.Input;
+import client.view.old.Input;
 
 public class OffManagementSellerView {
     public OffManagementSellerView() {

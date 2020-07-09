@@ -2,7 +2,7 @@ import server.controller.MainScreen;
 import server.controller.ProgramManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import client.view.MainScreenView;
+import client.view.old.MainScreenView;
 
 public class Main extends Application {
 

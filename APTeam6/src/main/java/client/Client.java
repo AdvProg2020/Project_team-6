@@ -1,7 +1,9 @@
 package client;
 
-import client.view.Alert;
+import client.view.news.GeneralController_V;
+import client.view.old.Alert;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,9 +15,45 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client extends Application {
+    private Stage theStage;
+    private ArrayList<FXMLLoader> allFXMLLoaders;
+    private ArrayList<Scene> allScenes;
+    private ArrayList<GeneralController_V> allControllers;
+
+    public void run() throws IOException {
+        /*Scanner scanner = new Scanner(System.in);
+        while (true){
+            String s = scanner.nextLine();
+            sendMessage(s);
+            s = getMessage();
+            System.out.println(s);
+        }*/
+
+        theStage = new Stage();
+        allFXMLLoaders = new ArrayList<>();
+        allScenes = new ArrayList<>();
+        allControllers = new ArrayList<>();
+    }
+
+    public String getMessage() throws IOException {
+        DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
+        String command = dataInputStream.readUTF();
+        //TODO: decode
+        return command;
+    }
+
+    public void sendMessage(String command) throws IOException {
+        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
+        //TODO: encode
+        dataOutputStream.writeUTF(command);
+        dataOutputStream.flush();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
 
     private Socket serverSocket = null;
 
@@ -78,30 +116,5 @@ public class Client extends Application {
         stage.setScene(scene);
         stage.setTitle("Connect");
         stage.show();
-    }
-
-
-    public void run() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        while (true){
-            String s = scanner.nextLine();
-            sendMessage(s);
-            s = getMessage();
-            System.out.println(s);
-        }
-    }
-
-    public String getMessage() throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
-        String command = dataInputStream.readUTF();
-        //TODO decode
-        return command;
-    }
-
-    public void sendMessage(String command) throws IOException {
-        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
-        //TODO encode
-        dataOutputStream.writeUTF(command);
-        dataOutputStream.flush();
     }
 }

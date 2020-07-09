@@ -5,10 +5,10 @@ import server.Server;
 import server.model.product.Category;
 import server.model.product.Product;
 import server.model.product.SubCategory;
-import client.view.CategoriesAndSubCategoriesMenuView;
-import client.view.PersonalInfoMenuView;
-import client.view.SellerProductsMenuView;
-import client.view.SingleProductScreenView;
+import client.view.old.CategoriesAndSubCategoriesMenuView;
+import client.view.old.PersonalInfoMenuView;
+import client.view.old.SellerProductsMenuView;
+import client.view.old.SingleProductScreenView;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,7 @@ package server.controller.managerPanels;
 
 import server.Server;
 import server.controller.Parent;
-import client.view.ManageRequestsView;
+import client.view.old.ManageRequestsView;
 
 public class ManageRequests implements Parent {
 
