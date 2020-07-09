@@ -1,5 +1,6 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.account.Account;
@@ -7,6 +8,7 @@ import server.model.account.Manager;
 import client.view.ManageUsersView;
 
 public class ManageUsers implements Parent {
+    /*
     private static ManageUsers manageUsersInstance = null;
     public static ManageUsers getManageUsersInstance() {
         if (manageUsersInstance == null)
@@ -39,6 +41,8 @@ public class ManageUsers implements Parent {
             }
         }
     }
+     */
+
     private void ViewUser(String username){
         Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
         System.out.println("the user's first name is :" + tempAccount.getFirstName() + "the user's last name is :" + tempAccount.getLastName());
@@ -46,11 +50,16 @@ public class ManageUsers implements Parent {
 
     private void deleteUser(String username){
         ProgramManager.getProgramManagerInstance().deleteAccount(username);
-        view.giveOutput("the user was successfully removed!");
+        //view.giveOutput("the user was successfully removed!");
     }
     private void createManagerProfile(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber){
         Manager newManager = new Manager(username,password,firstName,lastName,emailAddress,phoneNumber);
         ProgramManager.getProgramManagerInstance().addAccountToList(username,newManager);
+    }
+
+    @Override
+    public void start(Server server) {
+
     }
 }
 

@@ -1,11 +1,13 @@
 package server.controller.sellerPanels;
 
+import server.Server;
 import server.controller.LoginMenu;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import client.view.userPanel.SellerUserPanelView;
 
 public class SellerUserPanel implements Parent {
+    /*
     private static SellerUserPanel sellerUserPanelInstance;
     public static SellerUserPanel getSellerUserPanelInstance(){
         if (sellerUserPanelInstance == null)
@@ -49,5 +51,11 @@ public class SellerUserPanel implements Parent {
                 return;
             }
         }
+    }
+     */
+
+    @Override
+    public void start(Server server) {
+
     }
 }

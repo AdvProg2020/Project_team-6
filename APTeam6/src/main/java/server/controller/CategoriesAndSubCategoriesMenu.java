@@ -1,6 +1,7 @@
 package server.controller;
 
 import javafx.stage.Stage;
+import server.Server;
 import server.model.product.Category;
 import server.model.product.Product;
 import server.model.product.SubCategory;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 
 public class CategoriesAndSubCategoriesMenu implements Parent{
+    /*
     private static CategoriesAndSubCategoriesMenu instance;
 
     public static CategoriesAndSubCategoriesMenu getInstance() {
@@ -20,6 +22,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             instance = new CategoriesAndSubCategoriesMenu();
         return instance;
     }
+    */
 
     ///////////////////////////////////////////
     private CategoriesAndSubCategoriesMenuView view;
@@ -211,7 +214,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         }
 
     }*/
-
+    /*
     public void start(PersonalInfoMenuView personalInfoMenuView){
         this.personalInfoMenuView = personalInfoMenuView;
         view = new CategoriesAndSubCategoriesMenuView(this);
@@ -224,6 +227,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         view.showCategoriesList(allCategoriesArrayList);
         state = 0;
     }
+    */
 
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
@@ -353,8 +357,9 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         }
     }
 
+
     @Override
-    public void start() {
+    public void start(Server server) {
 
     }
 

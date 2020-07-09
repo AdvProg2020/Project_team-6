@@ -1,9 +1,11 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.*;
 import client.view.userPanel.ManagerUserPanelView;
 
 public class ManagerUserPanel implements Parent {
+    /*
     private static ManagerUserPanel managerUserPanelInstance;
 
     public static ManagerUserPanel getManagerUserPanelInstance() {
@@ -52,5 +54,11 @@ public class ManagerUserPanel implements Parent {
                 return;
             }
         }
+    }
+     */
+
+    @Override
+    public void start(Server server) {
+
     }
 }

@@ -1,11 +1,13 @@
 package server.controller;
 
+import server.Server;
 import server.model.account.Account;
 import server.model.account.Buyer;
 import server.model.account.Seller;
 import client.view.PersonalInfoMenuView;
 
 public class PersonalInfoMenu implements Parent{
+    /*
     private static PersonalInfoMenu personalInfoMenuInstance = null;
     public static PersonalInfoMenu getPersonalInfoMenuInstance() {
         if (personalInfoMenuInstance == null)
@@ -16,6 +18,7 @@ public class PersonalInfoMenu implements Parent{
     ///////////////////////////////////////////////////
     PersonalInfoMenuView view;
     private Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
+
 
     public void start(){
         view = new PersonalInfoMenuView();
@@ -47,5 +50,11 @@ public class PersonalInfoMenu implements Parent{
                 throw new RuntimeException("Unknown command was passed to LoginMenu by client.view");
             }
         }
+    }
+     */
+
+    @Override
+    public void start(Server server) {
+
     }
 }

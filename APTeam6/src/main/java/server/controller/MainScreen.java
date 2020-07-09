@@ -1,5 +1,6 @@
 package server.controller;
 
+import server.Server;
 import server.controller.buyerPanels.BuyerUserPanel;
 import server.controller.managerPanels.ManagerUserPanel;
 import server.controller.sellerPanels.SellerUserPanel;
@@ -7,15 +8,13 @@ import client.view.MainScreenView;
 
 
 public class MainScreen implements Parent{
-    private static MainScreen mainScreenInstance = null;
 
-    public static MainScreen getMainScreenInstance() {
-        if (mainScreenInstance == null)
-            mainScreenInstance = new MainScreen();
-        return mainScreenInstance;
-    }
 
-    public void start() {
+
+    public void start(Server server) {
+
+
+        /*
         MainScreenView view = new MainScreenView();
         String command = null;
         while (true) {
@@ -41,10 +40,11 @@ public class MainScreen implements Parent{
                     SellerUserPanel.getSellerUserPanelInstance().start();
                 else if (role == 3)
                     ManagerUserPanel.getManagerUserPanelInstance().start();
-            }
+            }*/
         }
-    }
-
 
 
 }
+
+
+

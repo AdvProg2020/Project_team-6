@@ -1,9 +1,17 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import client.view.ManageRequestsView;
 
 public class ManageRequests implements Parent {
+
+    @Override
+    public void start(Server server) {
+
+    }
+
+    /*
     private static ManageRequests ManageRequestsInstance = null;
 
     public static ManageRequests getManageRequestsInstance() {
@@ -38,5 +46,6 @@ public class ManageRequests implements Parent {
             }
         }
     }
+         */
 }
 

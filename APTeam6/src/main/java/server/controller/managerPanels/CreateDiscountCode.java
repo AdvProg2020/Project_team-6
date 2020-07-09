@@ -1,10 +1,12 @@
 package server.controller.managerPanels;
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.product.DiscountCode;
 import client.view.CreateDiscountCodeView;
 
 public class CreateDiscountCode implements Parent {
+    /*
     private static CreateDiscountCode instance;
     public static CreateDiscountCode getInstance(){
         if (instance == null)
@@ -28,5 +30,12 @@ public class CreateDiscountCode implements Parent {
                 ProgramManager.getProgramManagerInstance().addDiscountCodeToArrayList(discountCode);
             }
         }
+    }
+
+     */
+
+    @Override
+    public void start(Server server) {
+
     }
 }

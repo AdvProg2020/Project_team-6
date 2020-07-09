@@ -1,11 +1,13 @@
 package server.controller.buyerPanels;
 
+import server.Server;
 import server.controller.LoginMenu;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import client.view.userPanel.BuyerUserPanelView;
 
 public class BuyerUserPanel implements Parent {
+    /*
     private static BuyerUserPanel buyerUserPanelInstance;
 
     public static BuyerUserPanel getBuyerUserPanelInstance() {
@@ -39,5 +41,11 @@ public class BuyerUserPanel implements Parent {
                 return;
             }
         }
+    }
+     */
+
+    @Override
+    public void start(Server server) {
+
     }
 }

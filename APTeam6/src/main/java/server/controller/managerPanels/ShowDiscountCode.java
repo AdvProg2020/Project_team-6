@@ -1,11 +1,13 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.product.DiscountCode;
 import client.view.ShowDiscountCodeView;
 
 public class ShowDiscountCode implements Parent {
+    /*
     private static ShowDiscountCode showDiscountCode = null;
     public static ShowDiscountCode getShowDiscountCodeInstance() {
         if (showDiscountCode == null)
@@ -52,6 +54,7 @@ public class ShowDiscountCode implements Parent {
         }
     }
 
+
     public void viewDiscountCode(DiscountCode discountCode){
         view.viewDiscountCode1(discountCode);
         view.viewDiscountCode2(discountCode);
@@ -78,6 +81,10 @@ public class ShowDiscountCode implements Parent {
     public void editDiscountCodeRepetitionTime(DiscountCode discountCode, int repetitionTime){
         view.editDiscountCodeRepetitionTime(discountCode,repetitionTime);
     }
+     */
 
+    @Override
+    public void start(Server server) {
 
+    }
 }

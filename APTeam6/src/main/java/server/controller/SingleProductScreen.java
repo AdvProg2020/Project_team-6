@@ -8,20 +8,21 @@ import client.view.SingleProductScreenView;
 import java.util.ArrayList;
 
 public class SingleProductScreen {
+    /*
     private static SingleProductScreen instance;
     public static SingleProductScreen getInstance() {
         if (instance == null)
             instance = new SingleProductScreen();
         return instance;
     }
-    ////////////////////////////////////////
     private SingleProductScreenView view;
+     */
+    ////////////////////////////////////////
 
-    //TODO: Pass the product stuff to client.view
-    //TODO: add to buyBasket for buyer
-    //TODO: Compare products ToT
+
 
     public void start(Product product) throws Exception {
+        /*
         view = new SingleProductScreenView(product.getId());
         view.start(new Stage());
         ArrayList<Score> scores = product.getScores();
@@ -48,6 +49,7 @@ public class SingleProductScreen {
                 throw new RuntimeException("Unknown command was passed to ManageUsersMenu by client.view");
             }
         }
+         */
     }
     public void compare(Product product1,Product product2){
 

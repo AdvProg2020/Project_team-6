@@ -1,11 +1,13 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 
 import client.view.ManageAllProductsView;
 
 public class ManageAllProducts implements Parent {
+    /*
     private static ManageAllProducts manageAllProductsInstance = null;
     public static ManageAllProducts getLoginMenuInstance() {
         if (manageAllProductsInstance == null)
@@ -29,7 +31,14 @@ public class ManageAllProducts implements Parent {
             }
         }
     }
+         */
+
     public void remove(int productId) {
         ProgramManager.getProgramManagerInstance().removeProduct(productId);
+    }
+
+    @Override
+    public void start(Server server) {
+
     }
 }

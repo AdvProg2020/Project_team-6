@@ -27,7 +27,25 @@ public class Server implements Runnable {
                 break;
             }
 
-            //TODO
+
+            /*
+            command start with:
+            00: main screen
+                -1: user panel
+                -2: product
+                -3: offs
+                -4: login menu
+
+            01: PersonalInfoMenu
+                -1:
+
+             */
+
+            if(command.startsWith("00")){
+
+            }
+
+
             System.out.println(command);
 
             try {

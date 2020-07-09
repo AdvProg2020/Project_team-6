@@ -1,20 +1,18 @@
 package server.controller;
 
+import server.Server;
 import server.model.account.Account;
 import server.model.account.Buyer;
 import server.model.account.Seller;
 import client.view.LoginMenuView;
 
 public class LoginMenu implements Parent{
+
+
+
+    /*
     private static LoginMenu loginMenuInstance = null;
 
-    public static LoginMenu getLoginMenuInstance() {
-        if (loginMenuInstance == null)
-            loginMenuInstance = new LoginMenu();
-        return loginMenuInstance;
-    }
-
-    ///////////////////////////////////////////////////
     LoginMenuView view;
 
     public void start() {
@@ -43,42 +41,49 @@ public class LoginMenu implements Parent{
                 throw new RuntimeException("Unknown command was passed to LoginMenu by client.view");
             }
         }
-    }
+    }*/
+
+
 
     public void login(String username, String password) {
         if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
-            view.giveOutput("This username does not exist");
+            //view.giveOutput("This username does not exist");
             return;
         }
         Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
         if (!tempAccount.checkPassword(password)) {
-            view.giveOutput("Wrong password");
+            //view.giveOutput("Wrong password");
             return;
         }
         ProgramManager.getProgramManagerInstance().loginSuccessful(tempAccount);
-        view.giveOutput("Welcome " + username + ".");
+        //view.giveOutput("Welcome " + username + ".");
     }
 
     public void register(String username, String role) {
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
-            view.giveOutput("This username is already occupied");
+            //view.giveOutput("This username is already occupied");
             return;
         }
         String[] userData = null;
-        userData = view.getUserUsualData();
+        //userData = view.getUserUsualData();
 
         if (role.equals("buyer")) {
             System.out.println("here now1");
             new Buyer(username, userData[4], userData[0], userData[1], userData[3], userData[2]);
         }
         else if (role.equals("seller")) {
-            String company = view.getSellerCompany();
-            new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
+            //String company = view.getSellerCompany();
+            //new Seller(username, userData[4], userData[0], userData[1], userData[3], userData[2], company);
         }
-        view.giveOutput("Registered successfully.");
+        //view.giveOutput("Registered successfully.");
     }
 
     public void logout() {
         ProgramManager.getProgramManagerInstance().logoutSuccessful();
+    }
+
+    @Override
+    public void start(Server server) {
+
     }
 }

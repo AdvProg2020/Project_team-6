@@ -1,9 +1,11 @@
 package server.controller.sellerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import client.view.SellerProductsMenuView;
 
 public class SellerProductsMenu implements Parent {
+    /*
     private static SellerProductsMenu instance;
     public static SellerProductsMenu getInstance(){
         if (instance == null)
@@ -26,5 +28,11 @@ public class SellerProductsMenu implements Parent {
             }
         }
         //TODO: make this page
+    }
+    */
+
+    @Override
+    public void start(Server server) {
+
     }
 }

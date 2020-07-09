@@ -1,11 +1,13 @@
 package server.controller.sellerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.requests.OffRequest;
 import client.view.userPanel.OffManagementSellerView;
 
 public class OffManagementSeller implements Parent {
+    /*
     private static OffManagementSeller instance;
     public static OffManagementSeller getInstance(){
         if (instance == null)
@@ -38,5 +40,11 @@ public class OffManagementSeller implements Parent {
                 throw new RuntimeException("Unknown command was passed to OffManagementSeller by client.view");
             }
         }
+    }
+    */
+
+    @Override
+    public void start(Server server) {
+
     }
 }
