@@ -57,8 +57,8 @@ public class MainScreenView extends Application {
             }
             if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
                 byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getRole();
-                if (role == 1)
-                    BuyerUserPanel.getBuyerUserPanelInstance().start();
+                //if (role == 1)
+                    //BuyerUserPanel.getBuyerUserPanelInstance().start();
             }
         }
     }

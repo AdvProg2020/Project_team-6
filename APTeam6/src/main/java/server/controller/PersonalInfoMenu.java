@@ -19,7 +19,6 @@ public class PersonalInfoMenu implements Parent{
     PersonalInfoMenuView view;
     private Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
 
-
     public void start(){
         view = new PersonalInfoMenuView();
         String command = null;

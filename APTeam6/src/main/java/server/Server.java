@@ -1,5 +1,11 @@
 package server;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import server.controller.MainScreen;
+import server.controller.Parent;
 import server.controller.ProgramManager;
 
 import java.io.*;
@@ -8,6 +14,10 @@ import java.net.Socket;
 public class Server implements Runnable {
 
     private Socket clientSocket;
+    private Parent thisParent = new MainScreen();
+    private Parent preParent = null;
+    private Scene scene;
+
 
     Server(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -15,7 +25,7 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("its first run");
+        this.scene = createLogsPage();
         while (true) {
             String command = "";
             try {
@@ -58,6 +68,18 @@ public class Server implements Runnable {
 
             }
         }
+    }
+
+    public Scene createLogsPage(){
+        Stage stage = new Stage();
+        VBox vBox = new VBox();
+        Label logLabel = new Label("Connect :");
+        logLabel.setWrapText(true);
+        Scene scene = new Scene(vBox,200,650);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("--..--");
+        return scene;
     }
 
     public String getMessage() throws IOException {
