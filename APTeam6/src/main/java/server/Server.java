@@ -6,7 +6,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import server.controller.MainScreen;
 import server.controller.Parent;
+import server.controller.PersonalInfoMenu;
 import server.controller.ProgramManager;
+import server.controller.managerPanels.RegisterManager;
 
 import java.io.*;
 import java.net.Socket;
@@ -48,19 +50,58 @@ public class Server implements Runnable {
 
             /*
             command start with:
-            00: main screen
-                -1: user panel
-                -2: product
-                -3: offs
-                -4: login menu
+            00-0: start main screen or register manager(managerPanel/registerManager or mainScreen)
+                      return 02-start for register manager or 00-start for main screen
+                -1: start user panel(personalInfoMenu)
+                -2: start product(categoriesAndSubCategoriesMenu)
+                -3: start offs(offs)
+                -4: start login menu(loginMenu)
+                -5: get and verify new manager data
 
-            01: PersonalInfoMenu
+            01: start PersonalInfoMenu (personalMenuInfo)
                 -1:
+
+            02-0: start register new manager (managerPanel/registerManager)
+                -1: get and verify data
 
              */
 
-            if(command.startsWith("00")){
+            if(command.startsWith("00-0")){
+                if(ProgramManager.getProgramManagerInstance().existManager) {
+                    MainScreen mainScreen = new MainScreen();
+                    try {
+                        mainScreen.start(this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    preParent = thisParent;
+                    thisParent = mainScreen;
+                }else{
+                    RegisterManager registerManager = new RegisterManager();
+                    try {
+                        registerManager.start(this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    preParent = thisParent;
+                    thisParent = registerManager;
+                }
+            }else if(command.startsWith("00-1")){
+                if(ProgramManager.getProgramManagerInstance().existManager) {
+                    PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
+                    personalInfoMenu.start(this);
+                    preParent = thisParent;
+                    thisParent = null;
+                }else{
 
+                }
+            }else if(command.startsWith("02-1")){
+                RegisterManager registerManager = (RegisterManager) thisParent;
+                try {
+                    registerManager.registerNewManager(command.substring(4));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
 
@@ -95,8 +136,8 @@ public class Server implements Runnable {
     public String getMessage() throws IOException {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.clientSocket.getInputStream()));
         String command = dataInputStream.readUTF();
-        this.log.addLog(command,1);
         //TODO decode
+        this.log.addLog(command,1);
         return command;
     }
 
