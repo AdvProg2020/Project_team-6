@@ -91,7 +91,7 @@ public class Server implements Runnable {
                     PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
                     personalInfoMenu.start(this);
                     preParent = thisParent;
-                    thisParent = null;
+                    thisParent = personalInfoMenu;
                 }else{
 
                 }
