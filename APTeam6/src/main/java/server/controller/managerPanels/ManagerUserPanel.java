@@ -4,6 +4,8 @@ import server.Server;
 import server.controller.*;
 import client.view.userPanel.ManagerUserPanelView;
 
+import java.io.IOException;
+
 public class ManagerUserPanel implements Parent {
     /*
     private static ManagerUserPanel managerUserPanelInstance;
@@ -57,8 +59,16 @@ public class ManagerUserPanel implements Parent {
     }
      */
 
-    @Override
-    public void start(Server server) {
+    private Server server = null;
 
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
     }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

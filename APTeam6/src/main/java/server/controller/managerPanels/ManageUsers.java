@@ -7,7 +7,22 @@ import server.model.account.Account;
 import server.model.account.Manager;
 import client.view.old.ManageUsersView;
 
+import java.io.IOException;
+
 public class ManageUsers implements Parent {
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
     /*
     private static ManageUsers manageUsersInstance = null;
     public static ManageUsers getManageUsersInstance() {
@@ -57,9 +72,5 @@ public class ManageUsers implements Parent {
         ProgramManager.getProgramManagerInstance().addAccountToList(username,newManager);
     }
 
-    @Override
-    public void start(Server server) {
-
-    }
 }
 

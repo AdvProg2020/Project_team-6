@@ -6,6 +6,8 @@ import server.controller.Parent;
 import server.controller.ProgramManager;
 import client.view.userPanel.BuyerUserPanelView;
 
+import java.io.IOException;
+
 public class BuyerUserPanel implements Parent {
     /*
     private static BuyerUserPanel buyerUserPanelInstance;
@@ -44,8 +46,16 @@ public class BuyerUserPanel implements Parent {
     }
      */
 
-    @Override
-    public void start(Server server) {
+    private Server server = null;
 
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
     }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

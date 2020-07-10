@@ -6,6 +6,8 @@ import server.controller.ProgramManager;
 
 import client.view.old.ManageAllProductsView;
 
+import java.io.IOException;
+
 public class ManageAllProducts implements Parent {
     /*
     private static ManageAllProducts manageAllProductsInstance = null;
@@ -37,8 +39,16 @@ public class ManageAllProducts implements Parent {
         ProgramManager.getProgramManagerInstance().removeProduct(productId);
     }
 
-    @Override
-    public void start(Server server) {
+    private Server server = null;
 
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
     }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

@@ -1,13 +1,28 @@
 package server.controller;
 
 import javafx.stage.Stage;
+import server.Server;
 import server.model.product.Product;
 import server.model.product.Score;
 import client.view.old.SingleProductScreenView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class SingleProductScreen {
+public class SingleProductScreen implements Parent{
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
     /*
     private static SingleProductScreen instance;
     public static SingleProductScreen getInstance() {
@@ -51,7 +66,5 @@ public class SingleProductScreen {
         }
          */
     }
-    public void compare(Product product1,Product product2){
 
-    }
 }

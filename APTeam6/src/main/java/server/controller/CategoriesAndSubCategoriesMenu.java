@@ -10,6 +10,7 @@ import client.view.old.PersonalInfoMenuView;
 import client.view.old.SellerProductsMenuView;
 import client.view.old.SingleProductScreenView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -23,6 +24,18 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         return instance;
     }
     */
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
 
     ///////////////////////////////////////////
     private CategoriesAndSubCategoriesMenuView view;
@@ -358,10 +371,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     }
 
 
-    @Override
-    public void start(Server server) {
 
-    }
 
-    //TODO: check for index out of bound in all methods
 }

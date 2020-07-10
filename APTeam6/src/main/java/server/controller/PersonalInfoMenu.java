@@ -6,6 +6,8 @@ import server.model.account.Buyer;
 import server.model.account.Seller;
 import client.view.old.PersonalInfoMenuView;
 
+import java.io.IOException;
+
 public class PersonalInfoMenu implements Parent{
     /*
     private static PersonalInfoMenu personalInfoMenuInstance = null;
@@ -52,8 +54,16 @@ public class PersonalInfoMenu implements Parent{
     }
      */
 
-    @Override
-    public void start(Server server) {
+    private Server server = null;
 
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
     }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

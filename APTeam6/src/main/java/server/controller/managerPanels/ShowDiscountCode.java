@@ -6,6 +6,8 @@ import server.controller.ProgramManager;
 import server.model.product.DiscountCode;
 import client.view.old.ShowDiscountCodeView;
 
+import java.io.IOException;
+
 public class ShowDiscountCode implements Parent {
     /*
     private static ShowDiscountCode showDiscountCode = null;
@@ -83,8 +85,16 @@ public class ShowDiscountCode implements Parent {
     }
      */
 
-    @Override
-    public void start(Server server) {
+    private Server server = null;
 
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
     }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

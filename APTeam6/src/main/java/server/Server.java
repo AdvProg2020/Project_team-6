@@ -64,7 +64,7 @@ public class Server implements Runnable {
             02-0: start register new manager (managerPanel/registerManager)
                 -1: get and verify data
 
-             */
+            */
 
             if(command.startsWith("00-0")){
                 if(ProgramManager.getProgramManagerInstance().existManager) {
