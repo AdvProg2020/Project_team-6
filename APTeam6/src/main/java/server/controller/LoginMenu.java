@@ -59,18 +59,24 @@ public class LoginMenu implements Parent{
 
 
 
-    public void login(String username, String password) {
-        if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
+    public void login(String data) throws IOException {
+
+        //TODO check data validation
+
+        if (!ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data.split("-+-")[0])) {
             //view.giveOutput("This username does not exist");
+            sendMessage("4-username_does_not_exist");
             return;
         }
-        Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(username);
-        if (!tempAccount.checkPassword(password)) {
+        Account tempAccount = ProgramManager.getProgramManagerInstance().getAccountByUsername(data.split("-+-")[0]);
+        if (!tempAccount.checkPassword(data.split("-+-")[1])) {
             //view.giveOutput("Wrong password");
+            sendMessage("4-wrong_password");
             return;
         }
         ProgramManager.getProgramManagerInstance().loginSuccessful(tempAccount);
         //view.giveOutput("Welcome " + username + ".");
+        sendMessage("4-login_successful");
     }
 
     public void registerNewBuyer(String data) throws IOException {
@@ -84,7 +90,7 @@ public class LoginMenu implements Parent{
             new Buyer(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
                     data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5]);
 
-            sendMessage("account_created");
+            sendMessage("1-account_created");
         }else{
             sendMessage("error in data");
         }
@@ -102,7 +108,25 @@ public class LoginMenu implements Parent{
                     data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5],
                     data.split("-+-")[6]);
 
-            sendMessage("account_created");
+            sendMessage("2-account_created");
+        }else{
+            sendMessage("error in data");
+        }
+    }
+
+    public void registerNewManager(String data) throws IOException {
+        if(data.split("-+-").length==6 && !data.split("-+-")[0].equals("") &&
+                !data.split("-+-")[1].equals("") && !data.split("-+-")[2].equals("") &&
+                !data.split("-+-")[3].equals("") && !data.split("-+-")[4].equals("") &&
+                !data.split("-+-")[5].equals("")) {
+
+            //TODO check exist user with this user name
+
+            new Manager(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
+                    data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5]);
+
+
+            sendMessage("3-account_created");
         }else{
             sendMessage("error in data");
         }

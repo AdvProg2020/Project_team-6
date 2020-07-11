@@ -62,8 +62,10 @@ public class Server implements Runnable {
                 -1: get and verify data
 
             03-0: start login menu(LoginMenu)
-                -1: get and verify data for buyer
-                -2: get and verify data for seller
+                -1: get and verify data for new buyer
+                -2: get and verify data for new seller
+                -3: get and verify data for new manager
+                -4: get data and check password for login
 
             */
 
@@ -140,6 +142,21 @@ public class Server implements Runnable {
                     LoginMenu loginMenu = (LoginMenu) thisParent;
                     try {
                         loginMenu.registerNewSeller(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else if(command.startsWith("03-3")){
+                if(thisParent instanceof LoginMenu){
+                    LoginMenu loginMenu = (LoginMenu) thisParent;
+                    try {
+                        loginMenu.registerNewManager(command.substring(4));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
