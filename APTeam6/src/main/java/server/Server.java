@@ -4,10 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import server.controller.MainScreen;
-import server.controller.Parent;
-import server.controller.PersonalInfoMenu;
-import server.controller.ProgramManager;
+import server.controller.*;
 import server.controller.managerPanels.RegisterManager;
 
 import java.io.*;
@@ -39,8 +36,8 @@ public class Server implements Runnable {
             try {
                 command = getMessage();
             } catch (IOException e) {
-                this.log.addLog("disconnected!",2);
-                this.log.addLog(e.getMessage(),2);
+                this.log.addLog("disconnected!", 2);
+                this.log.addLog(e.getMessage(), 2);
                 ProgramManager.getProgramManagerInstance().saveToFiles();
                 MainServer.runningServer--;
                 break;
@@ -64,10 +61,14 @@ public class Server implements Runnable {
             02-0: start register new manager (managerPanel/registerManager)
                 -1: get and verify data
 
+            03-0: start login menu(LoginMenu)
+                -1: get and verify data for buyer
+                -2: get and verify data for seller
+
             */
 
-            if(command.startsWith("00-0")){
-                if(ProgramManager.getProgramManagerInstance().existManager) {
+            if (command.startsWith("00-0")) {
+                if (ProgramManager.getProgramManagerInstance().existManager) {
                     MainScreen mainScreen = new MainScreen();
                     try {
                         mainScreen.start(this);
@@ -76,7 +77,7 @@ public class Server implements Runnable {
                     }
                     preParent = thisParent;
                     thisParent = mainScreen;
-                }else{
+                } else {
                     RegisterManager registerManager = new RegisterManager();
                     try {
                         registerManager.start(this);
@@ -86,21 +87,68 @@ public class Server implements Runnable {
                     preParent = thisParent;
                     thisParent = registerManager;
                 }
-            }else if(command.startsWith("00-1")){
-                if(ProgramManager.getProgramManagerInstance().existManager) {
-                    PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
-                    personalInfoMenu.start(this);
-                    preParent = thisParent;
-                    thisParent = personalInfoMenu;
-                }else{
-
-                }
-            }else if(command.startsWith("02-1")){
-                RegisterManager registerManager = (RegisterManager) thisParent;
+            } else if (command.startsWith("01-0")) {
+                PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
                 try {
-                    registerManager.registerNewManager(command.substring(4));
+                    personalInfoMenu.start(this);
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = personalInfoMenu;
+            } else if (command.startsWith("02-1")) {
+                if (thisParent instanceof RegisterManager) {
+                    RegisterManager registerManager = (RegisterManager) thisParent;
+                    try {
+                        registerManager.registerNewManager(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (command.startsWith("03-0")) {
+                LoginMenu loginMenu = new LoginMenu();
+                try {
+                    loginMenu.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = loginMenu;
+            }else if(command.startsWith("03-1")){
+                if(thisParent instanceof LoginMenu){
+                    LoginMenu loginMenu = (LoginMenu) thisParent;
+                    try {
+                        loginMenu.registerNewBuyer(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else if(command.startsWith("03-2")){
+                if(thisParent instanceof LoginMenu){
+                    LoginMenu loginMenu = (LoginMenu) thisParent;
+                    try {
+                        loginMenu.registerNewSeller(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -110,8 +158,8 @@ public class Server implements Runnable {
             try {
                 sendMessage(command);
             } catch (IOException e) {
-                this.log.addLog("disconnected!",2);
-                this.log.addLog(e.getMessage(),2);
+                this.log.addLog("disconnected!", 2);
+                this.log.addLog(e.getMessage(), 2);
                 ProgramManager.getProgramManagerInstance().saveToFiles();
                 MainServer.runningServer--;
                 break;
@@ -137,13 +185,13 @@ public class Server implements Runnable {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.clientSocket.getInputStream()));
         String command = dataInputStream.readUTF();
         //TODO decode
-        this.log.addLog(command,1);
+        this.log.addLog(command, 1);
         return command;
     }
 
     public void sendMessage(String command) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.clientSocket.getOutputStream()));
-        this.log.addLog(command,0);
+        this.log.addLog(command, 0);
         //TODO encode
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();

@@ -63,7 +63,7 @@ public class PersonalInfoMenu implements Parent{
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("01-" + message);
     }
 
 }

@@ -3,6 +3,7 @@ package server.controller;
 import server.Server;
 import server.model.account.Account;
 import server.model.account.Buyer;
+import server.model.account.Manager;
 import server.model.account.Seller;
 import client.view.old.LoginMenuView;
 
@@ -20,7 +21,7 @@ public class LoginMenu implements Parent{
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("03-" + message);
     }
 
     /*
@@ -72,6 +73,43 @@ public class LoginMenu implements Parent{
         //view.giveOutput("Welcome " + username + ".");
     }
 
+    public void registerNewBuyer(String data) throws IOException {
+        if(data.split("-+-").length==6 && !data.split("-+-")[0].equals("") &&
+                !data.split("-+-")[1].equals("") && !data.split("-+-")[2].equals("") &&
+                !data.split("-+-")[3].equals("") && !data.split("-+-")[4].equals("") &&
+                !data.split("-+-")[5].equals("")) {
+
+            //TODO check exist user with this user name
+
+            new Buyer(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
+                    data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5]);
+
+            sendMessage("account_created");
+        }else{
+            sendMessage("error in data");
+        }
+    }
+
+    public void registerNewSeller(String data) throws IOException {
+        if(data.split("-+-").length==7 && !data.split("-+-")[0].equals("") &&
+                !data.split("-+-")[1].equals("") && !data.split("-+-")[2].equals("") &&
+                !data.split("-+-")[3].equals("") && !data.split("-+-")[4].equals("") &&
+                !data.split("-+-")[5].equals("") && !data.split("-+-")[6].equals("") ) {
+
+            //TODO check exist user with this user name
+
+            new Seller(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
+                    data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5],
+                    data.split("-+-")[6]);
+
+            sendMessage("account_created");
+        }else{
+            sendMessage("error in data");
+        }
+    }
+
+
+    /*
     public void register(String username, String role) {
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(username)) {
             //view.giveOutput("This username is already occupied");
@@ -90,6 +128,7 @@ public class LoginMenu implements Parent{
         }
         //view.giveOutput("Registered successfully.");
     }
+     */
 
     public void logout() {
         ProgramManager.getProgramManagerInstance().logoutSuccessful();

@@ -2,6 +2,7 @@ package server.controller.managerPanels;
 
 import server.Server;
 import server.controller.Parent;
+import server.controller.ProgramManager;
 import server.model.account.Manager;
 
 import java.io.IOException;
@@ -27,6 +28,9 @@ public class RegisterManager implements Parent {
                 !data.split("-+-")[5].equals("")) {
             new Manager(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
                     data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5]);
+
+            ProgramManager.getProgramManagerInstance().saveToFiles();
+            ProgramManager.getProgramManagerInstance().loadFromFiles();
             sendMessage("account_created");
         }else{
             sendMessage("error in data");
