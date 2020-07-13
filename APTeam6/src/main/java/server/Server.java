@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import server.controller.*;
 import server.controller.managerPanels.RegisterManager;
+import server.controller.managerPanels.ShowDiscountCode;
 
 import java.io.*;
 import java.net.Socket;
@@ -67,7 +68,8 @@ public class Server implements Runnable {
                 -3: get and verify data for new manager
                 -4: get data and check password for login
 
-            04-0 : showDiscountCode
+            04-0 : start showDiscountCode
+            04-1 : show the DiscountCode
 
             */
 
@@ -169,11 +171,32 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
+            }else if(command.startsWith("04-0")){
+                ShowDiscountCode showDiscountCode = new ShowDiscountCode();
+                try {
+                    showDiscountCode.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = showDiscountCode;
+            }else if(command.startsWith("04-1")){
+                if(thisParent instanceof ShowDiscountCode){
+                    ShowDiscountCode showDiscountCode = (ShowDiscountCode) thisParent;
+                    try {
+                        showDiscountCode.showDiscountCode(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
-
             System.out.println(command);
-
             try {
                 sendMessage(command);
             } catch (IOException e) {
