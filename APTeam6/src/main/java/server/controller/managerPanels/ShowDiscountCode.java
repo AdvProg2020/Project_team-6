@@ -3,13 +3,14 @@ package server.controller.managerPanels;
 import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
+import server.model.account.Manager;
 import server.model.product.DiscountCode;
 import client.view.old.ShowDiscountCodeView;
 
 import java.io.IOException;
 
 public class ShowDiscountCode implements Parent {
-    /*
+
     private static ShowDiscountCode showDiscountCode = null;
     public static ShowDiscountCode getShowDiscountCodeInstance() {
         if (showDiscountCode == null)
@@ -83,7 +84,7 @@ public class ShowDiscountCode implements Parent {
     public void editDiscountCodeRepetitionTime(DiscountCode discountCode, int repetitionTime){
         view.editDiscountCodeRepetitionTime(discountCode,repetitionTime);
     }
-     */
+
 
     private Server server = null;
 
@@ -95,6 +96,21 @@ public class ShowDiscountCode implements Parent {
 
     private void sendMessage(String message) throws IOException {
         server.sendMessage("02-" + message);
+    }
+    public void showDiscountCode(String data){
+        if(data.split("-+-").length==6 && !data.split("-+-")[0].equals("") &&
+                !data.split("-+-")[1].equals("") && !data.split("-+-")[2].equals("") &&
+                !data.split("-+-")[3].equals("") && !data.split("-+-")[4].equals("") &&
+                !data.split("-+-")[5].equals("")) {
+            new Manager(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
+                    data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5]);
+
+            ProgramManager.getProgramManagerInstance().saveToFiles();
+            ProgramManager.getProgramManagerInstance().loadFromFiles();
+            sendMessage("account_created");
+        }else{
+            sendMessage("error in data");
+        }
     }
 
 }

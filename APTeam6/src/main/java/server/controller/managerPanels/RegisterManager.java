@@ -8,9 +8,7 @@ import server.model.account.Manager;
 import java.io.IOException;
 
 public class RegisterManager implements Parent {
-
     private Server server = null;
-
     @Override
     public void start(Server server) throws IOException {
         this.server = server;

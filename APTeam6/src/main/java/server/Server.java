@@ -67,6 +67,8 @@ public class Server implements Runnable {
                 -3: get and verify data for new manager
                 -4: get data and check password for login
 
+            04-0 : showDiscountCode
+
             */
 
             if (command.startsWith("00-0")) {
