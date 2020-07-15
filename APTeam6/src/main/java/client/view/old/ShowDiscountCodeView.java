@@ -185,25 +185,25 @@ public class ShowDiscountCodeView extends Application {
                 if (ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()) != null) {
                     codeLabel.setText("Enter your new code:");
                     codeTextField.setPromptText("Code");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), codeTextField.getText());
+                    //ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), codeTextField.getText());
 
                     startDateLabel.setText("Enter your new Start Date:");
                     startDateTextField.setPromptText("Start Date");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), startDateTextField.getText());
+                    //ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeStartDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), startDateTextField.getText());
 
                     endDateLabel.setText("Enter your new End Date:");
                     endDateTextField.setPromptText("End Date");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), endDateTextField.getText());
+                    //ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeEndDate(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), endDateTextField.getText());
 
 
                     percentageLabel.setText("Enter your new Percentage:");
                     percentageTextField.setPromptText("Percentage");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), Integer.parseInt(percentageTextField.getText()));
+                    //ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodePercentage(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), Integer.parseInt(percentageTextField.getText()));
 
 
                     repetitionTimeLabel.setText("Enter your new Repetition Time:");
                     repetitionTimeTextField.setPromptText("RepetitionTime");
-                    ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), Integer.parseInt(repetitionTimeTextField.getText()));
+                    //ShowDiscountCode.getShowDiscountCodeInstance().editDiscountCodeRepetitionTime(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode.getText()), Integer.parseInt(repetitionTimeTextField.getText()));
                     try {
                         new Alert().showAlert("DiscountCode with this Code doesn't exist", "Ok", 0, null);
                     } catch (Exception e) {

@@ -36,7 +36,11 @@ public class Client extends Application {
 
         theStage = new Stage();
         allFXMLLoaders = new ArrayList<>();
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         allScenes = new ArrayList<>();
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         allControllers = new ArrayList<>();
 
         theStage.setTitle("Kamali's shop");

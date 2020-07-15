@@ -1,6 +1,7 @@
 package server.controller;
 
 import javafx.stage.Stage;
+import server.Server;
 import server.model.product.Category;
 import server.model.product.Product;
 import server.model.product.SubCategory;
@@ -9,16 +10,31 @@ import client.view.old.PersonalInfoMenuView;
 import client.view.old.SellerProductsMenuView;
 import client.view.old.SingleProductScreenView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class CategoriesAndSubCategoriesMenu implements Parent{
+    /*
     private static CategoriesAndSubCategoriesMenu instance;
 
     public static CategoriesAndSubCategoriesMenu getInstance() {
         if (instance == null)
             instance = new CategoriesAndSubCategoriesMenu();
         return instance;
+    }
+    */
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
     }
 
     ///////////////////////////////////////////
@@ -211,7 +227,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         }
 
     }*/
-
+    /*
     public void start(PersonalInfoMenuView personalInfoMenuView){
         this.personalInfoMenuView = personalInfoMenuView;
         view = new CategoriesAndSubCategoriesMenuView(this);
@@ -224,6 +240,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         view.showCategoriesList(allCategoriesArrayList);
         state = 0;
     }
+    */
 
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
@@ -353,10 +370,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         }
     }
 
-    @Override
-    public void start() {
 
-    }
 
-    //TODO: check for index out of bound in all methods
+
 }

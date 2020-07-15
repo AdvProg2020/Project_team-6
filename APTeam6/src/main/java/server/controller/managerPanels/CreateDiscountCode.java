@@ -1,10 +1,14 @@
 package server.controller.managerPanels;
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.product.DiscountCode;
 import client.view.old.CreateDiscountCodeView;
 
+import java.io.IOException;
+
 public class CreateDiscountCode implements Parent {
+    /*
     private static CreateDiscountCode instance;
     public static CreateDiscountCode getInstance(){
         if (instance == null)
@@ -29,4 +33,19 @@ public class CreateDiscountCode implements Parent {
             }
         }
     }
+
+     */
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

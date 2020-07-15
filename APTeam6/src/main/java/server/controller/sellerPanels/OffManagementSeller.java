@@ -1,11 +1,28 @@
 package server.controller.sellerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.requests.OffRequest;
 import client.view.userPanel.OffManagementSellerView;
 
+import java.io.IOException;
+
 public class OffManagementSeller implements Parent {
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
+    /*
     private static OffManagementSeller instance;
     public static OffManagementSeller getInstance(){
         if (instance == null)
@@ -39,4 +56,7 @@ public class OffManagementSeller implements Parent {
             }
         }
     }
+    */
+
+
 }

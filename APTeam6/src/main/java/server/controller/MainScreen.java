@@ -1,21 +1,25 @@
 package server.controller;
 
+import server.Server;
 import server.controller.buyerPanels.BuyerUserPanel;
 import server.controller.managerPanels.ManagerUserPanel;
 import server.controller.sellerPanels.SellerUserPanel;
 import client.view.old.MainScreenView;
 
+import java.io.IOException;
 
-public class MainScreen implements Parent{
-    private static MainScreen mainScreenInstance = null;
 
-    public static MainScreen getMainScreenInstance() {
-        if (mainScreenInstance == null)
-            mainScreenInstance = new MainScreen();
-        return mainScreenInstance;
-    }
+public class MainScreen implements Parent {
 
-    public void start() {
+    private Server server = null;
+
+    public void start(Server server) throws IOException {
+
+        this.server = server;
+
+        sendMessage("start");
+
+        /*
         MainScreenView view = new MainScreenView();
         String command = null;
         while (true) {
@@ -41,10 +45,15 @@ public class MainScreen implements Parent{
                     SellerUserPanel.getSellerUserPanelInstance().start();
                 else if (role == 3)
                     ManagerUserPanel.getManagerUserPanelInstance().start();
-            }
-        }
+            }*/
+    }
+
+    public void sendMessage(String message) throws IOException {
+        this.server.sendMessage("00-" + message);
     }
 
 
-
 }
+
+
+

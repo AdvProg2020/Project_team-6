@@ -1,11 +1,16 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
+import server.model.account.Manager;
 import server.model.product.DiscountCode;
 import client.view.old.ShowDiscountCodeView;
 
+import java.io.IOException;
+
 public class ShowDiscountCode implements Parent {
+/*
     private static ShowDiscountCode showDiscountCode = null;
     public static ShowDiscountCode getShowDiscountCodeInstance() {
         if (showDiscountCode == null)
@@ -52,6 +57,7 @@ public class ShowDiscountCode implements Parent {
         }
     }
 
+
     public void viewDiscountCode(DiscountCode discountCode){
         view.viewDiscountCode1(discountCode);
         view.viewDiscountCode2(discountCode);
@@ -78,6 +84,21 @@ public class ShowDiscountCode implements Parent {
     public void editDiscountCodeRepetitionTime(DiscountCode discountCode, int repetitionTime){
         view.editDiscountCodeRepetitionTime(discountCode,repetitionTime);
     }
+*/
 
+    private Server server = null;
 
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+    public void showDiscountCode(String data) throws IOException {
+            DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data.split("-+-")[0]);
+            sendMessage("id :" + tempDiscountCode.getId() + "\nStart Data :" + tempDiscountCode.getStart() + " \nEnd Date :" + tempDiscountCode.getEnd() + "\nRepetition Time :" + tempDiscountCode.getRepetitionTime() + "\nPercentage :" + tempDiscountCode.getPercentage());
+    }
 }

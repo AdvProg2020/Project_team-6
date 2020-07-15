@@ -1,27 +1,43 @@
 package server.controller;
 
 import javafx.stage.Stage;
+import server.Server;
 import server.model.product.Product;
 import server.model.product.Score;
 import client.view.old.SingleProductScreenView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class SingleProductScreen {
+public class SingleProductScreen implements Parent{
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
+    /*
     private static SingleProductScreen instance;
     public static SingleProductScreen getInstance() {
         if (instance == null)
             instance = new SingleProductScreen();
         return instance;
     }
-    ////////////////////////////////////////
     private SingleProductScreenView view;
+     */
+    ////////////////////////////////////////
 
-    //TODO: Pass the product stuff to client.view
-    //TODO: add to buyBasket for buyer
-    //TODO: Compare products ToT
+
 
     public void start(Product product) throws Exception {
+        /*
         view = new SingleProductScreenView(product.getId());
         view.start(new Stage());
         ArrayList<Score> scores = product.getScores();
@@ -48,8 +64,7 @@ public class SingleProductScreen {
                 throw new RuntimeException("Unknown command was passed to ManageUsersMenu by client.view");
             }
         }
+         */
     }
-    public void compare(Product product1,Product product2){
 
-    }
 }

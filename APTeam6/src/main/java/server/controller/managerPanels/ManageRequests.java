@@ -1,9 +1,26 @@
 package server.controller.managerPanels;
 
+import server.Server;
 import server.controller.Parent;
 import client.view.old.ManageRequestsView;
 
+import java.io.IOException;
+
 public class ManageRequests implements Parent {
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
+    /*
     private static ManageRequests ManageRequestsInstance = null;
 
     public static ManageRequests getManageRequestsInstance() {
@@ -38,5 +55,6 @@ public class ManageRequests implements Parent {
             }
         }
     }
+         */
 }
 

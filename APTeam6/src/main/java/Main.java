@@ -14,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         ProgramManager programManager = ProgramManager.getProgramManagerInstance();
-        MainScreen mainScreen = MainScreen.getMainScreenInstance();
+        //MainScreen mainScreen = MainScreen.getMainScreenInstance();
         MainScreenView mainScreenView = MainScreenView.getMainScreenViewInstance();
 
         programManager.loadFromFiles();

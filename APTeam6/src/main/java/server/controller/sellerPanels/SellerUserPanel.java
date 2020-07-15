@@ -1,11 +1,15 @@
 package server.controller.sellerPanels;
 
+import server.Server;
 import server.controller.LoginMenu;
 import server.controller.Parent;
 import server.controller.ProgramManager;
 import client.view.userPanel.SellerUserPanelView;
 
+import java.io.IOException;
+
 public class SellerUserPanel implements Parent {
+    /*
     private static SellerUserPanel sellerUserPanelInstance;
     public static SellerUserPanel getSellerUserPanelInstance(){
         if (sellerUserPanelInstance == null)
@@ -50,4 +54,18 @@ public class SellerUserPanel implements Parent {
             }
         }
     }
+     */
+
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
 }

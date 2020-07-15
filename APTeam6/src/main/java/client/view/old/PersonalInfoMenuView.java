@@ -292,7 +292,7 @@ public class PersonalInfoMenuView extends Application {
         });
 
         manageCategories.setOnAction(actionEvent -> {
-            CategoriesAndSubCategoriesMenu.getInstance().start(this);
+            //CategoriesAndSubCategoriesMenu.getInstance().start(this);
             stage.close();
         });
         SingleProductMenu.setOnAction(actionEvent -> {
@@ -372,8 +372,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         showCategories.setOnAction(actionEvent -> {
-            CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = CategoriesAndSubCategoriesMenu.getInstance();
-            categoriesAndSubCategoriesMenu.start();
+            //CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = CategoriesAndSubCategoriesMenu.getInstance();
+            //categoriesAndSubCategoriesMenu.start();
             stage.close();
         });
 

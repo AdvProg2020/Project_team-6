@@ -1,0 +1,6 @@
+receive 2020-07-09--19:59:29   salam
+send    2020-07-09--19:59:29   salam
+receive 2020-07-09--19:59:30   dfh
+send    2020-07-09--19:59:30   dfh
+server  2020-07-09--19:59:34   disconnected!
+server  2020-07-09--19:59:34   Connection reset
