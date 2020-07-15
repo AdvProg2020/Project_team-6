@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -37,7 +38,15 @@ public class Client extends Application {
         allFXMLLoaders = new ArrayList<>();
         allScenes = new ArrayList<>();
         allControllers = new ArrayList<>();
+
+        theStage.setTitle("Kamali's shop");
+        theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
+
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
+        //TODO: Add all FXMLs here
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////
 
     public String getMessage() throws IOException {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
