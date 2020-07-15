@@ -56,7 +56,7 @@ public class ProgramManager {
     private ArrayList<Request> allRequests;
     private HashMap<Integer, Off> allOffs;
 
-    private Account currentlyLoggedInUser;
+    //private Account currentlyLoggedInUsers;
 
     private HashMap<Product, Integer> buyBasket;
 
@@ -93,7 +93,7 @@ public class ProgramManager {
         requestsFile = new File(ADDRESS + "requests.json");
         offsFile = new File(ADDRESS + "offs.json");
 
-        currentlyLoggedInUser = null;
+        //currentlyLoggedInUsers = null;
 
         buyBasket = new HashMap<>();
     }
@@ -220,21 +220,23 @@ public class ProgramManager {
         return allAccounts.get(username);
     }
 
-    public void loginSuccessful(Account account) {
-        currentlyLoggedInUser = account;
+    /*public void loginSuccessful(Account account) {
+        currentlyLoggedInUsers = account;
         if (account.getRole() == 1) {
             ((Buyer) account).addProductToBuyBasket(buyBasket);
             buyBasket.clear();
         }
-    }
+    }*/
 
-    public boolean isAnyoneLoggedIn() {
-        return currentlyLoggedInUser != null;
+    /*public boolean isAnyoneLoggedIn() {
+        return currentlyLoggedInUsers != null;
     }
 
     public void logoutSuccessful() {
-        currentlyLoggedInUser = null;
+        currentlyLoggedInUsers = null;
     }
+
+     */
 
     public void addAccountToList(String username, Account account) {
         allAccounts.put(username, account);
@@ -291,20 +293,24 @@ public class ProgramManager {
         allAccounts.remove(username);
     }
 
-    public Account getCurrentlyLoggedInUser() {
-        return currentlyLoggedInUser;
+    /*public Account getCurrentlyLoggedInUsers() {
+        return currentlyLoggedInUsers;
     }
+
+     */
 
     /**
      * this function gets current user's role
      *
      * @return 0 if no one is logged in
      */
-    public byte getCurrentlyLoggedInUserRole() {
-        if (currentlyLoggedInUser != null)
-            return currentlyLoggedInUser.getRole();
+    /*public byte getCurrentlyLoggedInUserRole() {
+        if (currentlyLoggedInUsers != null)
+            return currentlyLoggedInUsers.getRole();
         return 0;
     }
+
+     */
 
     public Collection<Account> getAllAccounts() {
         return allAccounts.values();
@@ -336,18 +342,20 @@ public class ProgramManager {
     /**
      * If a buyer is logged in, this method will add the product to their buyBasket, otherwise it will be added to ProgramManager buyBasket.
      *
-     * @param product the product to be added
+     *  product the product to be added
      */
-    public void addToCurrentBuyBasket(Product product, int count) {
-        if (currentlyLoggedInUser == null) {
+    /*public void addToCurrentBuyBasket(Product product, int count) {
+        if (currentlyLoggedInUsers == null) {
             if (buyBasket.containsKey(product)) {
                 count += buyBasket.get(product);
                 buyBasket.replace(product, count);
             } else
                 buyBasket.put(product, count);
-        } else if (currentlyLoggedInUser.getRole() == 1)
-            ((Buyer) currentlyLoggedInUser).addProductToBuyBasket(product, count);
+        } else if (currentlyLoggedInUsers.getRole() == 1)
+            ((Buyer) currentlyLoggedInUsers).addProductToBuyBasket(product, count);
     }
+
+     */
 
     public void addRequestToList(Request request) {
         allRequests.add(request);
@@ -361,9 +369,11 @@ public class ProgramManager {
         allCategories.put(category.getName(), category);
     }
 
-    public void showSellerCompanyInfo() {
-        ((Seller) currentlyLoggedInUser).getClass();
+    /*public void showSellerCompanyInfo() {
+        ((Seller) currentlyLoggedInUsers).getClass();
     }
+
+     */
 
 
 

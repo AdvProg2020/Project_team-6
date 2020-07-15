@@ -46,6 +46,10 @@ public class Seller extends Account implements Comparable<Seller>, Request {
 
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     private static int field = 1;
     private static ArrayList<Seller> sellerArrayList;
     public int compareTo(Seller seller) {

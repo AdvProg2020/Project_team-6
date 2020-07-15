@@ -1,6 +1,5 @@
 package client.view.old;
 
-import server.controller.CategoriesAndSubCategoriesMenu;
 import server.controller.ProgramManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -24,7 +23,7 @@ import java.io.FileInputStream;
 public class PersonalInfoMenuView extends Application {
 
     public PersonalInfoMenuView() {
-        Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
+/*        Account currentUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUsers();
         System.out.println("Your personal info is as follows:" +
                 "\n\tUsername: " + currentUser.getUsername() +
                 "\n\tFirst name: " + currentUser.getFirstName() +
@@ -37,6 +36,9 @@ public class PersonalInfoMenuView extends Application {
         } else if (currentUser.getRole() == 1) {
             System.out.println("\tCredit: " + ((Buyer) currentUser).getCredit());
         }
+
+
+ */
     }
 
     public String getInputCommand() {
@@ -74,7 +76,7 @@ public class PersonalInfoMenuView extends Application {
         pane.setAlignment(Pos.CENTER);
         Font arial12 = new Font("Arial" , 12);
 
-        Account currentlyLoggedInUser = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
+        Account currentlyLoggedInUser = null;
 
         Label credit = new Label("Credit");
         Label credit2 = new Label();

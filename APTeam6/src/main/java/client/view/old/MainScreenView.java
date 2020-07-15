@@ -1,7 +1,6 @@
 package client.view.old;
 
 import server.controller.ProgramManager;
-import server.controller.buyerPanels.BuyerUserPanel;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -55,11 +54,11 @@ public class MainScreenView extends Application {
             } else {
                 System.out.println("Invalid command");
             }
-            if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
-                byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser().getRole();
+            /*if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
+                byte role = ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUsers().getRole();
                 //if (role == 1)
                     //BuyerUserPanel.getBuyerUserPanelInstance().start();
-            }
+            }*/
         }
     }
 
@@ -224,7 +223,7 @@ public class MainScreenView extends Application {
 
             account.setOnAction(actionEvent -> {
                 //ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername("a"));
-                if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
+                /*if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
                     try {
                         new PersonalInfoMenuView().start(new Stage());
                     } catch (Exception e) {
@@ -236,7 +235,7 @@ public class MainScreenView extends Application {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
                 window.close();
             });
 

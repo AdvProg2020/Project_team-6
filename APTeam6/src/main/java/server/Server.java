@@ -7,11 +7,15 @@ import javafx.stage.Stage;
 import server.controller.*;
 import server.controller.managerPanels.RegisterManager;
 import server.controller.managerPanels.ShowDiscountCode;
+import server.model.account.Account;
+import server.model.account.Buyer;
+import server.model.product.Product;
 
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 public class Server implements Runnable {
 
@@ -19,10 +23,41 @@ public class Server implements Runnable {
     private Parent thisParent = new MainScreen();
     private Parent preParent = null;
     private Log log = null;
+    private Account currentlyLoggedInUsers = null;
+    private HashMap<Product, Integer> buyBasket = new HashMap<>();
 
 
     Server(Socket clientSocket) {
         this.clientSocket = clientSocket;
+    }
+
+    public void loginSuccessful(Account currentlyLoggedInUsers) {
+        if (currentlyLoggedInUsers.getRole() == 1) {
+            ((Buyer) currentlyLoggedInUsers).addProductToBuyBasket(buyBasket);
+            buyBasket.clear();
+        }
+        this.currentlyLoggedInUsers = currentlyLoggedInUsers;
+    }
+
+    public Account getCurrentlyLoggedInUsers() {
+        return currentlyLoggedInUsers;
+    }
+
+    public boolean isAnyoneLoggedIn() {
+        return currentlyLoggedInUsers != null;
+    }
+
+    public void addToCurrentBuyBasket(Product product, int count) {
+        if (currentlyLoggedInUsers == null) {
+            if (buyBasket.containsKey(product)) {
+                count += buyBasket.get(product);
+                buyBasket.replace(product, count);
+            } else {
+                buyBasket.put(product, count);
+            }
+        } else if (currentlyLoggedInUsers.getRole() == 1) {
+            ((Buyer) currentlyLoggedInUsers).addProductToBuyBasket(product, count);
+        }
     }
 
     @Override
@@ -56,8 +91,8 @@ public class Server implements Runnable {
                 -4: start login menu(loginMenu)
                 -5: get and verify new manager data
 
-            01: start PersonalInfoMenu (personalMenuInfo)
-                -1:
+            01-0: start PersonalInfoMenu (personalMenuInfo)
+                -1: change information in personalInfoMenu
 
             02-0: start register new manager (managerPanel/registerManager)
                 -1: get and verify data
@@ -68,8 +103,8 @@ public class Server implements Runnable {
                 -3: get and verify data for new manager
                 -4: get data and check password for login
 
-            04-0 : start showDiscountCode
-            04-1 : show the DiscountCode
+            04-0: start showDiscountCode
+                -1: show the DiscountCode
 
             */
 
@@ -102,6 +137,17 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = personalInfoMenu;
+            } else if (command.startsWith("01-1")) {
+                if(thisParent instanceof PersonalInfoMenu) {
+                    PersonalInfoMenu personalInfoMenu = (PersonalInfoMenu) thisParent;
+                    personalInfoMenu.changeInformation(command.substring(4));
+                }else{
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             } else if (command.startsWith("02-1")) {
                 if (thisParent instanceof RegisterManager) {
                     RegisterManager registerManager = (RegisterManager) thisParent;
