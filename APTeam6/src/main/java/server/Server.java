@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import server.controller.*;
+import server.controller.buyerPanels.ShowCart;
 import server.controller.managerPanels.RegisterManager;
 import server.controller.managerPanels.ShowDiscountCode;
 import server.model.account.Account;
@@ -105,6 +106,9 @@ public class Server implements Runnable {
 
             04-0: start showDiscountCode
                 -1: show the DiscountCode
+
+            05-0: start ShowCart
+
 
             */
 
@@ -241,7 +245,25 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
+            }else if(command.startsWith("05-0")){
+                ShowCart showCart = new ShowCart(buyBasket);
+                try {
+                    showCart.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = showCart;
             }
+
+
+
+
+
+
+
+
+
             System.out.println(command);
             try {
                 sendMessage(command);

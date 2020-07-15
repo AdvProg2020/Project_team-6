@@ -43,7 +43,7 @@ public class Client extends Application {
 
         allControllers = new ArrayList<>();
 
-        theStage.setTitle("Kamali's shop");
+        theStage.setTitle("tabaian shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
         allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));

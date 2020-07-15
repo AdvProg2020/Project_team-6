@@ -37,12 +37,12 @@ public class LoginMenuView extends Application {
         Button logout = new Button("logout");
         Button back = new Button("back");
 
-        if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
+        /*if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
             login.setVisible(false);
             register.setVisible(false);
         } else {
             logout.setVisible(false);
-        }
+        }*/
 
         vBox.getChildren().addAll(login, register, back, logout);
         vBox.setAlignment(Pos.CENTER);
@@ -68,7 +68,7 @@ public class LoginMenuView extends Application {
             register(this);
         });
 
-        logout.setOnAction(actionEvent -> {
+        /*logout.setOnAction(actionEvent -> {
             ProgramManager.getProgramManagerInstance().logoutSuccessful();
             try {
                 new Alert().showAlert("logout successful", "Ok", 2, null);
@@ -77,6 +77,8 @@ public class LoginMenuView extends Application {
                 e.printStackTrace();
             }
         });
+
+         */
 
         back.setOnAction(actionEvent -> {
             stage.close();
@@ -431,7 +433,7 @@ public class LoginMenuView extends Application {
             usernameIsNull.setVisible(usernameTextField.getText().equals(""));
             passwordIsNull.setVisible(passwordField.getText().equals(""));
 
-            if (!(usernameTextField.getText().equals("") || passwordField.getText().equals(""))) {
+            /*if (!(usernameTextField.getText().equals("") || passwordField.getText().equals(""))) {
                 if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(usernameTextField.getText())) {
                     if (ProgramManager.getProgramManagerInstance().getAccountByUsername(usernameTextField.getText()).checkPassword(passwordField.getText())) {
                         ProgramManager.getProgramManagerInstance().loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername(usernameTextField.getText()));
@@ -449,6 +451,8 @@ public class LoginMenuView extends Application {
                     doesntExistUsername.setVisible(true);
                 }
             }
+
+             */
         });
 
         Scene scene = new Scene(vBox, 250, 450);
@@ -478,7 +482,7 @@ public class LoginMenuView extends Application {
             if (command.equals("back")) {
                 return command;
             }
-            if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
+            /*if (ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn()) {
                 if (command.equals("logout")) {
                     return command;
                 }
@@ -487,14 +491,18 @@ public class LoginMenuView extends Application {
             } else {
                 System.out.println("Invalid command");
             }
+
+             */
         }
     }
 
     private void showHelp() {
-        if (!ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn())
+        /*if (!ProgramManager.getProgramManagerInstance().isAnyoneLoggedIn())
             System.out.println("List of commands:\n\tlogin [username] [password]\n\tcreate account [role] [username]");
         else
             System.out.println("List of commands:\n\tlogout\n\tcreate account [role] [username]");
+
+         */
     }
 
     public void giveOutput(String message) {
