@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import server.controller.*;
+import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
 import server.controller.managerPanels.RegisterManager;
 import server.controller.managerPanels.ShowDiscountCode;
@@ -108,6 +109,10 @@ public class Server implements Runnable {
                 -1: show the DiscountCode
 
             05-0: start ShowCart
+
+
+
+            07-0: start buyHistory log
 
 
             */
@@ -254,6 +259,15 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = showCart;
+            }else if(command.startsWith("07-0")){
+                BuyHistory buyHistory = new BuyHistory();
+                try {
+                    buyHistory.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = buyHistory;
             }
 
 

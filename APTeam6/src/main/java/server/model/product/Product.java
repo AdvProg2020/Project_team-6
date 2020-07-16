@@ -15,6 +15,7 @@ public class Product {
     private HashMap<String, String> SubCategoryAdditionalInfo;
     private int visitCount = 0;
     private LocalDateTime creationDate;
+    private long price = 0;
 
     private String categoryName;
     private String subCategoryName;
@@ -23,19 +24,20 @@ public class Product {
     private ArrayList<Comment> comments;
 
     public Product(String name, String categoryName, String subCategoryName,String date,
-                   HashMap<String,String> categoryAdditionalInfo,HashMap<String,String> subCategoryAdditionalInfo){
+                   HashMap<String,String> categoryAdditionalInfo,HashMap<String,String> subCategoryAdditionalInfo,long price){
         this.name = name;
         this.categoryName = categoryName;
         this.subCategoryName = subCategoryName;
         this.CategoryAdditionalInfo = categoryAdditionalInfo;
         this.SubCategoryAdditionalInfo = subCategoryAdditionalInfo;
         this.creationDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(date);
+        this.price = price;
         id = nextId;
         nextId++;
     }
 
-    void createAllArrayLists(){
     //------------------test---------
+    void createAllArrayLists(){
         scores = new ArrayList<>();
         comments = new ArrayList<>();
     }
@@ -62,6 +64,10 @@ public class Product {
                 description = newValue;
                 break;
         }
+    }
+
+    public long getPrice() {
+        return price;
     }
 
     public int getId() {

@@ -25,4 +25,20 @@ public class LogsInGeneral {
     public int getLogId() {
         return logId;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public static int getNextLogId() {
+        return nextLogId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getExecutedDiscount() {
+        return executedDiscount;
+    }
 }

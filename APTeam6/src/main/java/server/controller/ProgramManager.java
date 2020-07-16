@@ -212,6 +212,10 @@ public class ProgramManager {
         return allLogs.values();
     }
 
+    public HashMap<Integer,LogsInGeneral> getLogsInGeneralHashMap(){
+        return allLogs;
+    }
+
     public boolean isThereAccountWithUsername(String name) {
         return allAccounts.get(name) != null;
     }
