@@ -390,10 +390,10 @@ public class ProgramManager {
         for (int i = 0; i < allRequests.size(); i++) {
             if (allRequests.get(i) instanceof ProductRequest) {
                 //System.out.println(i + ". " + allRequests.get(i) + "is a ProductRequest");
-                result.append("\n").append(i).append(". ").append(allRequests.get(i)).append("is a ProductRequest");
+                result.append("\n").append(i).append(". ").append(allRequests.get(i).toString()).append("is a ProductRequest");
             } else if (allRequests.get(i) instanceof OffRequest) {
                 //System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
-                result.append("\n").append(i).append(". ").append(allRequests.get(i)).append("is an OffRequest");
+                result.append("\n").append(i).append(". ").append(allRequests.get(i).toString()).append("is an OffRequest");
             }
         }
 
@@ -404,11 +404,14 @@ public class ProgramManager {
         if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).accept();
         } else if (allRequests.get(id) instanceof OffRequest) {
+            allRequests.get(id).accept();
         }
     }
 
     public void declineRequests(int id) {
         if (allRequests.get(id) instanceof ProductRequest) {
+            allRequests.get(id).decline();
+        } else if (allRequests.get(id) instanceof OffRequest) {
             allRequests.get(id).decline();
         }
     }

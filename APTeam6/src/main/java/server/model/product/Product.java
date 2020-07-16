@@ -41,6 +41,7 @@ public class Product {
         scores = new ArrayList<>();
         comments = new ArrayList<>();
     }
+    //------------------test---------
 
     public void addComment(Comment comment){
         comments.add(comment);
@@ -51,8 +52,8 @@ public class Product {
     }
 
     /**
-     * this method changes name or description
-     * @param field 1 - name<br/>2 - description
+     * this method changes name or description or price
+     * @param field 1 - name<br/>2 - description<br/>4 - price
      * @param newValue the new text
      */
     public void changeField(byte field, String newValue){
@@ -62,6 +63,9 @@ public class Product {
                 break;
             case 2:
                 description = newValue;
+                break;
+            case 4:
+                price = Long.parseLong(newValue);
                 break;
         }
     }
@@ -116,5 +120,16 @@ public class Product {
 
     public void addVisitCount(){
         visitCount++;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", creationDate=" + creationDate +
+                ", price=" + price +
+                ", categoryName='" + categoryName + '\'' +
+                ", subCategoryName='" + subCategoryName + '\'' +
+                '}';
     }
 }

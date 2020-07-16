@@ -3,6 +3,7 @@ package server.controller.managerPanels;
 import server.Server;
 import server.controller.Parent;
 import client.view.old.ManageRequestsView;
+import server.controller.ProgramManager;
 
 import java.io.IOException;
 
@@ -13,11 +14,29 @@ public class ManageRequests implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("06-" + message);
+    }
+
+    public void acceptRequest(String data) throws IOException {
+
+        //TODO check data validation
+
+        ProgramManager.getProgramManagerInstance().acceptRequests(Integer.parseInt(data));
+
+        sendMessage("accepted");
+    }
+
+    public void declineRequest(String data) throws IOException {
+
+        //TODO check data validation
+
+        ProgramManager.getProgramManagerInstance().declineRequests(Integer.parseInt(data));
+
+        sendMessage("declined");
     }
 
     /*

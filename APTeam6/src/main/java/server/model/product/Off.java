@@ -51,11 +51,23 @@ public class Off {
     public LocalDateTime getEndDate() {
         return endDate;
     }
+
     public int getOffAmount() {
         return offAmount;
     }
 
     public int getOffId() {
         return offId;
+    }
+
+    @Override
+    public String toString() {
+        return "Off{" +
+                "productsInOff=" + productsInOff +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", offStatus=" + offStatus +
+                ", offAmount=" + offAmount +
+                '}';
     }
 }

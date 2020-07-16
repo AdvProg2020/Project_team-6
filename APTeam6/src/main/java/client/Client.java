@@ -72,6 +72,7 @@ public class Client extends Application {
     }
 
     public void sendMessage(String command) throws IOException {
+        command = token + command;
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
         //TODO: encode
         dataOutputStream.writeUTF(command);

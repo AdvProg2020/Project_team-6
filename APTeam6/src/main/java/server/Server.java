@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
+import server.controller.managerPanels.ManageRequests;
 import server.controller.managerPanels.ManageUsers;
 import server.controller.managerPanels.RegisterManager;
 import server.controller.managerPanels.ShowDiscountCode;
@@ -121,7 +122,9 @@ public class Server implements Runnable {
 
             05-0: start ShowCart
 
-
+            06-0: start manageRequest
+                -1: accept request
+                -2: decline request
 
             07-0: start buyHistory log
 
@@ -316,6 +319,45 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = showCart;
+            }else if(command.startsWith("06-0")){
+                ManageRequests manageRequests = new ManageRequests();
+                try {
+                    manageRequests.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = manageRequests;
+            }else if(command.startsWith("06-1")){
+                if(thisParent instanceof ManageRequests){
+                    ManageRequests manageRequests = (ManageRequests) thisParent;
+                    try {
+                        manageRequests.acceptRequest(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else if(command.startsWith("06-2")){
+                if(thisParent instanceof ManageRequests){
+                    ManageRequests manageRequests = (ManageRequests) thisParent;
+                    try {
+                        manageRequests.declineRequest(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }else if(command.startsWith("07-0")){
                 BuyHistory buyHistory = new BuyHistory();
                 try {
