@@ -28,6 +28,7 @@ public class Server implements Runnable {
     private Log log = null;
     private Account currentlyLoggedInUsers = null;
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
+    private boolean tokenSent = false;
 
 
     Server(Socket clientSocket) {
@@ -78,6 +79,14 @@ public class Server implements Runnable {
 
         while (true) {
             String command = "";
+            if(!tokenSent){
+                try {
+                    sendMessage(createToken());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                tokenSent = true;
+            }
             try {
                 command = getMessage();
             } catch (IOException e) {
@@ -406,5 +415,21 @@ public class Server implements Runnable {
         //TODO encode
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();
+    }
+
+    private String createToken(){
+        String string = "asdfghjklqwertyuiopzxcvbnmASDFGHJKLZXCVBNMQWERTYUIOP9875643210";
+        String token = "";
+
+        for (int i = 0; i < 15; i++) {
+            double a = Math.random();
+            a = a * 62;
+            int b = Integer.parseInt(""+Math.floor(a));
+            token += string.substring(b,b+1);
+        }
+
+        System.out.println(token);
+        return token;
+
     }
 }
