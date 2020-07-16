@@ -55,6 +55,7 @@ public class ProgramManager {
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
     private HashMap<Integer, Off> allOffs;
+    public ArrayList<Account> allLoggedInUser = null;
 
     //private Account currentlyLoggedInUsers;
 

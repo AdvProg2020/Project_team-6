@@ -40,6 +40,7 @@ public class Server implements Runnable {
             buyBasket.clear();
         }
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
+        ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -48,6 +49,11 @@ public class Server implements Runnable {
 
     public boolean isAnyoneLoggedIn() {
         return currentlyLoggedInUsers != null;
+    }
+
+    public void logoutSuccessful(){
+        ProgramManager.getProgramManagerInstance().allLoggedInUser.remove(currentlyLoggedInUsers);
+        currentlyLoggedInUsers = null;
     }
 
     public void addToCurrentBuyBasket(Product product, int count) {
@@ -88,23 +94,18 @@ public class Server implements Runnable {
             command start with:
             00-0: start main screen or register manager(managerPanel/registerManager or mainScreen)
                       return 02-start for register manager or 00-start for main screen
-                -1: start user panel(personalInfoMenu)
-                -2: start product(categoriesAndSubCategoriesMenu)
-                -3: start offs(offs)
-                -4: start login menu(loginMenu)
-                -5: get and verify new manager data
 
             01-0: start PersonalInfoMenu (personalMenuInfo)
                 -1: change information in personalInfoMenu
 
-            02-0: start register new manager (managerPanel/registerManager)
-                -1: get and verify data
+            02-1: (managerPanel/registerManager): get and verify data for register
 
             03-0: start login menu(LoginMenu)
                 -1: get and verify data for new buyer
                 -2: get and verify data for new seller
                 -3: get and verify data for new manager
                 -4: get data and check password for login
+                -5: logout
 
             04-0: start showDiscountCode
                 -1: show the DiscountCode
@@ -118,6 +119,10 @@ public class Server implements Runnable {
 
             09-0: start manage users
                 -1: view user(with username)
+                -2: delete user(with username)
+                -3: change user(with username) start(only send information)
+                -4: change user(with username) get and verify data and change
+
 
 
             */
@@ -231,6 +236,44 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
+            }else if(command.startsWith("03-4")){
+                if(thisParent instanceof LoginMenu){
+                    LoginMenu loginMenu = (LoginMenu) thisParent;
+                    try {
+                        loginMenu.login(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else if(command.startsWith("03-5")){
+                if(thisParent instanceof LoginMenu){
+                    if(currentlyLoggedInUsers!=null){
+                        logoutSuccessful();
+                        try {
+                            sendMessage("logout");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else {
+                        try {
+                            sendMessage("firstLogin");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }else if(command.startsWith("04-0")){
                 ShowDiscountCode showDiscountCode = new ShowDiscountCode();
                 try {
@@ -287,6 +330,21 @@ public class Server implements Runnable {
                     ManageUsers manageUsers = (ManageUsers) thisParent;
                     try {
                         manageUsers.viewUser(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else if(command.startsWith("09-2")){
+                if(thisParent instanceof ManageUsers){
+                    ManageUsers manageUsers = (ManageUsers) thisParent;
+                    try {
+                        manageUsers.deleteUser(command.substring(4));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

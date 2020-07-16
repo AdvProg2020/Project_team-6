@@ -25,6 +25,72 @@ public class ManageUsers implements Parent {
         server.sendMessage("09-" + message);
     }
 
+    public void deleteUser(String data) throws IOException {
+        if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data)){
+            if(ProgramManager.getProgramManagerInstance().allLoggedInUser.contains(ProgramManager.getProgramManagerInstance().getAccountByUsername(data))){
+                sendMessage("firstLogout");
+            }else{
+                ProgramManager.getProgramManagerInstance().deleteAccount(data);
+                sendMessage("deleted");
+            }
+        }else{
+            sendMessage("usernameDoesntExist");
+        }
+    }
+
+    public void changeUserStart(String data) throws IOException {
+        if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data)) {
+            //username---password---firstName---lastName---email---phoneNumber
+            //username---password---firstName---lastName---email---phoneNumber---credit
+            //username---password---firstName---lastName---email---phoneNumber---credit---company
+            Account account = ProgramManager.getProgramManagerInstance().getAccountByUsername(data.split("---")[0]);
+            if(account.getRole()==1){
+                account.setPassword(data.split("---")[1]);
+                account.setFirstName(data.split("---")[2]);
+                account.setLastName(data.split("---")[3]);
+                account.setEmailAddress(data.split("---")[4]);
+                account.setPhoneNumber(data.split("---")[5]);
+            }else if(account.getRole()==2){
+                account.setPassword(data.split("---")[1]);
+                account.setFirstName(data.split("---")[2]);
+                account.setLastName(data.split("---")[3]);
+                account.setEmailAddress(data.split("---")[4]);
+                account.setPhoneNumber(data.split("---")[5]);
+                Seller seller = (Seller) account;
+                seller.setCompanyName(data.split("---")[6]);
+            }else if(account.getRole()==3){
+                account.setPassword(data.split("---")[1]);
+                account.setFirstName(data.split("---")[2]);
+                account.setLastName(data.split("---")[3]);
+                account.setEmailAddress(data.split("---")[4]);
+                account.setPhoneNumber(data.split("---")[5]);
+            }
+        } else {
+            sendMessage("usernameDoesntExist");
+        }
+    }
+
+    public void changeUserChange(String data) throws IOException {
+        if(data.split("---")[0].equals("buyer")){
+
+        }
+        if(data.split("---").length==7 && !data.split("---")[0].equals("") &&
+                !data.split("---")[1].equals("") && !data.split("---")[2].equals("") &&
+                !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
+                !data.split("---")[5].equals("") && !data.split("---")[6].equals("") ) {
+
+            //TODO check exist user with this user name
+
+            new Seller(data.split("---")[0], data.split("---")[1], data.split("---")[2],
+                    data.split("---")[3], data.split("---")[4], data.split("---")[5],
+                    data.split("---")[6]);
+
+            sendMessage("2-account_created");
+        }else{
+            sendMessage("error in data");
+        }
+    }
+
     public void viewUser(String data) throws IOException {
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data)) {
             StringBuilder message = new StringBuilder();
