@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
+import server.controller.managerPanels.ManageUsers;
 import server.controller.managerPanels.RegisterManager;
 import server.controller.managerPanels.ShowDiscountCode;
 import server.model.account.Account;
@@ -113,6 +114,10 @@ public class Server implements Runnable {
 
 
             07-0: start buyHistory log
+
+
+            09-0: start manage users
+                -1: view user(with username)
 
 
             */
@@ -268,6 +273,30 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = buyHistory;
+            }else if(command.startsWith("09-0")){
+                ManageUsers manageUsers = new ManageUsers();
+                try {
+                    manageUsers.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = manageUsers;
+            }else if(command.startsWith("09-1")){
+                if(thisParent instanceof ManageUsers){
+                    ManageUsers manageUsers = (ManageUsers) thisParent;
+                    try {
+                        manageUsers.viewUser(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
 
