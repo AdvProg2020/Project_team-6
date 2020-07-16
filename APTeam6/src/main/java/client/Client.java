@@ -24,16 +24,26 @@ public class Client extends Application {
     private ArrayList<FXMLLoader> allFXMLLoaders;
     private ArrayList<Scene> allScenes;
     private ArrayList<GeneralController_V> allControllers;
+    private String token = "";
+    private boolean tokenWasTaken = false;
 
     public void run() throws IOException {
-        /*Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         while (true){
+
+
+            if(!tokenWasTaken){
+                token = getMessage();
+                tokenWasTaken = true;
+            }
+
+
             String s = scanner.nextLine();
             sendMessage(s);
             s = getMessage();
             System.out.println(s);
-        }*/
-
+        }
+/*
         theStage = new Stage();
         allFXMLLoaders = new ArrayList<>();
 
@@ -48,6 +58,8 @@ public class Client extends Application {
 
         allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
         //TODO: Add all FXMLs here
+
+ */
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

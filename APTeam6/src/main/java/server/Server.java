@@ -424,7 +424,7 @@ public class Server implements Runnable {
         for (int i = 0; i < 15; i++) {
             double a = Math.random();
             a = a * 62;
-            int b = Integer.parseInt(""+Math.floor(a));
+            int b = (int) Math.floor(a);
             token += string.substring(b,b+1);
         }
 
