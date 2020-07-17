@@ -7,12 +7,10 @@ import javafx.stage.Stage;
 import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
-import server.controller.managerPanels.ManageRequests;
-import server.controller.managerPanels.ManageUsers;
-import server.controller.managerPanels.RegisterManager;
-import server.controller.managerPanels.ShowDiscountCode;
+import server.controller.managerPanels.*;
 import server.model.account.Account;
 import server.model.account.Buyer;
+import server.model.product.DiscountCode;
 import server.model.product.Product;
 
 import java.io.*;
@@ -118,15 +116,23 @@ public class Server implements Runnable {
                 -5: logout
 
             04-0: start showDiscountCode
-                -1: show the DiscountCode
+                -1: view discount code(return data by code)
+                -2: change data by code
+                -3: remove discount code
 
             05-0: start ShowCart
 
             06-0: start manageRequest
                 -1: accept request
                 -2: decline request
+                -3: detail request
 
             07-0: start buyHistory log
+
+
+            08-0: start create discount code
+                -1: create discount code(get data and create)
+
 
 
             09-0: start manage users
@@ -134,6 +140,10 @@ public class Server implements Runnable {
                 -2: delete user(with username)
                 -3: change user(with username) start(only send information)
                 -4: change user(with username) get and verify data and change
+
+
+            10-0: start View Sales History(for seller)
+
 
 
 
@@ -159,7 +169,8 @@ public class Server implements Runnable {
                     preParent = thisParent;
                     thisParent = registerManager;
                 }
-            } else if (command.startsWith("01-0")) {
+            }
+            else if (command.startsWith("01-0")) {
                 PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
                 try {
                     personalInfoMenu.start(this);
@@ -168,7 +179,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = personalInfoMenu;
-            } else if (command.startsWith("01-1")) {
+            }
+            else if (command.startsWith("01-1")) {
                 if(thisParent instanceof PersonalInfoMenu) {
                     PersonalInfoMenu personalInfoMenu = (PersonalInfoMenu) thisParent;
                     personalInfoMenu.changeInformation(command.substring(4));
@@ -179,7 +191,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            } else if (command.startsWith("02-1")) {
+            }
+            else if (command.startsWith("02-1")) {
                 if (thisParent instanceof RegisterManager) {
                     RegisterManager registerManager = (RegisterManager) thisParent;
                     try {
@@ -194,7 +207,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            } else if (command.startsWith("03-0")) {
+            }
+            else if (command.startsWith("03-0")) {
                 LoginMenu loginMenu = new LoginMenu();
                 try {
                     loginMenu.start(this);
@@ -203,7 +217,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = loginMenu;
-            }else if(command.startsWith("03-1")){
+            }
+            else if (command.startsWith("03-1")) {
                 if(thisParent instanceof LoginMenu){
                     LoginMenu loginMenu = (LoginMenu) thisParent;
                     try {
@@ -218,7 +233,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("03-2")){
+            }
+            else if (command.startsWith("03-2")) {
                 if(thisParent instanceof LoginMenu){
                     LoginMenu loginMenu = (LoginMenu) thisParent;
                     try {
@@ -233,7 +249,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("03-3")){
+            }
+            else if (command.startsWith("03-3")) {
                 if(thisParent instanceof LoginMenu){
                     LoginMenu loginMenu = (LoginMenu) thisParent;
                     try {
@@ -248,7 +265,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("03-4")){
+            }
+            else if (command.startsWith("03-4")) {
                 if(thisParent instanceof LoginMenu){
                     LoginMenu loginMenu = (LoginMenu) thisParent;
                     try {
@@ -263,7 +281,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("03-5")){
+            }
+            else if (command.startsWith("03-5")) {
                 if(thisParent instanceof LoginMenu){
                     if(currentlyLoggedInUsers!=null){
                         logoutSuccessful();
@@ -286,7 +305,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("04-0")){
+            }
+            else if (command.startsWith("04-0")) {
                 ShowDiscountCode showDiscountCode = new ShowDiscountCode();
                 try {
                     showDiscountCode.start(this);
@@ -295,7 +315,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = showDiscountCode;
-            }else if(command.startsWith("04-1")){
+            }
+            else if (command.startsWith("04-1")) {
                 if(thisParent instanceof ShowDiscountCode){
                     ShowDiscountCode showDiscountCode = (ShowDiscountCode) thisParent;
                     try {
@@ -310,7 +331,40 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("05-0")){
+            }
+            else if (command.startsWith("04-2")) {
+                if(thisParent instanceof ShowDiscountCode){
+                    ShowDiscountCode showDiscountCode = (ShowDiscountCode) thisParent;
+                    try {
+                        showDiscountCode.changeDataByCode(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("04-3")) {
+                if(thisParent instanceof ShowDiscountCode){
+                    ShowDiscountCode showDiscountCode = (ShowDiscountCode) thisParent;
+                    try {
+                        showDiscountCode.removeDiscountCode(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("05-0")) {
                 ShowCart showCart = new ShowCart(buyBasket);
                 try {
                     showCart.start(this);
@@ -319,7 +373,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = showCart;
-            }else if(command.startsWith("06-0")){
+            }
+            else if (command.startsWith("06-0")) {
                 ManageRequests manageRequests = new ManageRequests();
                 try {
                     manageRequests.start(this);
@@ -328,7 +383,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = manageRequests;
-            }else if(command.startsWith("06-1")){
+            }
+            else if (command.startsWith("06-1")) {
                 if(thisParent instanceof ManageRequests){
                     ManageRequests manageRequests = (ManageRequests) thisParent;
                     try {
@@ -343,7 +399,8 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("06-2")){
+            }
+            else if (command.startsWith("06-2")) {
                 if(thisParent instanceof ManageRequests){
                     ManageRequests manageRequests = (ManageRequests) thisParent;
                     try {
@@ -358,7 +415,24 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("07-0")){
+            }
+            else if (command.startsWith("06-3")) {
+                if(thisParent instanceof ManageRequests){
+                    ManageRequests manageRequests = (ManageRequests) thisParent;
+                    try {
+                        manageRequests.detailRequest(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("07-0")) {
                 BuyHistory buyHistory = new BuyHistory();
                 try {
                     buyHistory.start(this);
@@ -367,7 +441,34 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = buyHistory;
-            }else if(command.startsWith("09-0")){
+            }
+            else if (command.startsWith("08-0")) {
+                CreateDiscountCode createDiscountCode = new CreateDiscountCode();
+                try {
+                    createDiscountCode.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = createDiscountCode;
+            }
+            else if (command.startsWith("08-1")) {
+                if(thisParent instanceof CreateDiscountCode){
+                    CreateDiscountCode createDiscountCode = (CreateDiscountCode) thisParent;
+                    try {
+                        createDiscountCode.createDiscountCodeByData(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("09-0")) {
                 ManageUsers manageUsers = new ManageUsers();
                 try {
                     manageUsers.start(this);
@@ -376,7 +477,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = manageUsers;
-            }else if(command.startsWith("09-1")){
+            }
+            else if (command.startsWith("09-1")) {
                 if(thisParent instanceof ManageUsers){
                     ManageUsers manageUsers = (ManageUsers) thisParent;
                     try {
@@ -391,11 +493,44 @@ public class Server implements Runnable {
                         e.printStackTrace();
                     }
                 }
-            }else if(command.startsWith("09-2")){
+            }
+            else if (command.startsWith("09-2")) {
                 if(thisParent instanceof ManageUsers){
                     ManageUsers manageUsers = (ManageUsers) thisParent;
                     try {
                         manageUsers.deleteUser(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("09-3")) {
+                if(thisParent instanceof ManageUsers){
+                    ManageUsers manageUsers = (ManageUsers) thisParent;
+                    try {
+                        manageUsers.changeUserStart(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("09-4")) {
+                if(thisParent instanceof ManageUsers){
+                    ManageUsers manageUsers = (ManageUsers) thisParent;
+                    try {
+                        manageUsers.changeUserChange(command.substring(4));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -470,7 +605,7 @@ public class Server implements Runnable {
             token += string.substring(b,b+1);
         }
 
-        System.out.println(token);
+        //System.out.println(token);
         return token;
 
     }

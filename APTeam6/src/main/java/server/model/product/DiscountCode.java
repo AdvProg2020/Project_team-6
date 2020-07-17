@@ -1,5 +1,6 @@
 package server.model.product;
 
+import server.controller.ProgramManager;
 import server.model.account.Account;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,19 @@ public class DiscountCode {
         this.end = end;
         this.percentage = percentage;
         this.repetitionTime = repetitionTime;
+        ProgramManager.getProgramManagerInstance().addDiscountCodeToArrayList(this);
+    }
+
+    @Override
+    public String toString() {
+        return "DiscountCode{" +
+                "code='" + code + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", percentage=" + percentage +
+                ", repetitionTime=" + repetitionTime +
+                ", usersIncludedInDiscountCode=" + usersIncludedInDiscountCode +
+                '}';
     }
 
     public String getCode() {
@@ -72,6 +86,7 @@ public class DiscountCode {
     public int getRepetitionTime() {
         return repetitionTime;
     }
+
     public void addToArrayList(Account account){
         usersIncludedInDiscountCode.add(account.getUsername());
     }

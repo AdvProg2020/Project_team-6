@@ -6,6 +6,7 @@ import server.model.product.DiscountCode;
 import client.view.old.CreateDiscountCodeView;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class CreateDiscountCode implements Parent {
     /*
@@ -45,7 +46,26 @@ public class CreateDiscountCode implements Parent {
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("08-" + message);
+    }
+
+    public void createDiscountCodeByData(String data) throws IOException {
+        HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
+        if(!discountCodeHashMap.containsKey(data)) {
+
+            //TODO check data validation
+            //code---startDate---endDate---percentage---repetitionTime
+
+            new DiscountCode(data.split("---")[0],
+                    ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]),
+                    ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]),
+                    Integer.parseInt(data.split("---")[3]),Integer.parseInt(data.split("---")[4]));
+
+            sendMessage("created");
+
+        }else{
+            sendMessage("duplicateCode");
+        }
     }
 
 }

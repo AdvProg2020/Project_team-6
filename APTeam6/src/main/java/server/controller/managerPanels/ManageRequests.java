@@ -17,6 +17,10 @@ public class ManageRequests implements Parent {
         sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
     }
 
+    public void detailRequest(String data) throws IOException {
+        sendMessage(ProgramManager.getProgramManagerInstance().detailsOfRequest(Integer.parseInt(data)));
+    }
+
     private void sendMessage(String message) throws IOException {
         server.sendMessage("06-" + message);
     }

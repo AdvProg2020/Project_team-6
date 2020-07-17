@@ -384,9 +384,9 @@ public class PersonalInfoMenuView extends Application {
         });
 
 
-        //showDiscountCode
-        //viewSalesHistory,manageProducts,addProduct,removeProduct,showCategories,viewOffs
-        //manageAllProduct,manageRequest,manageUsers,createDiscountCode,viewDiscountCode,manageCategories,SingleProductMenu
+
+        // seller: manageProducts,addProduct,removeProduct,showCategories,viewOffs
+        // manager: manageAllProduct,manageCategories,SingleProductMenu
 
         if (currentlyLoggedInUser.getRole() == 1) {
             pane.getChildren().addAll(role, role2, credit, credit2, username, usernameLabel, usernameLabel2, usernameTextField,

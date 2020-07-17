@@ -344,6 +344,10 @@ public class ProgramManager {
         return allDiscountCodes.get(code);
     }
 
+    public HashMap<String, DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
     /**
      * If a buyer is logged in, this method will add the product to their buyBasket, otherwise it will be added to ProgramManager buyBasket.
      *
