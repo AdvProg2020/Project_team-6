@@ -8,6 +8,9 @@ import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
 import server.controller.managerPanels.*;
+import server.controller.sellerPanels.OffManagementSeller;
+import server.controller.sellerPanels.SalesHistory;
+import server.controller.sellerPanels.SellerProductsMenu;
 import server.model.account.Account;
 import server.model.account.Buyer;
 import server.model.product.DiscountCode;
@@ -143,6 +146,23 @@ public class Server implements Runnable {
 
 
             10-0: start View Sales History(for seller)
+
+
+            11-0: start manage product(seller)
+                -1: view product(view product by id)
+                -2: view buyers of product(by id)
+                -3: edit product(by id)
+                -4: add product(get and verify data)
+                -5: remove product(by id)
+
+
+            12-0: start show category(seller)
+
+
+            13-0: start view offs
+                -1: view off by id
+                -2: edit off by id
+                -3: add off(get and verify data)
 
 
 
@@ -542,10 +562,167 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if (command.startsWith("10-0")) {
+                SalesHistory salesHistory = new SalesHistory();
+                try {
+                    salesHistory.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = salesHistory;
+            }
+            else if (command.startsWith("11-0")) {
+                SellerProductsMenu sellerProductsMenu = new SellerProductsMenu();
+                try {
+                    sellerProductsMenu.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = sellerProductsMenu;
+            }
+            else if (command.startsWith("11-1")) {
+                if(thisParent instanceof SellerProductsMenu){
+                    SellerProductsMenu sellerProductsMenu = (SellerProductsMenu) thisParent;
+                    try {
+                        sellerProductsMenu.viewProduct(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("11-2")) {
+                if(thisParent instanceof SellerProductsMenu){
+                    SellerProductsMenu sellerProductsMenu = (SellerProductsMenu) thisParent;
+                    try {
+                        sellerProductsMenu.viewBuyersOfProduct(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("11-3")) {
+                if(thisParent instanceof SellerProductsMenu){
+                    SellerProductsMenu sellerProductsMenu = (SellerProductsMenu) thisParent;
+                    try {
+                        sellerProductsMenu.editProduct(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("11-4")) {
+                if(thisParent instanceof SellerProductsMenu){
+                    SellerProductsMenu sellerProductsMenu = (SellerProductsMenu) thisParent;
+                    try {
+                        sellerProductsMenu.addProduct(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("11-5")) {
+                if(thisParent instanceof SellerProductsMenu){
+                    SellerProductsMenu sellerProductsMenu = (SellerProductsMenu) thisParent;
+                    try {
+                        sellerProductsMenu.removeProduct(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("12-0")) {
 
-
-
-
+            }
+            else if (command.startsWith("13-0")) {
+                OffManagementSeller offManagementSeller = new OffManagementSeller();
+                try {
+                    offManagementSeller.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = offManagementSeller;
+            }
+            else if (command.startsWith("13-1")) {
+                if(thisParent instanceof OffManagementSeller){
+                    OffManagementSeller offManagementSeller = (OffManagementSeller) thisParent;
+                    try {
+                        offManagementSeller.viewOff(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("13-2")) {
+                if(thisParent instanceof OffManagementSeller){
+                    OffManagementSeller offManagementSeller = (OffManagementSeller) thisParent;
+                    try {
+                        offManagementSeller.editOff(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("13-3")) {
+                if(thisParent instanceof OffManagementSeller){
+                    OffManagementSeller offManagementSeller = (OffManagementSeller) thisParent;
+                    try {
+                        offManagementSeller.addOff(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
 
 

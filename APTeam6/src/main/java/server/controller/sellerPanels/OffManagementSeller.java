@@ -22,6 +22,18 @@ public class OffManagementSeller implements Parent {
         server.sendMessage("02-" + message);
     }
 
+    public void viewOff(String substring) throws IOException {
+        sendMessage("");
+    }
+
+    public void editOff(String substring) throws IOException {
+        sendMessage("");
+    }
+
+    public void addOff(String substring) throws IOException {
+        sendMessage("");
+    }
+
     /*
     private static OffManagementSeller instance;
     public static OffManagementSeller getInstance(){
