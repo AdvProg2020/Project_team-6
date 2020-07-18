@@ -6,16 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="423.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.CategoryAndSubCategoryGenerator_V">
+<AnchorPane prefHeight="423.0" prefWidth="284.0" style="-fx-background-color: #ffccee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.CategoryAndSubCategoryGenerator_V">
    <children>
       <Label layoutX="13.0" layoutY="50.0" text="Name:" />
       <Label layoutX="13.0" layoutY="98.0" text="Properties:" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="14.0" text="Title" fx:id="titleLabel"/>
-      <TextField layoutX="56.0" layoutY="46.0" prefHeight="25.0" prefWidth="215.0" fx:id="nameText"/>
-      <ListView layoutX="14.0" layoutY="122.0" prefHeight="223.0" prefWidth="256.0" fx:id="attributeList"/>
-      <Button layoutX="16.0" layoutY="352.0" mnemonicParsing="false" text="Add" onAction="#addButton"/>
-      <Button layoutX="16.0" layoutY="384.0" mnemonicParsing="false" text="remove" onAction="#removeButton"/>
-      <Button layoutX="225.0" layoutY="384.0" mnemonicParsing="false" text="finish" onAction="#finishButton"/>
-      <TextField layoutX="57.0" layoutY="352.0" prefHeight="25.0" prefWidth="118.0" promptText="New attribute" fx:id="newAttributeText"/>
+      <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="14.0" text="Title" />
+      <TextField fx:id="nameText" layoutX="56.0" layoutY="46.0" prefHeight="25.0" prefWidth="215.0" />
+      <ListView fx:id="attributeList" layoutX="14.0" layoutY="122.0" prefHeight="223.0" prefWidth="256.0" />
+      <Button layoutX="16.0" layoutY="352.0" mnemonicParsing="false" onAction="#addButton" text="Add" />
+      <Button layoutX="16.0" layoutY="384.0" mnemonicParsing="false" onAction="#removeButton" text="Remove" />
+      <Button layoutX="223.0" layoutY="384.0" mnemonicParsing="false" onAction="#finishButton" text="Finish" />
+      <TextField fx:id="newAttributeText" layoutX="61.0" layoutY="352.0" prefHeight="25.0" prefWidth="209.0" promptText="New attribute" />
+      <Button layoutX="160.0" layoutY="384.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel" />
    </children>
 </AnchorPane>

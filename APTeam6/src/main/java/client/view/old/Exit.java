@@ -15,8 +15,8 @@ public class Exit extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Label text = new Label("Are you want to exit?");
-        Button yes = new Button("yes");
-        Button no = new Button("no");
+        Button yes = new Button("yes, I am");
+        Button no = new Button("no, I'm not");
 
         VBox vBox = new VBox(10);
         vBox.setAlignment(Pos.CENTER);
