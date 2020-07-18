@@ -218,10 +218,9 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
         String message = "";
         for(int i = 0;i < allCategoriesArrayList.size();i++){
-            message = message + "\n" + i + ". " + allCategoriesArrayList.get(i);
+            message = message + "---" + i + ". " + allCategoriesArrayList.get(i);
         }
         sendMessage(message);
     }
@@ -278,35 +277,40 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
          */
     }
 
-    public void add(String name) {
-        /*if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
-            if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
-                ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
-                updateCategoriesArrayList();
-                view.showCategoriesList(allCategoriesArrayList);
-            }
-            else
-                view.giveOutPutError("Repeated name");
+    public void add(String Data) {
+//        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
+//            if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
+//                ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
+//                updateCategoriesArrayList();
+//                view.showCategoriesList(allCategoriesArrayList);
+//            }
+//            else
+//                view.giveOutPutError("Repeated name");
+//        }
+//        else if (state == 1 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
+//            if (currentCategory.getSubCategoryByName(name) == null) {
+//                currentCategory.addSubcategory(new SubCategory(name));
+//                updateSubCategoriesArrayList();
+//                view.showSubCategoriesList(allSubCategoriesArrayList);
+//            }
+//            else
+//                view.giveOutPutError("Repeated name");
+//        }
+//        else if (state == 2 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 2) {
+//            try {
+//                new SellerProductsMenuView().start(new Stage());
+//            } catch (Exception e) {
+//                System.err.println("Zahr e mar");
+//                e.printStackTrace();
+//            }
+        ArrayList<String> additionalAttributes = new ArrayList<>();
+        String[] dataSplit = Data.split("---");
+        for(int i = 1;i < dataSplit.length;i++){
+            additionalAttributes.add(dataSplit[i]);
         }
-        else if (state == 1 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
-            if (currentCategory.getSubCategoryByName(name) == null) {
-                currentCategory.addSubcategory(new SubCategory(name));
-                updateSubCategoriesArrayList();
-                view.showSubCategoriesList(allSubCategoriesArrayList);
-            }
-            else
-                view.giveOutPutError("Repeated name");
-        }
-        else if (state == 2 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 2) {
-            try {
-                new SellerProductsMenuView().start(new Stage());
-            } catch (Exception e) {
-                System.err.println("Zahr e mar");
-                e.printStackTrace();
-            }
-        }
+        new Category(dataSplit[0],additionalAttributes);
+        updateCategoriesArrayList();
 
-         */
     }
 
     public void remove(int index) {
@@ -356,9 +360,10 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     }
 
     public void categorySort(ArrayList<Category> allCategoriesArrayList){
+        //TODO ostad kamali
 
     }
     public void subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList){
-
+        //TODO ostad kamali
     }
 }
