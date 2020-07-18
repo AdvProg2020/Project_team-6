@@ -44,12 +44,15 @@ public class SellerUserPanelView {
     }
 
     public void viewCompany(){
-        Seller seller = (Seller) ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
+        /*
+        Seller seller = (Seller) ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUsers();
         System.out.println("Company name: " + seller.getCompanyName());
+
+         */
     }
 
     public void viewSellLogs(){
-        Seller seller = (Seller) ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser();
+        /*Seller seller = (Seller) ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUsers();
         ArrayList<Integer> logIds = seller.getSellLogIds();
         ProgramManager programManager = ProgramManager.getProgramManagerInstance();
         System.out.println("List of all logs:");
@@ -65,17 +68,22 @@ public class SellerUserPanelView {
             }
             System.out.println();
         }
+
+         */
     }
 
     public void viewBalance(){
+        /*
         int totalMoney = 0;
         ProgramManager programManager = ProgramManager.getProgramManagerInstance();
-        ArrayList<Integer> logIds = ((Seller)programManager.getCurrentlyLoggedInUser()).getSellLogIds();
+        ArrayList<Integer> logIds = ((Seller)programManager.getCurrentlyLoggedInUsers()).getSellLogIds();
         for (Integer logId : logIds) {
             int price = ((SellLog)programManager.getLogByLogId(logId)).getReceivedAmount();
             totalMoney += price;
             System.out.print("\tlog" + logId + ": " + price);
         }
         System.out.print("Total money: " + totalMoney);
+
+         */
     }
 }

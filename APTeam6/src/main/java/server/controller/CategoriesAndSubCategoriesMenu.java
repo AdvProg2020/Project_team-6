@@ -264,7 +264,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
 
     ///////////////////////////////////
     public void edit(int index, String newName) {
-        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
+        /*if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             Category category = allCategoriesArrayList.get(index);
             category.setName(newName);
             updateCategoriesArrayList();
@@ -276,10 +276,12 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             updateSubCategoriesArrayList();
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
+
+         */
     }
 
     public void add(String name) {
-        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
+        /*if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
                 ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
                 updateCategoriesArrayList();
@@ -305,10 +307,12 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
                 e.printStackTrace();
             }
         }
+
+         */
     }
 
     public void remove(int index) {
-        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
+        /*if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
             Category category = allCategoriesArrayList.get(index);
             ProgramManager.getProgramManagerInstance().removeCategory(category);
             updateCategoriesArrayList();
@@ -326,6 +330,8 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             updateProductsArrayList();
             view.showProductsList(allProductsArrayList);
         }
+
+         */
     }
 
     public void open(int index) {

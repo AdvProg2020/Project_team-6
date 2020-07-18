@@ -24,16 +24,26 @@ public class Client extends Application {
     private ArrayList<FXMLLoader> allFXMLLoaders;
     private ArrayList<Scene> allScenes;
     private ArrayList<GeneralController_V> allControllers;
+    private String token = "";
+    private boolean tokenWasTaken = false;
 
     public void run() throws IOException {
-        /*Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         while (true){
+
+
+            if(!tokenWasTaken){
+                token = getMessage();
+                tokenWasTaken = true;
+            }
+
+
             String s = scanner.nextLine();
             sendMessage(s);
             s = getMessage();
             System.out.println(s);
-        }*/
-
+        }
+/*
         theStage = new Stage();
         allFXMLLoaders = new ArrayList<>();
 
@@ -43,11 +53,13 @@ public class Client extends Application {
 
         allControllers = new ArrayList<>();
 
-        theStage.setTitle("Kamali's shop");
+        theStage.setTitle("tabaian shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
         allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
         //TODO: Add all FXMLs here
+
+ */
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +72,7 @@ public class Client extends Application {
     }
 
     public void sendMessage(String command) throws IOException {
+        command = token + command;
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
         //TODO: encode
         dataOutputStream.writeUTF(command);

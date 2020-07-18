@@ -68,7 +68,7 @@ public class ShowCartView extends Application {
         stage.setScene(scene);
         stage.show();
 
-        HashMap<Integer, Integer> buyBasket = ((Buyer)ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUser()).getBuyBasket();
+        HashMap<Integer, Integer> buyBasket = null;
         ListView<String> productList = new ListView<>();
         vBox.getChildren().add(productList);
         for (Integer id : buyBasket.keySet()) {

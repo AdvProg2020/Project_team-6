@@ -8,6 +8,7 @@ import server.model.product.DiscountCode;
 import client.view.old.ShowDiscountCodeView;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class ShowDiscountCode implements Parent {
 /*
@@ -91,14 +92,50 @@ public class ShowDiscountCode implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        StringBuilder string = new StringBuilder();
+        HashMap<String,DiscountCode> allDiscountCodes = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
+        for (String discountCode : allDiscountCodes.keySet()) {
+            string.append(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(discountCode).toString());
+        }
+        sendMessage(string.toString());
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("04-" + message);
     }
+
     public void showDiscountCode(String data) throws IOException {
-            DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data.split("-+-")[0]);
+        HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
+        if(discountCodeHashMap.containsKey(data)) {
+            DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data);
             sendMessage("id :" + tempDiscountCode.getId() + "\nStart Data :" + tempDiscountCode.getStart() + " \nEnd Date :" + tempDiscountCode.getEnd() + "\nRepetition Time :" + tempDiscountCode.getRepetitionTime() + "\nPercentage :" + tempDiscountCode.getPercentage());
+        }else{
+            sendMessage("incorrectCode");
+        }
+    }
+
+    public void removeDiscountCode(String data) throws IOException {
+        HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
+        if(discountCodeHashMap.containsKey(data)) {
+            ProgramManager.getProgramManagerInstance().deleteDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data));
+        }else{
+            sendMessage("incorrectCode");
+        }
+    }
+
+    public void changeDataByCode(String data) throws IOException {
+        HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
+        if(discountCodeHashMap.containsKey(data)) {
+            DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data.split("---")[0]);
+            //TODO check data validation
+            //code---startDate---endDate---percentage---repetitionTime
+            tempDiscountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]));
+            tempDiscountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]));
+            tempDiscountCode.setPercentage(Integer.parseInt(data.split("---")[3]));
+            tempDiscountCode.setRepetitionTime(Integer.parseInt(data.split("---")[4]));
+        }else{
+            sendMessage("incorrectCode");
+        }
+
     }
 }

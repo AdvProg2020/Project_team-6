@@ -20,12 +20,12 @@ public class RegisterManager implements Parent {
     }
 
     public void registerNewManager(String data) throws IOException {
-        if(data.split("-+-").length==6 && !data.split("-+-")[0].equals("") &&
-                !data.split("-+-")[1].equals("") && !data.split("-+-")[2].equals("") &&
-                !data.split("-+-")[3].equals("") && !data.split("-+-")[4].equals("") &&
-                !data.split("-+-")[5].equals("")) {
-            new Manager(data.split("-+-")[0], data.split("-+-")[1], data.split("-+-")[2],
-                    data.split("-+-")[3], data.split("-+-")[4], data.split("-+-")[5]);
+        if(data.split("---").length==6 && !data.split("---")[0].equals("") &&
+                !data.split("---")[1].equals("") && !data.split("---")[2].equals("") &&
+                !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
+                !data.split("---")[5].equals("")) {
+            new Manager(data.split("---")[0], data.split("---")[1], data.split("---")[2],
+                    data.split("---")[3], data.split("---")[4], data.split("---")[5]);
 
             ProgramManager.getProgramManagerInstance().saveToFiles();
             ProgramManager.getProgramManagerInstance().loadFromFiles();

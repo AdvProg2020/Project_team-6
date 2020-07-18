@@ -8,7 +8,7 @@ import client.view.old.PersonalInfoMenuView;
 
 import java.io.IOException;
 
-public class PersonalInfoMenu implements Parent{
+public class PersonalInfoMenu implements Parent {
     /*
     private static PersonalInfoMenu personalInfoMenuInstance = null;
     public static PersonalInfoMenu getPersonalInfoMenuInstance() {
@@ -59,7 +59,67 @@ public class PersonalInfoMenu implements Parent{
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        String message = "start";
+        //manager---username---password---firstName---lastName---email---phoneNumber
+        //buyer---username---password---firstName---lastName---email---phoneNumber---credit
+        //seller---username---password---firstName---lastName---email---phoneNumber---credit---company
+        if (server.isAnyoneLoggedIn()) {
+            Account account = server.getCurrentlyLoggedInUsers();
+            if (account.getRole() == 1) {
+                message += "buyer";
+            } else if (account.getRole() == 2) {
+                message += "seller";
+            } else if (account.getRole() == 3) {
+                message += "manager";
+            } else {
+                message += "support";
+            }
+            message += "---" + account.getUsername() + "---" + account.getPassword() + "---" + account.getFirstName() +
+                    "---" + account.getLastName() + "---" + account.getEmailAddress() + "---" + account.getPhoneNumber();
+            if (account.getRole() == 1) {
+                message += "---";
+                Buyer buyer = (Buyer) account;
+                message += buyer.getCredit();
+            } else if (account.getRole() == 2) {
+                message += "---";
+                Seller seller = (Seller) account;
+                message += seller.getCredit();
+                message += "---";
+                message += seller.getCompanyName();
+            }
+        } else {
+            message = "loginFirst";
+        }
+        sendMessage(message);
+    }
+
+    public void changeInformation(String data){
+        //password---firstName---lastName---email---phoneNumber
+        //password---firstName---lastName---email---phoneNumber
+        //password---firstName---lastName---email---phoneNumber---company
+
+        Account account = server.getCurrentlyLoggedInUsers();
+        if(account.getRole()==1){
+            account.setPassword(data.split("---")[0]);
+            account.setFirstName(data.split("---")[1]);
+            account.setLastName(data.split("---")[2]);
+            account.setEmailAddress(data.split("---")[3]);
+            account.setPhoneNumber(data.split("---")[4]);
+        }else if(account.getRole()==2){
+            account.setPassword(data.split("---")[0]);
+            account.setFirstName(data.split("---")[1]);
+            account.setLastName(data.split("---")[2]);
+            account.setEmailAddress(data.split("---")[3]);
+            account.setPhoneNumber(data.split("---")[4]);
+            Seller seller = (Seller) account;
+            seller.setCompanyName(data.split("---")[5]);
+        }else if(account.getRole()==3){
+            account.setPassword(data.split("---")[0]);
+            account.setFirstName(data.split("---")[1]);
+            account.setLastName(data.split("---")[2]);
+            account.setEmailAddress(data.split("---")[3]);
+            account.setPhoneNumber(data.split("---")[4]);
+        }
     }
 
     private void sendMessage(String message) throws IOException {

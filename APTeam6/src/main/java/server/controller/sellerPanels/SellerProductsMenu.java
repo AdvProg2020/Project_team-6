@@ -17,7 +17,27 @@ public class SellerProductsMenu implements Parent {
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("11-" + message);
+    }
+
+    public void viewProduct(String substring) throws IOException {
+        sendMessage("");
+    }
+
+    public void editProduct(String substring) throws IOException {
+        sendMessage("");
+    }
+
+    public void addProduct(String substring) throws IOException {
+        sendMessage("");
+    }
+
+    public void viewBuyersOfProduct(String substring) throws IOException {
+        sendMessage("");
+    }
+
+    public void removeProduct(String substring) throws IOException {
+        sendMessage("");
     }
 
     /*

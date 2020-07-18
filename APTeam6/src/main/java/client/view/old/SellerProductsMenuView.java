@@ -111,7 +111,7 @@ public class SellerProductsMenuView extends Application {
                 }
 
 
-                new Product(name.getText(),category.getText(),sub.getText(),label5.getText(),hashMap1,hashMap1);
+                //new Product(name.getText(),category.getText(),sub.getText(),label5.getText(),hashMap1,hashMap1);
                 try {
                     new Alert().showAlert("product created","ok",0,null);
                 } catch (Exception e) {

@@ -17,8 +17,9 @@ public class MainServer {
         System.out.println("main server is running on port : " + serverSocket.getLocalPort() + "\n");
         while (true) {
             if(runningServer==0){
-                System.out.println("loading databases");
+                System.out.println("loading databases...");
                 ProgramManager.getProgramManagerInstance().loadFromFiles();
+                System.out.println("databases loaded successfully");
             }
             Socket clientSocket = serverSocket.accept();
             runningServer++;
