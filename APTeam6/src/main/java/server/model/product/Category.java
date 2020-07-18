@@ -12,11 +12,19 @@ public class Category implements Comparable<Category> {
     private HashMap<String, SubCategory> subCategories;
     private ArrayList<String> additionalAttributes;
 
+    /*
     public Category(String name) {
         this.name = name;
         subCategories = new HashMap<>();
         additionalAttributes = new ArrayList<>();
         ProgramManager.getProgramManagerInstance().addCategory(this);
+    }
+     */
+
+    public Category(String name, HashMap<String, SubCategory> subCategories, ArrayList<String> additionalAttributes) {
+        this.name = name;
+        this.subCategories = new HashMap<>();
+        this.additionalAttributes = additionalAttributes;
     }
 
     private static int field = 1;
