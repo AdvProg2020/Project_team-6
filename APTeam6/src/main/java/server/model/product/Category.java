@@ -21,7 +21,7 @@ public class Category implements Comparable<Category> {
     }
      */
 
-    public Category(String name, HashMap<String, SubCategory> subCategories, ArrayList<String> additionalAttributes) {
+    public Category(String name, ArrayList<String> additionalAttributes) {
         this.name = name;
         this.subCategories = new HashMap<>();
         this.additionalAttributes = additionalAttributes;

@@ -15,7 +15,7 @@ public class SubCategory {
     }
     */
 
-    public SubCategory(String name, ArrayList<Integer> productIds, ArrayList<String> additionalAttributes) {
+    public SubCategory(String name, ArrayList<String> additionalAttributes) {
         this.name = name;
         this.productIds = new ArrayList<>();
         this.additionalAttributes = additionalAttributes;
