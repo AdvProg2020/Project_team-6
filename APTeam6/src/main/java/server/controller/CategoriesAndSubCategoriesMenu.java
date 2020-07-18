@@ -236,15 +236,12 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     ///////////////////////////////////////////
     private CategoriesAndSubCategoriesMenuView view;
     private byte state = 0;
-
     private Category currentCategory = null;
     private SubCategory currentSubCategory = null;
 
     private ArrayList<Category> allCategoriesArrayList;
     private ArrayList<SubCategory> allSubCategoriesArrayList;
     private ArrayList<Product> allProductsArrayList;
-    private PersonalInfoMenuView personalInfoMenuView;
-
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
         categorySort(allCategoriesArrayList);
@@ -364,23 +361,5 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     }
     public void subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList){
 
-    }
-    public void back(){
-        if (state == 0) {
-            view.closeStage();
-            try {
-                personalInfoMenuView.start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (state == 1) {
-            state = 0;
-            view.showCategoriesList(allCategoriesArrayList);
-        }
-        else if (state == 2) {
-            state = 1;
-            view.showSubCategoriesList(allSubCategoriesArrayList);
-        }
     }
 }
