@@ -23,10 +23,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             instance = new CategoriesAndSubCategoriesMenu();
         return instance;
     }
-    */
-
-
-    /*public void startAsManager() {
+    public void startAsManager() {
         client.view = new CategoriesAndSubCategoriesMenuView();
         try {
             client.view.start(new Stage());
@@ -244,11 +241,13 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     private ArrayList<Product> allProductsArrayList;
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
+        //TODO : Kamali please Do some Sort:)
         categorySort(allCategoriesArrayList);
     }
 
     private void updateSubCategoriesArrayList() {
         allSubCategoriesArrayList = new ArrayList<>(currentCategory.getAllSubCategories());
+        //TODO : Kamali please Do some Sort:)
         subCategorySort(allSubCategoriesArrayList);
     }
 

@@ -688,11 +688,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-2")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    try {
-                        categoriesAndSubCategoriesMenu.add(command.substring(4));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //categoriesAndSubCategoriesMenu.add(command.substring(4));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -704,11 +700,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-3")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    try {
-                        categoriesAndSubCategoriesMenu.edit(command.substring(4));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //categoriesAndSubCategoriesMenu.edit(command.substring(4));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -720,11 +712,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-4")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    try {
-                        categoriesAndSubCategoriesMenu.remove(command.substring(4));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //categoriesAndSubCategoriesMenu.remove(command.substring(4));
                 } else {
                     try {
                         sendMessage("NotAllowed");
