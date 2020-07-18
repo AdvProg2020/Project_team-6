@@ -665,7 +665,14 @@ public class Server implements Runnable {
                 }
             }
             else if (command.startsWith("12-0")) {
-
+                CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu= new CategoriesAndSubCategoriesMenu();
+                try {
+                    categoriesAndSubCategoriesMenu.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = categoriesAndSubCategoriesMenu;
             }
             else if (command.startsWith("13-0")) {
                 OffManagementSeller offManagementSeller = new OffManagementSeller();

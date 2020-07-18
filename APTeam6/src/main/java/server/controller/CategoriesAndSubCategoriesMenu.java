@@ -222,10 +222,15 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     public void start(Server server) throws IOException {
         this.server = server;
         sendMessage("start");
+        String message = "";
+        for(int i = 0;i < allCategoriesArrayList.size();i++){
+            message = message + "\n" + i + ". " + allCategoriesArrayList.get(i);
+        }
+        sendMessage(message);
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("12-" + message);
     }
 
     ///////////////////////////////////////////
