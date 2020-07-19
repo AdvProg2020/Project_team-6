@@ -15,6 +15,7 @@ import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Server implements Runnable {
@@ -67,12 +68,22 @@ public class Server implements Runnable {
         }
     }
 
+
+
+
+
+
+
     @Override
     public void run() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("\'log--\'yyyy-MM-dd--HH+mm+ss");
         LocalDateTime now = LocalDateTime.now();
         Log log = new Log(dtf.format(now));
         this.log = log;
+
+        long[] time = new long[20];
+        Arrays.fill(time, 0);
+        time[19] = System.currentTimeMillis();
 
         while (true) {
             String command = "";
@@ -93,6 +104,13 @@ public class Server implements Runnable {
                 MainServer.runningServer--;
                 break;
             }
+
+            try {
+                replayAttacks(time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
 
 
 
@@ -837,7 +855,7 @@ public class Server implements Runnable {
 
 
 
-            System.out.println(command);
+            //System.out.println(command);
             try {
                 sendMessage(command);
             } catch (IOException e) {
@@ -849,6 +867,28 @@ public class Server implements Runnable {
 
             }
         }
+    }
+
+
+
+
+
+
+
+    private static void replayAttacks(long[] time) throws InterruptedException {
+        for (int i = 0; i < 19; i++) {
+            time[i] = time[i+1];
+        }
+
+        time[19] = System.currentTimeMillis();
+
+        if(time[0]!=0){
+            if(time[19]-time[0]<10000){
+                System.out.println("server suspended for 10 second because too many request");
+                Thread.sleep(10000);
+            }
+        }
+
     }
 
     /*
