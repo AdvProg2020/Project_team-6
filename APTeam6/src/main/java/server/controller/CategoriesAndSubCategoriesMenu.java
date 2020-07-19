@@ -365,6 +365,12 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
 //                e.printStackTrace();
 //            }
 //        }
+        Category tempCategory = allCategoriesArrayList.get(index);
+        try {
+            sendMessage(tempCategory.toString());
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
 
     }
 
