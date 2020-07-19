@@ -14,10 +14,10 @@ public class CreateDiscountCode_V {
     public ListView<CheckBox> buyersListView;
 
     public void createButton(ActionEvent actionEvent) {
-
+        //TODO: (Message) everything
     }
 
     public void cancelButton(ActionEvent actionEvent) {
-
+        //TODO: (Message) back
     }
 }
