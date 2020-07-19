@@ -278,6 +278,11 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         Category category = allCategoriesArrayList.get(index);
         category.setName(newName);
         updateCategoriesArrayList();
+        try {
+            sendMessage("edited");
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
 
     }
 
@@ -342,6 +347,11 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
          */
         allCategoriesArrayList.remove(index);
         updateCategoriesArrayList();
+        try {
+            sendMessage("removed");
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
     }
 
     public void open(int index) {
