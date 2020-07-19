@@ -1,15 +1,12 @@
 package client;
 
 import client.view.news.GeneralController_V;
-import client.view.old.Alert;
+import client.view.old.Exit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -57,8 +54,7 @@ public class Client extends Application {
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
         allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
-        //TODO: Add all FXMLs here
-
+        //TODO: Add all FXMLs here 😪
  */
     }
 
@@ -110,12 +106,12 @@ public class Client extends Application {
                 System.out.println("connecting...");
                 Socket serverSocket = new Socket(ipAddress.getText(), Integer.parseInt(serverPort.getText()));
                 System.out.println("connected!");
-                stage.close();
+                //stage.close();
                 this.serverSocket = serverSocket;
+                new Alert(Alert.AlertType.INFORMATION, "CONNECTED!!!").showAndWait();
                 run();
-                new Alert().showAlert("connected!","ok",0,null);
             } catch (IOException e) {
-                System.out.println("an error happened in connecting to server!");
+                System.out.println("An error happened while connecting to server!");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -134,6 +130,16 @@ public class Client extends Application {
         exit.setOnAction(actionEvent -> {
             stage.close();
             System.exit(0);
+        });
+
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "You sure about that? :(", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                //TODO: (message) disconnect
+                System.exit(0);
+            }
         });
 
         vBox.setAlignment(Pos.CENTER);
