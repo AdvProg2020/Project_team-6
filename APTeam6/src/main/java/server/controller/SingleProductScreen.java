@@ -57,13 +57,13 @@ public class SingleProductScreen {
 //
 //    private void updateCategoriesArrayList() {
 //        allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
-//        //TODO : Kamali please Do some Sort:)
+
 //        categorySort(allCategoriesArrayList);
 //    }
 //
 //    private void updateSubCategoriesArrayList() {
 //        allSubCategoriesArrayList = new ArrayList<>(currentCategory.getAllSubCategories());
-//        //TODO : Kamali please Do some Sort:)
+
 //        subCategorySort(allSubCategoriesArrayList);
 //    }
 //
@@ -74,7 +74,7 @@ public class SingleProductScreen {
 //        for (Integer id : productIds) {
 //            allProductsArrayList.add(programManager.getProductById(id));
 //        }
-//        //TODO: maybe do some sorting?
+
 //    }
 //
 //
@@ -223,10 +223,9 @@ public class SingleProductScreen {
 //    }
 //
 //    public void categorySort(ArrayList<Category> allCategoriesArrayList) {
-//        //TODO ostad kamali
 //
 //    }
 //    public void subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList) {
-//        //TODO ostad kamali
+//        //TOD
 //    }
 }

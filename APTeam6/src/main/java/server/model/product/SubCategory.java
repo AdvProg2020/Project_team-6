@@ -1,7 +1,6 @@
 package server.model.product;
 
 import java.util.ArrayList;
-
 public class SubCategory {
     private String name;
     private ArrayList<Integer> productIds;
@@ -14,7 +13,6 @@ public class SubCategory {
         additionalAttributes = new ArrayList<>();
     }
     */
-
     public ArrayList<String> getAdditionalAttributes() {
         return additionalAttributes;
     }
