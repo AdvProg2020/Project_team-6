@@ -180,6 +180,9 @@ public class Server implements Runnable {
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
+            14-0: start manage all products
+                -1:
+
 
 
             */
@@ -870,12 +873,29 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if(command.startsWith("14-0")){
+                ManageAllProducts manageAllProducts = new ManageAllProducts();
+                try {
+                    manageAllProducts.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = manageAllProducts;
 
+            }else if(command.startsWith("14-1")){
+                if(thisParent instanceof ManageAllProducts){
+                    ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
+                    manageAllProducts.remove(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-
-
-
-            //System.out.println(command);
+            }
             try {
                 sendMessage(command);
             } catch (IOException e) {
@@ -888,11 +908,6 @@ public class Server implements Runnable {
             }
         }
     }
-
-
-
-
-
 
 
     private static void replayAttacks(long[] time) throws InterruptedException {

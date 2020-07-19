@@ -203,7 +203,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
 
     }
 
-
     public void categorySort(ArrayList<Category> allCategoriesArrayList) {
         //TODO ostad kamali
 
