@@ -1,9 +1,5 @@
 package server;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
@@ -13,7 +9,6 @@ import server.controller.sellerPanels.SalesHistory;
 import server.controller.sellerPanels.SellerProductsMenu;
 import server.model.account.Account;
 import server.model.account.Buyer;
-import server.model.product.DiscountCode;
 import server.model.product.Product;
 
 import java.io.*;
@@ -161,6 +156,10 @@ public class Server implements Runnable {
                 -2: add Category
                 -3: edit Category
                 -4: remove Category
+                -5: open SubCategory
+                -6: add SubCategory
+                -7: edit SubCategory
+                -8: remove SubCategory
 
 
             13-0: start view offs
@@ -676,7 +675,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-1")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    categoriesAndSubCategoriesMenu.open(Integer.parseInt(command.split("\\s")[1]));
+                    categoriesAndSubCategoriesMenu.openCategory(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -688,7 +687,11 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-2")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    //categoriesAndSubCategoriesMenu.add(command.substring(4));
+                    try {
+                        categoriesAndSubCategoriesMenu.addCategory(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -700,7 +703,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-3")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    //categoriesAndSubCategoriesMenu.edit(command.substring(4));
+                    categoriesAndSubCategoriesMenu.editCategory(Integer.parseInt(command.split("---")[0].substring(4)),command.split("---")[1]);
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -712,7 +715,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("12-4")){
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
-                    //categoriesAndSubCategoriesMenu.remove(command.substring(4));
+                    categoriesAndSubCategoriesMenu.removeCategory(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -721,6 +724,55 @@ public class Server implements Runnable {
                     }
                 }
 
+            }
+            else if(command.startsWith("12-5")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.openSubCategory(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            else if(command.startsWith("12-6")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.addSubCategory(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if(command.startsWith("12-7")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.editSubCategory(Integer.parseInt(command.split("---")[0].substring(4)),command.split("---")[1]);
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if(command.startsWith("12-8")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.removeSubCategory(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
             else if (command.startsWith("13-0")) {
                 OffManagementSeller offManagementSeller = new OffManagementSeller();
