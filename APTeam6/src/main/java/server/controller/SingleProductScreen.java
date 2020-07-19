@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SingleProductScreen implements Parent{
-
+    Product product;
+    public SingleProductScreen(Product product){
+        this.product = product;
+    }
     private Server server = null;
-
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
@@ -22,19 +24,6 @@ public class SingleProductScreen implements Parent{
     private void sendMessage(String message) throws IOException {
         server.sendMessage("02-" + message);
     }
-
-    /*
-    private static SingleProductScreen instance;
-    public static SingleProductScreen getInstance() {
-        if (instance == null)
-            instance = new SingleProductScreen();
-        return instance;
-    }
-    private SingleProductScreenView view;
-     */
-    ////////////////////////////////////////
-
-
 
     public void start(Product product) throws Exception {
         /*
@@ -65,6 +54,14 @@ public class SingleProductScreen implements Parent{
             }
         }
          */
+        this.server = server;
+        // Name---CategoryName---SubCategoryName---description
+        sendMessage(product.getName() + "---" + product.getCategoryName() + "---" + product.getSubCategoryName() + "---" + product.getDescription());
+    }
+    public void addToBuyBasket(Product product){
+
+
+
     }
 
 }

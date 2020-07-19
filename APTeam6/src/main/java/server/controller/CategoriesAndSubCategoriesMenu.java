@@ -167,7 +167,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
             System.err.println("error occurred");
         }
     }
-
     public void openSubCategory(int index) {
         SubCategory tempSubCategory = allSubCategoriesArrayList.get(index);
         currentSubCategory = tempSubCategory;
@@ -184,13 +183,21 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
             System.err.println("error occurred");
         }
     }
+    public void openProduct(int index){
+        Product tempProduct = allProductsArrayList.get(index);
+        try {
+            //name---categoryName---SubCategoryName---description---price
+            sendMessage(tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice());
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
+    }
 
 
     public void categorySort(ArrayList<Category> allCategoriesArrayList) {
         //TODO ostad kamali
 
     }
-
     public void subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList) {
         //TODO ostad kamali
     }

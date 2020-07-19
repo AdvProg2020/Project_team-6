@@ -178,6 +178,7 @@ public class Server implements Runnable {
                 -6: add SubCategory
                 -7: edit SubCategory
                 -8: remove SubCategory
+                -9: open product
 
 
             13-0: start view offs
@@ -784,6 +785,18 @@ public class Server implements Runnable {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.removeSubCategory(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if(command.startsWith("12-9")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.openProduct(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
