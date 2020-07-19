@@ -275,9 +275,13 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
          */
+        Category category = allCategoriesArrayList.get(index);
+        category.setName(newName);
+        updateCategoriesArrayList();
+
     }
 
-    public void add(String Data) {
+    public void add(String Data) throws IOException {
 //        if (state == 0 && ProgramManager.getProgramManagerInstance().getCurrentlyLoggedInUserRole() == 3) {
 //            if (ProgramManager.getProgramManagerInstance().getCategoryByName(name) == null) {
 //                ProgramManager.getProgramManagerInstance().addCategory(new Category(name));
@@ -303,14 +307,17 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
 //                System.err.println("Zahr e mar");
 //                e.printStackTrace();
 //            }
-        ArrayList<String> additionalAttributes = new ArrayList<>();
-        String[] dataSplit = Data.split("---");
-        for(int i = 1;i < dataSplit.length;i++){
-            additionalAttributes.add(dataSplit[i]);
-        }
-        new Category(dataSplit[0],additionalAttributes);
-        updateCategoriesArrayList();
-
+        if(!ProgramManager.getProgramManagerInstance().getAllCategories().contains(ProgramManager.getProgramManagerInstance().getCategoryByName(Data.split("---")[0]))) {
+            ArrayList<String> additionalAttributes = new ArrayList<>();
+            String[] dataSplit = Data.split("---");
+            for (int i = 1; i < dataSplit.length; i++) {
+                additionalAttributes.add(dataSplit[i]);
+            }
+            allCategoriesArrayList.add(new Category(dataSplit[0], additionalAttributes));
+            updateCategoriesArrayList();
+            sendMessage("created");
+        }else
+            sendMessage("duplicateCode");
     }
 
     public void remove(int index) {
@@ -332,31 +339,33 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             updateProductsArrayList();
             view.showProductsList(allProductsArrayList);
         }
-
          */
+        allCategoriesArrayList.remove(index);
+        updateCategoriesArrayList();
     }
 
     public void open(int index) {
-        if (state == 0) {
-            currentCategory = allCategoriesArrayList.get(index);
-            updateSubCategoriesArrayList();
-            state = 1;
-            view.showSubCategoriesList(allSubCategoriesArrayList);
-        }
-        else if (state == 1) {
-            currentSubCategory = allSubCategoriesArrayList.get(index);
-            updateProductsArrayList();
-            state = 2;
-            view.showProductsList(allProductsArrayList);
-        }
-        else if (state == 2) {
-            Product product = allProductsArrayList.get(index);
-            try {
-                new SingleProductScreenView(product.getId()).start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        if (state == 0) {
+//            currentCategory = allCategoriesArrayList.get(index);
+//            updateSubCategoriesArrayList();
+//            state = 1;
+//            view.showSubCategoriesList(allSubCategoriesArrayList);
+//        }
+//        else if (state == 1) {
+//            currentSubCategory = allSubCategoriesArrayList.get(index);
+//            updateProductsArrayList();
+//            state = 2;
+//            view.showProductsList(allProductsArrayList);
+//        }
+//        else if (state == 2) {
+//            Product product = allProductsArrayList.get(index);
+//            try {
+//                new SingleProductScreenView(product.getId()).start(new Stage());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+
     }
 
     public void categorySort(ArrayList<Category> allCategoriesArrayList){
