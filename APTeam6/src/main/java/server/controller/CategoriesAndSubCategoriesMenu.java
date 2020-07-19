@@ -192,6 +192,16 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
             System.err.println("error occurred");
         }
     }
+    public void addToBuyBasket(int index,int count){
+        Product tempProduct = allProductsArrayList.get(index);
+        try {
+            server.addToCurrentBuyBasket(tempProduct,count);
+            sendMessage("added to buy basket");
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
+
+    }
 
 
     public void categorySort(ArrayList<Category> allCategoriesArrayList) {
