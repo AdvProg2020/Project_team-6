@@ -156,15 +156,17 @@ public class Server implements Runnable {
                 -5: remove product(by id)
 
 
-            12-0: start show category(seller)
+            12-0: start Categories and SubCategories Menu(seller)
+                -1: open Category
+                -2: add Category
+                -3: edit Category
+                -4: remove Category
 
 
             13-0: start view offs
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
-
-
 
 
             */

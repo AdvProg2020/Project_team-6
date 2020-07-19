@@ -25,30 +25,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
     }
     */
 
-    private Server server = null;
-
-    @Override
-    public void start(Server server) throws IOException {
-        this.server = server;
-        sendMessage("start");
-    }
-
-    private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
-    }
-
-    ///////////////////////////////////////////
-    private CategoriesAndSubCategoriesMenuView view;
-    private byte state = 0;
-
-    private Category currentCategory = null;
-    private SubCategory currentSubCategory = null;
-
-    private ArrayList<Category> allCategoriesArrayList;
-    private ArrayList<SubCategory> allSubCategoriesArrayList;
-    private ArrayList<Product> allProductsArrayList;
-
-    private PersonalInfoMenuView personalInfoMenuView;
 
     /*public void startAsManager() {
         client.view = new CategoriesAndSubCategoriesMenuView();
@@ -138,7 +114,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             }
         }
     }
-
     public void startAsSeller() {
         String command = null;
         state = 0;
@@ -241,15 +216,38 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         state = 0;
     }
     */
+    private Server server = null;
+
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("02-" + message);
+    }
+
+    ///////////////////////////////////////////
+    private CategoriesAndSubCategoriesMenuView view;
+    private byte state = 0;
+
+    private Category currentCategory = null;
+    private SubCategory currentSubCategory = null;
+
+    private ArrayList<Category> allCategoriesArrayList;
+    private ArrayList<SubCategory> allSubCategoriesArrayList;
+    private ArrayList<Product> allProductsArrayList;
+    private PersonalInfoMenuView personalInfoMenuView;
 
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
-        //TODO: maybe do some sorting?
+        categorySort(allCategoriesArrayList);
     }
 
     private void updateSubCategoriesArrayList() {
         allSubCategoriesArrayList = new ArrayList<>(currentCategory.getAllSubCategories());
-        //TODO: maybe do some sorting?
+        subCategorySort(allSubCategoriesArrayList);
     }
 
     private void updateProductsArrayList() {
@@ -276,7 +274,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             updateSubCategoriesArrayList();
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
-
          */
     }
 
@@ -357,6 +354,12 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
         }
     }
 
+    public void categorySort(ArrayList<Category> allCategoriesArrayList){
+
+    }
+    public void subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList){
+
+    }
     public void back(){
         if (state == 0) {
             view.closeStage();
@@ -375,8 +378,4 @@ public class CategoriesAndSubCategoriesMenu implements Parent{
             view.showSubCategoriesList(allSubCategoriesArrayList);
         }
     }
-
-
-
-
 }
