@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="423.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.CategoryAndSubCategoryGenerator_V">
+<AnchorPane prefHeight="423.0" prefWidth="284.0" style="-fx-background-color: #ffccee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.CategoryAndSubCategoryGenerator_V">
    <children>
       <Label layoutX="13.0" layoutY="50.0" text="Name:" />
       <Label layoutX="13.0" layoutY="98.0" text="Properties:" />
@@ -15,8 +15,8 @@
       <ListView fx:id="attributeList" layoutX="14.0" layoutY="122.0" prefHeight="223.0" prefWidth="256.0" />
       <Button layoutX="16.0" layoutY="352.0" mnemonicParsing="false" onAction="#addButton" text="Add" />
       <Button layoutX="16.0" layoutY="384.0" mnemonicParsing="false" onAction="#removeButton" text="Remove" />
-      <Button layoutX="225.0" layoutY="384.0" mnemonicParsing="false" onAction="#finishButton" text="Finish" />
-      <TextField fx:id="newAttributeText" layoutX="57.0" layoutY="352.0" prefHeight="25.0" prefWidth="118.0" promptText="New attribute" />
-      <Button layoutX="164.0" layoutY="384.0" mnemonicParsing="false" text="Cancel" onAction="#cancelButton"/>
+      <Button layoutX="223.0" layoutY="384.0" mnemonicParsing="false" onAction="#finishButton" text="Finish" />
+      <TextField fx:id="newAttributeText" layoutX="61.0" layoutY="352.0" prefHeight="25.0" prefWidth="209.0" promptText="New attribute" />
+      <Button layoutX="160.0" layoutY="384.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel" />
    </children>
 </AnchorPane>
