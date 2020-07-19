@@ -30,6 +30,10 @@ public class Category implements Comparable<Category> {
     private static int field = 1;
     private static ArrayList<Category> categoryArrayList;
 
+    public ArrayList<String> getAdditionalAttributes() {
+        return additionalAttributes;
+    }
+
     public int compareTo(Category category) {
         return -(category.name.compareTo(this.name));
     }

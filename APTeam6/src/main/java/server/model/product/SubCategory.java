@@ -15,6 +15,10 @@ public class SubCategory {
     }
     */
 
+    public ArrayList<String> getAdditionalAttributes() {
+        return additionalAttributes;
+    }
+
     public SubCategory(String name, ArrayList<String> additionalAttributes) {
         this.name = name;
         this.productIds = new ArrayList<>();

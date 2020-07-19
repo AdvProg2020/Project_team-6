@@ -30,7 +30,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
     ///////////////////////////////////////////
     private CategoriesAndSubCategoriesMenuView view;
     private Category currentCategory = null;
-    private SubCategory currentSubcategory = null;
+    private SubCategory currentSubCategory = null;
 
     private ArrayList<Category> allCategoriesArrayList;
     private ArrayList<SubCategory> allSubCategoriesArrayList;
@@ -49,7 +49,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
     }
 
     private void updateProductsArrayList() {
-        ArrayList<Integer> productIds = currentSubcategory.getAllProductIds();
+        ArrayList<Integer> productIds = currentSubCategory.getAllProductIds();
         allProductsArrayList = new ArrayList<>();
         ProgramManager programManager = ProgramManager.getProgramManagerInstance();
         for (Integer id : productIds) {
@@ -153,12 +153,15 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
 
     public void openCategory(int index) {
         Category tempCategory = allCategoriesArrayList.get(index);
+        currentCategory = tempCategory;
         try {
             String categoriesMessage = "";
             for (SubCategory allSubCategory : currentCategory.getAllSubCategories()) {
                 categoriesMessage = categoriesMessage + allSubCategory.getName() + "---";
             }
-            currentCategory = tempCategory;
+            for (String additionalAttribute : currentCategory.getAdditionalAttributes()) {
+                categoriesMessage = categoriesMessage + additionalAttribute + "---";
+            }
             sendMessage(categoriesMessage);
         } catch (IOException e) {
             System.err.println("error occurred");
@@ -167,12 +170,15 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
 
     public void openSubCategory(int index) {
         SubCategory tempSubCategory = allSubCategoriesArrayList.get(index);
+        currentSubCategory = tempSubCategory;
         try {
             String subCategoriesMessage = "";
-            for (Integer allProductId : currentSubcategory.getAllProductIds()) {
+            for (Integer allProductId : currentSubCategory.getAllProductIds()) {
                 subCategoriesMessage = subCategoriesMessage + ProgramManager.getProgramManagerInstance().getProductById(allProductId).getName() + "---";
             }
-            currentSubcategory = tempSubCategory;
+            for (String additionalAttribute : currentSubCategory.getAdditionalAttributes()) {
+                subCategoriesMessage = subCategoriesMessage + additionalAttribute + "---";
+            }
             sendMessage(subCategoriesMessage);
         } catch (IOException e) {
             System.err.println("error occurred");
