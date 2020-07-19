@@ -60,7 +60,6 @@ public class CreateDiscountCode implements Parent {
                     ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]),
                     ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]),
                     Integer.parseInt(data.split("---")[3]),Integer.parseInt(data.split("---")[4]));
-
             sendMessage("created");
 
         }else{

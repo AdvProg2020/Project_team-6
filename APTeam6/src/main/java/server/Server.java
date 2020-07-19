@@ -665,6 +665,61 @@ public class Server implements Runnable {
                 }
             }
             else if (command.startsWith("12-0")) {
+                CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu= new CategoriesAndSubCategoriesMenu();
+                try {
+                    categoriesAndSubCategoriesMenu.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = categoriesAndSubCategoriesMenu;
+            }else if(command.startsWith("12-1")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.open(Integer.parseInt(command.split("\\s")[1]));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("12-2")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    //categoriesAndSubCategoriesMenu.add(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("12-3")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    //categoriesAndSubCategoriesMenu.edit(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("12-4")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    //categoriesAndSubCategoriesMenu.remove(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
             }
             else if (command.startsWith("13-0")) {

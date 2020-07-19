@@ -7,10 +7,18 @@ public class SubCategory {
     private ArrayList<Integer> productIds;
     private ArrayList<String> additionalAttributes;
 
+    /*
     public SubCategory(String name) {
         this.name = name;
         productIds = new ArrayList<>();
         additionalAttributes = new ArrayList<>();
+    }
+    */
+
+    public SubCategory(String name, ArrayList<String> additionalAttributes) {
+        this.name = name;
+        this.productIds = new ArrayList<>();
+        this.additionalAttributes = additionalAttributes;
     }
 
     public String getName() {
@@ -20,6 +28,8 @@ public class SubCategory {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
     public ArrayList<Integer> getAllProductIds() {
         return productIds;

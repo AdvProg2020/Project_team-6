@@ -7,9 +7,7 @@ import client.view.old.SellerProductsMenuView;
 import java.io.IOException;
 
 public class SellerProductsMenu implements Parent {
-
     private Server server = null;
-
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
@@ -39,7 +37,6 @@ public class SellerProductsMenu implements Parent {
     public void removeProduct(String substring) throws IOException {
         sendMessage("");
     }
-
     /*
     private static SellerProductsMenu instance;
     public static SellerProductsMenu getInstance(){
