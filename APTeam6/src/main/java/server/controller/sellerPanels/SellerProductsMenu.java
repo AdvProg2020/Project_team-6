@@ -18,23 +18,23 @@ public class SellerProductsMenu implements Parent {
         server.sendMessage("11-" + message);
     }
 
-    public void viewProduct(String substring) throws IOException {
+    public void viewProduct(String message) throws IOException {
         sendMessage("");
     }
 
-    public void editProduct(String substring) throws IOException {
+    public void editProduct(String message) throws IOException {
         sendMessage("");
     }
 
-    public void addProduct(String substring) throws IOException {
+    public void addProduct(String message) throws IOException {
         sendMessage("");
     }
 
-    public void viewBuyersOfProduct(String substring) throws IOException {
+    public void viewBuyersOfProduct(String message) throws IOException {
         sendMessage("");
     }
 
-    public void removeProduct(String substring) throws IOException {
+    public void removeProduct(String message) throws IOException {
         sendMessage("");
     }
     /*
@@ -61,6 +61,4 @@ public class SellerProductsMenu implements Parent {
         }
     }
     */
-
-
 }

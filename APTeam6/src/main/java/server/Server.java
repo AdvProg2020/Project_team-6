@@ -606,13 +606,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.viewProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -622,13 +622,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.viewBuyersOfProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -638,13 +638,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.editProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -654,13 +654,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.addProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -670,13 +670,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.removeProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -685,7 +685,7 @@ public class Server implements Runnable {
                 try {
                     categoriesAndSubCategoriesMenu.start(this);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("error occurred");
                 }
                 preParent = thisParent;
                 thisParent = categoriesAndSubCategoriesMenu;
@@ -697,7 +697,7 @@ public class Server implements Runnable {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
 
