@@ -122,6 +122,22 @@ public class Product {
         visitCount++;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

@@ -3,8 +3,13 @@ package server.controller.sellerPanels;
 import server.Server;
 import server.controller.Parent;
 import client.view.old.SellerProductsMenuView;
+import server.controller.ProgramManager;
+import server.model.product.DiscountCode;
+import server.model.product.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SellerProductsMenu implements Parent {
     private Server server = null;
@@ -19,10 +24,24 @@ public class SellerProductsMenu implements Parent {
     }
 
     public void viewProduct(String message) throws IOException {
-        sendMessage("");
+        Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message));
+        //Name---Description---Price---Category---SubCategory---Comments
+        sendMessage(tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getComments());
     }
 
     public void editProduct(String message) throws IOException {
+        HashMap<Integer,Product> allProducts = ProgramManager.getProgramManagerInstance().getAllProducts();
+        if(allProducts.containsKey(Integer.parseInt(message.split("---")[0]))) {
+            Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message.split("---")[0]));
+            //TODO check data validation
+            //name---categoryName---subCategoryName---price
+            tempProduct.setName(message.split("---")[1]);
+            tempProduct.setCategoryName(message.split("---")[2]);
+            tempProduct.setSubCategoryName(message.split("---")[3]);
+            tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
+        }else{
+            sendMessage("incorrectId");
+        }
         sendMessage("");
     }
 
@@ -32,10 +51,12 @@ public class SellerProductsMenu implements Parent {
 
     public void viewBuyersOfProduct(String message) throws IOException {
         sendMessage("");
+
     }
 
     public void removeProduct(String message) throws IOException {
-        sendMessage("");
+        ProgramManager.getProgramManagerInstance().removeProduct(Integer.parseInt(message));
+        sendMessage("removed");
     }
     /*
     private static SellerProductsMenu instance;
