@@ -23,13 +23,10 @@ public class Product {
     private ArrayList<Score> scores;
     private ArrayList<Comment> comments;
 
-    public Product(String name, String categoryName, String subCategoryName,String date,
-                   HashMap<String,String> categoryAdditionalInfo,HashMap<String,String> subCategoryAdditionalInfo,long price){
+    public Product(String name, String categoryName, String subCategoryName,String date,long price){
         this.name = name;
         this.categoryName = categoryName;
         this.subCategoryName = subCategoryName;
-        this.CategoryAdditionalInfo = categoryAdditionalInfo;
-        this.SubCategoryAdditionalInfo = subCategoryAdditionalInfo;
         this.creationDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(date);
         this.price = price;
         id = nextId;

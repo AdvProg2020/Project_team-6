@@ -46,7 +46,10 @@ public class SellerProductsMenu implements Parent {
     }
 
     public void addProduct(String message) throws IOException {
-        sendMessage("");
+        //name---categoryName---subCategoryName---Date---price
+        String[] dataSplit = message.split("---");
+        new Product(dataSplit[0],dataSplit[1],dataSplit[2],dataSplit[3],Long.parseLong(dataSplit[4]));
+        sendMessage("created");
     }
 
     public void viewBuyersOfProduct(String message) throws IOException {
