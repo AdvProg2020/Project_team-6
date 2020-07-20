@@ -36,7 +36,21 @@ public class ManageAllProducts implements Parent {
          */
 
     public void remove(int productId) {
-        ProgramManager.getProgramManagerInstance().removeProduct(productId);
+        if(ProgramManager.getProgramManagerInstance().getProductById(productId) != null) {
+            ProgramManager.getProgramManagerInstance().removeProduct(productId);
+            try {
+                sendMessage("removed");
+            } catch (IOException e) {
+                System.err.println("error occurred");
+            }
+        }else{
+            try {
+                sendMessage("the product does not exist");
+            } catch (IOException e) {
+                System.err.println("error occurred");
+            }
+
+        }
     }
 
     private Server server = null;
@@ -48,7 +62,7 @@ public class ManageAllProducts implements Parent {
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("02-" + message);
+        server.sendMessage("14-" + message);
     }
 
 }

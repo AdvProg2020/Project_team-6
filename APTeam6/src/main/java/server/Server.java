@@ -68,12 +68,6 @@ public class Server implements Runnable {
         }
     }
 
-
-
-
-
-
-
     @Override
     public void run() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("\'log--\'yyyy-MM-dd--HH+mm+ss");
@@ -178,12 +172,17 @@ public class Server implements Runnable {
                 -6: add SubCategory
                 -7: edit SubCategory
                 -8: remove SubCategory
+                -9: open product
+                -a: add to buy basket
 
 
             13-0: start view offs
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
+            14-0: start manage all products
+                -1:
+
 
 
             */
@@ -792,6 +791,30 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if(command.startsWith("12-9")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.openProduct(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if(command.startsWith("12-a")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.addToBuyBasket(Integer.parseInt(command.split("---")[0].substring(4)),Integer.parseInt(command.split("---")[1]));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             else if (command.startsWith("13-0")) {
                 OffManagementSeller offManagementSeller = new OffManagementSeller();
                 try {
@@ -850,12 +873,29 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if(command.startsWith("14-0")){
+                ManageAllProducts manageAllProducts = new ManageAllProducts();
+                try {
+                    manageAllProducts.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = manageAllProducts;
 
+            }else if(command.startsWith("14-1")){
+                if(thisParent instanceof ManageAllProducts){
+                    ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
+                    manageAllProducts.remove(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-
-
-
-            //System.out.println(command);
+            }
             try {
                 sendMessage(command);
             } catch (IOException e) {
@@ -868,11 +908,6 @@ public class Server implements Runnable {
             }
         }
     }
-
-
-
-
-
 
 
     private static void replayAttacks(long[] time) throws InterruptedException {
