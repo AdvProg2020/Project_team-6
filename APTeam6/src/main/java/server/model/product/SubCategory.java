@@ -1,7 +1,8 @@
 package server.model.product;
 
 import java.util.ArrayList;
-public class SubCategory {
+
+public class SubCategory implements Comparable<SubCategory>{
     private String name;
     private ArrayList<Integer> productIds;
     private ArrayList<String> additionalAttributes;
@@ -13,6 +14,7 @@ public class SubCategory {
         additionalAttributes = new ArrayList<>();
     }
     */
+
     public ArrayList<String> getAdditionalAttributes() {
         return additionalAttributes;
     }
@@ -22,6 +24,11 @@ public class SubCategory {
         this.productIds = new ArrayList<>();
         this.additionalAttributes = additionalAttributes;
     }
+
+    public int compareTo(SubCategory subCategory) {
+        return -(subCategory.name.compareTo(this.name));
+    }
+
 
     public String getName() {
         return name;

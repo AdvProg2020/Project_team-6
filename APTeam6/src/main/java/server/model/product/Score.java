@@ -2,7 +2,7 @@ package server.model.product;
 
 public class Score {
     private String username;
-    private byte score;
+    private float score;
     private int productId;
 
     public Score(String username, byte score, int productId) {
@@ -19,7 +19,7 @@ public class Score {
      * What is the maximum you ask? I don't know either
      * @return score :)
      */
-    public byte getScore() {
+    public float getScore() {
         return score;
     }
 

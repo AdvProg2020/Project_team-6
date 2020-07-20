@@ -17,7 +17,15 @@ public class LoginMenu implements Parent{
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        if(ProgramManager.getProgramManagerInstance().existManager) {
+
+            sendMessage("start");
+
+        }else{
+
+            sendMessage("createManager");
+
+        }
     }
 
     private void sendMessage(String message) throws IOException {
