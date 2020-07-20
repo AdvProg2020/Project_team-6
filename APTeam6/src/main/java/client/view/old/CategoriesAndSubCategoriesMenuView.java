@@ -84,18 +84,18 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
 
         openButton.setOnAction(actionEvent -> {
             if (list.getSelectionModel().getSelectedIndices().size() == 1)
-                controller.open(list.getSelectionModel().getSelectedIndices().get(0));
+                controller.openCategory(list.getSelectionModel().getSelectedIndices().get(0));
         });
         editButton.setOnAction(actionEvent -> {
             if (list.getSelectionModel().getSelectedIndices().size() == 1)
-                controller.edit(list.getSelectionModel().getSelectedIndices().get(0), nameTextField.getText());
+                controller.editCategory(list.getSelectionModel().getSelectedIndices().get(0), nameTextField.getText());
         });
         addButton.setOnAction(actionEvent -> {
-            controller.add(nameTextField.getText());
+            controller.addCategory(nameTextField.getText());
         });
         removeButton.setOnAction(actionEvent -> {
             if (list.getSelectionModel().getSelectedIndices().size() == 1)
-                controller.remove(list.getSelectionModel().getSelectedIndices().get(0));
+                controller.removeCategory(list.getSelectionModel().getSelectedIndices().get(0));
         });
         backButton.setOnAction(actionEvent -> {
             //controller.back();
