@@ -109,9 +109,11 @@ public class Server implements Runnable {
 
 
             /*
-            command start with:
-            00-0: start main screen or register manager(managerPanel/registerManager or mainScreen)
-                      return 02-start for register manager or 00-start for main screen
+
+            **command start with:**
+
+            00-0: start main screen(managerPanel or mainScreen)
+
 
             01-0: start PersonalInfoMenu (personalMenuInfo)
                 -1: change information in personalInfoMenu
@@ -119,6 +121,7 @@ public class Server implements Runnable {
             02-1: (managerPanel/registerManager): get and verify data for register
 
             03-0: start login menu(LoginMenu)
+                (return start when exist manager and return createManager when doesnt exist manager)
                 -1: get and verify data for new buyer
                 -2: get and verify data for new seller
                 -3: get and verify data for new manager
@@ -188,7 +191,7 @@ public class Server implements Runnable {
             */
 
             if (command.startsWith("00-0")) {
-                if (ProgramManager.getProgramManagerInstance().existManager) {
+                //if (ProgramManager.getProgramManagerInstance().existManager) {
                     MainScreen mainScreen = new MainScreen();
                     try {
                         mainScreen.start(this);
@@ -197,7 +200,7 @@ public class Server implements Runnable {
                     }
                     preParent = thisParent;
                     thisParent = mainScreen;
-                } else {
+                /*} else {
                     RegisterManager registerManager = new RegisterManager();
                     try {
                         registerManager.start(this);
@@ -207,6 +210,8 @@ public class Server implements Runnable {
                     preParent = thisParent;
                     thisParent = registerManager;
                 }
+
+                 */
             }
             else if (command.startsWith("01-0")) {
                 PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
