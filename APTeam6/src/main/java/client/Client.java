@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -99,6 +101,10 @@ public class Client extends Application {
         ipAddress.setDisable(true);
         ipAddress.setPromptText("e.g. 192.168.1.14");
         serverPort.setPromptText("between 1 and 65535");
+
+        //TODO: find a good sound
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
+        mediaPlayer.play();
 
         connect.setOnAction(actionEvent -> {
             // TODO check data validation  ip & port

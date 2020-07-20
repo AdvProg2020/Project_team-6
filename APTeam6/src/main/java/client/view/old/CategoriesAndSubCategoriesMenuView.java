@@ -98,7 +98,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                 controller.remove(list.getSelectionModel().getSelectedIndices().get(0));
         });
         backButton.setOnAction(actionEvent -> {
-            controller.back();
+            //controller.back();
         });
     }
 
