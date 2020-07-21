@@ -27,12 +27,9 @@ public class Server implements Runnable {
     private Account currentlyLoggedInUsers = null;
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
     private boolean tokenSent = false;
-
-
     Server(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
-
     public void loginSuccessful(Account currentlyLoggedInUsers) {
         if (currentlyLoggedInUsers.getRole() == 1) {
             ((Buyer) currentlyLoggedInUsers).addProductToBuyBasket(buyBasket);
