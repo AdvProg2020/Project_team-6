@@ -90,9 +90,11 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             if (list.getSelectionModel().getSelectedIndices().size() == 1)
                 controller.editCategory(list.getSelectionModel().getSelectedIndices().get(0), nameTextField.getText());
         });
+        /*
         addButton.setOnAction(actionEvent -> {
             //controller.addCategory(nameTextField.getText());
         });
+        */
         removeButton.setOnAction(actionEvent -> {
             if (list.getSelectionModel().getSelectedIndices().size() == 1)
                 controller.removeCategory(list.getSelectionModel().getSelectedIndices().get(0));

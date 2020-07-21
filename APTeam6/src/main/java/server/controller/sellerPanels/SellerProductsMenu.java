@@ -3,8 +3,13 @@ package server.controller.sellerPanels;
 import server.Server;
 import server.controller.Parent;
 import client.view.old.SellerProductsMenuView;
+import server.controller.ProgramManager;
+import server.model.product.DiscountCode;
+import server.model.product.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SellerProductsMenu implements Parent {
     private Server server = null;
@@ -18,24 +23,43 @@ public class SellerProductsMenu implements Parent {
         server.sendMessage("11-" + message);
     }
 
-    public void viewProduct(String substring) throws IOException {
+    public void viewProduct(String message) throws IOException {
+        Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message));
+        //Name---Description---Price---Category---SubCategory---Comments
+        sendMessage(tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getComments());
+    }
+
+    public void editProduct(String message) throws IOException {
+        HashMap<Integer,Product> allProducts = ProgramManager.getProgramManagerInstance().getAllProducts();
+        if(allProducts.containsKey(Integer.parseInt(message.split("---")[0]))) {
+            Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message.split("---")[0]));
+            //TODO check data validation
+            //name---categoryName---subCategoryName---price
+            tempProduct.setName(message.split("---")[1]);
+            tempProduct.setCategoryName(message.split("---")[2]);
+            tempProduct.setSubCategoryName(message.split("---")[3]);
+            tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
+        }else{
+            sendMessage("incorrectId");
+        }
         sendMessage("");
     }
 
-    public void editProduct(String substring) throws IOException {
-        sendMessage("");
+    public void addProduct(String message) throws IOException {
+        //name---categoryName---subCategoryName---Date---price
+        String[] dataSplit = message.split("---");
+        new Product(dataSplit[0],dataSplit[1],dataSplit[2],dataSplit[3],Long.parseLong(dataSplit[4]));
+        sendMessage("created");
     }
 
-    public void addProduct(String substring) throws IOException {
+    public void viewBuyersOfProduct(String message) throws IOException {
         sendMessage("");
+
     }
 
-    public void viewBuyersOfProduct(String substring) throws IOException {
-        sendMessage("");
-    }
-
-    public void removeProduct(String substring) throws IOException {
-        sendMessage("");
+    public void removeProduct(String message) throws IOException {
+        ProgramManager.getProgramManagerInstance().removeProduct(Integer.parseInt(message));
+        sendMessage("removed");
     }
     /*
     private static SellerProductsMenu instance;
@@ -61,6 +85,4 @@ public class SellerProductsMenu implements Parent {
         }
     }
     */
-
-
 }

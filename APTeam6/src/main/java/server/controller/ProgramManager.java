@@ -2,13 +2,11 @@ package server.controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
-import server.model.account.Seller;
 import server.model.product.Off;
 import server.model.requests.OffRequest;
 import server.model.requests.ProductRequest;
 import server.model.requests.Request;
 import server.model.account.Account;
-import server.model.account.Buyer;
 import server.model.logs.LogsInGeneral;
 import server.model.product.Category;
 import server.model.product.DiscountCode;
@@ -330,6 +328,7 @@ public class ProgramManager {
     }
 
 
+
     public LocalDateTime parsingStringToDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
@@ -346,6 +345,9 @@ public class ProgramManager {
 
     public HashMap<String, DiscountCode> getAllDiscountCodes() {
         return allDiscountCodes;
+    }
+    public HashMap<Integer,Product> getAllProducts() {
+        return allProducts;
     }
 
     /**
@@ -373,17 +375,6 @@ public class ProgramManager {
     public void removeRequest(Request request) {
         allRequests.remove(request);
     }
-
-    public void addCategory(Category category) {
-        allCategories.put(category.getName(), category);
-    }
-
-    /*public void showSellerCompanyInfo() {
-        ((Seller) currentlyLoggedInUsers).getClass();
-    }
-
-     */
-
 
 
     // MKH don't print things here

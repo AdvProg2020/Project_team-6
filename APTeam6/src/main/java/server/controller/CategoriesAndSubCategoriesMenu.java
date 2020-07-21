@@ -8,6 +8,7 @@ import client.view.old.CategoriesAndSubCategoriesMenuView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class CategoriesAndSubCategoriesMenu implements Parent {
@@ -38,14 +39,14 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
 
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
-        //TODO : Kamali please Do some Sort:)
-        categorySort(allCategoriesArrayList);
+
+        allCategoriesArrayList = categorySort(allCategoriesArrayList);
     }
 
     private void updateSubCategoriesArrayList() {
         allSubCategoriesArrayList = new ArrayList<>(currentCategory.getAllSubCategories());
-        //TODO : Kamali please Do some Sort:)
-        subCategorySort(allSubCategoriesArrayList);
+
+        allSubCategoriesArrayList = subCategorySort(allSubCategoriesArrayList);
     }
 
     private void updateProductsArrayList() {
@@ -55,7 +56,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
         for (Integer id : productIds) {
             allProductsArrayList.add(programManager.getProductById(id));
         }
-        //TODO: maybe do some sorting?
+        Product.sortProducts(1, allProductsArrayList);
     }
 
 
@@ -167,7 +168,6 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
             System.err.println("error occurred");
         }
     }
-
     public void openSubCategory(int index) {
         SubCategory tempSubCategory = allSubCategoriesArrayList.get(index);
         currentSubCategory = tempSubCategory;
@@ -184,14 +184,41 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
             System.err.println("error occurred");
         }
     }
-
-
-    public void categorySort(ArrayList<Category> allCategoriesArrayList) {
-        //TODO ostad kamali
+    public void openProduct(int index){
+        Product tempProduct = allProductsArrayList.get(index);
+        try {
+            //name---categoryName---SubCategoryName---description---price
+            sendMessage(tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice());
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
+    }
+    public void addToBuyBasket(int index,int count){
+        Product tempProduct = allProductsArrayList.get(index);
+        try {
+            server.addToCurrentBuyBasket(tempProduct,count);
+            sendMessage("added to buy basket");
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
 
     }
 
-    public void subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList) {
-        //TODO ostad kamali
+    public ArrayList<Category> categorySort(ArrayList<Category> allCategoriesArrayList) {
+
+        Collections.sort(allCategoriesArrayList);
+
+        return allCategoriesArrayList;
+
     }
+
+    public ArrayList<SubCategory> subCategorySort(ArrayList<SubCategory> allSubCategoriesArrayList) {
+
+        Collections.sort(allSubCategoriesArrayList);
+
+        return allSubCategoriesArrayList;
+
+    }
+
+
 }

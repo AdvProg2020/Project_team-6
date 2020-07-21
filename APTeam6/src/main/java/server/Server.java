@@ -15,6 +15,7 @@ import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Server implements Runnable {
@@ -74,6 +75,10 @@ public class Server implements Runnable {
         Log log = new Log(dtf.format(now));
         this.log = log;
 
+        long[] time = new long[20];
+        Arrays.fill(time, 0);
+        time[19] = System.currentTimeMillis();
+
         while (true) {
             String command = "";
             if(!tokenSent){
@@ -94,12 +99,21 @@ public class Server implements Runnable {
                 break;
             }
 
+            try {
+                replayAttacks(time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
 
 
             /*
-            command start with:
-            00-0: start main screen or register manager(managerPanel/registerManager or mainScreen)
-                      return 02-start for register manager or 00-start for main screen
+
+            **command start with:**
+
+            00-0: start main screen(managerPanel or mainScreen)
+
 
             01-0: start PersonalInfoMenu (personalMenuInfo)
                 -1: change information in personalInfoMenu
@@ -107,6 +121,7 @@ public class Server implements Runnable {
             02-1: (managerPanel/registerManager): get and verify data for register
 
             03-0: start login menu(LoginMenu)
+                (return start when exist manager and return createManager when doesnt exist manager)
                 -1: get and verify data for new buyer
                 -2: get and verify data for new seller
                 -3: get and verify data for new manager
@@ -160,18 +175,23 @@ public class Server implements Runnable {
                 -6: add SubCategory
                 -7: edit SubCategory
                 -8: remove SubCategory
+                -9: open product
+                -a: add to buy basket
 
 
             13-0: start view offs
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
+            14-0: start manage all products
+                -1:
+
 
 
             */
 
             if (command.startsWith("00-0")) {
-                if (ProgramManager.getProgramManagerInstance().existManager) {
+                //if (ProgramManager.getProgramManagerInstance().existManager) {
                     MainScreen mainScreen = new MainScreen();
                     try {
                         mainScreen.start(this);
@@ -180,7 +200,7 @@ public class Server implements Runnable {
                     }
                     preParent = thisParent;
                     thisParent = mainScreen;
-                } else {
+                /*} else {
                     RegisterManager registerManager = new RegisterManager();
                     try {
                         registerManager.start(this);
@@ -190,6 +210,8 @@ public class Server implements Runnable {
                     preParent = thisParent;
                     thisParent = registerManager;
                 }
+
+                 */
             }
             else if (command.startsWith("01-0")) {
                 PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
@@ -589,13 +611,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.viewProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -605,13 +627,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.viewBuyersOfProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -621,13 +643,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.editProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -637,13 +659,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.addProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -653,13 +675,13 @@ public class Server implements Runnable {
                     try {
                         sellerProductsMenu.removeProduct(command.substring(4));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 } else {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
             }
@@ -668,7 +690,7 @@ public class Server implements Runnable {
                 try {
                     categoriesAndSubCategoriesMenu.start(this);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("error occurred");
                 }
                 preParent = thisParent;
                 thisParent = categoriesAndSubCategoriesMenu;
@@ -680,7 +702,7 @@ public class Server implements Runnable {
                     try {
                         sendMessage("NotAllowed");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.err.println("error occurred");
                     }
                 }
 
@@ -774,6 +796,30 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if(command.startsWith("12-9")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.openProduct(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if(command.startsWith("12-a")){
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    categoriesAndSubCategoriesMenu.addToBuyBasket(Integer.parseInt(command.split("---")[0].substring(4)),Integer.parseInt(command.split("---")[1]));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             else if (command.startsWith("13-0")) {
                 OffManagementSeller offManagementSeller = new OffManagementSeller();
                 try {
@@ -832,12 +878,29 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if(command.startsWith("14-0")){
+                ManageAllProducts manageAllProducts = new ManageAllProducts();
+                try {
+                    manageAllProducts.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = manageAllProducts;
 
+            }else if(command.startsWith("14-1")){
+                if(thisParent instanceof ManageAllProducts){
+                    ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
+                    manageAllProducts.remove(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-
-
-
-            System.out.println(command);
+            }
             try {
                 sendMessage(command);
             } catch (IOException e) {
@@ -849,6 +912,23 @@ public class Server implements Runnable {
 
             }
         }
+    }
+
+
+    private static void replayAttacks(long[] time) throws InterruptedException {
+        for (int i = 0; i < 19; i++) {
+            time[i] = time[i+1];
+        }
+
+        time[19] = System.currentTimeMillis();
+
+        if(time[0]!=0){
+            if(time[19]-time[0]<10000){
+                System.out.println("server suspended for 10 second because too many request");
+                Thread.sleep(10000);
+            }
+        }
+
     }
 
     /*
