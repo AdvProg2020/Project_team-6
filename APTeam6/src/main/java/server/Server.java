@@ -190,12 +190,11 @@ public class Server implements Runnable {
                 -2: edit off by id
                 -3: add off(get and verify data)
             14-0: Start View Cart
-                -1: showProducts
-                -2: viewProduct
-                -3: increase
-                -4: decrease
-                -5: purchase
-                -6: showTotalPrice
+                -1: viewProduct
+                -2: increase
+                -3: decrease
+                -4: purchase
+                -5: showTotalPrice
 
 
 
@@ -902,7 +901,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("14-1")){
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
-                    cart.showProducts();
+                    cart.viewProduct(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -914,7 +913,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("14-2")){
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
-                    cart.viewProduct(Integer.parseInt(command.substring(4)));
+                    cart.increase(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -926,7 +925,7 @@ public class Server implements Runnable {
             }else if(command.startsWith("14-3")){
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
-                    cart.increase(Integer.parseInt(command.substring(4)));
+                    cart.decrease(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -938,18 +937,6 @@ public class Server implements Runnable {
             }else if(command.startsWith("14-4")){
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
-                    cart.decrease(Integer.parseInt(command.substring(4)));
-                } else {
-                    try {
-                        sendMessage("NotAllowed");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }else if(command.startsWith("14-5")){
-                if(thisParent instanceof Cart){
-                    Cart cart = (Cart) thisParent;
                     cart.purchase();
                 } else {
                     try {
@@ -959,7 +946,7 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("14-6")){
+            }else if(command.startsWith("14-5")){
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
                     cart.showTotalPrice();

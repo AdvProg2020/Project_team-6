@@ -14,14 +14,6 @@ public class Cart implements Parent {
     public void start(Server server) throws IOException {
         HashMap<Product,Integer> buyBasket = server.getBuyBasket();
         this.server = server;
-        sendMessage("start");
-    }
-
-    private void sendMessage(String message) throws IOException {
-        server.sendMessage("14-" + message);
-    }
-    public void showProducts(){
-        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
         String message = "";
         for (Product product : buyBasket.keySet()) {
             message = message + product.getName() + "---";
@@ -31,7 +23,10 @@ public class Cart implements Parent {
         } catch (IOException e) {
             System.err.println("error occurred");
         }
+    }
 
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("14-" + message);
     }
     public void viewProduct(int productId){
         HashMap<Product,Integer> buyBasket = server.getBuyBasket();
@@ -70,8 +65,6 @@ public class Cart implements Parent {
     }
     public void purchase(){
         HashMap<Product,Integer> buyBasket = server.getBuyBasket();
-
-
     }
     public void showTotalPrice(){
         HashMap<Product,Integer> buyBasket = server.getBuyBasket();
@@ -87,6 +80,4 @@ public class Cart implements Parent {
 
 
     }
-
-
 }
