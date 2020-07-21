@@ -30,6 +30,9 @@ public class Server implements Runnable {
     private boolean tokenSent = false;
     private String token = "";
 
+    public HashMap<Product, Integer> getBuyBasket() {
+        return buyBasket;
+    }
 
     Server(Socket clientSocket) {
         this.clientSocket = clientSocket;
