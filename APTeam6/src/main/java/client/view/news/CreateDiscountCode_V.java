@@ -6,7 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-public class CreateDiscountCode_V {
+public class CreateDiscountCode_V extends GeneralController_V{
     public TextField codeText;
     public TextField daysBeforeStartText;
     public TextField daysBeforeEndText;

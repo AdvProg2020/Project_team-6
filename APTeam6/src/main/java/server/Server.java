@@ -4,7 +4,6 @@ import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
 import server.controller.managerPanels.*;
-import server.controller.sellerPanels.Cart;
 import server.controller.sellerPanels.OffManagementSeller;
 import server.controller.sellerPanels.SalesHistory;
 import server.controller.sellerPanels.SellerProductsMenu;
@@ -29,6 +28,7 @@ public class Server implements Runnable {
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
     private boolean tokenSent = false;
     private String token = "";
+    private Bank bank = null;
 
     public HashMap<Product, Integer> getBuyBasket() {
         return buyBasket;
@@ -45,6 +45,8 @@ public class Server implements Runnable {
         }
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
         ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
+        bank = new Bank();
+        //TODO
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -189,6 +191,7 @@ public class Server implements Runnable {
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
+
             14-0: Start View Cart
                 -1: viewProduct
                 -2: increase
