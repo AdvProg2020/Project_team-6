@@ -202,7 +202,7 @@ public class Server implements Runnable {
                 -5: showTotalPrice
             15-0: start verifyDiscountCode
                 -1: verify
-
+            16-0: start receiveBuyerInfo
 
 
 
@@ -988,7 +988,16 @@ public class Server implements Runnable {
                         System.err.println("error occurred");
                     }
                 }
-
+            }
+            else if (command.startsWith("16-0")) {
+                ReceiveBuyerInfo receiveBuyerInfo = new ReceiveBuyerInfo();
+                try {
+                    receiveBuyerInfo.start(this);
+                } catch (IOException e) {
+                    System.err.println("error occurred");
+                }
+                preParent = thisParent;
+                thisParent = receiveBuyerInfo;
             }
             try {
                 sendMessage(command);

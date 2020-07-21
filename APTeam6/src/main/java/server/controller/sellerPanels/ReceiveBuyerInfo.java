@@ -13,9 +13,15 @@ public class ReceiveBuyerInfo implements Parent {
     @Override
     public void start(Server server) throws IOException {
         Account tempAccount = server.getCurrentlyLoggedInUsers();
-        sendMessage("start");
+        String emailAddress = tempAccount.getEmailAddress();
+        String firstName = tempAccount.getFirstName();
+        String lastName = tempAccount.getLastName();
+        String phoneNumber = tempAccount.getPhoneNumber();
+        String username = tempAccount.getUsername();
+        //username---firstName---lastName---emailAddress---phoneNumber
+        sendMessage(username + "---" + firstName + "---" + lastName + "---" + emailAddress + "---" + phoneNumber);
     }
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("14-" + message);
+        server.sendMessage("16-" + message);
     }
 }

@@ -16,7 +16,7 @@ public class VerifyDiscountCode implements Parent {
         sendMessage("start");
     }
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("14-" + message);
+        server.sendMessage("15-" + message);
     }
     public void verify(String data){
         DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data);
