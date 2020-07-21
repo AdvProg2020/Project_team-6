@@ -10,9 +10,9 @@ public class ProductTest {
         ProgramManager.getProgramManagerInstance().createAllProductHashMap();
         ProgramManager.getProgramManagerInstance().createAllCategoriesHashMapForTest();
         Product.nextId = 0;
-        Category category = new Category("electrical");
-        SubCategory subCategory = new SubCategory("tv");
-        category.addSubcategory(subCategory);
+        //Category category = new Category("electrical");
+        //SubCategory subCategory = new SubCategory("tv");
+        //category.addSubcategory(subCategory);
         /*Product product = new Product("tv samsung","electrical","tv");
         Assert.assertEquals(0,product.getId());
         Assert.assertEquals("tv samsung",product.getName());

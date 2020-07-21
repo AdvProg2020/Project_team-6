@@ -91,7 +91,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                 controller.editCategory(list.getSelectionModel().getSelectedIndices().get(0), nameTextField.getText());
         });
         addButton.setOnAction(actionEvent -> {
-            controller.addCategory(nameTextField.getText());
+            //controller.addCategory(nameTextField.getText());
         });
         removeButton.setOnAction(actionEvent -> {
             if (list.getSelectionModel().getSelectedIndices().size() == 1)
