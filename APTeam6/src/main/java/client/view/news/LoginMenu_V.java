@@ -26,19 +26,29 @@ public class LoginMenu_V {
 
     public void registerBuyerButtonAction(ActionEvent actionEvent) {
         String[] strings = getBuyerOrManagerInfo();
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder(userNameText.getText() + "---" + passwordText.getText());
         for (String string : strings) {
-            builder.append(string + "---");
+            builder.append("---").append(string);
         }
-        //TODO: (message) userName password
+        //TODO: (message) buyer builder.toString();
     }
 
     public void registerManagerButtonAction(ActionEvent actionEvent) {
-
+        String[] strings = getBuyerOrManagerInfo();
+        StringBuilder builder = new StringBuilder(userNameText.getText() + "---" + passwordText.getText());
+        for (String string : strings) {
+            builder.append("---").append(string);
+        }
+        //TODO: (message) manager builder.toString();
     }
 
     public void registerSellerButtonAction(ActionEvent actionEvent) {
-
+        String[] strings = getSellerInfo();
+        StringBuilder builder = new StringBuilder(userNameText.getText() + "---" + passwordText.getText());
+        for (String string : strings) {
+            builder.append("---").append(string);
+        }
+        //TODO: (message) seller builder.toString();
     }
 
     //////////////////////////////////////
