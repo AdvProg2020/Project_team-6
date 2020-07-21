@@ -4,9 +4,7 @@ import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
 import server.controller.managerPanels.*;
-import server.controller.sellerPanels.OffManagementSeller;
-import server.controller.sellerPanels.SalesHistory;
-import server.controller.sellerPanels.SellerProductsMenu;
+import server.controller.sellerPanels.*;
 import server.model.account.Account;
 import server.model.account.Buyer;
 import server.model.product.Product;
@@ -45,7 +43,11 @@ public class Server implements Runnable {
         }
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
         ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
-        bank = new Bank();
+        try {
+            bank = new Bank();
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
         //TODO
     }
 
@@ -198,6 +200,9 @@ public class Server implements Runnable {
                 -3: decrease
                 -4: purchase
                 -5: showTotalPrice
+            15-0: start verifyDiscountCode
+                -1: verify
+
 
 
 
@@ -962,6 +967,29 @@ public class Server implements Runnable {
                 }
 
             }
+            else if(command.startsWith("15-0")){
+                VerifyDiscountCode verifyDiscountCode = new VerifyDiscountCode();
+                try {
+                    verifyDiscountCode.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = verifyDiscountCode;
+            }
+            else if(command.startsWith("15-1")){
+                if(thisParent instanceof VerifyDiscountCode){
+                    VerifyDiscountCode verifyDiscountCode = (VerifyDiscountCode) thisParent;
+                    verifyDiscountCode.verify(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+
+            }
             try {
                 sendMessage(command);
             } catch (IOException e) {
@@ -972,6 +1000,7 @@ public class Server implements Runnable {
                 break;
 
             }
+
         }
     }
 
