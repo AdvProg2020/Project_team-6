@@ -28,6 +28,7 @@ public class Server implements Runnable {
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
     private boolean tokenSent = false;
     private String token = "";
+    private Bank bank = null;
 
 
     Server(Socket clientSocket) {
@@ -41,6 +42,8 @@ public class Server implements Runnable {
         }
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
         ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
+        bank = new Bank();
+        //TODO
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -185,6 +188,7 @@ public class Server implements Runnable {
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
+
             14-0: start manage all products
                 -1:
 

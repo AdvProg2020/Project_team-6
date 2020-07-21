@@ -6,16 +6,27 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class MainServer {
 
     public static int runningServer = 0;
+    public static Socket bankSocket = null;
 
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("please wait...");
         ServerSocket serverSocket = new ServerSocket(0);
         //System.out.println("main server ip is : "+serverSocket.getLocalSocketAddress().toString());
         System.out.println("main server is running on port : " + serverSocket.getLocalPort() + "\n");
+
+        System.out.println("please input bank information");
+        System.out.println("please input bank ip address:");
+        Scanner scanner = new Scanner(System.in);
+        String ip = scanner.nextLine();
+        System.out.println("please input bank port:");
+        int port = Integer.parseInt(scanner.nextLine());
+        bankSocket = new Socket(ip,port);
+        System.out.println("connected to bank");
 
         long[] time = new long[5];
         Arrays.fill(time, 0);
