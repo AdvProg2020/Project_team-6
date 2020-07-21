@@ -34,6 +34,7 @@ public class Cart implements Parent {
 
     }
     public void viewProduct(int productId){
+        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
         Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(productId);
         //Name---CategoryName---subCategoryName---Price---Description
         String message = tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getPrice() + "---" + tempProduct.getDescription();
@@ -44,15 +45,46 @@ public class Cart implements Parent {
         }
     }
     public void increase(int productId){
-
+        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
+        Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(productId);
+        int number = buyBasket.get(tempProduct) + 1;
+        buyBasket.remove(tempProduct,buyBasket.get(tempProduct));
+        buyBasket.put(tempProduct,number);
+        try {
+            sendMessage("increased");
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
     }
     public void decrease(int productId){
-
+        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
+        Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(productId);
+        int number = buyBasket.get(tempProduct) - 1;
+        buyBasket.remove(tempProduct,buyBasket.get(tempProduct));
+        buyBasket.put(tempProduct,number);
+        try {
+            sendMessage("decreased");
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
     }
     public void purchase(){
+        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
+
 
     }
     public void showTotalPrice(){
+        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
+        int totalPrice = 0;
+        for (Product product : buyBasket.keySet()) {
+            totalPrice += (int) (product.getPrice() * buyBasket.get(product));
+        }
+        try {
+            sendMessage(String.valueOf(totalPrice));
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
+
 
     }
 
