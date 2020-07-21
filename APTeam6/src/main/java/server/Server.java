@@ -4,6 +4,7 @@ import server.controller.*;
 import server.controller.buyerPanels.BuyHistory;
 import server.controller.buyerPanels.ShowCart;
 import server.controller.managerPanels.*;
+import server.controller.sellerPanels.Cart;
 import server.controller.sellerPanels.OffManagementSeller;
 import server.controller.sellerPanels.SalesHistory;
 import server.controller.sellerPanels.SellerProductsMenu;
@@ -185,8 +186,13 @@ public class Server implements Runnable {
                 -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
-            14-0: start manage all products
-                -1:
+            14-0: Start View Cart
+                -1: showProducts
+                -2: viewProduct
+                -3: increase
+                -4: decrease
+                -5: purchase
+                -6: showTotalPrice
 
 
 
@@ -881,19 +887,79 @@ public class Server implements Runnable {
                 }
             }
             else if(command.startsWith("14-0")){
-                ManageAllProducts manageAllProducts = new ManageAllProducts();
+                Cart cart = new Cart();
                 try {
-                    manageAllProducts.start(this);
+                    cart.start(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 preParent = thisParent;
-                thisParent = manageAllProducts;
+                thisParent = cart;
 
             }else if(command.startsWith("14-1")){
-                if(thisParent instanceof ManageAllProducts){
-                    ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
-                    manageAllProducts.remove(Integer.parseInt(command.substring(4)));
+                if(thisParent instanceof Cart){
+                    Cart cart = (Cart) thisParent;
+                    cart.showProducts();
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("14-2")){
+                if(thisParent instanceof Cart){
+                    Cart cart = (Cart) thisParent;
+                    cart.viewProduct(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("14-3")){
+                if(thisParent instanceof Cart){
+                    Cart cart = (Cart) thisParent;
+                    cart.increase(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("14-4")){
+                if(thisParent instanceof Cart){
+                    Cart cart = (Cart) thisParent;
+                    cart.decrease(Integer.parseInt(command.substring(4)));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("14-5")){
+                if(thisParent instanceof Cart){
+                    Cart cart = (Cart) thisParent;
+                    cart.purchase();
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }else if(command.startsWith("14-6")){
+                if(thisParent instanceof Cart){
+                    Cart cart = (Cart) thisParent;
+                    cart.showTotalPrice();
                 } else {
                     try {
                         sendMessage("NotAllowed");
