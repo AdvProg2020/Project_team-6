@@ -92,7 +92,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
         });
         /*
         addButton.setOnAction(actionEvent -> {
-            controller.addCategory(nameTextField.getText());
+            //controller.addCategory(nameTextField.getText());
         });
         */
         removeButton.setOnAction(actionEvent -> {

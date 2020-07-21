@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -95,6 +96,8 @@ public class Client extends Application {
 
     private Socket serverSocket = null;
 
+    MediaPlayer mediaPlayer;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -117,7 +120,7 @@ public class Client extends Application {
         serverPort.setPromptText("between 1 and 65535");
 
         //TODO: find a good sound
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
+        mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
         mediaPlayer.play();
 
         connect.setOnAction(actionEvent -> {

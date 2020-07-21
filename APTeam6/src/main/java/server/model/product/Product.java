@@ -29,13 +29,10 @@ public class Product implements Comparable<Product>{
     private int numberOfScore = 0;
     private ArrayList<Comment> comments;
 
-    public Product(String name, String categoryName, String subCategoryName,String date,
-                   HashMap<String,String> categoryAdditionalInfo,HashMap<String,String> subCategoryAdditionalInfo,long price){
+    public Product(String name, String categoryName, String subCategoryName,String date,long price){
         this.name = name;
         this.categoryName = categoryName;
         this.subCategoryName = subCategoryName;
-        this.CategoryAdditionalInfo = categoryAdditionalInfo;
-        this.SubCategoryAdditionalInfo = subCategoryAdditionalInfo;
         this.creationDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(date);
         this.price = price;
         id = nextId;
@@ -169,6 +166,22 @@ public class Product implements Comparable<Product>{
 
     public void addVisitCount(){
         visitCount++;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
     }
 
     @Override
