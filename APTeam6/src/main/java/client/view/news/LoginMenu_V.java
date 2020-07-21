@@ -25,7 +25,11 @@ public class LoginMenu_V {
     }
 
     public void registerBuyerButtonAction(ActionEvent actionEvent) {
-        /////////////
+        String[] strings = getBuyerOrManagerInfo();
+        StringBuilder builder = new StringBuilder();
+        for (String string : strings) {
+            builder.append(string + "---");
+        }
         //TODO: (message) userName password
     }
 
@@ -39,7 +43,7 @@ public class LoginMenu_V {
 
     //////////////////////////////////////
 
-    private String[] getBuyerInfo(){
+    private String[] getBuyerOrManagerInfo(){
         String[] strings = new String[4];
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setTitle("Buyer info");
@@ -60,6 +64,34 @@ public class LoginMenu_V {
         inputDialog.setHeaderText("Enter your email address");
         inputDialog.showAndWait();
         strings[3] = inputDialog.getResult();
+        return strings;
+    }
+
+    private String[] getSellerInfo(){
+        String[] strings = new String[5];
+        TextInputDialog inputDialog = new TextInputDialog();
+        inputDialog.setTitle("Seller info");
+        inputDialog.getDialogPane().setStyle("-fx-background-color: #ffffee;");
+
+        inputDialog.setHeaderText("Enter your first name");
+        inputDialog.showAndWait();
+        strings[0] = inputDialog.getResult();
+
+        inputDialog.setHeaderText("Enter your last name");
+        inputDialog.showAndWait();
+        strings[1] = inputDialog.getResult();
+
+        inputDialog.setHeaderText("Enter your phone Num");
+        inputDialog.showAndWait();
+        strings[2] = inputDialog.getResult();
+
+        inputDialog.setHeaderText("Enter your email address");
+        inputDialog.showAndWait();
+        strings[3] = inputDialog.getResult();
+
+        inputDialog.setHeaderText("Enter your chompany name");
+        inputDialog.showAndWait();
+        strings[4] = inputDialog.getResult();
         return strings;
     }
 }
