@@ -27,6 +27,7 @@ public class Server implements Runnable {
     private Account currentlyLoggedInUsers = null;
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
     private boolean tokenSent = false;
+    private String token = "";
 
 
     Server(Socket clientSocket) {
@@ -83,11 +84,12 @@ public class Server implements Runnable {
             String command = "";
             if(!tokenSent){
                 try {
-                    sendMessage(createToken());
+                    token = createToken();
+                    sendMessage(token);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                tokenSent = true;
+
             }
             try {
                 command = getMessage();
@@ -947,7 +949,18 @@ public class Server implements Runnable {
     public String getMessage() throws IOException {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.clientSocket.getInputStream()));
         String command = dataInputStream.readUTF();
-        //TODO decode
+
+        if(command.startsWith(token)){
+            command = command.substring(10);
+        }else{
+            sendMessage("tokenExpired");
+            return null;
+        }
+
+        String secretKey;
+        secretKey = AES.getSecretKeyByToken(token);
+        command = AES.decrypt(command,secretKey);
+
         this.log.addLog(command, 1);
         return command;
     }
@@ -955,7 +968,15 @@ public class Server implements Runnable {
     public void sendMessage(String command) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.clientSocket.getOutputStream()));
         this.log.addLog(command, 0);
-        //TODO encode
+
+        if(tokenSent){
+            String secretKey;
+            secretKey = AES.getSecretKeyByToken(token);
+            command = AES.encrypt(command,secretKey);
+        }else{
+            tokenSent = true;
+        }
+
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();
     }
