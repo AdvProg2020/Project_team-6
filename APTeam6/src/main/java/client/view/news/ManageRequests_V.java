@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
-public class ManageRequests_V {
+public class ManageRequests_V extends GeneralController_V{
     public ListView<String> requestListView;
     public void initialize(){
         requestListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

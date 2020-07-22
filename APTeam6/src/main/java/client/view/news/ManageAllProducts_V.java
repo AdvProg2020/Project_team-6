@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
-public class ManageAllProducts_V {
+public class ManageAllProducts_V extends GeneralController_V{
     public ListView<String> productsListView;
 
     public void initialize(){
@@ -16,6 +16,8 @@ public class ManageAllProducts_V {
     }
 
     public void removeButton(ActionEvent actionEvent) {
-        //TODO: (message) index
+        if (productsListView.getSelectionModel().getSelectedIndices().size() == 1){
+            //TODO: (message) index
+        }
     }
 }
