@@ -343,7 +343,7 @@ public class SingleProductScreen {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
         if(discountCodeHashMap.containsKey(data)) {
             DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data.split("---")[0]);
-            //TODO check data validation
+            //
             //code---startDate---endDate---percentage---repetitionTime
             tempDiscountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]));
             tempDiscountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]));
@@ -355,5 +355,82 @@ public class SingleProductScreen {
 
     }
 
-     */
+
+private Server server = null;
+    @Override
+    public void start(Server server) throws IOException {
+        this.server = server;
+        sendMessage("start");
+    }
+
+    private void sendMessage(String message) throws IOException {
+        server.sendMessage("11-" + message);
+    }
+
+    public void viewProduct(String message) throws IOException {
+        Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message));
+        //Name---Description---Price---Category---SubCategory---Comments
+        sendMessage(tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getComments());
+    }
+
+    public void editProduct(String message) throws IOException {
+        HashMap<Integer,Product> allProducts = ProgramManager.getProgramManagerInstance().getAllProducts();
+        if(allProducts.containsKey(Integer.parseInt(message.split("---")[0]))) {
+            Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message.split("---")[0]));
+            //
+            //name---categoryName---subCategoryName---price
+            tempProduct.setName(message.split("---")[1]);
+            tempProduct.setCategoryName(message.split("---")[2]);
+            tempProduct.setSubCategoryName(message.split("---")[3]);
+            tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
+        }else{
+            sendMessage("incorrectId");
+        }
+        sendMessage("");
+    }
+
+    public void addProduct(String message) throws IOException {
+        //name---categoryName---subCategoryName---Date---price
+        String[] dataSplit = message.split("---");
+        new Product(dataSplit[0],dataSplit[1],dataSplit[2],dataSplit[3],Long.parseLong(dataSplit[4]));
+        sendMessage("created");
+    }
+
+    public void viewBuyersOfProduct(String message) throws IOException {
+        for (Integer integer : ProgramManager.getProgramManagerInstance().getLogsInGeneralHashMap().keySet()) {
+
+        }
+
+        sendMessage("");
+
+    }
+
+    public void removeProduct(String message) throws IOException {
+        ProgramManager.getProgramManagerInstance().removeProduct(Integer.parseInt(message));
+        sendMessage("removed");
+    }
+    /*
+    private static SellerProductsMenu instance;
+    public static SellerProductsMenu getInstance(){
+        if (instance == null)
+            instance = new SellerProductsMenu();
+        return instance;
+    }
+    ////////////////////////////////
+    private SellerProductsMenuView view;
+
+    public void start(){
+        view = new SellerProductsMenuView();
+        String command = null;
+        while (true) {
+            command = view.getInputCommand();
+            if (command.equals("back")) {
+                return;
+            }
+            else {
+                throw new RuntimeException("Unknown command was passed to LoginMenu by client.view");
+            }
+        }
+    }
+    */
 }

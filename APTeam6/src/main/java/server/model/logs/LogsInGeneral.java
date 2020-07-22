@@ -12,7 +12,7 @@ public class LogsInGeneral {
 
     /**
      * Attention: this method automatically adds the log to the log list.
-     */
+     **/
     public LogsInGeneral(Date date, int executedDiscount,int logId,int type) {
         this.date = date;
         this.executedDiscount = executedDiscount;

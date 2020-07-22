@@ -28,6 +28,7 @@ public class Client extends Application {
     private boolean tokenWasTaken = false;
 
     public void run() throws IOException {
+        /*
         Scanner scanner = new Scanner(System.in);
         while (true){
 
@@ -43,7 +44,9 @@ public class Client extends Application {
             s = getMessage();
             System.out.println(s);
         }
-/*
+
+         */
+
         theStage = new Stage();
         allFXMLLoaders = new ArrayList<>();
 
@@ -58,7 +61,7 @@ public class Client extends Application {
 
         allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
         //TODO: Add all FXMLs here 😪
- */
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -66,15 +69,26 @@ public class Client extends Application {
     public String getMessage() throws IOException {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
         String command = dataInputStream.readUTF();
-        //TODO: decode
+        if(tokenWasTaken) {
+            String secretKey;
+            secretKey = AES.getSecretKeyByToken(token);
+            command = AES.decrypt(command, secretKey);
+        }else{
+            tokenWasTaken = true;
+            token = command;
+        }
         return command;
     }
 
     public void sendMessage(String command) throws IOException {
         command = token + command;
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
-        //TODO: encode
-        dataOutputStream.writeUTF(command);
+
+        String secretKey;
+        secretKey = AES.getSecretKeyByToken(token);
+        command = AES.encrypt(command,secretKey);
+
+        dataOutputStream.writeUTF(token+command);
         dataOutputStream.flush();
     }
 

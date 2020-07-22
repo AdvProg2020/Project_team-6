@@ -1,9 +1,11 @@
 package server.controller.sellerPanels;
 
+import server.Log;
 import server.Server;
 import server.controller.Parent;
 import client.view.old.SellerProductsMenuView;
 import server.controller.ProgramManager;
+import server.model.logs.LogsInGeneral;
 import server.model.product.DiscountCode;
 import server.model.product.Product;
 
@@ -53,6 +55,10 @@ public class SellerProductsMenu implements Parent {
     }
 
     public void viewBuyersOfProduct(String message) throws IOException {
+        for (Integer integer : ProgramManager.getProgramManagerInstance().getLogsInGeneralHashMap().keySet()) {
+
+        }
+
         sendMessage("");
 
     }
