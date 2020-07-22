@@ -145,8 +145,67 @@ public class Bank implements Parent {
         return Integer.parseInt(response);
 
 
+    }
 
+    public void getTransactions(String type) throws IOException {
+        String command = "get_transaction ";
+        command+=token;
+        command+=" ";
+        command+=type;
 
+        dataOutputStream.writeUTF(command);
+        dataOutputStream.flush();
+        String response = dataInputStream.readUTF();
+
+        if (response.equals("token is invalid")){
+            sendMessage("token is invalid");
+        }else if (response.equals("token expired")){
+            sendMessage("token expired");
+        }else if (response.equals("invalid receipt id")){
+            sendMessage("invalid receipt id");
+        }else {
+            sendMessage(response);
+        }
+    }
+
+    public void pay(String receiptID) throws IOException {
+        String command = "pay ";
+        command+=receiptID;
+
+        dataOutputStream.writeUTF(command);
+        dataOutputStream.flush();
+        String response = dataInputStream.readUTF();
+
+        if (response.equals("invalid receipt id")){
+            sendMessage("invalid receipt id");
+        }else if (response.equals("receipt is paid before")){
+            sendMessage("receipt is paid before");
+        }else if (response.equals("source account does not have enough money")){
+            sendMessage("source account does not have enough money");
+        }else if (response.equals("invalid account id")){
+            sendMessage("invalid account id");
+        }else if (response.equals("done successfully")){
+            sendMessage("done successfully");
+        }else{
+            sendMessage("error in connection");
+        }
+    }
+
+    public void getBalance() throws IOException {
+        String command = "get_balance ";
+        command+=token;
+
+        dataOutputStream.writeUTF(command);
+        dataOutputStream.flush();
+        String response = dataInputStream.readUTF();
+
+        if (response.equals("token is invalid")){
+            sendMessage("token is invalid");
+        }else if (response.equals("token expired")){
+            sendMessage("token expired");
+        }else{
+            sendMessage(response);
+        }
     }
 
     public void sendMessage(String message) throws IOException {

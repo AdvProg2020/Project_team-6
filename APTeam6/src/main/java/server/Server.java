@@ -44,7 +44,8 @@ public class Server implements Runnable {
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
         ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
         try {
-            bank = new Bank();
+            bank = new Bank(MainServer.bankSocket);
+            bank.start(this);
         } catch (IOException e) {
             System.err.println("error occurred");
         }
