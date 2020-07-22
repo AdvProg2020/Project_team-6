@@ -69,7 +69,7 @@ public class ManageAllProductsView extends Application {
                     }
                 } else {
                     try {
-                        new Alert().showAlert("Product with this id doesnt exist", "Ok", 0, null);
+                        new Alert().showAlert("Product with this id doesn't exist", "Ok", 0, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
