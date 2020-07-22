@@ -60,20 +60,29 @@ public class LoginMenu_V extends GeneralController_V{
         inputDialog.getDialogPane().setStyle("-fx-background-color: #eeffff;");
 
         inputDialog.setHeaderText("Enter your first name");
-        inputDialog.showAndWait();
-        strings[0] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[0] = inputDialog.getResult();
+        }while (!strings[0].matches("[a-zA-Z0-9]+"));
 
         inputDialog.setHeaderText("Enter your last name");
-        inputDialog.showAndWait();
-        strings[1] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[1] = inputDialog.getResult();
+        }while (!strings[1].matches("[a-zA-Z0-9]+"));
 
         inputDialog.setHeaderText("Enter your phone Num");
-        inputDialog.showAndWait();
-        strings[2] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[2] = inputDialog.getResult();
+        }while (!strings[2].matches("[0-9]+"));
 
         inputDialog.setHeaderText("Enter your email address");
-        inputDialog.showAndWait();
-        strings[3] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[3] = inputDialog.getResult();
+        }while (!strings[3].matches("[a-zA-Z0-9@.]+"));
+
         return strings;
     }
 
@@ -84,24 +93,35 @@ public class LoginMenu_V extends GeneralController_V{
         inputDialog.getDialogPane().setStyle("-fx-background-color: #ffffee;");
 
         inputDialog.setHeaderText("Enter your first name");
-        inputDialog.showAndWait();
-        strings[0] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[0] = inputDialog.getResult();
+        }while (!strings[0].matches("[a-zA-Z0-9]+"));
 
         inputDialog.setHeaderText("Enter your last name");
-        inputDialog.showAndWait();
-        strings[1] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[1] = inputDialog.getResult();
+        }while (!strings[1].matches("[a-zA-Z0-9]+"));
 
         inputDialog.setHeaderText("Enter your phone Num");
-        inputDialog.showAndWait();
-        strings[2] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[2] = inputDialog.getResult();
+        }while (!strings[2].matches("[0-9]+"));
 
         inputDialog.setHeaderText("Enter your email address");
-        inputDialog.showAndWait();
-        strings[3] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[3] = inputDialog.getResult();
+        }while (!strings[3].matches("[a-zA-Z0-9@.]+"));
 
         inputDialog.setHeaderText("Enter your chompany name");
-        inputDialog.showAndWait();
-        strings[4] = inputDialog.getResult();
+        do {
+            inputDialog.showAndWait();
+            strings[4] = inputDialog.getResult();
+        }while (!strings[4].matches("[a-zA-Z0-9]+"));
+
         return strings;
     }
 }

@@ -7,11 +7,14 @@ import javafx.scene.control.SelectionMode;
 public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
     //This method is to be called before setting the scene
     public void reset(){
-        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
     public ListView listView;
     public ListView attributesListView;
+
+    public void initialize(){
+        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
 
     public void backBtn(ActionEvent actionEvent) {
         //TODO: (message) -

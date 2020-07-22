@@ -44,7 +44,8 @@ public class Server implements Runnable {
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
         ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
         try {
-            bank = new Bank();
+            bank = new Bank(MainServer.bankSocket);
+            bank.start(this);
         } catch (IOException e) {
             System.err.println("error occurred");
         }
@@ -152,11 +153,8 @@ public class Server implements Runnable {
 
             07-0: start buyHistory log
 
-
             08-0: start create discount code
                 -1: create discount code(get data and create)
-
-
 
             09-0: start manage users
                 -1: view user(with username)
@@ -164,9 +162,7 @@ public class Server implements Runnable {
                 -3: change user(with username) start(only send information)
                 -4: change user(with username) get and verify data and change
 
-
             10-0: start View Sales History(for seller)
-
 
             11-0: start manage product(seller)
                 -1: view product(view product by id)
@@ -174,7 +170,6 @@ public class Server implements Runnable {
                 -3: edit product(by id)
                 -4: add product(get and verify data)
                 -5: remove product(by id)
-
 
             12-0: start Categories and SubCategories Menu(seller)
                 -1: open Category
@@ -188,7 +183,6 @@ public class Server implements Runnable {
                 -9: open product
                 -a: add to buy basket
 
-
             13-0: start view offs
                 -1: view off by id
                 -2: edit off by id
@@ -200,10 +194,18 @@ public class Server implements Runnable {
                 -3: decrease
                 -4: purchase
                 -5: showTotalPrice
+
             15-0: start verifyDiscountCode
                 -1: verify
+
             16-0: start receiveBuyerInfo
 
+            17-0: start bank
+                -1: create account
+                -2: create receipt
+                -3: get transaction
+                -4: pay
+                -5: get balance
 
 
             */
@@ -999,6 +1001,119 @@ public class Server implements Runnable {
                 preParent = thisParent;
                 thisParent = receiveBuyerInfo;
             }
+            else if (command.startsWith("17-0")) {
+                Bank bank = null;
+                try {
+                    bank = new Bank(MainServer.bankSocket);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    bank.start(this);
+                } catch (IOException e) {
+                    System.err.println("error occurred");
+                }
+                preParent = thisParent;
+                thisParent = bank;
+            }
+            else if(command.startsWith("17-1")){
+                if(thisParent instanceof Bank){
+                    Bank bank = (Bank) thisParent;
+                    try {
+                        bank.createAccount(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if(command.startsWith("17-2")){
+                if(thisParent instanceof Bank){
+                    Bank bank = (Bank) thisParent;
+                    try {
+                        bank.createReceipt(command.substring(4).split("---")[0],
+                                Long.parseLong(command.substring(4).split("---")[1]),
+                                Integer.parseInt(command.substring(4).split("---")[2]),
+                                Integer.parseInt(command.substring(4).split("---")[3]),
+                                command.substring(4).split("---")[4]);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if(command.startsWith("17-3")){
+                if(thisParent instanceof Bank){
+                    Bank bank = (Bank) thisParent;
+                    try {
+                        bank.getTransactions(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if(command.startsWith("17-4")){
+                if(thisParent instanceof Bank){
+                    Bank bank = (Bank) thisParent;
+                    try {
+                        bank.pay(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if(command.startsWith("17-5")){
+                if(thisParent instanceof Bank){
+                    Bank bank = (Bank) thisParent;
+                    try {
+                        bank.getBalance();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             try {
                 sendMessage(command);
             } catch (IOException e) {
