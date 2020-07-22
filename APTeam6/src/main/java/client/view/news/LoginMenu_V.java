@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 
-public class LoginMenu_V {
+public class LoginMenu_V extends GeneralController_V{
     public TextField userNameText;
     public TextField passwordText;
     public Button loginButton;

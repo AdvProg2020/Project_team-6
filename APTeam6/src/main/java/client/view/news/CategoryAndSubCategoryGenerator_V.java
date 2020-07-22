@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-public class CategoryAndSubCategoryGenerator_V {
+public class CategoryAndSubCategoryGenerator_V extends GeneralController_V{
     public ListView attributeList;
     public TextField newAttributeText;
     public TextField nameText;
