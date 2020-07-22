@@ -11,6 +11,6 @@
        <ImageView fitHeight="449.0" fitWidth="600.0">
            <Image url="@../pictures/loading/loading (15).gif"/>
        </ImageView>
-      <ProgressBar layoutX="14.0" layoutY="417.0" prefHeight="18.0" prefWidth="573.0" progress="0.0" fx:id="LoadProgress"/>
+      <ProgressBar layoutX="14.0" layoutY="417.0" prefHeight="18.0" prefWidth="573.0" progress="0.0" fx:id="loadProgress"/>
    </children>
 </AnchorPane>
