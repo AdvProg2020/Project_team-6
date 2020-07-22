@@ -65,13 +65,87 @@ public class Bank implements Parent {
         dataOutputStream.flush();
         String response = dataInputStream.readUTF();
 
-        if (response.equals("invalid username or password")){
+        if (response.equals("invalid username or password")) {
             sendMessage("invalid username or password");
             return;
         }
 
         sendMessage("ok");
         token = response;
+
+    }
+
+    public int createReceipt(String receiptType, long money, int sourceID,
+                              int destinationID, String description) throws IOException {
+        String command = "create_receipt ";
+        command += token;
+        command += " ";
+        command += receiptType;
+        command += " ";
+        command += String.valueOf(money);
+        command += " ";
+        if (receiptType.equals("deposit")) {
+            command += "-1";
+        } else {
+            command += String.valueOf(sourceID);
+        }
+        command += " ";
+        if (receiptType.equals("withdraw")) {
+            command += "-1";
+        } else {
+            command += String.valueOf(destinationID);
+        }
+        command += " ";
+        command += description;
+
+        dataOutputStream.writeUTF(command);
+        dataOutputStream.flush();
+
+        String response = dataInputStream.readUTF();
+        if (response.equals("invalid receipt type")) {
+            sendMessage("invalid receipt type");
+            return -1;
+        }
+        else if (response.equals("invalid money")) {
+            sendMessage("invalid money");
+            return -1;
+        }
+        else if (response.equals("invalid parameters passed")) {
+            sendMessage("invalid parameters passed");
+            return -1;
+        }
+        else if (response.equals("token is invalid")) {
+            sendMessage("token is invalid");
+            return -1;
+        }
+        else if (response.equals("token expired")) {
+            sendMessage("token expired");
+            return -1;
+        }
+        else if (response.equals("source account id is invalid")) {
+            sendMessage("source account id is invalid");
+            return -1;
+        }
+        else if (response.equals("dest account id is invalid")) {
+            sendMessage("dest account id is invalid");
+            return -1;
+        }
+        else if (response.equals("equal source and dest account")) {
+            sendMessage("equal source and dest account");
+            return -1;
+        }
+        else if (response.equals("invalid account id")) {
+            sendMessage("invalid account id");
+            return -1;
+        }
+        else if (response.equals("your input contains invalid characters")) {
+            sendMessage("your input contains invalid characters");
+            return -1;
+        }
+        return Integer.parseInt(response);
+
+
+
 
     }
 
@@ -85,3 +159,5 @@ public class Bank implements Parent {
         sendMessage("start");
     }
 }
+
+
