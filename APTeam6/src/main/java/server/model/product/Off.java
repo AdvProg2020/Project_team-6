@@ -22,6 +22,7 @@ public class Off {
         offStatus = OffStatus.WaitingForBuild;
         ProgramManager.getProgramManagerInstance().addOffToHashMap(this);
     }
+
     public void changeField(byte field, String newValue){
         if(field == 1){
             if(newValue.equalsIgnoreCase("WaitingForBuild")){
