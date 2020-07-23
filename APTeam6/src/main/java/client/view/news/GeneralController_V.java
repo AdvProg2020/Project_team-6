@@ -3,9 +3,9 @@ package client.view.news;
 import client.Client;
 
 public abstract class GeneralController_V {
-    protected static Client senderReceiver;
+    protected Client senderReceiver;
 
-    static void setSenderReceiver(Client client){
+    public void setSenderReceiver(Client client){
         senderReceiver = client;
     }
 }

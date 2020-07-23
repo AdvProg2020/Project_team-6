@@ -5,6 +5,7 @@ import client.view.old.Exit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -24,6 +25,8 @@ public class Client extends Application {
     private ArrayList<FXMLLoader> allFXMLLoaders;
     private ArrayList<Scene> allScenes;
     private ArrayList<GeneralController_V> allControllers;
+    private ArrayList<Parent> allRoots;
+
     private String token = "";
     private boolean tokenWasTaken = false;
 
@@ -44,24 +47,43 @@ public class Client extends Application {
             s = getMessage();
             System.out.println(s);
         }
-
          */
 
         theStage = new Stage();
         allFXMLLoaders = new ArrayList<>();
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         allScenes = new ArrayList<>();
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
         allControllers = new ArrayList<>();
 
-        theStage.setTitle("tabaian shop");
+        theStage.setTitle("MohammadKhani's shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
         allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
-        //TODO: Add all FXMLs here 😪
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoryAndSubCategoryGenerator_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CreateDiscountCode_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\LoadingScreen_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\LoginMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\MainScreen_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageAllProducts_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageDiscountCodes_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageRequests_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageUsers_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\PersonalInfoMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerNewOffMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerOffsMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerProductMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SingleProductMenu_V.fxml")));
 
+        for (FXMLLoader fxmlLoader : allFXMLLoaders)
+            allRoots.add(fxmlLoader.load());
+        for (FXMLLoader fxmlLoader : allFXMLLoaders)
+            allControllers.add(fxmlLoader.getController());
+        for (GeneralController_V controller : allControllers)
+            controller.setSenderReceiver(this);
+        for (Parent root : allRoots)
+            allScenes.add(new Scene(root));
+
+        theStage.setScene(allScenes.get(5));
+        theStage.show();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
