@@ -31,7 +31,8 @@ public class ManageRequests implements Parent {
 
         ProgramManager.getProgramManagerInstance().acceptRequests(Integer.parseInt(data));
 
-        sendMessage("accepted");
+        //sendMessage("accepted");
+        sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
     }
 
     public void declineRequest(String data) throws IOException {
@@ -40,7 +41,8 @@ public class ManageRequests implements Parent {
 
         ProgramManager.getProgramManagerInstance().declineRequests(Integer.parseInt(data));
 
-        sendMessage("declined");
+        //sendMessage("declined");
+        sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
     }
 
     /*

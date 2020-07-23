@@ -20,6 +20,7 @@ public class ReceiveBuyerInfo implements Parent {
         String username = tempAccount.getUsername();
         //username---firstName---lastName---emailAddress---phoneNumber
         sendMessage(username + "---" + firstName + "---" + lastName + "---" + emailAddress + "---" + phoneNumber);
+        new VerifyDiscountCode().start(server);
     }
     private void sendMessage(String message) throws IOException {
         server.sendMessage("16-" + message);

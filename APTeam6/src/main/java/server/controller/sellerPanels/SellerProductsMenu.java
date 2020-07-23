@@ -5,6 +5,7 @@ import server.Server;
 import server.controller.Parent;
 import client.view.old.SellerProductsMenuView;
 import server.controller.ProgramManager;
+import server.model.logs.BuyLog;
 import server.model.logs.LogsInGeneral;
 import server.model.product.DiscountCode;
 import server.model.product.Product;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 
 public class SellerProductsMenu implements Parent {
     private Server server = null;
+
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
@@ -32,8 +34,8 @@ public class SellerProductsMenu implements Parent {
     }
 
     public void editProduct(String message) throws IOException {
-        HashMap<Integer,Product> allProducts = ProgramManager.getProgramManagerInstance().getAllProducts();
-        if(allProducts.containsKey(Integer.parseInt(message.split("---")[0]))) {
+        HashMap<Integer, Product> allProducts = ProgramManager.getProgramManagerInstance().getAllProducts();
+        if (allProducts.containsKey(Integer.parseInt(message.split("---")[0]))) {
             Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message.split("---")[0]));
             //TODO check data validation
             //name---categoryName---subCategoryName---price
@@ -41,7 +43,7 @@ public class SellerProductsMenu implements Parent {
             tempProduct.setCategoryName(message.split("---")[2]);
             tempProduct.setSubCategoryName(message.split("---")[3]);
             tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
-        }else{
+        } else {
             sendMessage("incorrectId");
         }
         sendMessage("");
@@ -50,17 +52,34 @@ public class SellerProductsMenu implements Parent {
     public void addProduct(String message) throws IOException {
         //name---categoryName---subCategoryName---Date---price
         String[] dataSplit = message.split("---");
-        new Product(dataSplit[0],dataSplit[1],dataSplit[2],dataSplit[3],Long.parseLong(dataSplit[4]));
+        new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
         sendMessage("created");
     }
 
     public void viewBuyersOfProduct(String message) throws IOException {
-        for (Integer integer : ProgramManager.getProgramManagerInstance().getLogsInGeneralHashMap().keySet()) {
+        ArrayList<String> buyersName = new ArrayList<>();
 
+        for (LogsInGeneral log : ProgramManager.getProgramManagerInstance().getAllLogs()) {
+
+            if (log.getType() == 1) {
+
+                BuyLog buyLog = (BuyLog) log;
+                for (Product boughtProduct : buyLog.getBoughtProducts()) {
+
+                    if (boughtProduct.getName().equals(message)){
+                        buyersName.add(buyLog.getBuyerUserName());
+                    }
+                }
+            }
+        }
+        String result = "";
+
+        for (String s : buyersName) {
+            result+=s;
+            result+="---";
         }
 
-        sendMessage("");
-
+        sendMessage(result);
     }
 
     public void removeProduct(String message) throws IOException {

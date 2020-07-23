@@ -64,7 +64,11 @@ public class Cart implements Parent {
         }
     }
     public void purchase(){
-        HashMap<Product,Integer> buyBasket = server.getBuyBasket();
+        try {
+            new ReceiveBuyerInfo().start(server);
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
     }
     public void showTotalPrice(){
         HashMap<Product,Integer> buyBasket = server.getBuyBasket();
