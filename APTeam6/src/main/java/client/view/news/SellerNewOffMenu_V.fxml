@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="245.0" prefWidth="405.0" style="-fx-background-color: #fcfff0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.SellerNewOffMenu_V">
+   <children>
+      <ListView layoutX="14.0" layoutY="40.0" prefHeight="189.0" prefWidth="248.0" fx:id="productsListView"/>
+      <Label layoutX="14.0" layoutY="14.0" text="Products:" />
+      <Button layoutX="276.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Cancel" onAction="#cancelButton"/>
+      <Button layoutX="276.0" layoutY="171.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Create the off" onAction="#createButton"/>
+      <TextField layoutX="276.0" layoutY="40.0" prefHeight="25.0" prefWidth="100.0" fx:id="percentageTextField"/>
+      <Label layoutX="276.0" layoutY="14.0" text="Percentage:" />
+      <Label layoutX="382.0" layoutY="44.0" text="\%" />
+   </children>
+</AnchorPane>
