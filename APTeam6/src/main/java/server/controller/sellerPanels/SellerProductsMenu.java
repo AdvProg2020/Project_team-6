@@ -7,6 +7,7 @@ import client.view.old.SellerProductsMenuView;
 import server.controller.ProgramManager;
 import server.model.logs.BuyLog;
 import server.model.logs.LogsInGeneral;
+import server.model.product.Comment;
 import server.model.product.DiscountCode;
 import server.model.product.Product;
 
@@ -29,8 +30,17 @@ public class SellerProductsMenu implements Parent {
 
     public void viewProduct(String message) throws IOException {
         Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message));
-        //Name---Description---Price---Category---SubCategory---Comments
-        sendMessage(tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getComments());
+        //Name---Description---Price---Category---SubCategory---Comment1===com2===com3...
+        String result = tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() +
+                "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---";
+
+        for (Comment comment : tempProduct.getComments()) {
+            result+=comment.getTitle();
+            result+=":";
+            result+=comment.getText();
+            result+="===";
+        }
+        sendMessage(result);
     }
 
     public void editProduct(String message) throws IOException {
