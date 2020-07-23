@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
-public class SellerNewOffMenu_V {
+public class SellerNewOffMenu_V extends GeneralController_V{
     public ListView<CheckBox> productsListView;
     public TextField percentageTextField;
 

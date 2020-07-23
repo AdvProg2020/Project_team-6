@@ -2,6 +2,7 @@ package server.model.product;
 
 public class Score {
     private String username;
+    //Maximum is 10 and minimum is 0
     private float score;
     private int productId;
 
