@@ -132,7 +132,7 @@ public class Server implements Runnable {
             02-1: (managerPanel/registerManager): get and verify data for register
 
             03-0: start login menu(LoginMenu)
-                (return start when exist manager and return createManager when doesnt exist manager)
+                (return start when exist manager and return createManager when doesnt exist manager) //TODO: Kamali fix this line
                 -1: get and verify data for new buyer
                 -2: get and verify data for new seller
                 -3: get and verify data for new manager

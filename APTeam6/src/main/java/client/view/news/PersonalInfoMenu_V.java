@@ -27,6 +27,10 @@ public class PersonalInfoMenu_V extends GeneralController_V{
     public Button S_offsButton;
     public Button B_categoriesButton;
 
+    public void reset(){
+        //TODO TODO TODO
+    }
+
     public void changePasswordButton(ActionEvent actionEvent) {
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setHeaderText("New passWord");
