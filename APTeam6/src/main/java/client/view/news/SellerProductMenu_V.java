@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 
 import java.util.ArrayList;
 
-public class SellerProductMenu_V {
+public class SellerProductMenu_V extends GeneralController_V{
     public TextField nameTextField;
     public TextArea descriptionTextArea;
     public ListView<TextField> categoryInfoListView;

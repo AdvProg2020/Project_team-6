@@ -28,7 +28,7 @@ public class PersonalInfoMenu_V extends GeneralController_V{
     public Button B_categoriesButton;
 
     public void reset(){
-        //TODO TODO TODO
+        //TODO get role and disable buttons and credit.
     }
 
     public void changePasswordButton(ActionEvent actionEvent) {
