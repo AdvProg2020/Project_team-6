@@ -57,6 +57,9 @@ public class Cart implements Parent {
         int number = buyBasket.get(tempProduct) - 1;
         buyBasket.remove(tempProduct,buyBasket.get(tempProduct));
         buyBasket.put(tempProduct,number);
+        if(number <= 0){
+            buyBasket.remove(productId);
+        }
         try {
             sendMessage("decreased");
         } catch (IOException e) {
@@ -81,7 +84,5 @@ public class Cart implements Parent {
         } catch (IOException e) {
             System.err.println("error occurred");
         }
-
-
     }
 }

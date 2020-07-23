@@ -106,7 +106,7 @@ public class ShowDiscountCode implements Parent {
 
     public void showDiscountCode(String data) throws IOException {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
-        if(discountCodeHashMap.containsKey(data)) {
+        if(discountCodeHashMap.containsKey(data.split("---")[0])){
             DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data);
             sendMessage("id :" + tempDiscountCode.getId() + "\nStart Data :" + tempDiscountCode.getStart() + " \nEnd Date :" + tempDiscountCode.getEnd() + "\nRepetition Time :" + tempDiscountCode.getRepetitionTime() + "\nPercentage :" + tempDiscountCode.getPercentage());
         }else{
@@ -116,7 +116,7 @@ public class ShowDiscountCode implements Parent {
 
     public void removeDiscountCode(String data) throws IOException {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
-        if(discountCodeHashMap.containsKey(data)) {
+        if(discountCodeHashMap.containsKey(data.split("---")[0])) {
             ProgramManager.getProgramManagerInstance().deleteDiscountCode(ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data));
         }else{
             sendMessage("incorrectCode");
@@ -125,7 +125,7 @@ public class ShowDiscountCode implements Parent {
 
     public void changeDataByCode(String data) throws IOException {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
-        if(discountCodeHashMap.containsKey(data)) {
+        if(discountCodeHashMap.containsKey(data.split("---")[0])) {
             DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data.split("---")[0]);
             //TODO check data validation
             //code---startDate---endDate---percentage---repetitionTime
