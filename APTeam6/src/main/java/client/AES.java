@@ -16,7 +16,6 @@ public class AES {
     public static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
-
             key = myKey.getBytes("UTF-8");
             sha = MessageDigest.getInstance("SHA-1");
             key = sha.digest(key);
