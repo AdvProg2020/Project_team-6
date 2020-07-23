@@ -2,6 +2,7 @@ package server.controller.managerPanels;
 import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
+import server.model.account.Account;
 import server.model.product.DiscountCode;
 import client.view.old.CreateDiscountCodeView;
 
@@ -42,7 +43,14 @@ public class CreateDiscountCode implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        String message = "";
+        for (Account allAccount : ProgramManager.getProgramManagerInstance().getAllAccounts()) {
+            if(allAccount.getRole() == 1){
+                message = message + allAccount.getUsername() + "---";
+            }
+
+        }
+        sendMessage(message);
     }
 
     private void sendMessage(String message) throws IOException {
