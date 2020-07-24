@@ -30,13 +30,15 @@ public class Cart implements Parent {
     }
     public void viewProduct(int productId){
         HashMap<Product,Integer> buyBasket = server.getBuyBasket();
-        Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(productId);
-        //Name---CategoryName---subCategoryName---Price---Description
-        String message = tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getPrice() + "---" + tempProduct.getDescription();
-        try {
-            sendMessage(message);
-        } catch (IOException e) {
-            System.err.println("error occurred");
+        if(buyBasket.containsKey(productId)) {
+            Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(productId);
+            //Name---CategoryName---subCategoryName---Price---Description
+            String message = tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getPrice() + "---" + tempProduct.getDescription();
+            try {
+                sendMessage(message);
+            } catch (IOException e) {
+                System.err.println("error occurred");
+            }
         }
     }
     public void increase(int productId){

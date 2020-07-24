@@ -47,25 +47,37 @@ public class SellerProductsMenu implements Parent {
     public void editProduct(String message) throws IOException {
         HashMap<Integer, Product> allProducts = ProgramManager.getProgramManagerInstance().getAllProducts();
         if (allProducts.containsKey(Integer.parseInt(message.split("---")[0]))) {
-            Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message.split("---")[0]));
-            //TODO check data validation
-            //name---categoryName---subCategoryName---price
-            tempProduct.setName(message.split("---")[1]);
-            tempProduct.setCategoryName(message.split("---")[2]);
-            tempProduct.setSubCategoryName(message.split("---")[3]);
-            tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
-        } else {
-            sendMessage("incorrectId");
+            if (!message.split("---")[0].equals("") &&
+                    !message.split("---")[1].equals("") &&
+                    !message.split("---")[2].equals("") &&
+                    !message.split("---")[3].equals("") &&
+                    !message.split("---")[4].equals("")) {
+                Product tempProduct = ProgramManager.getProgramManagerInstance().getProductById(Integer.parseInt(message.split("---")[0]));
+
+                //name---categoryName---subCategoryName---price
+                tempProduct.setName(message.split("---")[1]);
+                tempProduct.setCategoryName(message.split("---")[2]);
+                tempProduct.setSubCategoryName(message.split("---")[3]);
+                tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
+            } else {
+                sendMessage("incorrectId");
+            }
         }
-        sendMessage("");
     }
 
     public void addProduct(String message) throws IOException {
         //name---categoryName---subCategoryName---price
         String[] dataSplit = message.split("---");
-        Product product = new Product(dataSplit[0], dataSplit[1], dataSplit[2], Long.parseLong(dataSplit[3]));
-        new ProductRequest(product,(byte)0,null);
-        sendMessage("created");
+        if(!dataSplit[0].equals("") &&
+                !dataSplit[1].equals("") &&
+                !dataSplit[2].equals("") &&
+                !dataSplit[3].equals("")) {
+            Product product = new Product(dataSplit[0], dataSplit[1], dataSplit[2], Long.parseLong(dataSplit[3]));
+            new ProductRequest(product, (byte) 0, null);
+            sendMessage("created");
+        }else{
+            sendMessage("empty input");
+        }
     }
 
     public void viewBuyersOfProduct(String message) throws IOException {
