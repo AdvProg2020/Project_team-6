@@ -16,6 +16,7 @@ public class VerifyDiscountCodeV extends GeneralController_V {
     public TextField PhoneNumberTextField;
     public TextField DiscountCode;
     public Button verifyAndSubmit;
+    public Button Back;
 
     public void DiscountCheck(ActionEvent actionEvent) {
         if(DiscountCheck.isSelected()){
@@ -37,5 +38,9 @@ public class VerifyDiscountCodeV extends GeneralController_V {
         if(receipt.startsWith("verified")){
 
         }
+    }
+
+    public void Back(ActionEvent actionEvent) {
+        senderReceiver.allControllers.get(15).start();
     }
 }
