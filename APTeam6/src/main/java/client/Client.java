@@ -26,7 +26,7 @@ public class Client extends Application {
     private Stage theStage;
     private ArrayList<FXMLLoader> allFXMLLoaders;
     private ArrayList<Scene> allScenes;
-    private ArrayList<GeneralController_V> allControllers;
+    public ArrayList<GeneralController_V> allControllers;
     private ArrayList<Parent> allRoots;
 
     DataInputStream dataInputStream;

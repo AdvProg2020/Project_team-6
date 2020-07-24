@@ -13,6 +13,16 @@ public class SingleProductMenu_V extends GeneralController_V{
     public ProgressBar scoreProgressBar;
     public Label scoreLabel;
     public ListView<String> commentsListView;
+    public ListView<String> additionalInfoListView;
+
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(14);
+        senderReceiver.sendMessage("12-9");
+        String receipt = senderReceiver.getMessage();
+        //TODO: server should send additionals too
+        reset();
+    }
 
     public void reset(String name, String description, ArrayList<String> comments, float averageScore){
         nameLabel.setText(name);
