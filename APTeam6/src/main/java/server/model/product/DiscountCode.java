@@ -29,14 +29,19 @@ public class DiscountCode {
 
     @Override
     public String toString() {
-        return "DiscountCode{" +
-                "code='" + code + '\'' +
-                ", start=" + start +
-                ", end=" + end +
-                ", percentage=" + percentage +
-                ", repetitionTime=" + repetitionTime +
-                ", usersIncludedInDiscountCode=" + usersIncludedInDiscountCode +
-                '}';
+        StringBuilder s = new StringBuilder("" +
+                "" + code +
+                "---" + start +
+                "---" + end +
+                "---" + percentage +
+                "---" + repetitionTime +
+                "---");
+        for (String user : usersIncludedInDiscountCode) {
+            s.append(user);
+            s.append("===");
+        }
+        s.append("---");
+        return s.toString();
     }
 
     public String getCode() {

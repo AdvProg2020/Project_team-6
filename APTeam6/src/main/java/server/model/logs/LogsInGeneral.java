@@ -1,6 +1,7 @@
 package server.model.logs;
 import server.controller.ProgramManager;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class LogsInGeneral {
@@ -13,7 +14,7 @@ public class LogsInGeneral {
     /**
      * Attention: this method automatically adds the log to the log list.
      **/
-    public LogsInGeneral(Date date, int executedDiscount,int logId,int type) {
+    public LogsInGeneral(LocalDateTime date, int executedDiscount, int logId, int type) {
         this.date = date;
         this.executedDiscount = executedDiscount;
         nextLogId++;

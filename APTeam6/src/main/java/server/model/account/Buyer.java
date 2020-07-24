@@ -30,6 +30,10 @@ public class Buyer extends Account implements Comparable<Buyer> {
         return credit;
     }
 
+    public void setCredit(long credit) {
+        this.credit = credit;
+    }
+
     public int compareTo(Buyer buyer) {
         switch (field) {
             case 1:
@@ -110,7 +114,8 @@ public class Buyer extends Account implements Comparable<Buyer> {
         return buyBasket;
     }
 
-    //TODO: Whoever made this method please delete it
+
+
     /*
     public void increaseProductInBuyBasketBy(int productId, int count) {
         if (buyBasket.containsKey(productId)) {

@@ -16,10 +16,10 @@ public class ProductRequest implements Request{
 
     @Override
     public String toString() {
-        String s = "ProductRequest{" +
-                "product=" + product +
-                ", newValue='" + newValue + '\'' +
-                ", action=" ;
+        String s = "" +
+                "" + product +
+                "===" + newValue +
+                "===" ;
         if(action==0){
             s+="create";
         }else if (action==1){
@@ -31,7 +31,7 @@ public class ProductRequest implements Request{
         }else if(action==4){
             s+="change price";
         }
-        s+='}';
+        s+="---";
         return s;
     }
 

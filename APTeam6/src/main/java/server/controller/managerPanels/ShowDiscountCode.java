@@ -108,7 +108,7 @@ public class ShowDiscountCode implements Parent {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
         if(discountCodeHashMap.containsKey(data.split("---")[0])){
             DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data);
-            sendMessage("id :" + tempDiscountCode.getId() + "\nStart Data :" + tempDiscountCode.getStart() + " \nEnd Date :" + tempDiscountCode.getEnd() + "\nRepetition Time :" + tempDiscountCode.getRepetitionTime() + "\nPercentage :" + tempDiscountCode.getPercentage());
+            sendMessage(tempDiscountCode.getId() + "---" + tempDiscountCode.getStart() + "---" + tempDiscountCode.getEnd() + "---" + tempDiscountCode.getRepetitionTime() + "---" + tempDiscountCode.getPercentage()+"---");
         }else{
             sendMessage("incorrectCode");
         }

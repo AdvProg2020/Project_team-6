@@ -18,7 +18,14 @@ public class ManageUsers implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        StringBuilder string = new StringBuilder();
+        for (Account account : ProgramManager.getProgramManagerInstance().getAllAccounts()) {
+            string.append(account.getUsername());
+            string.append("---");
+            string.append(account.getRole());
+            string.append("===");
+        }
+        sendMessage(string.toString());
     }
 
     private void sendMessage(String message) throws IOException {

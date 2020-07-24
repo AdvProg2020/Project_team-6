@@ -4,6 +4,7 @@ import server.controller.ProgramManager;
 import server.model.account.Buyer;
 import server.model.product.Product;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,23 +12,23 @@ import java.util.Date;
 
 public class BuyLog extends LogsInGeneral implements Comparable<BuyLog> {
     private int paidAmount;
-    private ArrayList<Product> boughtProducts = new ArrayList<>();
+    private ArrayList<Integer> boughtProductsId;
     private String buyerUserName;
 
-    public BuyLog(Date date, int executedDiscount, int logId,ArrayList<Product> products, int paidAmount, String buyerUserName) {
-        super(date, executedDiscount, logId , 1);
+    public BuyLog(int executedDiscount, int logId, int paidAmount, String buyerUserName,ArrayList<Integer> productIds) {
+        super(LocalDateTime.now(), executedDiscount, logId , 1);
         this.paidAmount = paidAmount;
-        this.boughtProducts = products;
         this.buyerUserName = buyerUserName;
         Buyer.buyLogIds.add(logId);
+        boughtProductsId = productIds;
     }
 
     public int getPaidAmount() {
         return paidAmount;
     }
 
-    public ArrayList<Product> getBoughtProducts() {
-        return boughtProducts;
+    public ArrayList<Integer> getBoughtProducts() {
+        return boughtProductsId;
     }
 
     public String getBuyerUserName() {

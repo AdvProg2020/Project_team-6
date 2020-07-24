@@ -49,7 +49,7 @@ public class Server implements Runnable {
         } catch (IOException e) {
             System.err.println("error occurred");
         }
-        //TODO
+
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -116,6 +116,17 @@ public class Server implements Runnable {
                 e.printStackTrace();
             }
 
+            if(!command.startsWith(token)){
+                try {
+                    sendMessage("invalid token");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }else{
+                command = command.substring(10);
+            }
+
 
 
 
@@ -123,13 +134,15 @@ public class Server implements Runnable {
 
             **command start with:**
 
-            00-0: start main screen(managerPanel or mainScreen) //TODO: Kamali fix this line although it's not important
+            00-0: start main screen(mainScreen)
 
 
             01-0: start PersonalInfoMenu (personalMenuInfo)
                 -1: change information in personalInfoMenu
 
-            02-1: (managerPanel/registerManager): get and verify data for register
+            02-0: start register manager or supporter
+                -1: (managerPanel/registerManager): get and verify data for register manager
+                -2: (managerPanel/registerManager): get and verify data for register supporter
 
             03-0: start login menu(LoginMenu)
                 (return start when exist manager and return createManager when doesnt exist manager)
@@ -208,6 +221,14 @@ public class Server implements Runnable {
                 -4: pay
                 -5: get balance
 
+            18-0: start manage all product (manager)
+                -1: remove product
+
+            19-0: start EWallet
+                -1:takeCredit
+                -2addToSellLog
+                -3:addToBuyLog
+
 
             */
 
@@ -256,11 +277,37 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if (command.startsWith("02-0")) {
+                RegisterManager registerManager = new RegisterManager();
+                try {
+                    registerManager.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = registerManager;
+            }
             else if (command.startsWith("02-1")) {
                 if (thisParent instanceof RegisterManager) {
                     RegisterManager registerManager = (RegisterManager) thisParent;
                     try {
                         registerManager.registerNewManager(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("02-2")) {
+                if (thisParent instanceof RegisterManager) {
+                    RegisterManager registerManager = (RegisterManager) thisParent;
+                    try {
+                        registerManager.registerNewSupporter(command.substring(4));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -715,7 +762,8 @@ public class Server implements Runnable {
                 }
                 preParent = thisParent;
                 thisParent = categoriesAndSubCategoriesMenu;
-            }else if(command.startsWith("12-1")){
+            }
+            else if (command.startsWith("12-1")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.openCategory(Integer.parseInt(command.substring(4)));
@@ -727,7 +775,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("12-2")){
+            }
+            else if (command.startsWith("12-2")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     try {
@@ -743,7 +792,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("12-3")){
+            }
+            else if (command.startsWith("12-3")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.editCategory(Integer.parseInt(command.split("---")[0].substring(4)),command.split("---")[1]);
@@ -755,7 +805,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("12-4")){
+            }
+            else if (command.startsWith("12-4")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.removeCategory(Integer.parseInt(command.substring(4)));
@@ -768,7 +819,7 @@ public class Server implements Runnable {
                 }
 
             }
-            else if(command.startsWith("12-5")){
+            else if (command.startsWith("12-5")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.openSubCategory(Integer.parseInt(command.substring(4)));
@@ -781,7 +832,7 @@ public class Server implements Runnable {
                 }
 
             }
-            else if(command.startsWith("12-6")){
+            else if (command.startsWith("12-6")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.addSubCategory(command.substring(4));
@@ -793,7 +844,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("12-7")){
+            else if (command.startsWith("12-7")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.editSubCategory(Integer.parseInt(command.split("---")[0].substring(4)),command.split("---")[1]);
@@ -805,7 +856,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("12-8")){
+            else if (command.startsWith("12-8")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.removeSubCategory(Integer.parseInt(command.substring(4)));
@@ -817,7 +868,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("12-9")){
+            else if (command.startsWith("12-9")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.openProduct(Integer.parseInt(command.substring(4)));
@@ -829,7 +880,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("12-a")){
+            else if (command.startsWith("12-a")) {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.addToBuyBasket(Integer.parseInt(command.split("---")[0].substring(4)),Integer.parseInt(command.split("---")[1]));
@@ -899,7 +950,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("14-0")){
+            else if (command.startsWith("14-0")) {
                 Cart cart = new Cart();
                 try {
                     cart.start(this);
@@ -909,7 +960,8 @@ public class Server implements Runnable {
                 preParent = thisParent;
                 thisParent = cart;
 
-            }else if(command.startsWith("14-1")){
+            }
+            else if (command.startsWith("14-1")) {
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
                     cart.viewProduct(Integer.parseInt(command.substring(4)));
@@ -921,7 +973,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("14-2")){
+            }
+            else if (command.startsWith("14-2")) {
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
                     cart.increase(Integer.parseInt(command.substring(4)));
@@ -933,7 +986,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("14-3")){
+            }
+            else if (command.startsWith("14-3")) {
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
                     cart.decrease(Integer.parseInt(command.substring(4)));
@@ -945,7 +999,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("14-4")){
+            }
+            else if (command.startsWith("14-4")) {
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
                     cart.purchase();
@@ -957,7 +1012,8 @@ public class Server implements Runnable {
                     }
                 }
 
-            }else if(command.startsWith("14-5")){
+            }
+            else if (command.startsWith("14-5")) {
                 if(thisParent instanceof Cart){
                     Cart cart = (Cart) thisParent;
                     cart.showTotalPrice();
@@ -970,7 +1026,7 @@ public class Server implements Runnable {
                 }
 
             }
-            else if(command.startsWith("15-0")){
+            else if (command.startsWith("15-0")) {
                 VerifyDiscountCode verifyDiscountCode = new VerifyDiscountCode();
                 try {
                     verifyDiscountCode.start(this);
@@ -980,7 +1036,7 @@ public class Server implements Runnable {
                 preParent = thisParent;
                 thisParent = verifyDiscountCode;
             }
-            else if(command.startsWith("15-1")){
+            else if (command.startsWith("15-1")) {
                 if(thisParent instanceof VerifyDiscountCode){
                     VerifyDiscountCode verifyDiscountCode = (VerifyDiscountCode) thisParent;
                     verifyDiscountCode.verify(command.substring(4));
@@ -1017,7 +1073,7 @@ public class Server implements Runnable {
                 preParent = thisParent;
                 thisParent = bank;
             }
-            else if(command.startsWith("17-1")){
+            else if (command.startsWith("17-1")) {
                 if(thisParent instanceof Bank){
                     Bank bank = (Bank) thisParent;
                     try {
@@ -1033,7 +1089,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("17-2")){
+            else if (command.startsWith("17-2")) {
                 if(thisParent instanceof Bank){
                     Bank bank = (Bank) thisParent;
                     try {
@@ -1053,7 +1109,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("17-3")){
+            else if (command.startsWith("17-3")) {
                 if(thisParent instanceof Bank){
                     Bank bank = (Bank) thisParent;
                     try {
@@ -1069,7 +1125,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("17-4")){
+            else if (command.startsWith("17-4")) {
                 if(thisParent instanceof Bank){
                     Bank bank = (Bank) thisParent;
                     try {
@@ -1085,7 +1141,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("17-5")){
+            else if (command.startsWith("17-5")) {
                 if(thisParent instanceof Bank){
                     Bank bank = (Bank) thisParent;
                     try {
@@ -1101,7 +1157,7 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("18-0")){
+            /*else if(command.startsWith("18-0")){
                 if(thisParent instanceof Bank){
                     Bank bank = (Bank) thisParent;
                     try {
@@ -1117,8 +1173,76 @@ public class Server implements Runnable {
                     }
                 }
             }
+             */
+            else if (command.startsWith("18-0")) {
+                ManageAllProducts manageAllProducts = new ManageAllProducts();
+                try {
+                    manageAllProducts.start(this);
+                } catch (IOException e) {
+                    System.err.println("error occurred");
+                }
+                preParent = thisParent;
+                thisParent = manageAllProducts;
+            }
+            else if (command.startsWith("18-1")) {
+                if(thisParent instanceof ManageAllProducts){
+                    ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
+                    manageAllProducts.remove(Integer.parseInt(command));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if (command.startsWith("19-0")) {
+                EWallet eWallet = new EWallet();
+                try {
+                    eWallet.start(this);
+                } catch (IOException e) {
+                    System.err.println("error occurred");
+                }
+                preParent = thisParent;
+                thisParent = eWallet;
+            }
+            else if (command.startsWith("19-1")) {
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet) thisParent;
+                    eWallet.takeCredit(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if (command.startsWith("19-2")) {
+                    if(thisParent instanceof EWallet){
+                        EWallet eWallet = (EWallet) thisParent;
+                        eWallet.addToSellLog(command.substring(4));
+                    } else {
+                        try {
+                            sendMessage("NotAllowed");
+                        } catch (IOException e) {
+                            System.err.println("error occurred");
+                        }
+                    }
+            }
 
-
+            else if (command.startsWith("19-3")) {
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet) thisParent;
+                    eWallet.addToBuyLog(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
 
 
 
