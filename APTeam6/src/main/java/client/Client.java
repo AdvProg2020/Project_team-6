@@ -32,8 +32,8 @@ public class Client extends Application {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
-    private String token = "";
-    private boolean tokenWasTaken = false;
+    //private String token = "";
+    //private boolean tokenWasTaken = false;
 
     public void run() throws IOException {
         /*
@@ -43,9 +43,9 @@ public class Client extends Application {
         dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
         dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
 
-        if(!tokenWasTaken){
+        /*if(!tokenWasTaken){
                 token = getMessage();
-                tokenWasTaken = true;}
+                tokenWasTaken = true;}*/
             /*
             String s = scanner.nextLine();
             sendMessage(s);
@@ -106,7 +106,7 @@ public class Client extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (tokenWasTaken) {
+        /*if (tokenWasTaken) {
             String secretKey;
             secretKey = AES.getSecretKeyByToken(token);
             command = AES.decrypt(command, secretKey);
@@ -114,7 +114,7 @@ public class Client extends Application {
         else {
             tokenWasTaken = true;
             token = command;
-        }
+        }*/
         return command;
     }
 
@@ -123,12 +123,14 @@ public class Client extends Application {
     }
 
     public void sendMessage(String command){
-        command = token + command;
+        /*command = token + command;
 
         String secretKey;
         secretKey = AES.getSecretKeyByToken(token);
         command = AES.encrypt(command, secretKey);
 
+
+         */
         try {
             dataOutputStream.writeUTF(command);
             dataOutputStream.flush();
