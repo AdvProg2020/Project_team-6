@@ -49,7 +49,7 @@ public class Server implements Runnable {
         } catch (IOException e) {
             System.err.println("error occurred");
         }
-        //TODO
+
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -123,7 +123,7 @@ public class Server implements Runnable {
 
             **command start with:**
 
-            00-0: start main screen(managerPanel or mainScreen) //TODO: Kamali fix this line although it's not important
+            00-0: start main screen(mainScreen)
 
 
             01-0: start PersonalInfoMenu (personalMenuInfo)

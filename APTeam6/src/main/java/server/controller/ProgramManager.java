@@ -53,11 +53,16 @@ public class ProgramManager {
     private HashMap<String, DiscountCode> allDiscountCodes;
     private ArrayList<Request> allRequests;
     private HashMap<Integer, Off> allOffs;
-    public ArrayList<Account> allLoggedInUser = null;
+    public ArrayList<Account> allLoggedInUser = new ArrayList<>();
 
     //private Account currentlyLoggedInUsers;
 
-    private HashMap<Product, Integer> buyBasket;
+    //private HashMap<Product, Integer> buyBasket;
+
+
+    public HashMap<Integer, Off> getAllOffs() {
+        return allOffs;
+    }
 
 
     //------------------------ Test----------
@@ -94,7 +99,7 @@ public class ProgramManager {
 
         //currentlyLoggedInUsers = null;
 
-        buyBasket = new HashMap<>();
+        //buyBasket = new HashMap<>();
     }
 
     public void loadFromFiles() {
@@ -404,7 +409,7 @@ public class ProgramManager {
                 result.append("ProductRequest---").append(allRequests.get(i).toString());
             } else if (allRequests.get(i) instanceof OffRequest) {
                 //System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
-                result.append("\n").append(i).append(". ").append(allRequests.get(i).toString()).append("is an OffRequest");
+                result.append("OffRequest---").append(allRequests.get(i).toString());
             }
         }
 
