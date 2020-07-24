@@ -133,6 +133,8 @@ public class Server implements Runnable {
 
             **command start with:**
 
+            99-9: back
+
             00-0: start main screen(mainScreen)
 
 
@@ -255,6 +257,12 @@ public class Server implements Runnable {
                 }
 
                  */
+            }
+            else if (command.startsWith("99-9")) {
+                if(preParent!=null) {
+                    thisParent = preParent;
+                    preParent = null;
+                }
             }
             else if (command.startsWith("01-0")) {
                 PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
