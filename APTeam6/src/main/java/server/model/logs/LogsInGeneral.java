@@ -7,7 +7,7 @@ import java.util.Date;
 public class LogsInGeneral {
     protected static int nextLogId = 0;
     protected int logId;
-    protected Date date;
+    protected LocalDateTime date;
     protected int executedDiscount;
     protected int type;      // 1 : buyLog  -  2 : sellLog
 
@@ -35,7 +35,7 @@ public class LogsInGeneral {
         return nextLogId;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
