@@ -20,11 +20,10 @@ public class OffManagementSeller implements Parent {
     public void start(Server server) throws IOException {
         this.server = server;
         String message = "";
-        Account tempAccount = server.getCurrentlyLoggedInUsers();
-        for (Integer productId : ((Seller) (tempAccount)).productIds) {
-            message = message + ProgramManager.getProgramManagerInstance().getProductById(productId).getName() + "---";
+        for (Integer integer : ProgramManager.getProgramManagerInstance().getAllOffs().keySet()) {
+            message = message + ProgramManager.getProgramManagerInstance().getAllOffs().get(integer).getOffId() + "---";
         }
-        sendMessage("start");
+        sendMessage(message);
     }
 
     private void sendMessage(String message) throws IOException {
