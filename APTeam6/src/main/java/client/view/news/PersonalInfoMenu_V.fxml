@@ -21,7 +21,7 @@
       <Button layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#changeFirstNameButton" prefHeight="24.0" prefWidth="24.0" />
       <Button layoutX="257.0" layoutY="98.0" mnemonicParsing="false" onAction="#ChangeEmailButton" prefHeight="24.0" prefWidth="24.0" />
       <Label fx:id="lastNameLabel" layoutX="44.0" layoutY="133.0" text="Last Name:" />
-      <Label fx:id="PhoneLabel" layoutX="289.0" layoutY="133.0" text="Phone no:" />
+      <Label fx:id="phoneLabel" layoutX="289.0" layoutY="133.0" text="Phone no:" />
       <Button layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#changeLastNameButton" prefHeight="24.0" prefWidth="24.0" />
       <Button layoutX="257.0" layoutY="129.0" mnemonicParsing="false" onAction="#ChangePhoneButton" prefHeight="24.0" prefWidth="24.0" />
       <Line endX="386.0" layoutX="114.0" layoutY="196.0" startX="-100.0" />

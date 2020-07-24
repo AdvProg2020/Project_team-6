@@ -62,7 +62,7 @@ public class ManageAllProducts implements Parent {
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("14-" + message);
+        server.sendMessage("18-" + message);
     }
 
 }

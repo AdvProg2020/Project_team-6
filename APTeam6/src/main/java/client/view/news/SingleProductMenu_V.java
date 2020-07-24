@@ -7,7 +7,7 @@ import javafx.scene.control.ProgressBar;
 
 import java.util.ArrayList;
 
-public class SingleProductMenu_V {
+public class SingleProductMenu_V extends GeneralController_V{
     public Label nameLabel;
     public Label descriptionLabel;
     public ProgressBar scoreProgressBar;

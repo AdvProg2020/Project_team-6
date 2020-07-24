@@ -4,8 +4,25 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ManageUsers_V extends GeneralController_V{
     public ListView<String> usersListView;
+
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(4);
+        senderReceiver.sendMessage("09-0");
+        String receipt = senderReceiver.getMessage();
+        //TODO: kidding me?
+        //reset(new ArrayList<String>(Arrays.asList(receipt.)));
+    }
+
+    private void reset(ArrayList<String> users){
+        usersListView.getItems().clear();
+        usersListView.getItems().addAll(users);
+    }
 
     public void initialize(){
         usersListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

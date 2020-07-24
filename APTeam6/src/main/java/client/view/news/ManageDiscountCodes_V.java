@@ -9,6 +9,16 @@ import java.util.ArrayList;
 public class ManageDiscountCodes_V extends GeneralController_V{
     public ListView<String> discountCodeListView;
 
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(7);
+        senderReceiver.sendMessage("04-0");
+        String receipt = senderReceiver.getMessage();
+        //TODO: WHAT??????
+        ArrayList<String> strings = new ArrayList<>();
+        reset(strings);
+    }
+
     public void initialize(){
         discountCodeListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }

@@ -16,10 +16,10 @@ public class OffRequest implements Request {
 
     @Override
     public String toString() {
-        String s = "OffRequest{" +
-                "off=" + off +
-                ", changingFiled='" + changingFiled + '\'' +
-                ", action=";
+        String s = "" +
+                "" + off +
+                "===" + changingFiled +
+                "===";
         if(action==0){
             s+="add off";
         }else if (action==1){
@@ -31,7 +31,7 @@ public class OffRequest implements Request {
         }else if(action==4){
             s+= "offAmount";
         }
-        s += '}';
+        s += "---";
         return s;
     }
 

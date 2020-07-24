@@ -12,6 +12,19 @@ public class LoginMenu_V extends GeneralController_V{
     public Button logoutButton;
     public Button registerManagerButton;
 
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(4);
+        senderReceiver.sendMessage("03-0");
+        String receipt = senderReceiver.getMessage();
+        reset();
+    }
+
+    private void reset(){
+        userNameText.setText("");
+        passwordText.setText("");
+    }
+
     public void backButtonAction(ActionEvent actionEvent) {
         //TODO: (message) -
     }

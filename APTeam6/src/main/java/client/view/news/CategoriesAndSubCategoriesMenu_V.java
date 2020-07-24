@@ -4,13 +4,26 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
-    //This method is to be called before setting the scene
-    public void reset(){
+    @Override
+    public void start(){
+        senderReceiver.changeMenu(0);
+        senderReceiver.sendMessage("12-0");
+        String receipt = senderReceiver.getMessage();
+        ArrayList<String> allCategories = new ArrayList<>(Arrays.asList(receipt.substring(3).split("---")));
+        reset(allCategories);
     }
 
-    public ListView listView;
-    public ListView attributesListView;
+    public void reset(ArrayList<String> allCategories){
+        listView.getItems().clear();
+        listView.getItems().addAll(allCategories);
+    }
+
+    public ListView<String> listView;
+    public ListView<String> attributesListView;
 
     public void initialize(){
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

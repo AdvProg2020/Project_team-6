@@ -1,6 +1,7 @@
 package client;
 
 import client.view.news.GeneralController_V;
+import client.view.news.LoadingScreen_V;
 import client.view.old.Exit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,6 +29,9 @@ public class Client extends Application {
     private ArrayList<GeneralController_V> allControllers;
     private ArrayList<Parent> allRoots;
 
+    DataInputStream dataInputStream;
+    DataOutputStream dataOutputStream;
+
     private String token = "";
     private boolean tokenWasTaken = false;
 
@@ -34,47 +39,43 @@ public class Client extends Application {
         /*
         Scanner scanner = new Scanner(System.in);
         while (true){
-
-
             if(!tokenWasTaken){
                 token = getMessage();
-                tokenWasTaken = true;
-            }
-
-
+                tokenWasTaken = true;}
             String s = scanner.nextLine();
             sendMessage(s);
             s = getMessage();
             System.out.println(s);
         }
          */
-
         theStage = new Stage();
         allFXMLLoaders = new ArrayList<>();
         allScenes = new ArrayList<>();
         allControllers = new ArrayList<>();
+        allRoots = new ArrayList<>();
 
         theStage.setTitle("MohammadKhani's shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoryAndSubCategoryGenerator_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CreateDiscountCode_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\LoadingScreen_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\LoginMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\MainScreen_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageAllProducts_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageDiscountCodes_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageRequests_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageUsers_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\PersonalInfoMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerNewOffMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerOffsMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerProductMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SingleProductMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CategoriesAndSubCategoriesMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CategoryAndSubCategoryGenerator_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CreateDiscountCode_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("LoadingScreen_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("LoginMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("MainScreen_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageAllProducts_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageDiscountCodes_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageRequests_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageUsers_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("PersonalInfoMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerNewOffMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerOffsMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerProductMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SingleProductMenu_V.fxml")));
 
-        for (FXMLLoader fxmlLoader : allFXMLLoaders)
+        for (FXMLLoader fxmlLoader : allFXMLLoaders) {
             allRoots.add(fxmlLoader.load());
+        }
         for (FXMLLoader fxmlLoader : allFXMLLoaders)
             allControllers.add(fxmlLoader.getController());
         for (GeneralController_V controller : allControllers)
@@ -82,36 +83,54 @@ public class Client extends Application {
         for (Parent root : allRoots)
             allScenes.add(new Scene(root));
 
-        theStage.setScene(allScenes.get(5));
+        dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
+        dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
+
+        theStage.setScene(allScenes.get(3));
         theStage.show();
+        ((LoadingScreen_V) allControllers.get(3)).reset();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
 
-    public String getMessage() throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
-        String command = dataInputStream.readUTF();
-        if(tokenWasTaken) {
+    public String getMessage() {
+        String command = null;
+        try {
+            command = dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (tokenWasTaken) {
             String secretKey;
             secretKey = AES.getSecretKeyByToken(token);
             command = AES.decrypt(command, secretKey);
-        }else{
+        }
+        else {
             tokenWasTaken = true;
             token = command;
         }
         return command;
     }
 
-    public void sendMessage(String command) throws IOException {
+    public void changeMenu(int menuNum){
+        theStage.setScene(allScenes.get(menuNum));
+    }
+
+    public void sendMessage(String command){
         command = token + command;
-        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
+        DataOutputStream dataOutputStream = null;
 
         String secretKey;
         secretKey = AES.getSecretKeyByToken(token);
-        command = AES.encrypt(command,secretKey);
+        command = AES.encrypt(command, secretKey);
 
-        dataOutputStream.writeUTF(token+command);
-        dataOutputStream.flush();
+        try {
+            dataOutputStream.writeUTF(token + command);
+            dataOutputStream.flush();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -154,9 +173,11 @@ public class Client extends Application {
                 //stage.close();
                 this.serverSocket = serverSocket;
                 new Alert(Alert.AlertType.INFORMATION, "CONNECTED!!!").showAndWait();
+                stage.close();
                 run();
             } catch (IOException e) {
                 System.out.println("An error happened while connecting to server!");
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -165,9 +186,10 @@ public class Client extends Application {
         isOnLocalhost.setOnAction(actionEvent -> {
             //ipAddress.setEditable(!isOnLocalhost.isSelected());
             ipAddress.setDisable(isOnLocalhost.isSelected());
-            if(isOnLocalhost.isSelected()){
+            if (isOnLocalhost.isSelected()) {
                 ipAddress.setText("localhost");
-            }else {
+            }
+            else {
                 ipAddress.setText("");
             }
         });
@@ -188,8 +210,8 @@ public class Client extends Application {
         });
 
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(serverIpLabel,isOnLocalhost,ipAddress,serverPortLabel,serverPort,connect,exit);
-        Scene scene = new Scene(vBox,250,400);
+        vBox.getChildren().addAll(serverIpLabel, isOnLocalhost, ipAddress, serverPortLabel, serverPort, connect, exit);
+        Scene scene = new Scene(vBox, 250, 400);
         stage.setScene(scene);
         stage.setTitle("Connect");
         stage.show();
