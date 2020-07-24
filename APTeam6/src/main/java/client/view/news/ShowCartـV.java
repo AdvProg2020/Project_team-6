@@ -17,6 +17,7 @@ public class ShowCartـV extends GeneralController_V{
     public Button purchase;
     public TextField productId;
     public ListView<String> productList;
+    public Button back;
     private String[] products;
     public void increase(ActionEvent actionEvent) {
         senderReceiver.sendMessage(productId.getText());
@@ -58,5 +59,7 @@ public class ShowCartـV extends GeneralController_V{
     public void initialize(){
         productList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
-    
+
+    public void back(ActionEvent actionEvent) {
+    }
 }

@@ -39,9 +39,14 @@ public class Client extends Application {
         /*
         Scanner scanner = new Scanner(System.in);
         while (true){
-            if(!tokenWasTaken){
+        */
+        dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
+        dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
+
+        if(!tokenWasTaken){
                 token = getMessage();
                 tokenWasTaken = true;}
+            /*
             String s = scanner.nextLine();
             sendMessage(s);
             s = getMessage();
@@ -85,8 +90,6 @@ public class Client extends Application {
         for (Parent root : allRoots)
             allScenes.add(new Scene(root));
 
-        dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
-        dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
 
         theStage.setScene(allScenes.get(3));
         theStage.show();
@@ -120,7 +123,6 @@ public class Client extends Application {
 
     public void sendMessage(String command){
         command = token + command;
-        DataOutputStream dataOutputStream = null;
 
         String secretKey;
         secretKey = AES.getSecretKeyByToken(token);
@@ -163,8 +165,8 @@ public class Client extends Application {
         serverPort.setPromptText("between 1 and 65535");
 
         //TODO: find a good sound
-        mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
-        mediaPlayer.play();
+        //mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
+        //mediaPlayer.play();
 
         connect.setOnAction(actionEvent -> {
             // TODO check data validation  ip & port
