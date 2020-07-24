@@ -3,9 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.ShowCartـV">
    <children>
-      <Button fx:id="send" layoutX="237.0" layoutY="139.0" mnemonicParsing="false" onAction="#send" text="Button" />
+      <Button fx:id="increase" layoutX="267.0" layoutY="97.0" mnemonicParsing="false" onAction="#increase" text="Increase" />
+      <Button fx:id="purchase" layoutX="265.0" layoutY="231.0" mnemonicParsing="false" onAction="#purchase" text="Purchase" />
+      <Button fx:id="showTotalPrice" layoutX="245.0" layoutY="188.0" mnemonicParsing="false" onAction="#showTotalPrice" text="Show Total Price" />
+      <Button fx:id="decrease" layoutX="265.0" layoutY="142.0" mnemonicParsing="false" onAction="#decrease" text="Decraese" />
+      <Button fx:id="viewProduct" layoutX="254.0" layoutY="54.0" mnemonicParsing="false" onAction="#viewProduct" text="View Product" />
+      <TextField fx:id="productId" layoutX="223.0" layoutY="29.0" />
    </children>
 </AnchorPane>
