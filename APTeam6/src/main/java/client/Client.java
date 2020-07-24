@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,28 +54,30 @@ public class Client extends Application {
         allFXMLLoaders = new ArrayList<>();
         allScenes = new ArrayList<>();
         allControllers = new ArrayList<>();
+        allRoots = new ArrayList<>();
 
         theStage.setTitle("MohammadKhani's shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoriesAndSubCategoriesMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CategoryAndSubCategoryGenerator_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\CreateDiscountCode_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\LoadingScreen_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\LoginMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\MainScreen_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageAllProducts_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageDiscountCodes_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageRequests_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\ManageUsers_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\PersonalInfoMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerNewOffMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerOffsMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SellerProductMenu_V.fxml")));
-        allFXMLLoaders.add(new FXMLLoader(getClass().getResource("news\\SingleProductMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CategoriesAndSubCategoriesMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CategoryAndSubCategoryGenerator_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CreateDiscountCode_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("LoadingScreen_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("LoginMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("MainScreen_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageAllProducts_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageDiscountCodes_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageRequests_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ManageUsers_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("PersonalInfoMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerNewOffMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerOffsMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerProductMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SingleProductMenu_V.fxml")));
 
-        for (FXMLLoader fxmlLoader : allFXMLLoaders)
+        for (FXMLLoader fxmlLoader : allFXMLLoaders) {
             allRoots.add(fxmlLoader.load());
+        }
         for (FXMLLoader fxmlLoader : allFXMLLoaders)
             allControllers.add(fxmlLoader.getController());
         for (GeneralController_V controller : allControllers)
