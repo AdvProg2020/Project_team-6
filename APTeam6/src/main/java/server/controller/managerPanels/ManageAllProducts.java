@@ -64,7 +64,7 @@ public class ManageAllProducts implements Parent {
         for (Integer integer : ProgramManager.getProgramManagerInstance().getAllProducts().keySet()) {
             Product tempProduct = ProgramManager.getProgramManagerInstance().getAllProducts().get(integer);
 
-            //Name---Description---Price---Category---SubCategory---Comment1===com2===com3...
+            //@Name---Description---Price---Category---SubCategory---Comment1===com2===com3...@...
             result = "@" + tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() +
                     "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---";
 
