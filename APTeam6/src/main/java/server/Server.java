@@ -116,6 +116,17 @@ public class Server implements Runnable {
                 e.printStackTrace();
             }
 
+            if(!command.startsWith(token)){
+                try {
+                    sendMessage("invalid token");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }else{
+                command = command.substring(10);
+            }
+
 
 
 
@@ -129,7 +140,9 @@ public class Server implements Runnable {
             01-0: start PersonalInfoMenu (personalMenuInfo)
                 -1: change information in personalInfoMenu
 
-            02-1: (managerPanel/registerManager): get and verify data for register
+            02-0: start register manager or supporter
+                -1: (managerPanel/registerManager): get and verify data for register manager
+                -2: (managerPanel/registerManager): get and verify data for register supporter
 
             03-0: start login menu(LoginMenu)
                 (return start when exist manager and return createManager when doesnt exist manager)
@@ -260,11 +273,37 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if (command.startsWith("02-0")) {
+                RegisterManager registerManager = new RegisterManager();
+                try {
+                    registerManager.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = registerManager;
+            }
             else if (command.startsWith("02-1")) {
                 if (thisParent instanceof RegisterManager) {
                     RegisterManager registerManager = (RegisterManager) thisParent;
                     try {
                         registerManager.registerNewManager(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("02-2")) {
+                if (thisParent instanceof RegisterManager) {
+                    RegisterManager registerManager = (RegisterManager) thisParent;
+                    try {
+                        registerManager.registerNewSupporter(command.substring(4));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
