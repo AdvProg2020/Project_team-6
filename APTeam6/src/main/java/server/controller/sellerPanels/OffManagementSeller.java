@@ -3,10 +3,14 @@ package server.controller.sellerPanels;
 import server.Server;
 import server.controller.Parent;
 import server.controller.ProgramManager;
+import server.model.account.Account;
+import server.model.account.Seller;
+import server.model.product.Product;
 import server.model.requests.OffRequest;
 import client.view.userPanel.OffManagementSellerView;
 
 import java.io.IOException;
+import java.security.AccessControlContext;
 
 public class OffManagementSeller implements Parent {
 
@@ -15,11 +19,29 @@ public class OffManagementSeller implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
+        String message = "";
+        Account tempAccount = server.getCurrentlyLoggedInUsers();
+        for (Integer productId : ((Seller) (tempAccount)).productIds) {
+            message = message + ProgramManager.getProgramManagerInstance().getProductById(productId).getName() + "---";
+        }
         sendMessage("start");
     }
 
     private void sendMessage(String message) throws IOException {
         server.sendMessage("02-" + message);
+    }
+    public void showProductIds(){
+        String message = "";
+        Account tempAccount = server.getCurrentlyLoggedInUsers();
+        for (Integer productId : ((Seller) (tempAccount)).productIds) {
+            message = message + ProgramManager.getProgramManagerInstance().getProductById(productId).getName() + "---";
+        }
+        try {
+            sendMessage(message);
+        } catch (IOException e) {
+            System.err.println("error occurred");
+        }
+
     }
 
     public void viewOff(String substring) throws IOException {
