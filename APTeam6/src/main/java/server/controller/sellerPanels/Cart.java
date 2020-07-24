@@ -70,6 +70,7 @@ public class Cart implements Parent {
     }
     public void purchase(){
         try {
+            sendMessage("purchase");
             new ReceiveBuyerInfo().start(server);
         } catch (IOException e) {
             System.err.println("error occurred");
