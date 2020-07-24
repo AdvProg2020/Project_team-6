@@ -59,6 +59,6 @@ public class CategoryAndSubCategoryGenerator_V extends GeneralController_V{
     }
 
     public void cancelButton(ActionEvent actionEvent) {
-        //TODO: (Message) -
+        senderReceiver.allControllers.get(0).start();
     }
 }

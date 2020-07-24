@@ -11,18 +11,18 @@ public class MainScreen_V extends GeneralController_V{
     }
 
     public void userPanelButton(ActionEvent actionEvent) {
-        //TODO: (message) -
+        senderReceiver.allControllers.get(10).start();
     }
 
     public void productsButton(ActionEvent actionEvent) {
-        //TODO: (message) -
+        //TODO: (message) -_-
     }
 
     public void offsButton(ActionEvent actionEvent) {
-        //TODO: (message) -
+        //TODO: (message) -_-
     }
 
     public void loginMenuButton(ActionEvent actionEvent) {
-        //TODO: (message) -
+        senderReceiver.allControllers.get(4).start();
     }
 }
