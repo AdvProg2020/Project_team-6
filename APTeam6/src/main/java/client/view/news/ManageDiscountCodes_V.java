@@ -3,19 +3,24 @@ package client.view.news;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
+import server.model.product.DiscountCode;
 
 import java.util.ArrayList;
 
 public class ManageDiscountCodes_V extends GeneralController_V{
     public ListView<String> discountCodeListView;
+    public TextField Code;
+    String[] discountCodes;
 
     @Override
     public void start() {
         senderReceiver.changeMenu(7);
         senderReceiver.sendMessage("04-0");
         String receipt = senderReceiver.getMessage();
-        //TODO: WHAT??????
         ArrayList<String> strings = new ArrayList<>();
+        discountCodes = receipt.split("---");
+        for (String discountCode : discountCodes) strings.add(discountCode.split("===")[0]);
         reset(strings);
     }
 
@@ -37,7 +42,7 @@ public class ManageDiscountCodes_V extends GeneralController_V{
     }
 
     public void deleteButton(ActionEvent actionEvent) {
-        //TODO (message) code
+        senderReceiver.sendMessage("04-3" + Code.getText());
     }
 
     public void addButton(ActionEvent actionEvent) {

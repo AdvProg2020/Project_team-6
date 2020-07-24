@@ -14,7 +14,6 @@ public class ShowCartـV extends GeneralController_V{
     public Button purchase;
     public TextField productId;
     public ListView<String> productList;
-    public Button back;
     private String[] products;
     public void increase(ActionEvent actionEvent) {
         senderReceiver.sendMessage("14-2" + productId.getText());
@@ -60,5 +59,6 @@ public class ShowCartـV extends GeneralController_V{
     }
 
     public void back(ActionEvent actionEvent) {
+        senderReceiver.allControllers.get(10).start();
     }
 }

@@ -3,18 +3,22 @@ package client.view.news;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class ManageRequests_V extends GeneralController_V{
     public ListView<String> requestListView;
+    public TextField requestId;
+    String[] requests;
 
     @Override
     public void start() {
         senderReceiver.changeMenu(8);
         senderReceiver.sendMessage("06-0");
         String receipt = senderReceiver.getMessage();
-        //TODO: Please ToT
+        requests = receipt.split("---");
         ArrayList<String> requests = new ArrayList<>();
         reset(requests);
     }
@@ -30,13 +34,15 @@ public class ManageRequests_V extends GeneralController_V{
 
     public void acceptButton(ActionEvent actionEvent) {
         if (requestListView.getSelectionModel().getSelectedIndices().size() == 1){
-            //TODO: (message) index
+            senderReceiver.sendMessage("06-1"  +requestId.getText());
         }
     }
 
     public void declineButton(ActionEvent actionEvent) {
         if (requestListView.getSelectionModel().getSelectedIndices().size() == 1){
-            //TODO: (message) index
+            if (requestListView.getSelectionModel().getSelectedIndices().size() == 1){
+                senderReceiver.sendMessage("06-2"  +requestId.getText());
+            }
         }
     }
 

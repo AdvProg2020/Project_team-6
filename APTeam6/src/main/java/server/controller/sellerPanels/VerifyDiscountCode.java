@@ -19,14 +19,15 @@ public class VerifyDiscountCode implements Parent {
     }
     public void verify(String data){
         DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data);
+
         if(tempDiscountCode != null){
             try {
                 //verified---percentage
                 sendMessage("verified" + "---" + tempDiscountCode.getPercentage());
-
             } catch (IOException e) {
                 System.err.println("error occurred");
             }
         }
     }
 }
+

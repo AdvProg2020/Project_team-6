@@ -15,7 +15,7 @@ public class ViewProductInCart_V extends GeneralController_V {
 
     @Override
     public void start() {
-        senderReceiver.changeMenu(15);
+        senderReceiver.changeMenu(16);
         senderReceiver.sendMessage("14-1");
         String receipt = senderReceiver.getMessage().substring(4);
         String[] dataSplit = receipt.split("---");
