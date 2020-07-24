@@ -38,7 +38,6 @@ public class EWallet implements Parent {
         for (String s : productIdSplit) {
             productIds.add(Integer.parseInt(s));
         }
-
         new SellLog(Integer.parseInt(dataSplit[0]),Integer.parseInt(dataSplit[1]),Integer.parseInt(dataSplit[2]),productIds);
     }
     public void addToBuyLog(String Data){

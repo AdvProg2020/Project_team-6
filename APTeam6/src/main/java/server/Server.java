@@ -223,7 +223,10 @@ public class Server implements Runnable {
             18-0: start manage all product (manager)
                 -1: remove product
 
-                
+            19-0: start EWallet
+                -1:takeCredit
+                -2addToSellLog
+                -3:addToBuyLog
 
 
             */
@@ -1184,6 +1187,53 @@ public class Server implements Runnable {
                 if(thisParent instanceof ManageAllProducts){
                     ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
                     manageAllProducts.remove(Integer.parseInt(command));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if (command.startsWith("19-0")) {
+                EWallet eWallet = new EWallet();
+                try {
+                    eWallet.start(this);
+                } catch (IOException e) {
+                    System.err.println("error occurred");
+                }
+                preParent = thisParent;
+                thisParent = eWallet;
+            }
+            else if (command.startsWith("19-1")) {
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet) thisParent;
+                    eWallet.takeCredit(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if (command.startsWith("19-2")) {
+                    if(thisParent instanceof EWallet){
+                        EWallet eWallet = (EWallet) thisParent;
+                        eWallet.addToSellLog(command.substring(4));
+                    } else {
+                        try {
+                            sendMessage("NotAllowed");
+                        } catch (IOException e) {
+                            System.err.println("error occurred");
+                        }
+                    }
+            }
+
+            else if (command.startsWith("19-3")) {
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet) thisParent;
+                    eWallet.addToBuyLog(command.substring(4));
                 } else {
                     try {
                         sendMessage("NotAllowed");
