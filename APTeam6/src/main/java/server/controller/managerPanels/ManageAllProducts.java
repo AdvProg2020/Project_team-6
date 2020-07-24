@@ -5,6 +5,8 @@ import server.controller.Parent;
 import server.controller.ProgramManager;
 
 import client.view.old.ManageAllProductsView;
+import server.model.product.Comment;
+import server.model.product.Product;
 
 import java.io.IOException;
 
@@ -58,7 +60,22 @@ public class ManageAllProducts implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        sendMessage("start");
+        String result ="";
+        for (Integer integer : ProgramManager.getProgramManagerInstance().getAllProducts().keySet()) {
+            Product tempProduct = ProgramManager.getProgramManagerInstance().getAllProducts().get(integer);
+
+            //@Name---Description---Price---Category---SubCategory---Comment1===com2===com3...@...
+            result = "@" + tempProduct.getName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() +
+                    "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---";
+
+            for (Comment comment : tempProduct.getComments()) {
+                result += comment.getTitle();
+                result += ":";
+                result += comment.getText();
+                result += "===";
+            }
+        }
+        sendMessage(result);
     }
 
     private void sendMessage(String message) throws IOException {
