@@ -5,12 +5,12 @@ import server.Server;
 import server.controller.Parent;
 import client.view.old.SellerProductsMenuView;
 import server.controller.ProgramManager;
-import server.model.account.Seller;
 import server.model.logs.BuyLog;
 import server.model.logs.LogsInGeneral;
 import server.model.product.Comment;
 import server.model.product.DiscountCode;
 import server.model.product.Product;
+import server.model.requests.ProductRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,8 +63,8 @@ public class SellerProductsMenu implements Parent {
     public void addProduct(String message) throws IOException {
         //name---categoryName---subCategoryName---Date---price
         String[] dataSplit = message.split("---");
-        Product newProduct = new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
-        ((Seller)server.getCurrentlyLoggedInUsers()).productIds.add(newProduct.getId());
+        Product product = new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
+        new ProductRequest(product,(byte)0,null);
         sendMessage("created");
     }
 
@@ -76,9 +76,9 @@ public class SellerProductsMenu implements Parent {
             if (log.getType() == 1) {
 
                 BuyLog buyLog = (BuyLog) log;
-                for (int boughtProductId : buyLog.getBoughtProducts()) {
-                    Product boughtProduct = ProgramManager.getProgramManagerInstance().getProductById(boughtProductId);
-                    if (boughtProduct.getName().equals(message)){
+                for (Integer boughtProduct : buyLog.getBoughtProducts()) {
+
+                    if (boughtProduct == Integer.parseInt(message)){
                         buyersName.add(buyLog.getBuyerUserName());
                     }
                 }

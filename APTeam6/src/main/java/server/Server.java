@@ -150,6 +150,7 @@ public class Server implements Runnable {
                 -3: get and verify data for new manager
                 -4: get data and check password for login
                 -5: logout
+                -6: get and verify data for new supporter
 
             04-0: start showDiscountCode
                 -1: view discount code(return data by code)
@@ -194,6 +195,7 @@ public class Server implements Runnable {
                 -8: remove SubCategory
                 -9: open product
                 -a: add to buy basket
+                -b: send current category and subCategory information
 
             13-0: start view offs
                 -1: view off by id
@@ -407,6 +409,22 @@ public class Server implements Runnable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("03-6")) {
+                if(thisParent instanceof LoginMenu){
+                    LoginMenu loginMenu = (LoginMenu) thisParent;
+                    try {
+                        loginMenu.registerNewSupporter(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try {
@@ -883,6 +901,22 @@ public class Server implements Runnable {
                 if(thisParent instanceof CategoriesAndSubCategoriesMenu){
                     CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
                     categoriesAndSubCategoriesMenu.addToBuyBasket(Integer.parseInt(command.split("---")[0].substring(4)),Integer.parseInt(command.split("---")[1]));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("12-b")) {
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    try {
+                        categoriesAndSubCategoriesMenu.getAdditionalInformationCategorySubCategory();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     try {
                         sendMessage("NotAllowed");
