@@ -29,7 +29,7 @@ public class ManageDiscountCodes_V extends GeneralController_V{
     }
 
     public void backButton(ActionEvent actionEvent) {
-        //TODO (message) -
+        senderReceiver.allControllers.get(10).start();
     }
 
     public void editButton(ActionEvent actionEvent) {
@@ -41,6 +41,6 @@ public class ManageDiscountCodes_V extends GeneralController_V{
     }
 
     public void addButton(ActionEvent actionEvent) {
-        //TODO (message) -
+        senderReceiver.allControllers.get(2).start();
     }
 }

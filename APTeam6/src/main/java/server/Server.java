@@ -232,6 +232,8 @@ public class Server implements Runnable {
                 -2addToSellLog
                 -3:addToBuyLog
 
+            20-0: sent role
+
 
             */
 
@@ -1294,6 +1296,14 @@ public class Server implements Runnable {
                     } catch (IOException e) {
                         System.err.println("error occurred");
                     }
+                }
+            }
+
+            else if (command.startsWith("20-0")){
+                try {
+                    sendMessage(((Byte)currentlyLoggedInUsers.getRole()).toString());
+                } catch (IOException e) {
+                    System.err.println("error occurred");
                 }
             }
 
