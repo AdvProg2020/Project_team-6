@@ -18,7 +18,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        String message = "";
+        String message = ((Byte)server.getCurrentlyLoggedInUsers().getRole()).toString();
         for (int i = 0; i < allCategoriesArrayList.size(); i++) {
             message = message + "---" + i + ". " + allCategoriesArrayList.get(i);
         }

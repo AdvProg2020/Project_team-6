@@ -26,8 +26,6 @@ public class LoadingScreen_V extends GeneralController_V{
                 }
             }
         });
-        //TODO: test if this works and then call main screen from here
-        senderReceiver.sendMessage("00-0");
-        senderReceiver.changeMenu(5);
+        senderReceiver.allControllers.get(5).start();
     }
 }

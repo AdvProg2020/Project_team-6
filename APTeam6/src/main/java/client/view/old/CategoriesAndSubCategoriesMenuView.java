@@ -291,7 +291,8 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                     nameLabel.setText("Enter your new name:");
                     nameTextField.setPromptText("Name");
 
-                    //TODO
+
+
 
                     try {
                         new Alert().showAlert("", "Ok", 0, null);
@@ -309,7 +310,8 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                 if (ProgramManager.getProgramManagerInstance().getCategoryByName(categoryName.getText()) != null) {
 
 
-                    //TODO
+
+
                     nameLabel.setText("");
                     categoryName.setText("");
                 } else {
@@ -329,7 +331,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
             if (!categoryName.getText().equals("") && categoryName.getText().matches("\\.+")) {
                 if (ProgramManager.getProgramManagerInstance().getCategoryByName(categoryName.getText()) != null) {
 
-                    //TODO
+
 
                     nameLabel.setText("");
                     categoryName.setText("");
@@ -341,7 +343,7 @@ public class CategoriesAndSubCategoriesMenuView extends Application {
                 } else {
                     try {
 
-                        //TODO
+
 
                         new Alert().showAlert("", "Ok", 0, null);
                     } catch (Exception e) {

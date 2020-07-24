@@ -9,19 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="253.0" prefWidth="661.0" style="-fx-background-color: #eeccff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.SingleProductMenu_V">
+<AnchorPane prefHeight="366.0" prefWidth="661.0" style="-fx-background-color: #eeccff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.SingleProductMenu_V">
    <children>
       <Label fx:id="nameLabel" layoutX="14.0" layoutY="14.0" text="Product name:" />
-      <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="38.0" prefHeight="196.0" prefWidth="232.0" text="Description:" wrapText="true" />
-      <Line endX="100.0" layoutX="156.0" layoutY="15.0" startX="100.0" startY="222" />
+      <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="38.0" prefHeight="156.0" prefWidth="232.0" text="Description:" wrapText="true" />
+      <Line endX="100.0" layoutX="156.0" layoutY="15.0" startX="100.0" startY="337.0" />
       <ProgressBar fx:id="scoreProgressBar" layoutX="272.0" layoutY="14.0" prefHeight="18.0" prefWidth="375.0" progress="0.5" style="-fx-accent: #ffee66;" />
       <Label fx:id="scoreLabel" layoutX="272.0" layoutY="38.0" text="Score:" />
        <ImageView layoutX="547.0" layoutY="41.0">
-           <Image url="@../pictures/noPhoto.PNG"/>
+           <Image url="@../pictures/noPhoto.PNG" />
        </ImageView>
-      <ListView layoutX="272.0" layoutY="83.0" prefHeight="155.0" prefWidth="262.0" fx:id="commentsListView"/>
+      <ListView fx:id="commentsListView" layoutX="272.0" layoutY="83.0" prefHeight="268.0" prefWidth="262.0" />
       <Label layoutX="272.0" layoutY="61.0" text="Chomments:" />
-      <Button layoutX="547.0" layoutY="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Back" onAction="#backButton"/>
-      <Button layoutX="547.0" layoutY="153.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="100.0" text="Add" onAction="#addButton"/>
+      <Button layoutX="547.0" layoutY="326.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="100.0" text="Back" />
+      <Button layoutX="547.0" layoutY="266.0" mnemonicParsing="false" onAction="#addButton" prefHeight="52.0" prefWidth="100.0" text="Add" />
+      <ListView fx:id="additionalInfoListView" layoutX="14.0" layoutY="197.0" prefHeight="156.0" prefWidth="232.0" />
    </children>
 </AnchorPane>

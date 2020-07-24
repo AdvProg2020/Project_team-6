@@ -71,7 +71,7 @@ public class CreateDiscountCodeView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        //TODO
+
 
         VBox vBox = new VBox(9);
         stage.setTitle("Create discount code");
@@ -148,8 +148,8 @@ public class CreateDiscountCodeView extends Application {
         create.setOnAction(actionEvent -> {
 
             //analyze data:
-            //TODO
-            // check date format
+
+
 
             label1.setVisible(codeTextField.getText().equals(""));
             label2.setVisible(startDateTextField.getText().equals(""));

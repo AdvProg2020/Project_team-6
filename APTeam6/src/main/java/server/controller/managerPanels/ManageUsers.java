@@ -86,7 +86,10 @@ public class ManageUsers implements Parent {
                 !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
                 !data.split("---")[5].equals("") && !data.split("---")[6].equals("") ) {
 
-            //TODO check exist user with this user name
+            if(ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data.split("---")[0])){
+                sendMessage("this username already taken");
+                return;
+            }
 
             new Seller(data.split("---")[0], data.split("---")[1], data.split("---")[2],
                     data.split("---")[3], data.split("---")[4], data.split("---")[5],
