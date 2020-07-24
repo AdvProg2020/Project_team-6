@@ -37,6 +37,5 @@ public class VerifyDiscountCodeV extends GeneralController_V {
         if(receipt.startsWith("verified")){
 
         }
-
     }
 }

@@ -3,11 +3,13 @@ package client.view.news;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
 public class ManageDiscountCodes_V extends GeneralController_V{
     public ListView<String> discountCodeListView;
+    public TextField Code;
 
     @Override
     public void start() {
@@ -37,7 +39,7 @@ public class ManageDiscountCodes_V extends GeneralController_V{
     }
 
     public void deleteButton(ActionEvent actionEvent) {
-        //TODO (message) code
+        senderReceiver.sendMessage("04-3" + Code.getText());
     }
 
     public void addButton(ActionEvent actionEvent) {
