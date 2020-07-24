@@ -1240,7 +1240,7 @@ public class Server implements Runnable {
             else if (command.startsWith("18-1")) {
                 if(thisParent instanceof ManageAllProducts){
                     ManageAllProducts manageAllProducts = (ManageAllProducts) thisParent;
-                    manageAllProducts.remove(Integer.parseInt(command));
+                    manageAllProducts.remove(Integer.parseInt(command.substring(4)));
                 } else {
                     try {
                         sendMessage("NotAllowed");
