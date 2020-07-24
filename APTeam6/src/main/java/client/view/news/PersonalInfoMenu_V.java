@@ -32,7 +32,7 @@ public class PersonalInfoMenu_V extends GeneralController_V{
 
     @Override
     public void start() {
-        senderReceiver.changeMenu(4);
+        senderReceiver.changeMenu(10);
         senderReceiver.sendMessage("01-0");
         String receipt = senderReceiver.getMessage();
         reset(receipt);

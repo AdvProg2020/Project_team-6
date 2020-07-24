@@ -196,9 +196,10 @@ public class Server implements Runnable {
                 -a: add to buy basket
 
             13-0: start view offs
-                -1: view off by id
+                -1: view off by id TODO: send all offs
                 -2: edit off by id
                 -3: add off(get and verify data)
+                TODO: -4: send all product name's for current seller
 
             14-0: Start View Cart
                 -1: viewProduct

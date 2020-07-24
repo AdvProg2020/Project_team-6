@@ -13,6 +13,14 @@ public class SellerOffsMenu_V extends GeneralController_V{
     public ListView<String> offsList;
     public ListView<String> productsList;
 
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(12);
+        senderReceiver.sendMessage("13-0");
+        String receipt = senderReceiver.getMessage();
+        reset();
+    }
+
     public void initialize(){
         offsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         productsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
