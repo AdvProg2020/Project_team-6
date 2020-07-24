@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="483.0" prefWidth="529.0" style="-fx-background-color: #ccddff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.SellerOffsMenu_V">
    <children>
-      <ListView layoutX="14.0" layoutY="29.0" prefHeight="442.0" prefWidth="140.0" fx:id="offsList"/>
+      <ListView layoutX="14.0" layoutY="29.0" prefHeight="442.0" prefWidth="140.0" fx:id="offsList" onMouseClicked="#clikedList"/>
       <ListView layoutX="169.0" layoutY="112.0" prefHeight="359.0" prefWidth="256.0" fx:id="productsList"/>
       <Label layoutX="14.0" layoutY="8.0" text="List of offs:" />
       <Label layoutX="169.0" layoutY="85.0" text="List of products in off:" />

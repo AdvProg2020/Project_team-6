@@ -203,13 +203,20 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
     public void openProduct(int index){
         Product tempProduct = allProductsArrayList.get(index);
         try {
-            //name---categoryName---SubCategoryName---description---price
+            //name---categoryName---SubCategoryName---description---price---average---comments---addition
             String message = tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() + "---";
-            String comments = "";
+            StringBuilder comments = new StringBuilder();
             for (Comment comment : tempProduct.getComments()) {
-                comments = comments + comment.getUsername() + "@@@" + comment.getText() + "===";
+                comments.append(comment.getUsername()).append(": ").append(comment.getText()).append("===");
             }
-            sendMessage(message + comments + tempProduct.getAverageScore());
+            StringBuilder attributes = new StringBuilder();
+            for (String key : tempProduct.getCategoryAdditionalInfo().keySet()) {
+                attributes.append(key).append(": ").append(tempProduct.getCategoryAdditionalInfo().get(key)).append("===");
+            }
+            for (String key : tempProduct.getSubCategoryAdditionalInfo().keySet()) {
+                attributes.append(key).append(": ").append(tempProduct.getSubCategoryAdditionalInfo().get(key)).append("===");
+            }
+            sendMessage(message + tempProduct.getAverageScore() + comments + "---" + attributes);
         } catch (IOException e) {
             System.err.println("error occurred");
         }
