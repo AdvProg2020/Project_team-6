@@ -24,8 +24,8 @@ public class Server implements Runnable {
     private Log log = null;
     private Account currentlyLoggedInUsers = null;
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
-    private boolean tokenSent = false;
-    private String token = "";
+    //private boolean tokenSent = false;
+    //private String token = "";
     private Bank bank = null;
 
     public HashMap<Product, Integer> getBuyBasket() {
@@ -43,12 +43,12 @@ public class Server implements Runnable {
         }
         this.currentlyLoggedInUsers = currentlyLoggedInUsers;
         ProgramManager.getProgramManagerInstance().allLoggedInUser.add(currentlyLoggedInUsers);
-        try {
-            bank = new Bank(MainServer.bankSocket);
-            bank.start(this);
+        /*try {
+            //bank = new Bank(MainServer.bankSocket);
+            //bank.start(this);
         } catch (IOException e) {
             System.err.println("error occurred");
-        }
+        }*/
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -90,7 +90,7 @@ public class Server implements Runnable {
 
         while (true) {
             String command = "";
-            if(!tokenSent){
+            /*if(!tokenSent){
                 try {
                     token = createToken();
                     sendMessage(token);
@@ -98,7 +98,7 @@ public class Server implements Runnable {
                     e.printStackTrace();
                 }
 
-            }
+            }*/
             try {
                 command = getMessage();
             } catch (IOException e) {
@@ -115,16 +115,16 @@ public class Server implements Runnable {
                 e.printStackTrace();
             }
 
-            if(!command.startsWith(token)){
+            /*if(!command.startsWith(token)){
                 try {
                     sendMessage("invalid token");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 continue;
-            }else{
-                command = command.substring(10);
-            }
+            }else{*/
+               // command = command.substring(15);
+            //}
 
 
 
@@ -1322,7 +1322,7 @@ public class Server implements Runnable {
 
 
 
-            try {
+            /*try {
                 sendMessage(command);
             } catch (IOException e) {
                 this.log.addLog("disconnected!", 2);
@@ -1331,7 +1331,7 @@ public class Server implements Runnable {
                 MainServer.runningServer--;
                 break;
 
-            }
+            }*/
 
         }
     }
@@ -1370,16 +1370,20 @@ public class Server implements Runnable {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.clientSocket.getInputStream()));
         String command = dataInputStream.readUTF();
 
+
+/*
+        String secretKey;
+        secretKey = AES.getSecretKeyByToken(token);
+        command = AES.decrypt(command,secretKey);
+
         if(command.startsWith(token)){
-            command = command.substring(10);
+            command = command.substring(15);
         }else{
             sendMessage("tokenExpired");
             return null;
         }
 
-        String secretKey;
-        secretKey = AES.getSecretKeyByToken(token);
-        command = AES.decrypt(command,secretKey);
+ */
 
         this.log.addLog(command, 1);
         return command;
@@ -1388,7 +1392,7 @@ public class Server implements Runnable {
     public void sendMessage(String command) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.clientSocket.getOutputStream()));
         this.log.addLog(command, 0);
-
+/*
         if(tokenSent){
             String secretKey;
             secretKey = AES.getSecretKeyByToken(token);
@@ -1396,6 +1400,8 @@ public class Server implements Runnable {
         }else{
             tokenSent = true;
         }
+
+ */
 
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();

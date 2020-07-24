@@ -73,9 +73,7 @@ public class AES {
     }
 
     public static String getSecretKeyByToken(String token) {
-
         String secretKeyString;
-
         secretKeyString = "sg";
         secretKeyString += "" + (char) (token.charAt(3) + token.charAt(5));
         secretKeyString += (char) (token.charAt(0) * 2);
@@ -85,7 +83,6 @@ public class AES {
         secretKeyString += "w./*-+er";
         secretKeyString += (char) (token.charAt(9));
         secretKeyString += "df";
-
         return secretKeyString;
     }
 }

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Log {
 
-    private boolean saveLogs = false;
+    private boolean saveLogs = true;
     private String fileName = "";
 
     Log(String name) {

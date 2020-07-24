@@ -25,7 +25,7 @@ public class MainServer {
         String ip = scanner.nextLine();
         System.out.println("please input bank port:");
         int port = Integer.parseInt(scanner.nextLine());
-        bankSocket = new Socket(ip,port);
+        //bankSocket = new Socket(ip,port);
         System.out.println("connected to bank");
 
         long[] time = new long[5];

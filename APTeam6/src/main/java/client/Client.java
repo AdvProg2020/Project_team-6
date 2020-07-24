@@ -32,16 +32,21 @@ public class Client extends Application {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
-    private String token = "";
-    private boolean tokenWasTaken = false;
+    //private String token = "";
+    //private boolean tokenWasTaken = false;
 
     public void run() throws IOException {
         /*
         Scanner scanner = new Scanner(System.in);
         while (true){
-            if(!tokenWasTaken){
+        */
+        dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
+        dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
+
+        /*if(!tokenWasTaken){
                 token = getMessage();
-                tokenWasTaken = true;}
+                tokenWasTaken = true;}*/
+            /*
             String s = scanner.nextLine();
             sendMessage(s);
             s = getMessage();
@@ -86,8 +91,6 @@ public class Client extends Application {
         for (Parent root : allRoots)
             allScenes.add(new Scene(root));
 
-        dataInputStream = new DataInputStream(new BufferedInputStream(this.serverSocket.getInputStream()));
-        dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.serverSocket.getOutputStream()));
 
         theStage.setScene(allScenes.get(3));
         theStage.show();
@@ -103,7 +106,7 @@ public class Client extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (tokenWasTaken) {
+        /*if (tokenWasTaken) {
             String secretKey;
             secretKey = AES.getSecretKeyByToken(token);
             command = AES.decrypt(command, secretKey);
@@ -111,7 +114,7 @@ public class Client extends Application {
         else {
             tokenWasTaken = true;
             token = command;
-        }
+        }*/
         return command;
     }
 
@@ -120,15 +123,16 @@ public class Client extends Application {
     }
 
     public void sendMessage(String command){
-        command = token + command;
-        DataOutputStream dataOutputStream = null;
+        /*command = token + command;
 
         String secretKey;
         secretKey = AES.getSecretKeyByToken(token);
         command = AES.encrypt(command, secretKey);
 
+
+         */
         try {
-            dataOutputStream.writeUTF(token + command);
+            dataOutputStream.writeUTF(command);
             dataOutputStream.flush();
         }
         catch (Exception e){
@@ -164,8 +168,8 @@ public class Client extends Application {
         serverPort.setPromptText("between 1 and 65535");
 
         //TODO: find a good sound
-        mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
-        mediaPlayer.play();
+        //mediaPlayer = new MediaPlayer(new Media(new File("src\\sound\\SinisterGleam.mp3").toURI().toString()));
+        //mediaPlayer.play();
 
         connect.setOnAction(actionEvent -> {
             // TODO check data validation  ip & port
