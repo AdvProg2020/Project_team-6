@@ -23,6 +23,8 @@ public class ManageUsers implements Parent {
             string.append(account.getUsername());
             string.append("---");
             string.append(account.getRole());
+            string.append("---");
+            string.append(((Boolean)account.isOnline()).toString());
             string.append("===");
         }
         sendMessage(string.toString());

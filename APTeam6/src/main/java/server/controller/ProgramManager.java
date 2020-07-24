@@ -273,6 +273,10 @@ public class ProgramManager {
         allCategories.get(product.getCategoryName()).getSubCategoryByName(product.getSubCategoryName()).removeProduct(product.getId());
     }
 
+    public void removeProductByIndex(int index){
+        removeProduct(allProducts.get(index));
+    }
+
     /**
      * this method adds the product to productsList and adds it to its subCategory as well
      */
