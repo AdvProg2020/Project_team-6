@@ -48,20 +48,16 @@ public class MainServer {
             new Thread(new Server(clientSocket)).start();
         }
     }
-
     private static void replayAttacks(long[] time) throws InterruptedException {
         for (int i = 0; i < 4; i++) {
-            time[i] = time[i+1];
+            time[i] = time[i + 1];
         }
-
         time[4] = System.currentTimeMillis();
-
         if(time[0]!=0){
             if(time[4]-time[0]<5000){
                 System.out.println("server suspended for 10 second because too many request");
                 Thread.sleep(10000);
             }
         }
-
     }
 }

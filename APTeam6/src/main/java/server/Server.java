@@ -1100,6 +1100,22 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if(command.startsWith("18-0")){
+                if(thisParent instanceof Bank){
+                    Bank bank = (Bank) thisParent;
+                    try {
+                        bank.getBalance();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
 
 
 
