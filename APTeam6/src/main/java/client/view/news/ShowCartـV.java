@@ -12,11 +12,6 @@ public class ShowCartـV {
     public Button purchase;
     public TextField productId;
 
-
-    public void send(ActionEvent actionEvent) {
-
-    }
-
     public void increase(ActionEvent actionEvent) {
         //TODO
     }
