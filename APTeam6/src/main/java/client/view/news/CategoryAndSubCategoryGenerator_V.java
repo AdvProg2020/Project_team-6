@@ -32,7 +32,16 @@ public class CategoryAndSubCategoryGenerator_V extends GeneralController_V{
 
     public void finishButton(ActionEvent actionEvent) {
         if (nameText.getText().matches("[a-zA-Z0-9]+")) {
-            //TODO: (Message) all attributes, name
+            String attribs = "";
+            for (String item : attributeList.getItems()) {
+                attribs += ("---" + item);
+            }
+            if (!isSubCategory){
+                senderReceiver.sendMessage("12-2" + nameText.getText() + attribs);
+            }
+            else {
+                senderReceiver.sendMessage("12-6" + nameText.getText() + attribs);
+            }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please use alphabet and numbers only");

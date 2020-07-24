@@ -21,8 +21,8 @@ public class SingleProductMenu_V extends GeneralController_V{
 
     @Override
     public void start() {
+        //Categories and subCategories menu should call this
         senderReceiver.changeMenu(14);
-        senderReceiver.sendMessage("12-9");
         String receipt = senderReceiver.getMessage();
         String[] strings = receipt.split("---");
         reset(strings[0], strings[3], strings[4], Float.parseFloat(strings[5]), new ArrayList<String>(Arrays.asList(strings[6].split("==="))), new ArrayList<String>(Arrays.asList(strings[7].split("==="))));
