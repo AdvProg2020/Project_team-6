@@ -36,10 +36,10 @@ public class BuyHistory implements Parent {
                     string.append(buyLog.getPaidAmount());
                     string.append("@");
 
-                    for (Product boughtProduct : buyLog.getBoughtProducts()) {
-                        string.append(boughtProduct.getName());
+                    for (Integer boughtProduct : buyLog.getBoughtProducts()) {
+                        string.append(ProgramManager.getProgramManagerInstance().getProductById(boughtProduct).getName());
                         string.append("---");
-                        string.append(boughtProduct.getPrice());
+                        string.append(ProgramManager.getProgramManagerInstance().getProductById(boughtProduct).getPrice());
                         string.append("===");
                     }
 

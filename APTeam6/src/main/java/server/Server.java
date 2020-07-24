@@ -49,7 +49,6 @@ public class Server implements Runnable {
         } catch (IOException e) {
             System.err.println("error occurred");
         }
-
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -134,6 +133,8 @@ public class Server implements Runnable {
 
             **command start with:**
 
+            99-9: back
+
             00-0: start main screen(mainScreen)
 
 
@@ -151,6 +152,7 @@ public class Server implements Runnable {
                 -3: get and verify data for new manager
                 -4: get data and check password for login
                 -5: logout
+                -6: get and verify data for new supporter
 
             04-0: start showDiscountCode
                 -1: view discount code(return data by code)
@@ -195,12 +197,13 @@ public class Server implements Runnable {
                 -8: remove SubCategory
                 -9: open product
                 -a: add to buy basket
+                -b: send current category and subCategory information
 
             13-0: start view offs
-                -1: view off by id TODO: send all offs
+                -1: view off by id
                 -2: edit off by id
                 -3: add off(get and verify data)
-                TODO: -4: send all product name's for current seller
+                -4: send all product name's for current seller
 
             14-0: Start View Cart
                 -1: viewProduct
@@ -254,6 +257,12 @@ public class Server implements Runnable {
                 }
 
                  */
+            }
+            else if (command.startsWith("99-9")) {
+                if(preParent!=null) {
+                    thisParent = preParent;
+                    preParent = null;
+                }
             }
             else if (command.startsWith("01-0")) {
                 PersonalInfoMenu personalInfoMenu = new PersonalInfoMenu();
@@ -408,6 +417,22 @@ public class Server implements Runnable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("03-6")) {
+                if(thisParent instanceof LoginMenu){
+                    LoginMenu loginMenu = (LoginMenu) thisParent;
+                    try {
+                        loginMenu.registerNewSupporter(command.substring(4));
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try {
@@ -892,6 +917,22 @@ public class Server implements Runnable {
                     }
                 }
             }
+            else if (command.startsWith("12-b")) {
+                if(thisParent instanceof CategoriesAndSubCategoriesMenu){
+                    CategoriesAndSubCategoriesMenu categoriesAndSubCategoriesMenu = (CategoriesAndSubCategoriesMenu) thisParent;
+                    try {
+                        categoriesAndSubCategoriesMenu.getAdditionalInformationCategorySubCategory();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             else if (command.startsWith("13-0")) {
                 OffManagementSeller offManagementSeller = new OffManagementSeller();
                 try {
@@ -942,6 +983,18 @@ public class Server implements Runnable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("13-4")) {
+                if(thisParent instanceof OffManagementSeller){
+                    OffManagementSeller offManagementSeller = (OffManagementSeller) thisParent;
+                    offManagementSeller.showProductIds();
                 } else {
                     try {
                         sendMessage("NotAllowed");

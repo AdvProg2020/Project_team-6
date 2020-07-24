@@ -128,7 +128,8 @@ public class SellerProductsMenuView extends Application {
         });
 
         back.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         stage.setOnCloseRequest(windowEvent -> {

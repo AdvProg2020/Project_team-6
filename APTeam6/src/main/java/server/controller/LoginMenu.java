@@ -1,10 +1,7 @@
 package server.controller;
 
 import server.Server;
-import server.model.account.Account;
-import server.model.account.Buyer;
-import server.model.account.Manager;
-import server.model.account.Seller;
+import server.model.account.*;
 import client.view.old.LoginMenuView;
 
 import java.io.IOException;
@@ -93,7 +90,10 @@ public class LoginMenu implements Parent{
                 !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
                 !data.split("---")[5].equals("")) {
 
-            //TODO check exist user with this user name
+            if(ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data.split("---")[0])){
+                sendMessage("this username already taken");
+                return;
+            }
 
             new Buyer(data.split("---")[0], data.split("---")[1], data.split("---")[2],
                     data.split("---")[3], data.split("---")[4], data.split("---")[5]);
@@ -110,7 +110,10 @@ public class LoginMenu implements Parent{
                 !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
                 !data.split("---")[5].equals("") && !data.split("---")[6].equals("") ) {
 
-            //TODO check exist user with this user name
+            if(ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data.split("---")[0])){
+                sendMessage("this username already taken");
+                return;
+            }
 
             new Seller(data.split("---")[0], data.split("---")[1], data.split("---")[2],
                     data.split("---")[3], data.split("---")[4], data.split("---")[5],
@@ -128,9 +131,33 @@ public class LoginMenu implements Parent{
                 !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
                 !data.split("---")[5].equals("")) {
 
-            //TODO check exist user with this user name
+            if(ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data.split("---")[0])){
+                sendMessage("this username already taken");
+                return;
+            }
 
             new Manager(data.split("---")[0], data.split("---")[1], data.split("---")[2],
+                    data.split("---")[3], data.split("---")[4], data.split("---")[5]);
+
+
+            sendMessage("3-account_created");
+        }else{
+            sendMessage("error in data");
+        }
+    }
+
+    public void registerNewSupporter(String data) throws IOException {
+        if(data.split("---").length==6 && !data.split("---")[0].equals("") &&
+                !data.split("---")[1].equals("") && !data.split("---")[2].equals("") &&
+                !data.split("---")[3].equals("") && !data.split("---")[4].equals("") &&
+                !data.split("---")[5].equals("")) {
+
+            if(ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data.split("---")[0])){
+                sendMessage("this username already taken");
+                return;
+            }
+
+            new CustomerSupport(data.split("---")[0], data.split("---")[1], data.split("---")[2],
                     data.split("---")[3], data.split("---")[4], data.split("---")[5]);
 
 

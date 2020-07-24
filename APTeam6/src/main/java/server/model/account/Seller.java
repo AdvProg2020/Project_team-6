@@ -3,6 +3,7 @@ package server.model.account;
 import server.controller.ProgramManager;
 import server.model.requests.Request;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,6 +12,7 @@ public class Seller extends Account implements Comparable<Seller>, Request {
     private long credit;
     public static ArrayList<Integer> sellLogIds = new ArrayList<Integer>();
     private String companyName;
+    public ArrayList<Integer> productIds = new ArrayList<>();
 
     public Seller(String username, String password, String firstName, String lastName, String emailAddress, String phoneNumber, String company) {
         super(username, password, firstName, lastName, emailAddress, phoneNumber);
