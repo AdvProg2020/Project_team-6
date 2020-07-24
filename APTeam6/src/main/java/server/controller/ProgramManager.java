@@ -379,6 +379,7 @@ public class ProgramManager {
 
     // MKH don't print things here
     public String showAllRequests() {
+        /*
         StringBuilder result = new StringBuilder();
         result.append("Requests : \n");
 
@@ -386,6 +387,21 @@ public class ProgramManager {
             if (allRequests.get(i) instanceof ProductRequest) {
                 //System.out.println(i + ". " + allRequests.get(i) + "is a ProductRequest");
                 result.append("\n").append(i).append(". ").append(allRequests.get(i).toString()).append("is a ProductRequest");
+            } else if (allRequests.get(i) instanceof OffRequest) {
+                //System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
+                result.append("\n").append(i).append(". ").append(allRequests.get(i).toString()).append("is an OffRequest");
+            }
+        }
+
+        return result.toString();
+
+         */
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < allRequests.size(); i++) {
+            if (allRequests.get(i) instanceof ProductRequest) {
+                //System.out.println(i + ". " + allRequests.get(i) + "is a ProductRequest");
+                result.append("ProductRequest---").append(allRequests.get(i).toString());
             } else if (allRequests.get(i) instanceof OffRequest) {
                 //System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
                 result.append("\n").append(i).append(". ").append(allRequests.get(i).toString()).append("is an OffRequest");
