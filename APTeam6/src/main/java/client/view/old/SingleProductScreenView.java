@@ -94,11 +94,13 @@ public class SingleProductScreenView extends Application {
         stage.show();
 
         back.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         addToBuyBasket.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         stage.setOnCloseRequest(windowEvent -> {

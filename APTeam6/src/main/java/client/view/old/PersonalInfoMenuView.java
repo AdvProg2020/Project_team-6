@@ -218,7 +218,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         openBuyHistory.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         showDiscountCode.setOnAction(actionEvent -> {
@@ -345,7 +346,8 @@ public class PersonalInfoMenuView extends Application {
         }
 
         viewBalance.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         viewCompanyInfo.setOnAction(actionEvent -> {
@@ -358,19 +360,23 @@ public class PersonalInfoMenuView extends Application {
         });
 
         viewSalesHistory.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         manageProducts.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         addProduct.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         removeProduct.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
         showCategories.setOnAction(actionEvent -> {
@@ -380,7 +386,8 @@ public class PersonalInfoMenuView extends Application {
         });
 
         viewOffs.setOnAction(actionEvent -> {
-            //TODO
+            //
+
         });
 
 

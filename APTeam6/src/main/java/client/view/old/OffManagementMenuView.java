@@ -14,7 +14,7 @@ public class OffManagementMenuView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        //TODO
+
 
         VBox vBox = new VBox();
         stage.setTitle("Off management");
