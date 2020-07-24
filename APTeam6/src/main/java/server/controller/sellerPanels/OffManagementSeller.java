@@ -50,15 +50,32 @@ public class OffManagementSeller implements Parent {
     }
 
     public void viewOff(String substring) throws IOException {
-        sendMessage("");
+        Off tempOff = ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(substring));
+        String message = "";
+        if(tempOff != null){
+            //OffId---startDate---endDate---offAmount
+            message = tempOff.getOffId() + "---"
+                    + tempOff.getStartDate() + "---"
+                    + tempOff.getEndDate() + "---"
+                    + tempOff.getOffAmount() + "---";
+
+        }
+        sendMessage(message);
     }
 
     public void editOff(String substring) throws IOException {
-        sendMessage("");
+        OffRequest offRequest = new OffRequest(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(substring.split("---")[1])),
+                (byte) 1,substring.split("---")[2]);
+        ProgramManager.getProgramManagerInstance().addRequestToList(offRequest);
+        sendMessage("request sent");
     }
 
     public void addOff(String substring) throws IOException {
-        sendMessage("");
+        OffRequest offRequest = new OffRequest(ProgramManager.getProgramManagerInstance().getOffById(Integer.parseInt(substring.split("---")[1])),
+                (byte)0,
+                null);
+        ProgramManager.getProgramManagerInstance().addRequestToList(offRequest);
+        sendMessage("request sent");
     }
 
     /*
@@ -70,7 +87,6 @@ public class OffManagementSeller implements Parent {
     }
     ////////////////////////////
     private OffManagementSellerView view;
-
     public void start(){
         view = new OffManagementSellerView();
         String command = null;
