@@ -5,6 +5,7 @@ import server.Server;
 import server.controller.Parent;
 import client.view.old.SellerProductsMenuView;
 import server.controller.ProgramManager;
+import server.model.account.Seller;
 import server.model.logs.BuyLog;
 import server.model.logs.LogsInGeneral;
 import server.model.product.Comment;
@@ -62,7 +63,8 @@ public class SellerProductsMenu implements Parent {
     public void addProduct(String message) throws IOException {
         //name---categoryName---subCategoryName---Date---price
         String[] dataSplit = message.split("---");
-        new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
+        Product newProduct = new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
+        ((Seller)server.getCurrentlyLoggedInUsers()).productIds.add(newProduct.getId());
         sendMessage("created");
     }
 
@@ -74,8 +76,8 @@ public class SellerProductsMenu implements Parent {
             if (log.getType() == 1) {
 
                 BuyLog buyLog = (BuyLog) log;
-                for (Product boughtProduct : buyLog.getBoughtProducts()) {
-
+                for (int boughtProductId : buyLog.getBoughtProducts()) {
+                    Product boughtProduct = ProgramManager.getProgramManagerInstance().getProductById(boughtProductId);
                     if (boughtProduct.getName().equals(message)){
                         buyersName.add(buyLog.getBuyerUserName());
                     }

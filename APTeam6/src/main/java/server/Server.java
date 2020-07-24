@@ -49,7 +49,6 @@ public class Server implements Runnable {
         } catch (IOException e) {
             System.err.println("error occurred");
         }
-
     }
 
     public Account getCurrentlyLoggedInUsers() {
@@ -941,6 +940,18 @@ public class Server implements Runnable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.startsWith("13-4")) {
+                if(thisParent instanceof OffManagementSeller){
+                    OffManagementSeller offManagementSeller = (OffManagementSeller) thisParent;
+                    offManagementSeller.showProductIds();
                 } else {
                     try {
                         sendMessage("NotAllowed");
