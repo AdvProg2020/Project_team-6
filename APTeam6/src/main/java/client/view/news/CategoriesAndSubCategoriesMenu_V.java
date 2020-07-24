@@ -11,6 +11,7 @@ public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
     @Override
     public void start(){
         senderReceiver.changeMenu(0);
+        senderReceiver.sendMessage("12-0");
         String receipt = senderReceiver.getMessage();
         ArrayList<String> allCategories = new ArrayList<>(Arrays.asList(receipt.substring(3).split("---")));
         reset(allCategories);

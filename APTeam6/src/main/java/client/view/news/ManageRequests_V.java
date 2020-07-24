@@ -4,8 +4,26 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
+import java.util.ArrayList;
+
 public class ManageRequests_V extends GeneralController_V{
     public ListView<String> requestListView;
+
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(4);
+        senderReceiver.sendMessage("06-0");
+        String receipt = senderReceiver.getMessage();
+        //TODO: Please ToT
+        ArrayList<String> requests = new ArrayList<>();
+        reset(requests);
+    }
+
+    private void reset(ArrayList<String> requests){
+        requestListView.getItems().clear();
+        requestListView.getItems().addAll(requests);
+    }
+
     public void initialize(){
         requestListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }

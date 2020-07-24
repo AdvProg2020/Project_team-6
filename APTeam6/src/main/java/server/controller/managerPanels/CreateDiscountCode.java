@@ -46,7 +46,7 @@ public class CreateDiscountCode implements Parent {
         String message = "";
         for (Account allAccount : ProgramManager.getProgramManagerInstance().getAllAccounts()) {
             if(allAccount.getRole() == 1){
-                message = message + allAccount.getUsername() + "---";
+                message = message + "---" + allAccount.getUsername();
             }
 
         }

@@ -8,6 +8,9 @@ public class LoadingScreen_V extends GeneralController_V{
     public ProgressBar loadProgress;
     public Image gifImage;
 
+    @Override
+    public void start() {}
+
     public void reset(){
         Platform.runLater(new Runnable() {
             @Override

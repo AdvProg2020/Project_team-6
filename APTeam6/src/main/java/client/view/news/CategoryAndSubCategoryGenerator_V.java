@@ -17,7 +17,6 @@ public class CategoryAndSubCategoryGenerator_V extends GeneralController_V{
     @Override
     public void start(){
         senderReceiver.changeMenu(1);
-        String receipt = senderReceiver.getMessage();
         reset();
     }
 

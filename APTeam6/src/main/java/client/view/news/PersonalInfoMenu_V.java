@@ -6,11 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 
 public class PersonalInfoMenu_V extends GeneralController_V{
+    public Label userNameLabel;
     public Label passwordLabel;
     public Label firstNameLabel;
     public Label emailLabel;
     public Label lastNameLabel;
-    public Label PhoneLabel;
+    public Label phoneLabel;
     public Label roleLabel;
     public Label creditLabel;
     public Button B_cartButton;
@@ -27,8 +28,47 @@ public class PersonalInfoMenu_V extends GeneralController_V{
     public Button S_offsButton;
     public Button B_categoriesButton;
 
-    public void reset(){
-        //TODO get role and disable buttons and credit.
+    String companyName;
+
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(4);
+        senderReceiver.sendMessage("01-0");
+        String receipt = senderReceiver.getMessage();
+        reset(receipt);
+    }
+
+    public void reset(String receipt){
+        String[] strings = receipt.split("---");
+        userNameLabel.setText("UserName: " + strings[1]);
+        passwordLabel.setText("PassWord: " + strings[2]);
+        firstNameLabel.setText("First Name: " + strings[3]);
+        lastNameLabel.setText("Last Name: " + strings[4]);
+        emailLabel.setText("Email: " + strings[5]);
+        phoneLabel.setText("Phone: " + strings[6]);
+
+        if (receipt.startsWith("buyer")){
+            setButtonsByRole(1);
+            roleLabel.setText("Role: Buyer");
+            creditLabel.setText("credit: " + strings[7]);
+        }
+        else if (receipt.startsWith("seller")){
+            setButtonsByRole(2);
+            roleLabel.setText("Role: Seller");
+            creditLabel.setText("credit: " + strings[7]);
+            companyName = strings[8];
+        }
+        else if (receipt.startsWith("manager")){
+            setButtonsByRole(3);
+            roleLabel.setText("Role: Manager");
+        }
+        else if (receipt.startsWith("support")){
+            setButtonsByRole(4);
+            roleLabel.setText("Role: Suppressor");
+        }
+        else {
+            throw new RuntimeException("The hell kind of account?!");
+        }
     }
 
     public void changePasswordButton(ActionEvent actionEvent) {
@@ -120,5 +160,74 @@ public class PersonalInfoMenu_V extends GeneralController_V{
 
     public void backButton(ActionEvent actionEvent) {
         //TODO: (message)
+    }
+
+    ////////////////////////////////
+
+    private void setButtonsByRole(int role){
+        if (role == 1){
+            B_cartButton.setDisable(false);
+            B_historyButton.setDisable(false);
+            B_discountButton.setDisable(false);
+            B_categoriesButton.setDisable(false);
+            M_usersButton.setDisable(true);
+            M_productsButton.setDisable(true);
+            M_discountCodeButton.setDisable(true);
+            M_requestButton.setDisable(true);
+            M_categoriesButton.setDisable(true);
+            S_companyButton.setDisable(true);
+            S_historyButton.setDisable(true);
+            S_categoriesButton.setDisable(true);
+            S_offsButton.setDisable(true);
+            //TODO: Support man
+        }
+        else if (role == 2){
+            B_cartButton.setDisable(true);
+            B_historyButton.setDisable(true);
+            B_discountButton.setDisable(true);
+            B_categoriesButton.setDisable(true);
+            M_usersButton.setDisable(true);
+            M_productsButton.setDisable(true);
+            M_discountCodeButton.setDisable(true);
+            M_requestButton.setDisable(true);
+            M_categoriesButton.setDisable(true);
+            S_companyButton.setDisable(false);
+            S_historyButton.setDisable(false);
+            S_categoriesButton.setDisable(false);
+            S_offsButton.setDisable(false);
+            //TODO: Support man
+        }
+        else if (role == 3){
+            B_cartButton.setDisable(true);
+            B_historyButton.setDisable(true);
+            B_discountButton.setDisable(true);
+            B_categoriesButton.setDisable(true);
+            M_usersButton.setDisable(false);
+            M_productsButton.setDisable(false);
+            M_discountCodeButton.setDisable(false);
+            M_requestButton.setDisable(false);
+            M_categoriesButton.setDisable(false);
+            S_companyButton.setDisable(true);
+            S_historyButton.setDisable(true);
+            S_categoriesButton.setDisable(true);
+            S_offsButton.setDisable(true);
+            //TODO: Support man
+        }
+        else if (role == 4){
+            B_cartButton.setDisable(true);
+            B_historyButton.setDisable(true);
+            B_discountButton.setDisable(true);
+            B_categoriesButton.setDisable(true);
+            M_usersButton.setDisable(true);
+            M_productsButton.setDisable(true);
+            M_discountCodeButton.setDisable(true);
+            M_requestButton.setDisable(true);
+            M_categoriesButton.setDisable(true);
+            S_companyButton.setDisable(true);
+            S_historyButton.setDisable(true);
+            S_categoriesButton.setDisable(true);
+            S_offsButton.setDisable(true);
+            //TODO: Support man
+        }
     }
 }

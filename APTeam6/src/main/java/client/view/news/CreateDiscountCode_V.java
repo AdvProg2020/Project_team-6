@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateDiscountCode_V extends GeneralController_V{
     public TextField codeText;
@@ -20,8 +21,7 @@ public class CreateDiscountCode_V extends GeneralController_V{
     public void start() {
         senderReceiver.changeMenu(2);
         String receipt = senderReceiver.getMessage();
-        ArrayList<String> allBuyerNames = new ArrayList<>();
-        //TODO: get userNames
+        ArrayList<String> allBuyerNames = new ArrayList<>(Arrays.asList(receipt.substring(3).split("---")));
         reset(allBuyerNames);
     }
 
@@ -32,7 +32,7 @@ public class CreateDiscountCode_V extends GeneralController_V{
         percentageText.setText("");
         repetitionText.setText("");
         for (String buyerName : allBuyerNames) {
-
+            buyersListView.getItems().add(new CheckBox(buyerName));
         }
     }
 

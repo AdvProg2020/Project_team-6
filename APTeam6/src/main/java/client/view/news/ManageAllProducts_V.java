@@ -7,6 +7,19 @@ import javafx.scene.control.SelectionMode;
 public class ManageAllProducts_V extends GeneralController_V{
     public ListView<String> productsListView;
 
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(6);
+        senderReceiver.sendMessage("");
+        //TODO: WHAT??????
+        String receipt = senderReceiver.getMessage();
+        reset();
+    }
+
+    private void reset(){
+
+    }
+
     public void initialize(){
         productsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
