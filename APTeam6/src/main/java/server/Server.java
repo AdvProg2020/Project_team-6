@@ -208,6 +208,11 @@ public class Server implements Runnable {
                 -5: get balance
 
 
+            19-0: start EWallet
+                -1: takeCredit
+                -2: addToSellLog
+                -3: addToBuyLog
+
             */
 
             if (command.startsWith("00-0")) {
@@ -1100,14 +1105,20 @@ public class Server implements Runnable {
                     }
                 }
             }
-            else if(command.startsWith("18-0")){
-                if(thisParent instanceof Bank){
-                    Bank bank = (Bank) thisParent;
-                    try {
-                        bank.getBalance();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            else if(command.startsWith("19-0")){
+                EWallet eWallet = new EWallet();
+                try {
+                    eWallet.start(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                preParent = thisParent;
+                thisParent = eWallet;
+            }
+            else if(command.startsWith("19-1")){
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet)thisParent;
+                    eWallet.takeCredit(command.substring(4));
                 } else {
                     try {
                         sendMessage("NotAllowed");
@@ -1116,20 +1127,30 @@ public class Server implements Runnable {
                     }
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            else if(command.startsWith("19-2")){
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet)thisParent;
+                    eWallet.addToSellLog(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
+            else if(command.startsWith("19-3")){
+                if(thisParent instanceof EWallet){
+                    EWallet eWallet = (EWallet)thisParent;
+                    eWallet.addToBuyLog(command.substring(4));
+                } else {
+                    try {
+                        sendMessage("NotAllowed");
+                    } catch (IOException e) {
+                        System.err.println("error occurred");
+                    }
+                }
+            }
             try {
                 sendMessage(command);
             } catch (IOException e) {
@@ -1142,8 +1163,7 @@ public class Server implements Runnable {
             }
 
         }
-    }
-
+}
 
     private static void replayAttacks(long[] time) throws InterruptedException {
         for (int i = 0; i < 19; i++) {

@@ -63,7 +63,6 @@ public class CreateDiscountCode implements Parent {
 
             //TODO check data validation
             //code---startDate---endDate---percentage---repetitionTime
-
             new DiscountCode(data.split("---")[0],
                     ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]),
                     ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]),

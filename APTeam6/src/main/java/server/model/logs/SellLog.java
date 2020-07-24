@@ -3,6 +3,7 @@ package server.model.logs;
 import server.controller.ProgramManager;
 import server.model.account.Seller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,15 +11,15 @@ import java.util.Date;
 
 public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
     private int receivedAmount;
-    private ArrayList<Integer> soldProducts;
+    private ArrayList<Integer> soldProductsId;
     protected String sellerUserName;
 
-    public SellLog(Date date, int executedDiscount, int logId, int receivedAmount, String sellerUserName) {
-        super(date, executedDiscount, logId , 2);
+    public SellLog(int executedDiscount, int logId, int receivedAmount,ArrayList<Integer> productIds) {
+        super(LocalDateTime.now(), executedDiscount, logId , 2);
         this.receivedAmount = receivedAmount;
-        this.soldProducts = new ArrayList<Integer>();
-        this.sellerUserName = sellerUserName;
+        this.soldProductsId = productIds;
         Seller.sellLogIds.add(logId);
+
     }
 
     private static int field = 1;
@@ -50,7 +51,7 @@ public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
         String string = "SellLog{" +
                 "receivedAmount=" + receivedAmount +
                 ", soldProducts=" ;
-        for (Integer soldProduct : soldProducts) {
+        for (Integer soldProduct : soldProductsId) {
             string += soldProduct.toString();
         }
         string += ", date=" + date +
@@ -83,7 +84,7 @@ public class SellLog extends LogsInGeneral implements Comparable<SellLog>{
     }
 
     public ArrayList<Integer> getSoldProductIds(){
-        return soldProducts;
+        return soldProductsId;
     }
 
     public int getReceivedAmount() {
