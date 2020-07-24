@@ -130,7 +130,7 @@ public class Client extends Application {
         command = AES.encrypt(command, secretKey);
 
         try {
-            dataOutputStream.writeUTF(token + command);
+            dataOutputStream.writeUTF(command);
             dataOutputStream.flush();
         }
         catch (Exception e){

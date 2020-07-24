@@ -1370,16 +1370,18 @@ public class Server implements Runnable {
         DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(this.clientSocket.getInputStream()));
         String command = dataInputStream.readUTF();
 
-        if(command.startsWith(token)){
-            command = command.substring(10);
-        }else{
-            sendMessage("tokenExpired");
-            return null;
-        }
+
 
         String secretKey;
         secretKey = AES.getSecretKeyByToken(token);
         command = AES.decrypt(command,secretKey);
+
+        if(command.startsWith(token)){
+            command = command.substring(15);
+        }else{
+            sendMessage("tokenExpired");
+            return null;
+        }
 
         this.log.addLog(command, 1);
         return command;
