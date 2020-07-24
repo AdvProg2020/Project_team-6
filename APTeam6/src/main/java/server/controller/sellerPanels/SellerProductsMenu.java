@@ -10,6 +10,7 @@ import server.model.logs.LogsInGeneral;
 import server.model.product.Comment;
 import server.model.product.DiscountCode;
 import server.model.product.Product;
+import server.model.requests.ProductRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +63,8 @@ public class SellerProductsMenu implements Parent {
     public void addProduct(String message) throws IOException {
         //name---categoryName---subCategoryName---Date---price
         String[] dataSplit = message.split("---");
-        new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
+        Product product = new Product(dataSplit[0], dataSplit[1], dataSplit[2], dataSplit[3], Long.parseLong(dataSplit[4]));
+        new ProductRequest(product,(byte)0,null);
         sendMessage("created");
     }
 
@@ -74,9 +76,9 @@ public class SellerProductsMenu implements Parent {
             if (log.getType() == 1) {
 
                 BuyLog buyLog = (BuyLog) log;
-                for (Product boughtProduct : buyLog.getBoughtProducts()) {
+                for (Integer boughtProduct : buyLog.getBoughtProducts()) {
 
-                    if (boughtProduct.getName().equals(message)){
+                    if (boughtProduct == Integer.parseInt(message)){
                         buyersName.add(buyLog.getBuyerUserName());
                     }
                 }

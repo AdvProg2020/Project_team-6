@@ -37,6 +37,21 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
     private ArrayList<SubCategory> allSubCategoriesArrayList;
     private ArrayList<Product> allProductsArrayList;
 
+    public void getAdditionalInformationCategorySubCategory() throws IOException {
+        if(currentCategory!=null && currentSubCategory!=null){
+            StringBuilder result = new StringBuilder();
+            for (String additionalAttribute : currentCategory.getAdditionalAttributes()) {
+                result.append(additionalAttribute);
+            }
+            for (String additionalAttribute : currentSubCategory.getAdditionalAttributes()) {
+                result.append(additionalAttribute);
+            }
+            sendMessage(result.toString());
+        }else{
+            sendMessage("category or subCategory is null");
+        }
+    }
+
     private void updateCategoriesArrayList() {
         allCategoriesArrayList = new ArrayList<>(ProgramManager.getProgramManagerInstance().getAllCategories());
 
