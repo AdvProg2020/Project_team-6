@@ -7,10 +7,29 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class CategoryAndSubCategoryGenerator_V extends GeneralController_V{
-    public ListView attributeList;
+    public ListView<String> attributeList;
     public TextField newAttributeText;
     public TextField nameText;
     public Label titleLabel;
+
+    private boolean isSubCategory;
+
+    @Override
+    public void start(){
+        senderReceiver.changeMenu(1);
+        String receipt = senderReceiver.getMessage();
+        reset();
+    }
+
+    private void reset(){
+        attributeList.getItems().clear();
+        newAttributeText.setText("");
+        nameText.setText("");
+    }
+
+    public void setSubCategory(boolean subCategory) {
+        isSubCategory = subCategory;
+    }
 
     public void finishButton(ActionEvent actionEvent) {
         if (nameText.getText().matches("[a-zA-Z0-9]+")) {
@@ -24,7 +43,7 @@ public class CategoryAndSubCategoryGenerator_V extends GeneralController_V{
 
     public void removeButton(ActionEvent actionEvent) {
         if (attributeList.getSelectionModel().getSelectedIndices().size() == 1){
-            attributeList.getItems().remove(attributeList.getSelectionModel().getSelectedIndices().get(0));
+            attributeList.getItems().remove(attributeList.getItems().get(attributeList.getSelectionModel().getSelectedIndices().get(0)));
         }
     }
 

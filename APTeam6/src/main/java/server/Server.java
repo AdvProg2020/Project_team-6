@@ -123,7 +123,7 @@ public class Server implements Runnable {
 
             **command start with:**
 
-            00-0: start main screen(managerPanel or mainScreen)
+            00-0: start main screen(managerPanel or mainScreen) //TODO: Kamali fix this line although it's not important
 
 
             01-0: start PersonalInfoMenu (personalMenuInfo)
@@ -132,7 +132,7 @@ public class Server implements Runnable {
             02-1: (managerPanel/registerManager): get and verify data for register
 
             03-0: start login menu(LoginMenu)
-                (return start when exist manager and return createManager when doesnt exist manager) //TODO: Kamali fix this line
+                (return start when exist manager and return createManager when doesnt exist manager)
                 -1: get and verify data for new buyer
                 -2: get and verify data for new seller
                 -3: get and verify data for new manager

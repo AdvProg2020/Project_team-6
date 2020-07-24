@@ -6,6 +6,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 public class CreateDiscountCode_V extends GeneralController_V{
     public TextField codeText;
     public TextField daysBeforeStartText;
@@ -13,6 +15,26 @@ public class CreateDiscountCode_V extends GeneralController_V{
     public TextField percentageText;
     public TextField repetitionText;
     public ListView<CheckBox> buyersListView;
+
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(2);
+        String receipt = senderReceiver.getMessage();
+        ArrayList<String> allBuyerNames = new ArrayList<>();
+        //TODO: get userNames
+        reset(allBuyerNames);
+    }
+
+    private void reset(ArrayList<String> allBuyerNames){
+        codeText.setText("");
+        daysBeforeStartText.setText("");
+        daysBeforeEndText.setText("");
+        percentageText.setText("");
+        repetitionText.setText("");
+        for (String buyerName : allBuyerNames) {
+
+        }
+    }
 
     public void createButton(ActionEvent actionEvent) {
         if (codeText.getText().equals("") || daysBeforeStartText.getText().equals("") || daysBeforeEndText.getText().equals("") || percentageText.getText().equals("") || repetitionText.getText().equals("")){
