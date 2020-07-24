@@ -11,7 +11,7 @@ public class ManageRequests_V extends GeneralController_V{
 
     @Override
     public void start() {
-        senderReceiver.changeMenu(4);
+        senderReceiver.changeMenu(8);
         senderReceiver.sendMessage("06-0");
         String receipt = senderReceiver.getMessage();
         //TODO: Please ToT

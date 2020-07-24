@@ -11,6 +11,12 @@ public class SellerNewOffMenu_V extends GeneralController_V{
     public ListView<CheckBox> productsListView;
     public TextField percentageTextField;
 
+    @Override
+    public void start() {
+        senderReceiver.changeMenu(11);
+        reset(); //TODO: I need a method in chontroller for getting all product names
+    }
+
     public void reset(ArrayList<String> productNames){
         productsListView.getItems().clear();
         for (String productName : productNames) {

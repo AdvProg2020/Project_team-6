@@ -12,7 +12,7 @@ public class ManageUsers_V extends GeneralController_V{
 
     @Override
     public void start() {
-        senderReceiver.changeMenu(4);
+        senderReceiver.changeMenu(9);
         senderReceiver.sendMessage("09-0");
         String receipt = senderReceiver.getMessage();
         //TODO: kidding me?
