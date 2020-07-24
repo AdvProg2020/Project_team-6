@@ -59,7 +59,7 @@ public class PersonalInfoMenu implements Parent {
     @Override
     public void start(Server server) throws IOException {
         this.server = server;
-        String message = "start";
+        String message = "start---";
         //manager---username---password---firstName---lastName---email---phoneNumber
         //buyer---username---password---firstName---lastName---email---phoneNumber---credit
         //seller---username---password---firstName---lastName---email---phoneNumber---credit---company

@@ -13,7 +13,7 @@ public class ManageAllProducts_V extends GeneralController_V{
         senderReceiver.changeMenu(6);
         senderReceiver.sendMessage("");
         String receipt = senderReceiver.getMessage();
-        reset(receipt.split("@"));
+        reset(receipt.split("---"));
     }
 
     private void reset(String[] strings){

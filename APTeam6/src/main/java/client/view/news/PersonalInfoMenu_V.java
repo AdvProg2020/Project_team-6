@@ -48,22 +48,22 @@ public class PersonalInfoMenu_V extends GeneralController_V{
         emailLabel.setText("Email: " + strings[5]);
         phoneLabel.setText("Phone: " + strings[6]);
 
-        if (receipt.startsWith("buyer")){
+        if (receipt.contains("buyer")){
             setButtonsByRole(1);
             roleLabel.setText("Role: Buyer");
             creditLabel.setText("credit: " + strings[7]);
         }
-        else if (receipt.startsWith("seller")){
+        else if (receipt.contains("seller")){
             setButtonsByRole(2);
             roleLabel.setText("Role: Seller");
             creditLabel.setText("credit: " + strings[7]);
             companyName = strings[8];
         }
-        else if (receipt.startsWith("manager")){
+        else if (receipt.contains("manager")){
             setButtonsByRole(3);
             roleLabel.setText("Role: Manager");
         }
-        else if (receipt.startsWith("support")){
+        else if (receipt.contains("support")){
             setButtonsByRole(4);
             roleLabel.setText("Role: Suppressor");
         }
