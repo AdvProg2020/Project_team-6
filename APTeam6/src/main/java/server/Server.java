@@ -1322,7 +1322,7 @@ public class Server implements Runnable {
 
 
 
-            try {
+            /*try {
                 sendMessage(command);
             } catch (IOException e) {
                 this.log.addLog("disconnected!", 2);
@@ -1331,7 +1331,7 @@ public class Server implements Runnable {
                 MainServer.runningServer--;
                 break;
 
-            }
+            }*/
 
         }
     }
