@@ -23,7 +23,7 @@ public class OffManagementSeller implements Parent {
         String message = "";
         for (Integer integer : ProgramManager.getProgramManagerInstance().getAllOffs().keySet()) {
             Off off = ProgramManager.getProgramManagerInstance().getAllOffs().get(integer);
-            message = message + off.getOffId() + "@" + off.getOffAmount() + "@";
+            message = message + off.getOffId() + "===" + off.getOffAmount() + "===";
             for (Integer id : off.getProductsInOff()) {
                 message += (ProgramManager.getProgramManagerInstance().getProductById(id).getName() + "@");
             }
