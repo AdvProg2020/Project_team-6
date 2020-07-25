@@ -1,6 +1,7 @@
 package client.view.news;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
@@ -69,45 +70,49 @@ public class PersonalInfoMenu_V extends GeneralController_V{
         else {
             throw new RuntimeException("The hell kind of account?!");
         }
+
+        System.out.println("Personal menu info");
     }
 
     public void changePasswordButton(ActionEvent actionEvent) {
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setHeaderText("New passWord");
         String result = inputDialog.getResult();
-        //TODO: (message) result
+        senderReceiver.sendMessage("4" + result);
     }
 
     public void changeFirstNameButton(ActionEvent actionEvent) {
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setHeaderText("New first name");
         String result = inputDialog.getResult();
-        //TODO: (message) result
+        senderReceiver.sendMessage("0" + result);
     }
 
     public void ChangeEmailButton(ActionEvent actionEvent) {
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setHeaderText("New Email");
         String result = inputDialog.getResult();
-        //TODO: (message) result
+        senderReceiver.sendMessage("2" + result);
     }
 
     public void changeLastNameButton(ActionEvent actionEvent) {
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setHeaderText("New last name");
         String result = inputDialog.getResult();
-        //TODO: (message) result
+        senderReceiver.sendMessage("1" + result);
     }
 
     public void ChangePhoneButton(ActionEvent actionEvent) {
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setHeaderText("New phone");
         String result = inputDialog.getResult();
-        //TODO: (message) result
+        senderReceiver.sendMessage("3" + result);
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+
     public void B_cartButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(15).start();
     }
 
     public void B_historyButtonAction(ActionEvent actionEvent) {
@@ -119,27 +124,27 @@ public class PersonalInfoMenu_V extends GeneralController_V{
     }
 
     public void M_usersButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(9).start();
     }
 
     public void M_productsButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(6).start();
     }
 
     public void M_discountCodeButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(7).start();
     }
 
     public void M_requestButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(8).start();
     }
 
     public void M_categoriesButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(0).start();
     }
 
     public void S_companyButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        new Alert(Alert.AlertType.INFORMATION,"Your chompany is called " + companyName + " in case you forgot 😁").showAndWait();
     }
 
     public void S_historyButtonAction(ActionEvent actionEvent) {
@@ -147,15 +152,15 @@ public class PersonalInfoMenu_V extends GeneralController_V{
     }
 
     public void S_categoriesButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(0).start();
     }
 
     public void S_offsButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(12).start();
     }
 
     public void B_categoriesButtonAction(ActionEvent actionEvent) {
-        //TODO: (message)
+        senderReceiver.allControllers.get(0).start();
     }
 
     public void backButton(ActionEvent actionEvent) {

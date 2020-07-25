@@ -94,6 +94,19 @@ public class PersonalInfoMenu implements Parent {
     }
 
     public void changeInformation(String data){
+        Account account = server.getCurrentlyLoggedInUsers();
+
+        if (data.startsWith("0"))
+            account.setFirstName(data.substring(1));
+        else if (data.startsWith("1"))
+            account.setLastName(data.substring(1));
+        else if (data.startsWith("2"))
+            account.setEmailAddress(data.substring(1));
+        else if (data.startsWith("3"))
+            account.setPhoneNumber(data.substring(1));
+        else if (data.startsWith("4"))
+            account.setPassword(data.substring(1));
+        /*
         //password---firstName---lastName---email---phoneNumber
         //password---firstName---lastName---email---phoneNumber
         //password---firstName---lastName---email---phoneNumber---company
@@ -119,7 +132,7 @@ public class PersonalInfoMenu implements Parent {
             account.setLastName(data.split("---")[2]);
             account.setEmailAddress(data.split("---")[3]);
             account.setPhoneNumber(data.split("---")[4]);
-        }
+        }*/
     }
 
     private void sendMessage(String message) throws IOException {
