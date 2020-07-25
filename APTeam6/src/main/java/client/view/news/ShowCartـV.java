@@ -20,15 +20,17 @@ public class ShowCartـV extends GeneralController_V{
     private String[] products;
     public void increase(ActionEvent actionEvent) {
         //TODO
+        senderReceiver.sendMessage(productId.getText());
     }
     public void decrease(ActionEvent actionEvent) {
         //TODO
+        senderReceiver.sendMessage(productId.getText());
     }
     public void showTotalPrice(ActionEvent actionEvent) {
         //TODO
     }
     public void viewProduct(ActionEvent actionEvent) {
-        //TODO
+        senderReceiver.sendMessage(productId.getText());
     }
     public void purchase(ActionEvent actionEvent) {
         //TODO
@@ -52,7 +54,6 @@ public class ShowCartـV extends GeneralController_V{
 
     public void initialize(){
         productList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
     }
     
 }

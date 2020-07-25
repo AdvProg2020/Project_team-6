@@ -3,14 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.ShowCartـV">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #5a96ff;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.news.ShowCartـV">
    <children>
-      <Button fx:id="increase" layoutX="267.0" layoutY="97.0" mnemonicParsing="false" onAction="#increase" text="Increase" />
-      <Button fx:id="purchase" layoutX="265.0" layoutY="231.0" mnemonicParsing="false" onAction="#purchase" text="Purchase" />
-      <Button fx:id="showTotalPrice" layoutX="245.0" layoutY="188.0" mnemonicParsing="false" onAction="#showTotalPrice" text="Show Total Price" />
-      <Button fx:id="decrease" layoutX="265.0" layoutY="142.0" mnemonicParsing="false" onAction="#decrease" text="Decraese" />
-      <Button fx:id="viewProduct" layoutX="254.0" layoutY="54.0" mnemonicParsing="false" onAction="#viewProduct" text="View Product" />
-      <TextField fx:id="productId" layoutX="223.0" layoutY="29.0" />
-      <ListView fx:id="productList" layoutX="36.0" layoutY="89.0" prefHeight="175.0" prefWidth="200.0" />
+      <Button fx:id="increase" layoutX="399.0" layoutY="115.0" mnemonicParsing="false" onAction="#increase" prefHeight="25.0" prefWidth="158.0" text="Increase" />
+      <Button fx:id="purchase" layoutX="401.0" layoutY="225.0" mnemonicParsing="false" onAction="#purchase" prefHeight="25.0" prefWidth="158.0" text="Purchase" />
+      <Button fx:id="showTotalPrice" layoutX="400.0" layoutY="188.0" mnemonicParsing="false" onAction="#showTotalPrice" prefHeight="25.0" prefWidth="158.0" text="Show Total Price" />
+      <Button fx:id="decrease" layoutX="400.0" layoutY="150.0" mnemonicParsing="false" onAction="#decrease" prefHeight="25.0" prefWidth="158.0" text="Decraese" />
+      <Button fx:id="viewProduct" layoutX="399.0" layoutY="81.0" mnemonicParsing="false" onAction="#viewProduct" prefHeight="25.0" prefWidth="158.0" text="View Product" />
+      <TextField fx:id="productId" layoutX="399.0" layoutY="26.0" prefHeight="25.0" prefWidth="158.0" promptText="Product ID" />
+      <ListView fx:id="productList" layoutX="23.0" layoutY="38.0" prefHeight="344.0" prefWidth="200.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="List Of Products" />
    </children>
 </AnchorPane>
