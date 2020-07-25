@@ -36,11 +36,11 @@ public class SellerOffsMenu_V extends GeneralController_V{
     }
 
     public void backButton(ActionEvent actionEvent) {
-        //TODO (message) -
+        senderReceiver.allControllers.get(10).start();
     }
 
     public void newButton(ActionEvent actionEvent) {
-        //TODO (message) -
+        senderReceiver.allControllers.get(11).start();
     }
 
     public void editButton(ActionEvent actionEvent) {

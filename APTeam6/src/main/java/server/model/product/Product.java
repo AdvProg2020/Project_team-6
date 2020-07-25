@@ -29,11 +29,11 @@ public class Product implements Comparable<Product>{
     private int numberOfScore = 0;
     private ArrayList<Comment> comments;
 
-    public Product(String name, String categoryName, String subCategoryName,String date,long price){
+    public Product(String name, String categoryName, String subCategoryName, long price){
         this.name = name;
         this.categoryName = categoryName;
         this.subCategoryName = subCategoryName;
-        this.creationDate = ProgramManager.getProgramManagerInstance().parsingStringToDate(date);
+        this.creationDate = LocalDateTime.now();
         this.price = price;
         id = nextId;
         nextId++;

@@ -1,6 +1,7 @@
 package client.view.news;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
@@ -14,6 +15,8 @@ public class SingleProductMenu_V extends GeneralController_V{
     public Label scoreLabel;
     public ListView<String> commentsListView;
     public ListView<String> additionalInfoListView;
+    public Button addButtonId;
+    private int role;
 
     @Override
     public void start() {
@@ -30,13 +33,19 @@ public class SingleProductMenu_V extends GeneralController_V{
         commentsListView.getItems().clear();
         commentsListView.getItems().addAll(comments);
         scoreProgressBar.setProgress(averageScore / 10);
+        senderReceiver.sendMessage("20-0");
+        role = Integer.parseInt(senderReceiver.getMessage());
+        if (role == 1 || role == 2)
+            addButtonId.setDisable(false);
+        else
+            addButtonId.setDisable(true);
     }
 
     public void backButton(ActionEvent actionEvent) {
-        //TODO (message) -
+        senderReceiver.allControllers.get(0).start();
     }
 
     public void addButton(ActionEvent actionEvent) {
-        //TODO (message) -
+
     }
 }

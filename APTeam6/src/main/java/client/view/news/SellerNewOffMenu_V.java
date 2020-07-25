@@ -25,7 +25,7 @@ public class SellerNewOffMenu_V extends GeneralController_V{
     }
 
     public void cancelButton(ActionEvent actionEvent) {
-        //TODO (NO message)
+        senderReceiver.allControllers.get(12).start();
     }
 
     public void createButton(ActionEvent actionEvent) {
