@@ -39,6 +39,7 @@ public class ManageDiscountCodes_V extends GeneralController_V{
 
     public void editButton(ActionEvent actionEvent) {
         //TODO I won't write this now. maybe later
+
     }
 
     public void deleteButton(ActionEvent actionEvent) {

@@ -419,7 +419,6 @@ public class ProgramManager {
                 result.append("Seller---").append(allRequests.get(i).toString());
             }
         }
-
         return result.toString();
     }
 

@@ -25,10 +25,13 @@ public class ManageRequests_V extends GeneralController_V{
         reset(requests1);
     }
 
+
+
     private void reset(ArrayList<String> requests){
         requestListView.getItems().clear();
         requestListView.getItems().addAll(requests);
     }
+
 
     public void initialize(){
         requestListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -53,6 +56,11 @@ public class ManageRequests_V extends GeneralController_V{
             //TODO: (message) index
         }
     }
+
+
+
+
+
 
     public void backButton(ActionEvent actionEvent) {
         senderReceiver.allControllers.get(10).start();
