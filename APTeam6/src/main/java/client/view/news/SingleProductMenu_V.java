@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SingleProductMenu_V extends GeneralController_V{
     public Label nameLabel;
@@ -23,15 +24,17 @@ public class SingleProductMenu_V extends GeneralController_V{
         senderReceiver.changeMenu(14);
         senderReceiver.sendMessage("12-9");
         String receipt = senderReceiver.getMessage();
-        //TODO: server should send additionals too
-        reset();
+        String[] strings = receipt.split("---");
+        reset(strings[0], strings[3], strings[4], Float.parseFloat(strings[5]), new ArrayList<String>(Arrays.asList(strings[6].split("==="))), new ArrayList<String>(Arrays.asList(strings[7].split("==="))));
     }
 
-    public void reset(String name, String description, ArrayList<String> comments, float averageScore){
-        nameLabel.setText(name);
+    public void reset(String name, String description, String price, float averageScore, ArrayList<String> comments, ArrayList<String> additional){
+        nameLabel.setText(name + " " + price);
         descriptionLabel.setText(description);
         commentsListView.getItems().clear();
         commentsListView.getItems().addAll(comments);
+        additionalInfoListView.getItems().clear();
+        additionalInfoListView.getItems().addAll(additional);
         scoreProgressBar.setProgress(averageScore / 10);
         senderReceiver.sendMessage("20-0");
         role = Integer.parseInt(senderReceiver.getMessage());
