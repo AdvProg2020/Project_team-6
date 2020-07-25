@@ -29,6 +29,10 @@ public class Product implements Comparable<Product>{
     private int numberOfScore = 0;
     private ArrayList<Comment> comments;
 
+    public float getAverageScore() {
+        return averageScore;
+    }
+
     public Product(String name, String categoryName, String subCategoryName, long price){
         this.name = name;
         this.categoryName = categoryName;

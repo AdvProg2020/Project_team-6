@@ -2,6 +2,7 @@ package server.controller;
 
 import server.Server;
 import server.model.product.Category;
+import server.model.product.Comment;
 import server.model.product.Product;
 import server.model.product.SubCategory;
 import client.view.old.CategoriesAndSubCategoriesMenuView;
@@ -203,7 +204,12 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
         Product tempProduct = allProductsArrayList.get(index);
         try {
             //name---categoryName---SubCategoryName---description---price
-            sendMessage(tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice());
+            String message = tempProduct.getName() + "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---" + tempProduct.getDescription() + "---" + tempProduct.getPrice() + "---";
+            String comments = "";
+            for (Comment comment : tempProduct.getComments()) {
+                comments = comments + comment.getUsername() + "@@@" + comment.getText() + "===";
+            }
+            sendMessage(message + comments + tempProduct.getAverageScore());
         } catch (IOException e) {
             System.err.println("error occurred");
         }
