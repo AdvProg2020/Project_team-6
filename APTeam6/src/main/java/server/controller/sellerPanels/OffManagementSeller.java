@@ -5,6 +5,7 @@ import server.controller.Parent;
 import server.controller.ProgramManager;
 import server.model.account.Account;
 import server.model.account.Seller;
+import server.model.product.Off;
 import server.model.product.Product;
 import server.model.requests.OffRequest;
 import client.view.userPanel.OffManagementSellerView;
@@ -21,7 +22,12 @@ public class OffManagementSeller implements Parent {
         this.server = server;
         String message = "";
         for (Integer integer : ProgramManager.getProgramManagerInstance().getAllOffs().keySet()) {
-            message = message + ProgramManager.getProgramManagerInstance().getAllOffs().get(integer).getOffId() + "---";
+            Off off = ProgramManager.getProgramManagerInstance().getAllOffs().get(integer);
+            message = message + off.getOffId() + "@" + off.getOffAmount() + "@";
+            for (Integer id : off.getProductsInOff()) {
+                message += (ProgramManager.getProgramManagerInstance().getProductById(id).getName() + "@");
+            }
+            message = message + "---";
         }
         sendMessage(message);
     }
