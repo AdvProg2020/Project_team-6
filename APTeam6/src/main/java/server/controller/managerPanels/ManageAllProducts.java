@@ -37,9 +37,9 @@ public class ManageAllProducts implements Parent {
     }
          */
 
-    public void remove(int productId) {
-        if(ProgramManager.getProgramManagerInstance().getProductById(productId) != null) {
-            ProgramManager.getProgramManagerInstance().removeProduct(productId);
+    public void remove(int i) {
+        if(ProgramManager.getProgramManagerInstance().getAllProducts().size() > i) {
+            ProgramManager.getProgramManagerInstance().removeProductByIndex(i);
             try {
                 sendMessage("removed");
             } catch (IOException e) {
@@ -62,19 +62,10 @@ public class ManageAllProducts implements Parent {
         this.server = server;
         StringBuilder result = new StringBuilder();
         for (Integer integer : ProgramManager.getProgramManagerInstance().getAllProducts().keySet()) {
-            Product tempProduct = ProgramManager.getProgramManagerInstance().getAllProducts().get(integer);
-
-            //@Name---Description---Price---Category---SubCategory---Comment1===com2===com3...@...
-            result.append("@").append(tempProduct.getName()).append("---").append(tempProduct.getDescription()).append("---").append(tempProduct.getPrice()).append("---").append(tempProduct.getCategoryName()).append("---").append(tempProduct.getSubCategoryName()).append("---");
-
-            for (Comment comment : tempProduct.getComments()) {
-                result.append(comment.getTitle());
-                result.append(":");
-                result.append(comment.getText());
-                result.append("===");
-            }
+            result.append(ProgramManager.getProgramManagerInstance().getAllProducts().get(integer).getName()).append("@");
         }
-        sendMessage(result.toString());
+        server.sendMessage(result.toString());
+        //sendMessage(result.toString());
     }
 
     private void sendMessage(String message) throws IOException {
