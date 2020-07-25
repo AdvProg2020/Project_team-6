@@ -81,6 +81,7 @@ public class LoginMenu implements Parent{
         }
         server.loginSuccessful(ProgramManager.getProgramManagerInstance().getAccountByUsername(data.split("---")[0]));
         //view.giveOutput("Welcome " + username + ".");
+        ProgramManager.getProgramManagerInstance().getAccountByUsername(data.split("---")[0]).setOnline(true);
         sendMessage("4-login_successful");
     }
 
@@ -190,6 +191,7 @@ public class LoginMenu implements Parent{
      */
 
     public void logout() {
+        server.getCurrentlyLoggedInUsers().setOnline(false);
         server.loginSuccessful(null);
     }
 

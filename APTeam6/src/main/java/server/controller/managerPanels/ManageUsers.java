@@ -23,6 +23,8 @@ public class ManageUsers implements Parent {
             string.append(account.getUsername());
             string.append("---");
             string.append(account.getRole());
+            string.append("---");
+            string.append(((Boolean)account.isOnline()).toString());
             string.append("===");
         }
         sendMessage(string.toString());
@@ -33,6 +35,7 @@ public class ManageUsers implements Parent {
     }
 
     public void deleteUser(String data) throws IOException {
+        data = data.substring(4);
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data)){
             if(ProgramManager.getProgramManagerInstance().allLoggedInUser.contains(ProgramManager.getProgramManagerInstance().getAccountByUsername(data))){
                 sendMessage("firstLogout");
@@ -78,6 +81,7 @@ public class ManageUsers implements Parent {
     }
 
     public void changeUserChange(String data) throws IOException {
+        data = data.substring(4);
         if(data.split("---")[0].equals("buyer")){
 
         }
@@ -102,6 +106,7 @@ public class ManageUsers implements Parent {
     }
 
     public void viewUser(String data) throws IOException {
+        data = data.substring(4);
         if (ProgramManager.getProgramManagerInstance().isThereAccountWithUsername(data)) {
             StringBuilder message = new StringBuilder();
             //manager---username---password---firstName---lastName---email---phoneNumber

@@ -80,4 +80,8 @@ public abstract class Account {
     public void setOnline(boolean online) {
         isOnline = online;
     }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
 }
