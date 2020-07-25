@@ -1,6 +1,7 @@
 package client.view.news;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -30,11 +31,13 @@ public class LoginMenu_V extends GeneralController_V{
     }
 
     public void logoutButtonAction(ActionEvent actionEvent) {
-        //TODO: (message) -
+        senderReceiver.sendMessage("03-5");
+        new Alert(Alert.AlertType.INFORMATION, senderReceiver.getMessage()).showAndWait();
     }
 
     public void loginButtonAction(ActionEvent actionEvent) {
-        //TODO: (message) userName password
+        senderReceiver.sendMessage("03-4" + userNameText.getText() + "---" + passwordText.getText());
+        new Alert(Alert.AlertType.INFORMATION, senderReceiver.getMessage()).showAndWait();
     }
 
     public void registerBuyerButtonAction(ActionEvent actionEvent) {
@@ -43,7 +46,8 @@ public class LoginMenu_V extends GeneralController_V{
         for (String string : strings) {
             builder.append("---").append(string);
         }
-        //TODO: (message) buyer builder.toString();
+        senderReceiver.sendMessage("03-1" + builder.toString());
+        new Alert(Alert.AlertType.INFORMATION, senderReceiver.getMessage()).showAndWait();
     }
 
     public void registerManagerButtonAction(ActionEvent actionEvent) {
@@ -52,7 +56,8 @@ public class LoginMenu_V extends GeneralController_V{
         for (String string : strings) {
             builder.append("---").append(string);
         }
-        //TODO: (message) manager builder.toString();
+        senderReceiver.sendMessage("03-3" + builder.toString());
+        new Alert(Alert.AlertType.INFORMATION, senderReceiver.getMessage()).showAndWait();
     }
 
     public void registerSellerButtonAction(ActionEvent actionEvent) {
@@ -61,7 +66,8 @@ public class LoginMenu_V extends GeneralController_V{
         for (String string : strings) {
             builder.append("---").append(string);
         }
-        //TODO: (message) seller builder.toString();
+        senderReceiver.sendMessage("03-2" + builder.toString());
+        new Alert(Alert.AlertType.INFORMATION, senderReceiver.getMessage()).showAndWait();
     }
 
     //////////////////////////////////////
@@ -78,18 +84,21 @@ public class LoginMenu_V extends GeneralController_V{
             strings[0] = inputDialog.getResult();
         }while (!strings[0].matches("[a-zA-Z0-9]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your last name");
         do {
             inputDialog.showAndWait();
             strings[1] = inputDialog.getResult();
         }while (!strings[1].matches("[a-zA-Z0-9]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your phone Num");
         do {
             inputDialog.showAndWait();
             strings[2] = inputDialog.getResult();
         }while (!strings[2].matches("[0-9]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your email address");
         do {
             inputDialog.showAndWait();
@@ -111,24 +120,28 @@ public class LoginMenu_V extends GeneralController_V{
             strings[0] = inputDialog.getResult();
         }while (!strings[0].matches("[a-zA-Z0-9]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your last name");
         do {
             inputDialog.showAndWait();
             strings[1] = inputDialog.getResult();
         }while (!strings[1].matches("[a-zA-Z0-9]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your phone Num");
         do {
             inputDialog.showAndWait();
             strings[2] = inputDialog.getResult();
         }while (!strings[2].matches("[0-9]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your email address");
         do {
             inputDialog.showAndWait();
             strings[3] = inputDialog.getResult();
         }while (!strings[3].matches("[a-zA-Z0-9@.]+"));
 
+        inputDialog.setContentText("");
         inputDialog.setHeaderText("Enter your chompany name");
         do {
             inputDialog.showAndWait();
