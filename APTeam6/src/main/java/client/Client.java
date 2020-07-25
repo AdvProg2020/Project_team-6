@@ -73,6 +73,7 @@ public class Client extends Application {
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerProductMenu_V.fxml")));
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SingleProductMenu_V.fxml")));
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ShowCart_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ViewProductInCart_V.fxml")));
 
         for (FXMLLoader fxmlLoader : allFXMLLoaders) {
             allRoots.add(fxmlLoader.load());

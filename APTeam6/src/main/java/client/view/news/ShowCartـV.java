@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import server.model.product.Product;
+
 
 import java.util.ArrayList;
 
@@ -19,8 +19,8 @@ public class ShowCartـV extends GeneralController_V{
     public ListView<String> productList;
     private String[] products;
     public void increase(ActionEvent actionEvent) {
-        //TODO
         senderReceiver.sendMessage(productId.getText());
+        senderReceiver.getMessage();
     }
     public void decrease(ActionEvent actionEvent) {
         //TODO
@@ -30,7 +30,10 @@ public class ShowCartـV extends GeneralController_V{
         //TODO
     }
     public void viewProduct(ActionEvent actionEvent) {
-        senderReceiver.sendMessage(productId.getText());
+        senderReceiver.sendMessage("14-1" + productId.getText());
+        String[] dataSplit = senderReceiver.getMessage().split("---");
+
+
     }
     public void purchase(ActionEvent actionEvent) {
         //TODO
