@@ -59,15 +59,18 @@ public class CreateDiscountCode implements Parent {
 
     public void createDiscountCodeByData(String data) throws IOException {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
-        if(!discountCodeHashMap.containsKey(data)) {
-
-            //TODO check data validation
-            //code---startDate---endDate---percentage---repetitionTime
-            new DiscountCode(data.split("---")[0],
-                    ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]),
-                    ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]),
-                    Integer.parseInt(data.split("---")[3]),Integer.parseInt(data.split("---")[4]));
-            sendMessage("created");
+        if(!discountCodeHashMap.containsKey(data.split("---")[0])) {
+            if(!(data.split("---")[0].equals("") || data.split("---")[1].equals("") ||data.split("---")[2].equals("") ||data.split("---")[3].equals("") ||data.split("---")[4].equals(""))){
+                //code---startDate---endDate---percentage---repetitionTime
+                new DiscountCode(data.split("---")[0],
+                        ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]),
+                        ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]),
+                        Integer.parseInt(data.split("---")[3]),Integer.parseInt(data.split("---")[4]));
+                sendMessage("created");
+            }
+            else{
+                sendMessage("empty input");
+            }
 
         }else{
             sendMessage("duplicateCode");
