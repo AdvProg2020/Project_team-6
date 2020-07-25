@@ -68,7 +68,7 @@ public class PersonalInfoMenu_V extends GeneralController_V{
             roleLabel.setText("Role: Suppressor");
         }
         else {
-            throw new RuntimeException("The hell kind of account?!");
+            throw new RuntimeException("The hell kind of account?! " + receipt);
         }
 
         System.out.println("Personal menu info");
