@@ -7,9 +7,9 @@ import javafx.scene.control.SelectionMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
+public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V {
     @Override
-    public void start(){
+    public void start() {
         senderReceiver.changeMenu(0);
         senderReceiver.sendMessage("12-0");
         String receipt = senderReceiver.getMessage();
@@ -18,7 +18,8 @@ public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
         reset(allCategories);
     }
 
-    public void reset(ArrayList<String> allCategories){
+    public void reset(ArrayList<String> allCategories) {
+        state = 0;
         listView.getItems().clear();
         listView.getItems().addAll(allCategories);
     }
@@ -30,7 +31,7 @@ public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
     private int role;
     //TODO: These
 
-    public void initialize(){
+    public void initialize() {
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
@@ -39,24 +40,69 @@ public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V{
     }
 
     public void addBtn(ActionEvent actionEvent) {
-        //TODO: (message) -
+        if (role == 2 && state == 2) {
+            senderReceiver.allControllers.get(13).start();
+        }
+        else if (role == 3) {
+            if (state == 0) {
+                CategoryAndSubCategoryGenerator_V generator = (CategoryAndSubCategoryGenerator_V) senderReceiver.allControllers.get(1);
+                generator.setSubCategory(false);
+                generator.start();
+            }
+            else if (state == 1) {
+                CategoryAndSubCategoryGenerator_V generator = (CategoryAndSubCategoryGenerator_V) senderReceiver.allControllers.get(1);
+                generator.setSubCategory(true);
+                generator.start();
+            }
+        }
     }
 
     public void removeBtn(ActionEvent actionEvent) {
-        if (listView.getSelectionModel().getSelectedIndices().size() == 1){
-            //TODO: (message) index
+        int index = listView.getSelectionModel().getSelectedIndices().get(0);
+        if (listView.getSelectionModel().getSelectedIndices().size() == 1 && role == 3) {
+            if (state == 0) {
+                senderReceiver.sendMessage("12-4" + index);
+                senderReceiver.getMessage();
+            }
+            //TODO: subs
         }
     }
 
     public void editBtn(ActionEvent actionEvent) {
-        if (listView.getSelectionModel().getSelectedIndices().size() == 1){
-            //TODO: (message) index
+        if (listView.getSelectionModel().getSelectedIndices().size() == 1 && role == 3) {
+            //TODO: (message) Later
         }
     }
 
     public void openBtn(ActionEvent actionEvent) {
-        if (listView.getSelectionModel().getSelectedIndices().size() == 1){
-            //TODO: (message) index
+        int index = listView.getSelectionModel().getSelectedIndices().get(0);
+        if (listView.getSelectionModel().getSelectedIndices().size() == 1) {
+            if (state == 0) {
+                senderReceiver.sendMessage("12-1" + index);
+                String catMessage = senderReceiver.getMessage();
+                ArrayList<String> subNames = new ArrayList<>(Arrays.asList(catMessage.split("@")[0].split("---")));
+                ArrayList<String> catAttributes = new ArrayList<>(Arrays.asList(catMessage.split("@")[1].split("---")));
+                listView.getItems().clear();
+                listView.getItems().addAll(subNames);
+                attributesListView.getItems().clear();
+                attributesListView.getItems().addAll(catAttributes);
+                state = 1;
+            }
+            else if (state == 1) {
+                senderReceiver.sendMessage("12-5" + index);
+                String subMessage = senderReceiver.getMessage();
+                ArrayList<String> proNames = new ArrayList<>(Arrays.asList(subMessage.split("@")[0].split("---")));
+                ArrayList<String> subAttributes = new ArrayList<>(Arrays.asList(subMessage.split("@")[1].split("---")));
+                listView.getItems().clear();
+                listView.getItems().addAll(proNames);
+                attributesListView.getItems().clear();
+                attributesListView.getItems().addAll(subAttributes);
+                state = 2;
+            }
+            else if (state == 2) {
+                senderReceiver.sendMessage("12-9" + index);
+                senderReceiver.allControllers.get(14).start();
+            }
         }
     }
 }

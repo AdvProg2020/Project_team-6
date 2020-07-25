@@ -26,7 +26,8 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
     }
 
     private void sendMessage(String message) throws IOException {
-        server.sendMessage("12-" + message);
+        server.sendMessage(message);
+        //server.sendMessage("12-" + message);
     }
 
     ///////////////////////////////////////////
@@ -176,6 +177,7 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
             for (SubCategory allSubCategory : currentCategory.getAllSubCategories()) {
                 categoriesMessage = categoriesMessage + allSubCategory.getName() + "---";
             }
+            categoriesMessage += "@";
             for (String additionalAttribute : currentCategory.getAdditionalAttributes()) {
                 categoriesMessage = categoriesMessage + additionalAttribute + "---";
             }

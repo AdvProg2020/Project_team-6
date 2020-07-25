@@ -54,7 +54,7 @@ public class Client extends Application {
         allControllers = new ArrayList<>();
         allRoots = new ArrayList<>();
 
-        theStage.setTitle("Tabaeian's shop");
+        theStage.setTitle("Kaiser's shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CategoriesAndSubCategoriesMenu_V.fxml")));

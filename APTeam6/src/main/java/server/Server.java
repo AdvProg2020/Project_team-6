@@ -1303,7 +1303,11 @@ public class Server implements Runnable {
                 try {
                     sendMessage(((Byte)currentlyLoggedInUsers.getRole()).toString());
                 } catch (IOException e) {
-                    System.err.println("error occurred");
+                    try {
+                        sendMessage("0");
+                    } catch (IOException ex) {
+                        System.err.println("error occurred");
+                    }
                 }
             }
 
