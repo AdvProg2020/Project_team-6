@@ -27,22 +27,25 @@ public class ManageRequests implements Parent {
 
     public void acceptRequest(String data) throws IOException {
 
-        //TODO check data validation
+        if(!data.equals("")) {
 
-        ProgramManager.getProgramManagerInstance().acceptRequests(Integer.parseInt(data));
+            ProgramManager.getProgramManagerInstance().acceptRequests(Integer.parseInt(data));
+            //sendMessage("accepted");
 
-        //sendMessage("accepted");
-        sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
+            sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
+        }
     }
 
     public void declineRequest(String data) throws IOException {
 
-        //TODO check data validation
 
-        ProgramManager.getProgramManagerInstance().declineRequests(Integer.parseInt(data));
+        if(!data.equals("")) {
+            ProgramManager.getProgramManagerInstance().declineRequests(Integer.parseInt(data));
 
-        //sendMessage("declined");
-        sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
+            //sendMessage("declined");
+            sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
+
+        }
     }
 
     /*

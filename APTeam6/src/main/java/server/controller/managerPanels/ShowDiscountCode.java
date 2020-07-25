@@ -127,12 +127,19 @@ public class ShowDiscountCode implements Parent {
         HashMap<String,DiscountCode> discountCodeHashMap = ProgramManager.getProgramManagerInstance().getAllDiscountCodes();
         if(discountCodeHashMap.containsKey(data.split("---")[0])) {
             DiscountCode tempDiscountCode = ProgramManager.getProgramManagerInstance().getDiscountCodeByCode(data.split("---")[0]);
-            //TODO check data validation
-            //code---startDate---endDate---percentage---repetitionTime
-            tempDiscountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]));
-            tempDiscountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]));
-            tempDiscountCode.setPercentage(Integer.parseInt(data.split("---")[3]));
-            tempDiscountCode.setRepetitionTime(Integer.parseInt(data.split("---")[4]));
+            if(!data.split("---")[0].equals("") &&
+                    !data.split("---")[1].equals("") &&
+                    !data.split("---")[2].equals("") &&
+                    !data.split("---")[3].equals("") &&
+                    !data.split("---")[4].equals("")) {
+                //code---startDate---endDate---percentage---repetitionTime
+                tempDiscountCode.setStart(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[1]));
+                tempDiscountCode.setEnd(ProgramManager.getProgramManagerInstance().parsingStringToDate(data.split("---")[2]));
+                tempDiscountCode.setPercentage(Integer.parseInt(data.split("---")[3]));
+                tempDiscountCode.setRepetitionTime(Integer.parseInt(data.split("---")[4]));
+            }else{
+                sendMessage("empty input");
+            }
         }else{
             sendMessage("incorrectCode");
         }

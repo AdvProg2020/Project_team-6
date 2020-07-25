@@ -54,7 +54,7 @@ public class Client extends Application {
         allControllers = new ArrayList<>();
         allRoots = new ArrayList<>();
 
-        theStage.setTitle("MohammadKhani's shop");
+        theStage.setTitle("Tabaeian's shop");
         theStage.getIcons().add(new Image(new FileInputStream("src/main/java/client/view/pictures/icon.png")));
 
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("CategoriesAndSubCategoriesMenu_V.fxml")));
@@ -72,6 +72,7 @@ public class Client extends Application {
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerOffsMenu_V.fxml")));
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SellerProductMenu_V.fxml")));
         allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("SingleProductMenu_V.fxml")));
+        allFXMLLoaders.add(new FXMLLoader(GeneralController_V.class.getClassLoader().getResource("ShowCart_V.fxml")));
 
         for (FXMLLoader fxmlLoader : allFXMLLoaders) {
             allRoots.add(fxmlLoader.load());
