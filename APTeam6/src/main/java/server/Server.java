@@ -24,8 +24,8 @@ public class Server implements Runnable {
     private Log log = null;
     private Account currentlyLoggedInUsers = null;
     private HashMap<Product, Integer> buyBasket = new HashMap<>();
-    //private boolean tokenSent = false;
-    //private String token = "";
+    private boolean tokenSent = false;
+    private String token = "";
     private Bank bank = null;
 
     public HashMap<Product, Integer> getBuyBasket() {
@@ -90,7 +90,7 @@ public class Server implements Runnable {
 
         while (true) {
             String command = "";
-            /*if(!tokenSent){
+            if(!tokenSent){
                 try {
                     token = createToken();
                     sendMessage(token);
@@ -98,7 +98,7 @@ public class Server implements Runnable {
                     e.printStackTrace();
                 }
 
-            }*/
+            }
             try {
                 command = getMessage();
             } catch (IOException e) {
@@ -1371,7 +1371,7 @@ public class Server implements Runnable {
         String command = dataInputStream.readUTF();
 
 
-/*
+
         String secretKey;
         secretKey = AES.getSecretKeyByToken(token);
         command = AES.decrypt(command,secretKey);
@@ -1383,7 +1383,7 @@ public class Server implements Runnable {
             return null;
         }
 
- */
+
 
         this.log.addLog(command, 1);
         return command;
@@ -1392,7 +1392,7 @@ public class Server implements Runnable {
     public void sendMessage(String command) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(this.clientSocket.getOutputStream()));
         this.log.addLog(command, 0);
-/*
+
         if(tokenSent){
             String secretKey;
             secretKey = AES.getSecretKeyByToken(token);
@@ -1401,7 +1401,7 @@ public class Server implements Runnable {
             tokenSent = true;
         }
 
- */
+
 
         dataOutputStream.writeUTF(command);
         dataOutputStream.flush();
