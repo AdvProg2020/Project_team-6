@@ -41,12 +41,13 @@ public class CategoriesAndSubCategoriesMenu implements Parent {
 
     public void getAdditionalInformationCategorySubCategory() throws IOException {
         if(currentCategory!=null && currentSubCategory!=null){
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new StringBuilder(currentCategory.getName() + "---" + currentSubCategory.getName() + "@");
             for (String additionalAttribute : currentCategory.getAdditionalAttributes()) {
-                result.append(additionalAttribute);
+                result.append("---").append(additionalAttribute);
             }
+            result.append("@");
             for (String additionalAttribute : currentSubCategory.getAdditionalAttributes()) {
-                result.append(additionalAttribute);
+                result.append("---").append(additionalAttribute);
             }
             sendMessage(result.toString());
         }else{

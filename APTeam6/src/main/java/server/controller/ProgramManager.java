@@ -2,6 +2,7 @@ package server.controller;
 
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
+import server.model.account.Seller;
 import server.model.product.Off;
 import server.model.requests.OffRequest;
 import server.model.requests.ProductRequest;
@@ -414,9 +415,10 @@ public class ProgramManager {
             } else if (allRequests.get(i) instanceof OffRequest) {
                 //System.out.println(i + ". " + allRequests.get(i) + "is an OffRequest");
                 result.append("OffRequest---").append(allRequests.get(i).toString());
+            } else {
+                result.append("Seller---").append(allRequests.get(i).toString());
             }
         }
-
         return result.toString();
     }
 
@@ -424,6 +426,8 @@ public class ProgramManager {
         if (allRequests.get(id) instanceof ProductRequest) {
             allRequests.get(id).accept();
         } else if (allRequests.get(id) instanceof OffRequest) {
+            allRequests.get(id).accept();
+        } else if (allRequests.get(id) instanceof Seller) {
             allRequests.get(id).accept();
         }
     }

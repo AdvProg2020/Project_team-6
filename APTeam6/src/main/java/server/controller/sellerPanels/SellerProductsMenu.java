@@ -14,6 +14,7 @@ import server.model.requests.ProductRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class SellerProductsMenu implements Parent {
@@ -36,10 +37,10 @@ public class SellerProductsMenu implements Parent {
                 "---" + tempProduct.getCategoryName() + "---" + tempProduct.getSubCategoryName() + "---";
 
         for (Comment comment : tempProduct.getComments()) {
-            result+=comment.getTitle();
-            result+=":";
-            result+=comment.getText();
-            result+="===";
+            result += comment.getTitle();
+            result += ":";
+            result += comment.getText();
+            result += "===";
         }
         sendMessage(result);
     }
@@ -59,23 +60,28 @@ public class SellerProductsMenu implements Parent {
                 tempProduct.setCategoryName(message.split("---")[2]);
                 tempProduct.setSubCategoryName(message.split("---")[3]);
                 tempProduct.setPrice(Long.parseLong(message.split("---")[4]));
-            } else {
+            }
+            else {
                 sendMessage("incorrectId");
             }
         }
     }
 
     public void addProduct(String message) throws IOException {
-        //name---categoryName---subCategoryName---price
+        //name---categoryName---subCategoryName---price---sadas
         String[] dataSplit = message.split("---");
-        if(!dataSplit[0].equals("") &&
-                !dataSplit[1].equals("") &&
-                !dataSplit[2].equals("") &&
-                !dataSplit[3].equals("")) {
-            Product product = new Product(dataSplit[0], dataSplit[1], dataSplit[2], Long.parseLong(dataSplit[3]));
+        if (!dataSplit[0].equals("") && !dataSplit[1].equals("") && !dataSplit[2].equals("") && !dataSplit[3].equals("")) {
+            HashMap<String, String> addit = new HashMap<>();
+            ArrayList<String> names = ProgramManager.getProgramManagerInstance().getCategoryByName(dataSplit[1]).getAdditionalAttributes();
+            names.addAll(ProgramManager.getProgramManagerInstance().getCategoryByName(dataSplit[1]).getSubCategoryByName(dataSplit[2]).getAdditionalAttributes());
+            for (int i = 0; i < names.size(); i++) {
+                addit.put(names.get(i), dataSplit[4].split("@")[i]);
+            }
+            Product product = new Product(dataSplit[0], dataSplit[1], dataSplit[2], Long.parseLong(dataSplit[3]), addit, new HashMap<>());
             new ProductRequest(product, (byte) 0, null);
             sendMessage("created");
-        }else{
+        }
+        else {
             sendMessage("empty input");
         }
     }
@@ -90,7 +96,7 @@ public class SellerProductsMenu implements Parent {
                 BuyLog buyLog = (BuyLog) log;
                 for (Integer boughtProduct : buyLog.getBoughtProducts()) {
 
-                    if (boughtProduct == Integer.parseInt(message)){
+                    if (boughtProduct == Integer.parseInt(message)) {
                         buyersName.add(buyLog.getBuyerUserName());
                     }
                 }
@@ -99,8 +105,8 @@ public class SellerProductsMenu implements Parent {
         String result = "";
 
         for (String s : buyersName) {
-            result+=s;
-            result+="---";
+            result += s;
+            result += "---";
         }
 
         sendMessage(result);

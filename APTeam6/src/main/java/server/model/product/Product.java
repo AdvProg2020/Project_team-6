@@ -1,12 +1,7 @@
 package server.model.product;
 
-import server.controller.ProgramManager;
-import server.model.account.Account;
-import server.model.account.Buyer;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -15,8 +10,8 @@ public class Product implements Comparable<Product>{
     private int id;
     private String name;
     private String description;
-    private HashMap<String, String> CategoryAdditionalInfo;
-    private HashMap<String, String> SubCategoryAdditionalInfo;
+    private HashMap<String, String> categoryAdditionalInfo;
+    private HashMap<String, String> subCategoryAdditionalInfo;
     private int visitCount = 0;
     private LocalDateTime creationDate;
     private long price = 0;
@@ -33,11 +28,13 @@ public class Product implements Comparable<Product>{
         return averageScore;
     }
 
-    public Product(String name, String categoryName, String subCategoryName, long price){
+    public Product(String name, String categoryName, String subCategoryName, long price, HashMap<String, String> categoryAdditionalInfo, HashMap<String, String> subCategoryAdditionalInfo){
         this.name = name;
         this.categoryName = categoryName;
         this.subCategoryName = subCategoryName;
         this.creationDate = LocalDateTime.now();
+        this.categoryAdditionalInfo = categoryAdditionalInfo;
+        this.subCategoryAdditionalInfo = subCategoryAdditionalInfo;
         this.price = price;
         id = nextId;
         nextId++;
@@ -137,11 +134,11 @@ public class Product implements Comparable<Product>{
     }
 
     public HashMap<String, String> getCategoryAdditionalInfo() {
-        return CategoryAdditionalInfo;
+        return categoryAdditionalInfo;
     }
 
     public HashMap<String, String> getSubCategoryAdditionalInfo() {
-        return SubCategoryAdditionalInfo;
+        return subCategoryAdditionalInfo;
     }
 
     public int getVisitCount() {

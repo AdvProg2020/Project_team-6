@@ -22,13 +22,17 @@ public class OffRequest implements Request {
                 "===";
         if(action==0){
             s+="add off";
-        }else if (action==1){
+        }
+        else if (action==1){
             s+="offStatus";
-        }else if(action==2){
+        }
+        else if(action==2){
             s+="startDate";
-        }else if(action==3){
+        }
+        else if(action==3){
             s+="endDate";
-        }else if(action==4){
+        }
+        else if(action==4){
             s+= "offAmount";
         }
         s += "---";

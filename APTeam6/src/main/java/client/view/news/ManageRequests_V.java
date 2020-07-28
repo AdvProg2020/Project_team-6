@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ManageRequests_V extends GeneralController_V{
     public ListView<String> requestListView;
@@ -18,15 +19,19 @@ public class ManageRequests_V extends GeneralController_V{
         senderReceiver.changeMenu(8);
         senderReceiver.sendMessage("06-0");
         String receipt = senderReceiver.getMessage();
+        System.out.println(receipt);
         requests = receipt.split("---");
-        ArrayList<String> requests = new ArrayList<>();
-        reset(requests);
+        ArrayList<String> requests1 = new ArrayList<>(Arrays.asList(requests));
+        reset(requests1);
     }
+
+
 
     private void reset(ArrayList<String> requests){
         requestListView.getItems().clear();
         requestListView.getItems().addAll(requests);
     }
+
 
     public void initialize(){
         requestListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -51,6 +56,11 @@ public class ManageRequests_V extends GeneralController_V{
             //TODO: (message) index
         }
     }
+
+
+
+
+
 
     public void backButton(ActionEvent actionEvent) {
         senderReceiver.allControllers.get(10).start();

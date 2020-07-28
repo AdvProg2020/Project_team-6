@@ -17,7 +17,7 @@ public class MainServer {
         System.out.println("please wait...");
         ServerSocket serverSocket = new ServerSocket(0);
         //System.out.println("main server ip is : "+serverSocket.getLocalSocketAddress().toString());
-        System.out.println("main server is running on port : " + serverSocket.getLocalPort() + "\n");
+        System.out.println("main server is running on port: " + serverSocket.getLocalPort() + "\n");
 
         System.out.println("please input bank information");
         System.out.println("please input bank ip address:");

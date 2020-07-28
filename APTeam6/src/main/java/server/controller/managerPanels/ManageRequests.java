@@ -4,8 +4,11 @@ import server.Server;
 import server.controller.Parent;
 import client.view.old.ManageRequestsView;
 import server.controller.ProgramManager;
+import server.model.account.Seller;
+import server.model.requests.Request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ManageRequests implements Parent {
 
@@ -15,12 +18,16 @@ public class ManageRequests implements Parent {
     public void start(Server server) throws IOException {
         this.server = server;
         sendMessage(ProgramManager.getProgramManagerInstance().showAllRequests());
-    }
+        /*ArrayList<Request> requests = ProgramManager.getProgramManagerInstance().getAllRequests();
+        String mess = "";
+        for (Request request : requests) {
+            mess += ((Seller)request).getFirstName();
+        }*/
 
+    }
     public void detailRequest(String data) throws IOException {
         sendMessage(ProgramManager.getProgramManagerInstance().detailsOfRequest(Integer.parseInt(data)));
     }
-
     private void sendMessage(String message) throws IOException {
         server.sendMessage("06-" + message);
     }

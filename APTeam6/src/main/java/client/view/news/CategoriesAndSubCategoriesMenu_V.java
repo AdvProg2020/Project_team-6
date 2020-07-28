@@ -29,7 +29,6 @@ public class CategoriesAndSubCategoriesMenu_V extends GeneralController_V {
 
     private int state;
     private int role;
-    //TODO: These
 
     public void initialize() {
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
